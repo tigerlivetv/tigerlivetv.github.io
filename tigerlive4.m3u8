@@ -2,6 +2,6 @@
 #EXT-X-VERSION:3
 #EXT-X-INDEPENDENT-SEGMENTS
 #EXT-X-STREAM-INF:BANDWIDTH=3956044,AVERAGE-BANDWIDTH=3736264,RESOLUTION=1280x720,FRAME-RATE=29.970,CODECS="avc1.640029,mp4a.40.2",SUBTITLES="subtitles"
-https://81285a097b2cd341b7871fa3aafac269.livehwc3.cn/pull06.scstream.net/live/stream-100344_lhd.m3u8?auth_key=1690296988-0-0-5fba54a135e3c8f034146605c90d69a2&user_session_id=11c5757dad9ae863ad719f9cb2d54428&sub_m3u8=true&edge_slice=true
+https://livecdn.rumsport.com/stream/8/chunks.m3u8
 #EXT-X-STREAM-INF:BANDWIDTH=995315,AVERAGE-BANDWIDTH=951107,RESOLUTION=640x360,FRAME-RATE=29.970,CODECS="avc1.4D401E,mp4a.40.2",SUBTITLES="subtitles"
-https://81285a097b2cd341b7871fa3aafac269.livehwc3.cn/pull06.scstream.net/live/stream-100344_lhd.m3u8?auth_key=1690296988-0-0-5fba54a135e3c8f034146605c90d69a2&user_session_id=11c5757dad9ae863ad719f9cb2d54428&sub_m3u8=true&edge_slice=true
+https://livecdn.rumsport.com/stream/8/chunks.m3u8
