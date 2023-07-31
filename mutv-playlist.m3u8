@@ -2,6 +2,6 @@
 #EXT-X-VERSION:3
 #EXT-X-INDEPENDENT-SEGMENTS
 #EXT-X-STREAM-INF:BANDWIDTH=3956044,AVERAGE-BANDWIDTH=3736264,RESOLUTION=1280x720,FRAME-RATE=29.970,CODECS="avc1.640029,mp4a.40.2",SUBTITLES="subtitles"
-https://s129137.cdn.mytvnet.vn/v5live.m3u8?c=vstv801&q=hd&deviceType=127&userId=18992825&deviceId=29843942&type=tv&p=0&zn=netott&rkey=18992825e7E6VGt1&ctl=9.40&hc=ctl12&sl=2&drmsrv=ctl12.mytvnet.vn&naddr=113.171.129.137&pkg=pkg30.hni&profiles=hd,sd&&bhd=6000000&bsd=3000000&location=VTL&rbk=17216246100&pnode=172.16.237.69&isp=all
+http://66.70.176.103:8081/USA%7CCBSPORTSNET/USA%7CCBSPORTSNET/playlist.m3u8
 #EXT-X-STREAM-INF:BANDWIDTH=995315,AVERAGE-BANDWIDTH=951107,RESOLUTION=640x360,FRAME-RATE=29.970,CODECS="avc1.4D401E,mp4a.40.2",SUBTITLES="subtitles"
-https://s129137.cdn.mytvnet.vn/v5live.m3u8?c=vstv801&q=hd&deviceType=127&userId=18992825&deviceId=29843942&type=tv&p=0&zn=netott&rkey=18992825e7E6VGt1&ctl=9.40&hc=ctl12&sl=2&drmsrv=ctl12.mytvnet.vn&naddr=113.171.129.137&pkg=pkg30.hni&profiles=hd,sd&&bhd=6000000&bsd=3000000&location=VTL&rbk=17216246100&pnode=172.16.237.69&isp=all
+http://66.70.176.103:8081/USA%7CCBSPORTSNET/USA%7CCBSPORTSNET/playlist.m3u8
