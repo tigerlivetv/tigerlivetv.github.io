@@ -2,6 +2,6 @@
 #EXT-X-VERSION:3
 #EXT-X-INDEPENDENT-SEGMENTS
 #EXT-X-STREAM-INF:BANDWIDTH=3956044,AVERAGE-BANDWIDTH=3736264,RESOLUTION=1280x720,FRAME-RATE=29.970,CODECS="avc1.640029,mp4a.40.2",SUBTITLES="subtitles"
-https://ab8b015f73be7afff38f332fb2361575.livehwc3.cn/pull.juqihuo.com/live/stream-551899_lhd.m3u8?sub_m3u8=true&auth_key=1691248566-0-0-1065099bb1be29205aecc3e1a6b1b196&edge_slice=true&user_session_id=a5df72e21ef85675ddb9e252b09bb9fb
+https://ab8b015f73be7afff38f332fb2361575.livehwc3.cn/pull.juqihuo.com/live/stream-11237399_lhd.m3u8?auth_key=1691289726-0-0-0b429a6bf7de92213a77f55b481e5847&user_session_id=761a571742e1a5c8aecbd1fca699e67b&sub_m3u8=true&edge_slice=true
 #EXT-X-STREAM-INF:BANDWIDTH=995315,AVERAGE-BANDWIDTH=951107,RESOLUTION=640x360,FRAME-RATE=29.970,CODECS="avc1.4D401E,mp4a.40.2",SUBTITLES="subtitles"
-https://ab8b015f73be7afff38f332fb2361575.livehwc3.cn/pull.juqihuo.com/live/stream-551899_lhd.m3u8?sub_m3u8=true&auth_key=1691248566-0-0-1065099bb1be29205aecc3e1a6b1b196&edge_slice=true&user_session_id=a5df72e21ef85675ddb9e252b09bb9fb
+https://ab8b015f73be7afff38f332fb2361575.livehwc3.cn/pull.juqihuo.com/live/stream-11237399_lhd.m3u8?auth_key=1691289726-0-0-0b429a6bf7de92213a77f55b481e5847&user_session_id=761a571742e1a5c8aecbd1fca699e67b&sub_m3u8=true&edge_slice=true
