@@ -2,6 +2,6 @@
 #EXT-X-VERSION:3
 #EXT-X-INDEPENDENT-SEGMENTS
 #EXT-X-STREAM-INF:BANDWIDTH=3956044,AVERAGE-BANDWIDTH=3736264,RESOLUTION=1280x720,FRAME-RATE=29.970,CODECS="avc1.640029,mp4a.40.2",SUBTITLES="subtitles"
-https://a0504dae9c72cdb02b00ddedf6df4973.livehwc3.cn/pull06.scstream.net/live/stream-991188_lhd.m3u8?auth_key=1691314829-0-0-7feaa56a0c0e353f98b950ee27d8a209&user_session_id=6e1efd798676379ec530cf77bc8a8557&sub_m3u8=true&edge_slice=true
+https://a0504dae9c72cdb02b00ddedf6df4973.livehwc3.cn/pull06.scstream.net/live/stream-991171_lhd.m3u8?edge_slice=true&sub_m3u8=true&auth_key=1691329289-0-0-b1827bfb25b8f293bf3c3606cef40d75&user_session_id=1a356fc4bdebf83ce67d43dd63f0f63e
 #EXT-X-STREAM-INF:BANDWIDTH=995315,AVERAGE-BANDWIDTH=951107,RESOLUTION=640x360,FRAME-RATE=29.970,CODECS="avc1.4D401E,mp4a.40.2",SUBTITLES="subtitles"
-https://a0504dae9c72cdb02b00ddedf6df4973.livehwc3.cn/pull06.scstream.net/live/stream-991188_lhd.m3u8?auth_key=1691314829-0-0-7feaa56a0c0e353f98b950ee27d8a209&user_session_id=6e1efd798676379ec530cf77bc8a8557&sub_m3u8=true&edge_slice=true
+https://a0504dae9c72cdb02b00ddedf6df4973.livehwc3.cn/pull06.scstream.net/live/stream-991171_lhd.m3u8?edge_slice=true&sub_m3u8=true&auth_key=1691329289-0-0-b1827bfb25b8f293bf3c3606cef40d75&user_session_id=1a356fc4bdebf83ce67d43dd63f0f63e
