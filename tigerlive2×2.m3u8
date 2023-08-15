@@ -2,6 +2,6 @@
 #EXT-X-VERSION:3
 #EXT-X-INDEPENDENT-SEGMENTS
 #EXT-X-STREAM-INF:BANDWIDTH=3956044,AVERAGE-BANDWIDTH=3736264,RESOLUTION=1280x720,FRAME-RATE=29.970,CODECS="avc1.640029,mp4a.40.2",SUBTITLES="subtitles"
-https://pull01.rrwes.live/live/stream-991121_lhd.m3u8?txSecret=1ff9d8183e35934c033ac1a39f4ed8bf&txTime=64dabbaa
+https://pull01.rrwes.live/live/stream-991114_lhd.m3u8?txSecret=704c384de0a7ae86fc5d1848db2226ec&txTime=64dc5a46
 #EXT-X-STREAM-INF:BANDWIDTH=995315,AVERAGE-BANDWIDTH=951107,RESOLUTION=640x360,FRAME-RATE=29.970,CODECS="avc1.4D401E,mp4a.40.2",SUBTITLES="subtitles"
-https://pull01.rrwes.live/live/stream-991121_lhd.m3u8?txSecret=1ff9d8183e35934c033ac1a39f4ed8bf&txTime=64dabbaa
+https://pull01.rrwes.live/live/stream-991114_lhd.m3u8?txSecret=704c384de0a7ae86fc5d1848db2226ec&txTime=64dc5a46
