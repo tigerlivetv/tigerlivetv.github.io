@@ -1,7 +1,0 @@
-#EXTM3U
-#EXT-X-VERSION:3
-#EXT-X-INDEPENDENT-SEGMENTS
-#EXT-X-STREAM-INF:BANDWIDTH=3956044,AVERAGE-BANDWIDTH=3736264,RESOLUTION=1280x720,FRAME-RATE=29.970,CODECS="avc1.640029,mp4a.40.2",SUBTITLES="subtitles"
-https://a0504dae9c72cdb02b00ddedf6df4973.livehwc3.cn/pull06.scstream.net/live/stream-9911954_lhd.m3u8?user_session_id=2c4f7318e3da074cffe96ec6d0223418&auth_key=1692456811-0-0-fa14f5b7f457774896c6ead26bc2e7c7&edge_slice=true&sub_m3u8=true
-#EXT-X-STREAM-INF:BANDWIDTH=995315,AVERAGE-BANDWIDTH=951107,RESOLUTION=640x360,FRAME-RATE=29.970,CODECS="avc1.4D401E,mp4a.40.2",SUBTITLES="subtitles"
-https://a0504dae9c72cdb02b00ddedf6df4973.livehwc3.cn/pull06.scstream.net/live/stream-9911954_lhd.m3u8?user_session_id=2c4f7318e3da074cffe96ec6d0223418&auth_key=1692456811-0-0-fa14f5b7f457774896c6ead26bc2e7c7&edge_slice=true&sub_m3u8=true
