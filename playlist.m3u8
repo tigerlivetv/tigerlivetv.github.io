@@ -1,11 +1,8 @@
 #EXTM3U
 #EXT-X-VERSION:3
-
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=3000000,RESOLUTION=1280x720
 https://play1nm.hnyongshun.cn/live/hd-en-k82rekh0kdjdrep.m3u8
-
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=1500000,RESOLUTION=854x480
 https://play1nm.hnyongshun.cn/live/hd-zh-k82rekh0kdjdrep.m3u8
-
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=800000,RESOLUTION=640x360
 https://play1nm.hnyongshun.cn/live/sd-k82rekh0kdjdrep.m3u8
