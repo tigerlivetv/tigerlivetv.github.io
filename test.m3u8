@@ -1,5 +1,5 @@
 #EXTM3U
 #EXT-X-TARGETDURATION:5220
 #EXTINF:5220,
-https://nayeem-parvez.pw/api/bioscope.m3u8?id=sony-ten-1-live
+http://168.227.22.18:1935/live/mobile-005/playlist.m3u8
 #EXT-X-ENDLIST
