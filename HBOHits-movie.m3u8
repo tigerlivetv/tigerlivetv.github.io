@@ -1,0 +1,5 @@
+#EXTM3U
+#EXT-X-TARGETDURATION:5220
+#EXTINF:5220,
+http://mykingtv.net:2082/gadget1k85/pass1k85/6965
+#EXT-X-ENDLIST
