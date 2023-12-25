@@ -1,5 +1,5 @@
 #EXTM3U
 #EXT-X-TARGETDURATION:5220
 #EXTINF:5220,
-http://203.81.84.130/hls/mwd_serie/index.m3u8
+http://bananatv.org:25461/play/g3giBgnTT3p1zAre6sVJbkL0E6RhtSHcNDvNHGpz9RA/ts
 #EXT-X-ENDLIST
