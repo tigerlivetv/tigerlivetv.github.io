@@ -1,6 +1,6 @@
 #EXTM3U
 #EXT-X-STREAM-INF:BANDWIDTH=390000,CODECS="avc1.4d0015,mp4a.40.2",RESOLUTION=426x240
-http://www.youtube.com/api/manifest/hls_playlist/id/5025ba90a349f1cc/itag/92/source/yt_live_broadcast/ratebypass/yes/cmbypass/yes/playlist_type/LIVE/maudio/1/pmbypass/yes/upn/Rwg0UFeZvSM/sver/3/ip/85.30.32.34/ipbits/8/expire/1346084679/sparams/ip,ipbits,expire,id,itag,source,ratebypass,cmbypass,playlist_type,maudio,pmbypass/signature/3119B02572030AFBACA74E48C615B33E1EC9B0F7.40D6BBE13D23D9A6EDDD0156F788D6A02F1B54E8/key/ck1/file/index.m3u8
+https://manifest.googlevideo.com/api/manifest/hls_variant/expire/1703506618/ei/Wh6JZZOwDo6K3LUPyrS_sAE/ip/103.250.220.140/id/
 #EXT-X-STREAM-INF:BANDWIDTH=1337000,CODECS="avc1.4d001e,mp4a.40.2",RESOLUTION=640x360
 http://www.youtube.com/api/manifest/hls_playlist/id/5025ba90a349f1cc/itag/93/source/yt_live_broadcast/ratebypass/yes/cmbypass/yes/playlist_type/LIVE/maudio/1/pmbypass/yes/upn/Rwg0UFeZvSM/sver/3/ip/85.30.32.34/ipbits/8/expire/1346084679/sparams/ip,ipbits,expire,id,itag,source,ratebypass,cmbypass,playlist_type,maudio,pmbypass/signature/0C01ACC5F2B8525D9EC14CC0A220D78604A42BFB.351021DBDB4CEEF0DDA91487696A291289BC03D1/key/ck1/file/index.m3u8
 #EXT-X-STREAM-INF:BANDWIDTH=1390000,CODECS="avc1.4d001f,mp4a.40.2",RESOLUTION=854x480
