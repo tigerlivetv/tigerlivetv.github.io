@@ -1,8 +1,8 @@
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=3000000,RESOLUTION=1280x720
-https://freegamestreams.in/live/abr_ch6/live/ch6_720p/chunks.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9MTIvMjYvMjAyMyAzOjEwOjAyIFBNJmhhc2hfdmFsdWU9cGdPeEcwQ2E5aUtURzNIV2JIZzdTQT09JnZhbGlkbWludXRlcz03MjAmaWQ9MTAzLjI1MC4yMjAuMTMxJnN0cm1fbGVuPTU=
+https://sv2.wacthstream.com/wacth_tv/600_eng1/playlist.m3u8
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=1500000,RESOLUTION=854x480
-https://freegamestreams.in/live/abr_ch6/live/ch6_720p/chunks.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9MTIvMjYvMjAyMyAzOjEwOjAyIFBNJmhhc2hfdmFsdWU9cGdPeEcwQ2E5aUtURzNIV2JIZzdTQT09JnZhbGlkbWludXRlcz03MjAmaWQ9MTAzLjI1MC4yMjAuMTMxJnN0cm1fbGVuPTU=
+https://sv2.wacthstream.com/wacth_tv/600_eng1/playlist.m3u8
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=800000,RESOLUTION=640x360
-https://freegamestreams.in/live/abr_ch6/live/ch6_720p/chunks.m3u8?wmsAuthSign=c2VydmVyX3RpbWU9MTIvMjYvMjAyMyAzOjEwOjAyIFBNJmhhc2hfdmFsdWU9cGdPeEcwQ2E5aUtURzNIV2JIZzdTQT09JnZhbGlkbWludXRlcz03MjAmaWQ9MTAzLjI1MC4yMjAuMTMxJnN0cm1fbGVuPTU=
+https://sv2.wacthstream.com/wacth_tv/600_eng1/playlist.m3u8
