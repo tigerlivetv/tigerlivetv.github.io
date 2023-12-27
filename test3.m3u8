@@ -1,10 +1,10 @@
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=278000,RESOLUTION=320x180,LANGUAGE="eng"
-https://ctrl.laotv.la/live/TrueSport6/index.m3u8
+https://tv.mahar.live/mahar/website.stream/mahar/website1/chunks.m3u8
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=522000,RESOLUTION=640x360,LANGUAGE="chi"
-https://ctrl.laotv.la/live/TrueSport6/index.m3u8
+https://tv.mahar.live/mahar/website.stream/mahar/website1/chunks.m3u8
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=560000,RESOLUTION=640x360,LANGUAGE="eng"
-https://ctrl.laotv.la/live/TrueSport6/index.m3u8
+https://tv.mahar.live/mahar/website.stream/mahar/website1/chunks.m3u8
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=240000,RESOLUTION=320x180,LANGUAGE="chi"
-https://ctrl.laotv.la/live/TrueSport6/index.m3u8
+https://tv.mahar.live/mahar/website.stream/mahar/website1/chunks.m3u8
