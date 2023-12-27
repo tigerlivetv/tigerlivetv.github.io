@@ -1,0 +1,10 @@
+#EXTM3U
+#EXT-X-TARGETDURATION:5220
+#EXTINF:5220,
+http://watchindia.net:8880/live/dharm23/qVir1fHdBn/1071.ts
+#EXTINF:5218.5,
+http://watchindia.net:8880/live/dharm23/qVir1fHdBn/1071.ts
+#EXTINF:0.000011,
+http://watchindia.net:8880/live/dharm23/qVir1fHdBn/1071.ts
+#EXT-X-ENDLIST
+"""
