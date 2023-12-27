@@ -1,8 +1,9 @@
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=3000000,RESOLUTION=1280x720
-https://143151680.global.cdnfastest.com/live/hotamnuong.m3u8?expire=1764065940&sign=83dd26f78669e27f8656245a4f50da40
+https://pull.niues.live/live/stream-9912080_lhd.m3u8?auth_key=1703711270-0-0-45210ba7d11b6ce38b6a4ca413b3d8d4
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=1500000,RESOLUTION=854x480
-https://143151680.global.cdnfastest.com/live/hotamnuong.m3u8?expire=1764065940&sign=83dd26f78669e27f8656245a4f50da40
+https://pull.niues.live/live/stream-9912080_lhd.m3u8?auth_key=1703711270-0-0-45210ba7d11b6ce38b6a4ca413b3d8d4
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=800000,RESOLUTION=640x360
-https://143151680.global.cdnfastest.com/live/hotamnuong.m3u8?expire=1764065940&sign=83dd26f78669e27f8656245a4f50da40
+https://pull.niues.live/live/stream-9912080_lhd.m3u8?auth_key=1703711270-0-0-45210ba7d11b6ce38b6a4ca413b3d8d4
+
