@@ -1,10 +1,10 @@
 #EXTM3U
 #EXT-X-TARGETDURATION:5220
 #EXTINF:5220,
-https://livecdn-001.rumsport.com/stream/9/stream/9_hd/chunks.m3u8?token=6b50e18e407ab8dd1306abcf09fb0426c23f8898&is_vip=false&verify=1703795100-QORZ95QtodJ7BWUaGR7d7v33A3zWNv9Uwpy07K9Ub5s%3D
+http://watchindia.net:8880/live/dharm23/qVir1fHdBn/1071.ts
 #EXTINF:5218.5,
-https://livecdn-001.rumsport.com/stream/9/stream/9_hd/chunks.m3u8?token=6b50e18e407ab8dd1306abcf09fb0426c23f8898&is_vip=false&verify=1703795100-QORZ95QtodJ7BWUaGR7d7v33A3zWNv9Uwpy07K9Ub5s%3D
+http://watchindia.net:8880/live/dharm23/qVir1fHdBn/1071.ts
 #EXTINF:0.000011,
-https://livecdn-001.rumsport.com/stream/9/stream/9_hd/chunks.m3u8?token=6b50e18e407ab8dd1306abcf09fb0426c23f8898&is_vip=false&verify=1703795100-QORZ95QtodJ7BWUaGR7d7v33A3zWNv9Uwpy07K9Ub5s%3D
+http://watchindia.net:8880/live/dharm23/qVir1fHdBn/1071.ts
 #EXT-X-ENDLIST
 """
