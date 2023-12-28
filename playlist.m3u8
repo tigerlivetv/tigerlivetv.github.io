@@ -1,8 +1,8 @@
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=3000000,RESOLUTION=1280x720
-https://admdn1.cdn.mangomolo.com/adsports1/smil:adsports1.stream.smil/playlist.m3u8
+https://livecdn.rumsport.com/stream/17/chunks.m3u8?token=96f99dca3f51ecfc0aa6c34cc6d8bd26caaafd2b&is_vip=false&verify=1703794680-JEzuLumtoEBg%2BCwnvmQmfm6FwrYncR4vrup5lJKcV7E%3D
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=1500000,RESOLUTION=854x480
-https://admdn1.cdn.mangomolo.com/adsports1/smil:adsports1.stream.smil/playlist.m3u8
+https://livecdn.rumsport.com/stream/17/chunks.m3u8?token=96f99dca3f51ecfc0aa6c34cc6d8bd26caaafd2b&is_vip=false&verify=1703794680-JEzuLumtoEBg%2BCwnvmQmfm6FwrYncR4vrup5lJKcV7E%3D
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=800000,RESOLUTION=640x360
-https://admdn1.cdn.mangomolo.com/adsports1/smil:adsports1.stream.smil/playlist.m3u8
+https://livecdn.rumsport.com/stream/17/chunks.m3u8?token=96f99dca3f51ecfc0aa6c34cc6d8bd26caaafd2b&is_vip=false&verify=1703794680-JEzuLumtoEBg%2BCwnvmQmfm6FwrYncR4vrup5lJKcV7E%3D
