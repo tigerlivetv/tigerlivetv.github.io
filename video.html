@@ -1,27 +1,37 @@
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>MYANMAR</title>  
-        <!-- Include hls.js from a CDN -->
-        <script src="https://cdn.tutorialjinni.com/hls.js/1.2.1/hls.min.js"></script>
-        
-    </head>
-    <body>
-        <!-- HTML5 Video Tag -->
-        <video id="video" 
-               width='480px' height='360px' controls autoplay
-               src="https://tigerlivetv.github.io/myanmar.music.m3u8">
-        </video>
-        <!-- Invocation Script -->
-        <script>
-            if (Hls.isSupported()) {
-              var video = document.getElementById('video');
-              var hls = new Hls();
-              hls.loadSource(video.src);
-              hls.attachMedia(video);
-            }else{
-                alert("Cannot stream HLS, use another video source");
-            }
-        </script>
-    </body>
+	<head>
+		<title>
+			JW Player Reponsive Video
+		</title>
+		<script type="text/javascript" src="//cdn.jsdelivr.net/jwplayer/5.10/jwplayer.js">
+		</script>
+		<style type="text/css">
+			html, body {
+				height: 100%;
+				width: 100%;
+				padding: 0;
+				margin: 0;
+			}
+			#player {
+				height: 100%;
+				width: 100%; 
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+	<div id="player">
+	</div>
+		<script type="text/javascript">
+			jwplayer("player").setup({
+				file: "https://tigerlivetv.github.io/myanmar.music.m3u8",
+				image: "http://testing.grappler.tk/files/2013/01/trailer_1080p.jpg",
+				height: "100%",
+				width: "100%",
+				stretching: "exactfit",
+				flashplayer:"//cdn.jsdelivr.net/jwplayer/5.10/player.swf"
+			});
+		</script>
+	</body>
 </html>
