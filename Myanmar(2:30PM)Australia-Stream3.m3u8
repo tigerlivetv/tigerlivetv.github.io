@@ -1,10 +1,10 @@
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=5300000,RESOLUTION=1920x1080
-https://pull.niur.live/live/stream-9911977_lhd.m3u8?txSecret=46c7a0c8f0437617e0fa0ec6ae11483e&txTime=669d54e7
+https://pull.niues.live/live/stream-235232_lsd.m3u8?auth_key=1721810179-0-0-3a78516142031fa24473962efbe6adc5
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=3000000,RESOLUTION=1280x720
-https://pull.niur.live/live/stream-9911977_lhd.m3u8?txSecret=46c7a0c8f0437617e0fa0ec6ae11483e&txTime=669d54e7
+https://pull.niues.live/live/stream-235232_lsd.m3u8?auth_key=1721810179-0-0-3a78516142031fa24473962efbe6adc5
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=1500000,RESOLUTION=854x480
-https://pull.niur.live/live/stream-9911977_lhd.m3u8?txSecret=46c7a0c8f0437617e0fa0ec6ae11483e&txTime=669d54e7
+https://pull.niues.live/live/stream-235232_lsd.m3u8?auth_key=1721810179-0-0-3a78516142031fa24473962efbe6adc5
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=800000,RESOLUTION=640x360
-https://pull.niur.live/live/stream-9911977_lhd.m3u8?txSecret=46c7a0c8f0437617e0fa0ec6ae11483e&txTime=669d54e7
+https://pull.niues.live/live/stream-235232_lsd.m3u8?auth_key=1721810179-0-0-3a78516142031fa24473962efbe6adc5
