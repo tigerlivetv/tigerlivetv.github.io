@@ -1,10 +1,10 @@
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=5300000,RESOLUTION=1920x1080
-https://pull.niues.live/live/stream-9912098_lhd.m3u8?auth_key=1723049000-0-0-2285f1d1949bd664cb78a64c721528eb
+https://l1-xl1.myanmarnet.com/relay/music/ch1/stream_hi/index.m3u8
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=3000000,RESOLUTION=1280x720
-https://pull.niues.live/live/stream-9912098_lhd.m3u8?auth_key=1723049000-0-0-2285f1d1949bd664cb78a64c721528eb
+https://l1-xl1.myanmarnet.com/relay/music/ch1/stream_hi/index.m3u8
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=1500000,RESOLUTION=854x480
-https://pull.niues.live/live/stream-9912098_lhd.m3u8?auth_key=1723049000-0-0-2285f1d1949bd664cb78a64c721528eb
+https://l1-xl1.myanmarnet.com/relay/music/ch1/stream_hi/index.m3u8
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=800000,RESOLUTION=640x360
-https://pull.niues.live/live/stream-9912098_lhd.m3u8?auth_key=1723049000-0-0-2285f1d1949bd664cb78a64c721528eb
+https://l1-xl1.myanmarnet.com/relay/music/ch1/stream_hi/index.m3u8
