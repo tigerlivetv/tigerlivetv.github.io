@@ -1,10 +1,10 @@
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=5300000,RESOLUTION=1920x1080
-https://l1-xl1.myanmarnet.com/relay/music/ch1/stream_hi/index.m3u8
+https://1340a8a15e15de4722c595c0dc3c7f5c.livehwc3.cn/pull.dangaoka.com/live/stream-505050_lhd.m3u8?user_session_id=570436a585aafa34aa47b8c5d7fffa68&auth_key=1723300644-0-0-756f86b9c7b734122ac3015392973a96&edge_slice=true&sub_m3u8=true
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=3000000,RESOLUTION=1280x720
-https://l1-xl1.myanmarnet.com/relay/music/ch1/stream_hi/index.m3u8
+https://1340a8a15e15de4722c595c0dc3c7f5c.livehwc3.cn/pull.dangaoka.com/live/stream-505050_lhd.m3u8?user_session_id=570436a585aafa34aa47b8c5d7fffa68&auth_key=1723300644-0-0-756f86b9c7b734122ac3015392973a96&edge_slice=true&sub_m3u8=true
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=1500000,RESOLUTION=854x480
-https://l1-xl1.myanmarnet.com/relay/music/ch1/stream_hi/index.m3u8
+https://1340a8a15e15de4722c595c0dc3c7f5c.livehwc3.cn/pull.dangaoka.com/live/stream-505050_lhd.m3u8?user_session_id=570436a585aafa34aa47b8c5d7fffa68&auth_key=1723300644-0-0-756f86b9c7b734122ac3015392973a96&edge_slice=true&sub_m3u8=true
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=800000,RESOLUTION=640x360
-https://l1-xl1.myanmarnet.com/relay/music/ch1/stream_hi/index.m3u8
+https://1340a8a15e15de4722c595c0dc3c7f5c.livehwc3.cn/pull.dangaoka.com/live/stream-505050_lhd.m3u8?user_session_id=570436a585aafa34aa47b8c5d7fffa68&auth_key=1723300644-0-0-756f86b9c7b734122ac3015392973a96&edge_slice=true&sub_m3u8=true
