@@ -1,10 +1,10 @@
 #EXTM3U
 #EXT-X-TARGETDURATION:5220
 #EXTINF:5220,
-http://195.26.87.217/live.ts?channelId=173&uid=7435&deviceMac=00:1A:79:51:4B:3A
+https://rriptv.top/cn1/play.php?key=RRIPTV&c=bbtsp1&ts=https://off4.jismhaitokia.com:999/hls/bbtsp1-1830.ts
 #EXTINF:5218.5,
-http://195.26.87.217/live.ts?channelId=173&uid=7435&deviceMac=00:1A:79:51:4B:3A
+https://rriptv.top/cn1/play.php?key=RRIPTV&c=bbtsp1&ts=https://off4.jismhaitokia.com:999/hls/bbtsp1-1830.ts
 #EXTINF:0.000011,
-http://195.26.87.217/live.ts?channelId=173&uid=7435&deviceMac=00:1A:79:51:4B:3A
+https://rriptv.top/cn1/play.php?key=RRIPTV&c=bbtsp1&ts=https://off4.jismhaitokia.com:999/hls/bbtsp1-1830.ts
 #EXT-X-ENDLIST
 """
