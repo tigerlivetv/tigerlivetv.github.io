@@ -1,8 +1,8 @@
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=3000000,RESOLUTION=1280x720
-https://m.ok.ru/dk/video.m3u8?st.cmd=moviePlaybackRedirect&st.sig=a17ccb4ea306340871a47b21424545c9009c082e&st.mq=3&st.mvid=6818752826091&st.ip=128.14.104.155&st.dla=off&st.exp=1735360179488&st.hls=on&_prevCmd=movieLayer&tkn=3460
+https://vd411.okcdn.ru/expires/1735273792590/clientType/1/srcIp/128.14.104.155/type/2/id/5693485222635/ms/45.136.20.43/zs/43/srcAg/CHROME_ANDROID_TABLET/ct/28/sig/A-NTuQ92xCg/ondemand/COuVqPHZpQESFAjrlajx2aUBEOuVqPHZpQEYAyABGhQI65Wo8dmlARDrlajx2aUBGAMgAiAFKAQwAzgCeIAQsgEECMTYAtoBAggYQ9c6Ym9Nhxs/fn/track.m3u8
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=1500000,RESOLUTION=854x480
-https://m.ok.ru/dk/video.m3u8?st.cmd=moviePlaybackRedirect&st.sig=a17ccb4ea306340871a47b21424545c9009c082e&st.mq=3&st.mvid=6818752826091&st.ip=128.14.104.155&st.dla=off&st.exp=1735360179488&st.hls=on&_prevCmd=movieLayer&tkn=3460
+https://vd411.okcdn.ru/expires/1735273792590/clientType/1/srcIp/128.14.104.155/type/2/id/5693485222635/ms/45.136.20.43/zs/43/srcAg/CHROME_ANDROID_TABLET/ct/28/sig/A-NTuQ92xCg/ondemand/COuVqPHZpQESFAjrlajx2aUBEOuVqPHZpQEYAyABGhQI65Wo8dmlARDrlajx2aUBGAMgAiAFKAQwAzgCeIAQsgEECMTYAtoBAggYQ9c6Ym9Nhxs/fn/track.m3u8
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=800000,RESOLUTION=640x360
-https://m.ok.ru/dk/video.m3u8?st.cmd=moviePlaybackRedirect&st.sig=a17ccb4ea306340871a47b21424545c9009c082e&st.mq=3&st.mvid=6818752826091&st.ip=128.14.104.155&st.dla=off&st.exp=1735360179488&st.hls=on&_prevCmd=movieLayer&tkn=3460
+https://vd411.okcdn.ru/expires/1735273792590/clientType/1/srcIp/128.14.104.155/type/2/id/5693485222635/ms/45.136.20.43/zs/43/srcAg/CHROME_ANDROID_TABLET/ct/28/sig/A-NTuQ92xCg/ondemand/COuVqPHZpQESFAjrlajx2aUBEOuVqPHZpQEYAyABGhQI65Wo8dmlARDrlajx2aUBGAMgAiAFKAQwAzgCeIAQsgEECMTYAtoBAggYQ9c6Ym9Nhxs/fn/track.m3u8
