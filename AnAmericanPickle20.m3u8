@@ -1,8 +1,8 @@
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=3000000,RESOLUTION=1280x720
-http://www.zegomovie.com/Videos/AnAmericanPickle20/index.m3u8
+https://m.ok.ru/dk/video.m3u8?st.cmd=moviePlaybackRedirect&st.sig=a17ccb4ea306340871a47b21424545c9009c082e&st.mq=3&st.mvid=6818752826091&st.ip=128.14.104.155&st.dla=off&st.exp=1735360179488&st.hls=on&_prevCmd=movieLayer&tkn=3460
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=1500000,RESOLUTION=854x480
-http://www.zegomovie.com/Videos/AnAmericanPickle20/index.m3u8
+https://m.ok.ru/dk/video.m3u8?st.cmd=moviePlaybackRedirect&st.sig=a17ccb4ea306340871a47b21424545c9009c082e&st.mq=3&st.mvid=6818752826091&st.ip=128.14.104.155&st.dla=off&st.exp=1735360179488&st.hls=on&_prevCmd=movieLayer&tkn=3460
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=800000,RESOLUTION=640x360
-http://www.zegomovie.com/Videos/AnAmericanPickle20/index.m3u8
+https://m.ok.ru/dk/video.m3u8?st.cmd=moviePlaybackRedirect&st.sig=a17ccb4ea306340871a47b21424545c9009c082e&st.mq=3&st.mvid=6818752826091&st.ip=128.14.104.155&st.dla=off&st.exp=1735360179488&st.hls=on&_prevCmd=movieLayer&tkn=3460
