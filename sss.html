@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Football Live Stream</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    video {
+      width: 90%;
+      max-width: 960px;
+      border: 5px solid #fff;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <video id="liveStream" controls autoplay>
+    <source src="https://your-stream-link.m3u8" type="application/x-mpegURL">
+    Your browser does not support the video tag.
+  </video>
+</body>
+</html>
