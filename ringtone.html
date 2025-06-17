@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="my">
+<head>
+  <meta charset="UTF-8">
+  <title>Burma Ringtone</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #aa0088, #000000);
+      font-family: 'Zawgyi-One', sans-serif;
+      text-align: center;
+      padding: 20px;
+      color: white;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .btn {
+      background: linear-gradient(to bottom, #dddddd, #222255);
+      border: none;
+      padding: 15px;
+      font-size: 18px;
+      border-radius: 10px;
+      color: white;
+      box-shadow: 2px 2px 6px #000000;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #4444ff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Burma Ringtone</h1>
+  <div class="grid" id="ringtoneContainer">
+    <!-- Buttons will be added here by JavaScript -->
+  </div>  <!-- Audio element --><audio id="player" controls style="margin-top: 20px; width: 100%; display: none;"></audio>
+
+  <script>
+    const container = document.getElementById('ringtoneContainer');
+    const player = document.getElementById('player');
+
+    for (let i = 1; i <= 21; i++) {
+      const button = document.createElement('button');
+      button.className = 'btn';
+      button.textContent = `ဖုန်းမြည် ${i}`;
+      button.onclick = () => {
+        const audioSrc = `ringtones/ring${i}.mp3`;
+        player.src = audioSrc;
+        player.style.display = 'block';
+        player.play();
+      };
+      container.appendChild(button);
+    }
+  </script></body>
+</html>
