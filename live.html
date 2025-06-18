@@ -1,96 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Live Stream UI</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Live Football - Burmese TV</title>
   <style>
+    :root {
+      --bg-light: #f5f6fa;
+      --bg-dark: #1e1e2f;
+      --text-light: #1e1e2f;
+      --text-dark: #f5f6fa;
+    }
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      margin:0;
+      font-family:'Segoe UI',sans-serif;
+      background-color:var(--bg-light);
+      color:var(--text-light);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding:20px;
+      transition:background-color .3s, color .3s;
     }
-
+    body.dark {
+      background-color:var(--bg-dark);
+      color:var(--text-dark);
+    }
     .video-container {
-      width: 100%;
-      max-width: 768px;
-      background: #000;
-      position: relative;
+      position:relative;
+      width:100%; max-width:720px;
+      background:black;
+      border-radius:12px; overflow:hidden;
+      box-shadow:0 0 15px rgba(0,0,0,0.3);
     }
-
-    video {
-      width: 100%;
-      height: auto;
-      display: block;
+    video, .spinner, .tool-btn { display:block; }
+    .spinner {
+      position:absolute; top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      border:5px solid #f3f3f3;
+      border-top:5px solid #e74c3c;
+      border-radius:50%; width:40px; height:40px;
+      animation:spin 1s linear infinite;
     }
-
-    .server-buttons {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      padding: 20px;
-      max-width: 768px;
-      width: 100%;
-      box-sizing: border-box;
+    @keyframes spin {
+      to { transform:translate(-50%,-50%) rotate(360deg); }
     }
-
+    .controls {
+      margin-top:15px;
+      display:flex; justify-content:space-between;
+      flex-wrap:wrap; max-width:720px; width:100%;
+      gap:10px;
+    }
+    .buttons {
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      flex:1 1 auto;
+    }
     .btn {
-      padding: 20px;
-      font-size: 18px;
-      border-radius: 8px;
-      text-align: center;
-      color: white;
-      cursor: pointer;
+      padding:14px;
+      border:none; border-radius:10px;
+      color:white; font-size:15px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:transform .2s;
     }
+    .btn:hover { transform:scale(1.05); }
+    .sd1 { background:linear-gradient(135deg,#a18cd1,#fbc2eb); }
+    .hd2 { background:linear-gradient(135deg,#e96443,#904e95); }
+    .sd3 { background:linear-gradient(135deg,#c94b4b,#4b134f); }
+    .hd4 { background:linear-gradient(135deg,#2980b9,#2c3e50); }
 
-    .btn.server1 { background: #4a4040; border: 2px solid red; }
-    .btn.server2 { background: #a0cfa3; color: #000; }
-    .btn.server3 { background: #3e3e80; }
-    .btn.server4 { background: #5cae50; }
+    .right-tools {
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .tool-btn {
+      padding:12px;font-size:14px;
+      border:none;border-radius:10px;
+      cursor:pointer;
+      background:#444;color:white;
+      transition:background .3s;
+    }
+    .tool-btn:hover { background:#666; }
 
-    @media (max-width: 600px) {
-      .server-buttons {
-        grid-template-columns: 1fr;
-      }
+    @media(max-width:500px) {
+      .controls { flex-direction:column; }
+      .buttons { grid-template-columns:1fr; }
     }
   </style>
 </head>
 <body>
-
+  <h2> Live Football - Burmese TV</h2>
   <div class="video-container">
-    <video id="video" controls autoplay></video>
+    <div class="spinner" id="spinner"></div>
+    <video id="video" controls autoplay playsinline></video>
+  </div>
+  <div class="controls">
+    <div class="buttons">
+      <button class="btn sd1" onclick="playStream('https://hls.rtasport.live/hls/stream.m3u8')">Live Football SD</button>
+      <button class="btn hd2" onclick="playStream('https://example.com/football_hd.m3u8')">Football HD</button>
+      <button class="btn sd3" onclick="playStream('https://example.com/football_alt.m3u8')">Alt Server SD</button>
+      <button class="btn hd4" onclick="playStream('https://example.com/football_alt_hd.m3u8')">Alt HD</button>
+    </div>
+    <div class="right-tools">
+      <button class="tool-btn" onclick="toggleDarkMode()"> Toggle Dark Mode</button>
+      <button class="tool-btn" onclick="goFullScreen()"> Fullscreen</button>
+    </div>
   </div>
 
-  <div class="server-buttons">
-    <div class="btn server1">Server 1 SD</div>
-    <div class="btn server2">Server 2 HD</div>
-    <div class="btn server3">Server 3 SD</div>
-    <div class="btn server4">Server 4 HD</div>
-  </div>
-
-  <!-- HLS.js script -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
     const video = document.getElementById('video');
-    const videoSrc = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // သင်ထည့်မယ့် m3u8 link
+    const spinner = document.getElementById('spinner');
+    let hls;
 
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(videoSrc);
-      hls.attachMedia(video);
-      hls.on(Hls.Events.MANIFEST_PARSED, function () {
-        video.play();
-      });
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = videoSrc;
-      video.addEventListener('loadedmetadata', function () {
-        video.play();
-      });
+    function playStream(url) {
+      spinner.style.display = 'block';
+      if (hls) hls.destroy();
+      if (Hls.isSupported()) {
+        hls = new Hls();
+        hls.loadSource(url);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => { video.play(); });
+        hls.on(Hls.Events.LEVEL_LOADED, () => { spinner.style.display = 'none'; });
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = url;
+        video.onloadedmetadata = () => {
+          video.play();
+          spinner.style.display = 'none';
+        };
+      }
     }
-  </script>
 
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+    }
+
+    function goFullScreen() {
+      const el = document.fullscreenElement ? document.exitFullscreen() : video.requestFullscreen();
+    }
+
+    // အင်္ဂါရပ်တိုးချင်ရင် ပြောပါ :)
+  </script>
 </body>
 </html>
