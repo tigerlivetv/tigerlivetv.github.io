@@ -3,171 +3,94 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Advanced Live Stream Player</title>
+  <title>Live Stream UI</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #0f172a;
-      color: white;
+      font-family: Arial, sans-serif;
+      background: #fff;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      min-height: 100vh;
     }
 
-    .container {
+    .video-container {
       width: 100%;
-      max-width: 900px;
-      padding: 20px;
-      background-color: #1e293b;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-    }
-
-    h1 {
-      text-align: center;
-      color: #38bdf8;
-      margin-bottom: 20px;
-    }
-
-    .video-wrapper {
+      max-width: 768px;
+      background: #000;
       position: relative;
-      border-radius: 15px;
-      overflow: hidden;
-      background-color: black;
     }
 
     video {
       width: 100%;
       height: auto;
-      border-radius: 15px;
+      display: block;
     }
 
-    .spinner {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border: 6px solid #ccc;
-      border-top: 6px solid #38bdf8;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      animation: spin 1s linear infinite;
-      z-index: 10;
+    .server-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding: 20px;
+      max-width: 768px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
-    @keyframes spin {
-      0% { transform: translate(-50%, -50%) rotate(0deg); }
-      100% { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-
-    .controls {
-      margin-top: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    select, button {
-      padding: 8px 12px;
-      font-size: 1rem;
+    .btn {
+      padding: 20px;
+      font-size: 18px;
       border-radius: 8px;
-      border: none;
-      background: #334155;
-      color: #fff;
+      text-align: center;
+      color: white;
       cursor: pointer;
     }
 
-    select:hover, button:hover {
-      background: #475569;
-    }
+    .btn.server1 { background: #4a4040; border: 2px solid red; }
+    .btn.server2 { background: #a0cfa3; color: #000; }
+    .btn.server3 { background: #3e3e80; }
+    .btn.server4 { background: #5cae50; }
 
-    .info {
-      margin-top: 10px;
-      background: #334155;
-      padding: 10px;
-      border-radius: 8px;
-      text-align: center;
+    @media (max-width: 600px) {
+      .server-buttons {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1> Live Streaming Now</h1>
 
-    <div class="video-wrapper" id="video-wrapper">
-      <div class="spinner" id="spinner"></div>
-      <video id="video" controls autoplay muted playsinline></video>
-    </div>
-
-    <div class="controls">
-      <label>
-        Quality:
-        <select id="qualitySelect">
-          <option value="auto">Auto</option>
-          <!-- Other options will be added dynamically -->
-        </select>
-      </label>
-      <button onclick="toggleFullscreen()"> Fullscreen</button>
-    </div>
-
-    <div class="info">
-      အနိမ့်ဆုံး internet connection 3 Mbps လောက်တော့ လိုအပ်ပါသည်။
-    </div>
+  <div class="video-container">
+    <video id="video" controls autoplay></video>
   </div>
 
-  <!-- HLS.js for m3u8 support -->
+  <div class="server-buttons">
+    <div class="btn server1">Server 1 SD</div>
+    <div class="btn server2">Server 2 HD</div>
+    <div class="btn server3">Server 3 SD</div>
+    <div class="btn server4">Server 4 HD</div>
+  </div>
+
+  <!-- HLS.js script -->
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
     const video = document.getElementById('video');
-    const spinner = document.getElementById('spinner');
-    const qualitySelect = document.getElementById('qualitySelect');
+    const videoSrc = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"; // သင်ထည့်မယ့် m3u8 link
 
-    const videoSrc = 'https://5a13fe32ef748.streamlock.net/mmplay/mntv/playlist.m3u8'; // <== သင့် m3u8 link ဖြင့်ပြောင်းပါ
-
-    let hls;
     if (Hls.isSupported()) {
-      hls = new Hls();
+      const hls = new Hls();
       hls.loadSource(videoSrc);
       hls.attachMedia(video);
-
-      hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-        // Hide loading
-        spinner.style.display = 'none';
-
-        // Populate quality options
-        data.levels.forEach((level, index) => {
-          const option = document.createElement("option");
-          option.value = index;
-          option.text = level.height + 'p';
-          qualitySelect.appendChild(option);
-        });
-
-        qualitySelect.addEventListener('change', function () {
-          const selected = qualitySelect.value;
-          hls.currentLevel = selected === "auto" ? -1 : parseInt(selected);
-        });
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        video.play();
       });
-
-      // Show loading spinner while buffering
-      hls.on(Hls.Events.BUFFER_STALLED, () => spinner.style.display = 'block');
-      hls.on(Hls.Events.BUFFER_APPENDED, () => spinner.style.display = 'none');
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
       video.src = videoSrc;
-      spinner.style.display = 'none';
-    }
-
-    function toggleFullscreen() {
-      if (!document.fullscreenElement) {
-        video.requestFullscreen().catch(err => console.log(err));
-      } else {
-        document.exitFullscreen();
-      }
+      video.addEventListener('loadedmetadata', function () {
+        video.play();
+      });
     }
   </script>
+
 </body>
 </html>
