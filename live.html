@@ -1,148 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="my">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Live Football - Burmese TV</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Live TV Player with Logo</title>
+
+  <!-- Video.js CSS -->
+  <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+
   <style>
-    :root {
-      --bg-light: #f5f6fa;
-      --bg-dark: #1e1e2f;
-      --text-light: #1e1e2f;
-      --text-dark: #f5f6fa;
-    }
     body {
-      margin:0;
-      font-family:'Segoe UI',sans-serif;
-      background-color:var(--bg-light);
-      color:var(--text-light);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      padding:20px;
-      transition:background-color .3s, color .3s;
+      margin: 0;
+      background-color: #f0f0f0;
+      font-family: sans-serif;
     }
-    body.dark {
-      background-color:var(--bg-dark);
-      color:var(--text-dark);
+
+    .top-bar {
+      text-align: center;
+      padding: 12px;
+      font-weight: bold;
+      font-size: 20px;
+      background-color: #222;
+      color: #fff;
     }
+
     .video-container {
-      position:relative;
-      width:100%; max-width:720px;
-      background:black;
-      border-radius:12px; overflow:hidden;
-      box-shadow:0 0 15px rgba(0,0,0,0.3);
+      position: relative;
+      padding: 10px;
     }
-    video, .spinner, .tool-btn { display:block; }
-    .spinner {
-      position:absolute; top:50%; left:50%;
-      transform:translate(-50%,-50%);
-      border:5px solid #f3f3f3;
-      border-top:5px solid #e74c3c;
-      border-radius:50%; width:40px; height:40px;
-      animation:spin 1s linear infinite;
-    }
-    @keyframes spin {
-      to { transform:translate(-50%,-50%) rotate(360deg); }
-    }
-    .controls {
-      margin-top:15px;
-      display:flex; justify-content:space-between;
-      flex-wrap:wrap; max-width:720px; width:100%;
-      gap:10px;
-    }
-    .buttons {
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:12px;
-      flex:1 1 auto;
-    }
-    .btn {
-      padding:14px;
-      border:none; border-radius:10px;
-      color:white; font-size:15px;
-      font-weight:bold;
-      cursor:pointer;
-      transition:transform .2s;
-    }
-    .btn:hover { transform:scale(1.05); }
-    .sd1 { background:linear-gradient(135deg,#a18cd1,#fbc2eb); }
-    .hd2 { background:linear-gradient(135deg,#e96443,#904e95); }
-    .sd3 { background:linear-gradient(135deg,#c94b4b,#4b134f); }
-    .hd4 { background:linear-gradient(135deg,#2980b9,#2c3e50); }
 
-    .right-tools {
-      display:flex;
-      flex-direction:column;
-      gap:10px;
+    .video-js {
+      width: 100%;
+      height: auto;
     }
-    .tool-btn {
-      padding:12px;font-size:14px;
-      border:none;border-radius:10px;
-      cursor:pointer;
-      background:#444;color:white;
-      transition:background .3s;
-    }
-    .tool-btn:hover { background:#666; }
 
-    @media(max-width:500px) {
-      .controls { flex-direction:column; }
-      .buttons { grid-template-columns:1fr; }
+    /*  Logo style with caption */
+    .custom-logo-box {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .custom-logo-icon {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .custom-logo-text {
+      margin-top: 3px;
+      font-size: 12px;
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .server-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .server-button {
+      padding: 16px;
+      text-align: center;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #333;
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    .server-button:hover {
+      background-color: #555;
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
-  <h2> Live Football - Burmese TV</h2>
+
+  <div class="top-bar"> Live Streaming with Tiger Logo</div>
+
   <div class="video-container">
-    <div class="spinner" id="spinner"></div>
-    <video id="video" controls autoplay playsinline></video>
-  </div>
-  <div class="controls">
-    <div class="buttons">
-      <button class="btn sd1" onclick="playStream('https://hls.rtasport.live/hls/stream.m3u8')">Live Football SD</button>
-      <button class="btn hd2" onclick="playStream('https://example.com/football_hd.m3u8')">Football HD</button>
-      <button class="btn sd3" onclick="playStream('https://example.com/football_alt.m3u8')">Alt Server SD</button>
-      <button class="btn hd4" onclick="playStream('https://example.com/football_alt_hd.m3u8')">Alt HD</button>
+    <!--  Logo -->
+    <div class="custom-logo-box">
+      <div class="custom-logo-icon"></div>
+      <div class="custom-logo-text">Tiger</div>
     </div>
-    <div class="right-tools">
-      <button class="tool-btn" onclick="toggleDarkMode()"> Toggle Dark Mode</button>
-      <button class="tool-btn" onclick="goFullScreen()"> Fullscreen</button>
-    </div>
+
+    <!--  Video Player -->
+    <video id="liveVideo" class="video-js vjs-default-skin" controls preload="auto" data-setup='{}'>
+      <source src="https://tv.mahar.live/mahar/website.stream/mahar/website1/chunks.m3u8" type="application/x-mpegURL" />
+    </video>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <!--  Server Buttons -->
+  <div class="server-grid">
+    <div class="server-button" onclick="switchStream('https://tv.mahar.live/mahar/website.stream/mahar/website1/chunks.m3u8')">Mahar TV</div>
+    <div class="server-button" onclick="switchStream('https://5a13fe32ef748.streamlock.net/mmplay/mrtv-entertainment/playlist.m3u8')">MRTV Entertainment</div>
+    <div class="server-button" onclick="switchStream('https://tv.mahar.live/mahar/website.stream/mahar/website2/chunks.m3u8')">Mahar Server 2</div>
+    <div class="server-button" onclick="switchStream('https://tv.mahar.live/esports/mahar.stream/esports/mahar2/chunks.m3u8')">Mahar Esports</div>
+  </div>
+
+  <!-- Video.js JS -->
+  <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
   <script>
-    const video = document.getElementById('video');
-    const spinner = document.getElementById('spinner');
-    let hls;
-
-    function playStream(url) {
-      spinner.style.display = 'block';
-      if (hls) hls.destroy();
-      if (Hls.isSupported()) {
-        hls = new Hls();
-        hls.loadSource(url);
-        hls.attachMedia(video);
-        hls.on(Hls.Events.MANIFEST_PARSED, () => { video.play(); });
-        hls.on(Hls.Events.LEVEL_LOADED, () => { spinner.style.display = 'none'; });
-      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = url;
-        video.onloadedmetadata = () => {
-          video.play();
-          spinner.style.display = 'none';
-        };
-      }
+    const player = videojs('liveVideo');
+    function switchStream(url) {
+      player.src({ src: url, type: 'application/x-mpegURL' });
+      player.play();
     }
-
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark');
-    }
-
-    function goFullScreen() {
-      const el = document.fullscreenElement ? document.exitFullscreen() : video.requestFullscreen();
-    }
-
-    // အင်္ဂါရပ်တိုးချင်ရင် ပြောပါ :)
   </script>
+
 </body>
 </html>
