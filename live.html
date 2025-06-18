@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Advanced Live Stream Player</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0f172a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      padding: 20px;
+      background-color: #1e293b;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+
+    h1 {
+      text-align: center;
+      color: #38bdf8;
+      margin-bottom: 20px;
+    }
+
+    .video-wrapper {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      background-color: black;
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+    }
+
+    .spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 6px solid #ccc;
+      border-top: 6px solid #38bdf8;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      z-index: 10;
+    }
+
+    @keyframes spin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .controls {
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    select, button {
+      padding: 8px 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      background: #334155;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    select:hover, button:hover {
+      background: #475569;
+    }
+
+    .info {
+      margin-top: 10px;
+      background: #334155;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1> Live Streaming Now</h1>
+
+    <div class="video-wrapper" id="video-wrapper">
+      <div class="spinner" id="spinner"></div>
+      <video id="video" controls autoplay muted playsinline></video>
+    </div>
+
+    <div class="controls">
+      <label>
+        Quality:
+        <select id="qualitySelect">
+          <option value="auto">Auto</option>
+          <!-- Other options will be added dynamically -->
+        </select>
+      </label>
+      <button onclick="toggleFullscreen()"> Fullscreen</button>
+    </div>
+
+    <div class="info">
+      အနိမ့်ဆုံး internet connection 3 Mbps လောက်တော့ လိုအပ်ပါသည်။
+    </div>
+  </div>
+
+  <!-- HLS.js for m3u8 support -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script>
+    const video = document.getElementById('video');
+    const spinner = document.getElementById('spinner');
+    const qualitySelect = document.getElementById('qualitySelect');
+
+    const videoSrc = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'; // <== သင့် m3u8 link ဖြင့်ပြောင်းပါ
+
+    let hls;
+    if (Hls.isSupported()) {
+      hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(video);
+
+      hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+        // Hide loading
+        spinner.style.display = 'none';
+
+        // Populate quality options
+        data.levels.forEach((level, index) => {
+          const option = document.createElement("option");
+          option.value = index;
+          option.text = level.height + 'p';
+          qualitySelect.appendChild(option);
+        });
+
+        qualitySelect.addEventListener('change', function () {
+          const selected = qualitySelect.value;
+          hls.currentLevel = selected === "auto" ? -1 : parseInt(selected);
+        });
+      });
+
+      // Show loading spinner while buffering
+      hls.on(Hls.Events.BUFFER_STALLED, () => spinner.style.display = 'block');
+      hls.on(Hls.Events.BUFFER_APPENDED, () => spinner.style.display = 'none');
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = videoSrc;
+      spinner.style.display = 'none';
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        video.requestFullscreen().catch(err => console.log(err));
+      } else {
+        document.exitFullscreen();
+      }
+    }
+  </script>
+</body>
+</html>
