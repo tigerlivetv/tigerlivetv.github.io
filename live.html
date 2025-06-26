@@ -1,66 +1,206 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="my">
 <head>
   <meta charset="UTF-8" />
-  <title>Tiger Live Channel</title>
+  <title>G LIVE CHANNEL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Noto+Sans+Myanmar&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <style>
     body {
       margin: 0;
-      background: black;
-      font-family: Arial, sans-serif;
+      padding: 0;
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+      font-family: 'Orbitron', 'Noto Sans Myanmar', 'Myanmar Text', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      backdrop-filter: blur(20px);
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      aspect-ratio: 16 / 9;
+      margin-top: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
       overflow: hidden;
     }
-    #video-container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-    }
+
     video {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      background: #000;
+      display: block;
     }
-    #marquee {
+
+    .g-live-text {
       position: absolute;
-      bottom: 10px;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      font-size: 20px;
+      top: 12px;
+      right: 12px;
+      z-index: 10;
+      font-size: 18px;
+      font-weight: 800;
+      color: #FFD700;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    }
+
+    .live-text {
+      position: absolute;
+      top: 40px;
+      right: 12px;
+      z-index: 10;
+      font-size: 14px;
+      font-weight: 900;
+      color: #FF0000; /* Red color */
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    }
+
+    .green-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: limegreen;
+      animation: blink 1.2s infinite;
+      box-shadow: 0 0 6px lime;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .marquee-inside {
+      position: absolute;
+      bottom: 8px;
+      left: 100%;
       white-space: nowrap;
-      overflow: hidden;
+      font-size: 13px;
+      font-weight: bold;
+      color: #FFD700;
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+      animation: scrollLeft 20s linear infinite;
+      z-index: 10;
+      pointer-events: none;
     }
-    #marquee span {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scroll 15s linear infinite;
+
+    @keyframes scrollLeft {
+      0% { left: 100%; }
+      100% { left: -100%; }
     }
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
+
+    .server-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .server-buttons button {
+      padding: 10px 20px;
+      border: 2px solid #000;
+      border-radius: 40px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .server-buttons button:hover {
+      transform: scale(1.05);
+      opacity: 0.95;
+    }
+
+    .s1 {
+      background: linear-gradient(135deg, #ff6a00, #ee0979);
+    }
+
+    .s2 {
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+    }
+
+    .s3 {
+      background: linear-gradient(135deg, #00f260, #0575e6);
+    }
+
+    .fullscreen-btn {
+      background: linear-gradient(135deg, #11998e, #38ef7d);
     }
   </style>
 </head>
 <body>
-  <div id="video-container">
-    <video id="video" controls autoplay muted></video>
-    <div id="marquee">
-      <span>🎉 Tiger Live Channel ကို အစဉ်အမြဲ ကြည့်ရှုအားပေးနေသော ပရိတ်သတ် တစ်ယောက်ချင်းစီကို ကျေးဇူးတင်ပါတယ်! 🎉</span>
+
+  <div class="video-wrapper" id="videoWrapper">
+    <video id="videoPlayer" controls autoplay playsinline></video>
+
+    <div class="g-live-text">G LIVE CHANNEL</div>
+    <div class="live-text">
+      <span class="green-dot"></span> LIVE
+    </div>
+
+    <div class="marquee-inside">
+      G LIVE CHANNEL အမြဲတမ်းကြည့်ရူ အားပေးသော မိဘညီအစ်ကိုမောင်နှမ တစ်ဦးစီ တစ်ဦးစီ တိုင်းကို ကျေးဇူးအထူးတင်အပ်ပါတယ် ခင်ဗျာ။
     </div>
   </div>
 
-  <script>
-    const video = document.getElementById('video');
-    const videoSrc = "https://5a13fe32ef748.streamlock.net/mmplay/mrtv-entertainment/playlist.m3u8"; // M3U8 link
+  <div class="server-buttons">
+    <button class="s1" onclick="loadStream('https://5a13fe32ef748.streamlock.net/mmplay/mrtv-4/playlist.m3u8')">Server 1</button>
+    <button class="s2" onclick="loadStream('https://5a13fe32ef748.streamlock.net/mmplay/mrtv-4/playlist.m3u8')">Server 2</button>
+    <button class="s3" onclick="loadStream('https://5a13fe32ef748.streamlock.net/mmplay/mrtv-4/playlist.m3u8')">Server 3</button>
+    <button class="fullscreen-btn" onclick="toggleFullscreen()">Fullscreen</button>
+  </div>
 
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(videoSrc);
-      hls.attachMedia(video);
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = videoSrc;
+  <script>
+    const video = document.getElementById("videoPlayer");
+    let hls;
+    const defaultUrl = "https://5a13fe32ef748.streamlock.net/mmplay/mrtv-4/playlist.m3u8";
+
+    function loadStream(url) {
+      if (Hls.isSupported()) {
+        if (hls) hls.destroy();
+        hls = new Hls();
+        hls.loadSource(url);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          video.play().catch(() => {
+            video.muted = true;
+            video.play();
+          });
+        });
+      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = url;
+        video.play().catch(() => {
+          video.muted = true;
+          video.play();
+        });
+      }
     }
+
+    function toggleFullscreen() {
+      const w = document.getElementById("videoWrapper");
+      if (!document.fullscreenElement) {
+        w.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    window.onload = () => {
+      loadStream(defaultUrl);
+    };
   </script>
+
 </body>
 </html>
