@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8" />
+  <title>G LIVE CHANNEL</title>
+  <link href="https://vjs.zencdn.net/7.21.1/video-js.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #1e003e, #7f00ff, #e100ff); /*  Neon Purple Gradient */
+      font-family: 'Orbitron', 'Noto Sans Myanmar', 'Myanmar Text', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .video-wrapper {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      aspect-ratio: 16 / 9;
+      margin-top: 20px;
+      background: rgba(30, 30, 60, 0.7);
+      border: 2px solid #FFD700;
+      border-radius: 25px;
+      box-shadow: 0 12px 40px rgba(50, 50, 100, 0.7);
+      overflow: hidden;
+    }
+    .video-js {
+      width: 100% !important;
+      height: 100% !important;
+      background: #000;
+      border-radius: 25px;
+    }
+    .g-live-text {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 10;
+      font-size: 18px;
+      font-weight: 800;
+      color: dodgerblue; /* အပြာရောင်အသေ */
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    }
+    .live-text {
+      position: absolute;
+      top: 33px;
+      right: 12px;
+      z-index: 10;
+      font-size: 14px;
+      font-weight: 900;
+      color: #FF0000;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    }
+    .green-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: limegreen;
+      animation: blink 1.2s infinite;
+      box-shadow: 0 0 6px lime;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .marquee-inside {
+      position: absolute;
+      bottom: 8px;
+      left: 100%;
+      white-space: nowrap;
+      font-size: 15px;
+      font-weight: bold;
+      color: #FFD700;
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+      animation: scrollLeft 20s linear infinite;
+      z-index: 10;
+      pointer-events: none;
+    }
+    @keyframes scrollLeft {
+      0% { left: 100%; }
+      100% { left: -100%; }
+    }
+    .server-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 20px;
+      max-width: 900px;
+    }
+    .server-buttons button {
+      padding: 8px 16px;
+      border: 2px solid #000;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+      backdrop-filter: blur(6px);
+      transition: transform 0.2s ease, opacity 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    .server-buttons button:hover {
+      transform: scale(1.05);
+      opacity: 0.95;
+    }
+    .server-buttons button.active {
+      opacity: 0.85;
+      transform: scale(1.1);
+      box-shadow: 0 0 12px 3px #FFD700;
+    }
+
+    .s1 {
+      background: linear-gradient(135deg, #ff6a00, #ee0979);
+    }
+    .s2 {
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+    }
+    .s3 {
+      background: linear-gradient(135deg, #00f260, #0575e6);
+    }
+    .youtube-btn {
+      background: linear-gradient(135deg, #FF0000, #cc0000);
+    }
+    .fullscreen-btn {
+      background: linear-gradient(135deg, #11998e, #38ef7d);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="video-wrapper" id="videoWrapper">
+    <video
+      id="videoPlayer"
+      class="video-js vjs-default-skin"
+      controls
+      autoplay
+      playsinline
+    ></video>
+
+    <div class="g-live-text">G LIVE CHANNEL</div>
+    <div class="live-text">
+      <span class="green-dot"></span> LIVE
+    </div>
+
+    <div class="marquee-inside">
+      G LIVE CHANNEL အမြဲတမ်းကြည့်ရှုအားပေးသော မိဘညီအစ်ကို မောင်နှမ တစ်ဦးစီကို ကျေးဇူးအထူးတင်ပါတယ်။
+    </div>
+  </div>
+
+  <div class="server-buttons">
+    <button class="s1 active" onclick="loadStream('https://vz-4af3a7b5-c37.b-cdn.net/bada3e15-2792-482e-bdc1-5c356d471315/360p/video.m3u8', 'application/x-mpegURL', this)">Server 1</button>
+    <button class="s2" onclick="loadStream('https://tigerlivetv.github.io/mahar-playlist.m3u8', 'application/x-mpegURL', this)">Server 2</button>
+    <button class="s3" onclick="loadStream('https://n88.all-live.online/online/pyQ1Kmev05Nc1CL2-EAUfQ/1751912336/itv1.m3u8', 'application/x-mpegURL', this)">Server 3</button>
+    <button class="youtube-btn" onclick="loadStream('https://www.youtube.com/watch?v=jHskPYAYwGw', 'video/youtube', this)">YouTube Live</button>
+    <button class="fullscreen-btn" onclick="toggleFullscreen()">Fullscreen</button>
+  </div>
+
+  <script src="https://vjs.zencdn.net/7.21.1/video.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-youtube/dist/Youtube.min.js"></script>
+
+  <script>
+    const player = videojs('videoPlayer');
+    let currentBtn = document.querySelector('.server-buttons button.active');
+
+    function loadStream(url, type, btn) {
+      if (currentBtn) currentBtn.classList.remove('active');
+      btn.classList.add('active');
+      currentBtn = btn;
+
+      player.src({ type: type, src: url });
+      player.ready(() => {
+        player.play().catch((err) => {
+          console.warn("Autoplay failed:", err);
+          player.muted(true);
+          player.play().catch(e => console.error("Still failed:", e));
+        });
+      });
+    }
+
+    function toggleFullscreen() {
+      const w = document.getElementById("videoWrapper");
+      if (!document.fullscreenElement) {
+        w.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    window.onload = () => {
+      document.querySelector('.s1').click();
+    };
+  </script>
+
+</body>
+</html>
