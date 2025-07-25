@@ -1,0 +1,8 @@
+#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=3000000,RESOLUTION=1280x720
+https://tv.mahar.live/mahar/website.stream/mahar/website1/chunks.m3u8
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=1500000,RESOLUTION=854x480
+https://tv.mahar.live/mahar/website.stream/mahar/website1/chunks.m3u8
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=800000,RESOLUTION=640x360
+https://tv.mahar.live/mahar/website.stream/mahar/website1/chunks.m3u8
