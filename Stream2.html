@@ -1,49 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Live Stream with HLS.js</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tiger Live TV - Live Stream</title>
   <style>
     body {
-      background-color: black;
       margin: 0;
+      background-color: #000;
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
+      flex-direction: column;
+      height: 100vh;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      text-align: center;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 12px 20px;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      box-sizing: border-box;
+    }
+    header .channel-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    header .logo {
+      max-height: 32px;
+      max-width: 120px;
+      object-fit: contain;
     }
     video {
-      width: 80%;
-      max-width: 800px;
+      margin-top: 60px; /* to avoid header overlap */
+      width: 90vw;
+      max-width: 900px;
+      aspect-ratio: 16 / 9;
       background-color: black;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      outline: none;
+    }
+    footer {
+      margin-top: auto;
+      padding: 12px 0;
+      font-size: 0.9rem;
+      color: #888;
+    }
+    @media (max-width: 600px) {
+      header .channel-name {
+        font-size: 1rem;
+      }
+      video {
+        width: 95vw;
+        border-radius: 4px;
+      }
     }
   </style>
 </head>
 <body>
+  <header>
+    <div class="channel-name">Tiger Live TV - Live Stream</div>
+    <!-- Optional logo - Uncomment and add your logo URL if you want -->
+    <!-- <img class="logo" src="https://yourdomain.com/logo.png" alt="Tiger Live TV Logo" /> -->
+  </header>
 
-  <video id="video" controls autoplay></video>
+  <video id="video" controls autoplay muted playsinline></video>
+
+  <footer>Powered by Tiger Live TV</footer>
 
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script>
-    var video = document.getElementById('video');
-    var videoSrc = 'https://live.inplyr.com/room/414317.m3u8';
+    const video = document.getElementById('video');
+    const videoSrc = 'https://live.inplyr.com/room/414317.m3u8';
 
     if (Hls.isSupported()) {
-      var hls = new Hls();
+      const hls = new Hls();
       hls.loadSource(videoSrc);
       hls.attachMedia(video);
-      hls.on(Hls.Events.MANIFEST_PARSED, function () {
-        video.play();
-      });
+      hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
       video.src = videoSrc;
-      video.addEventListener('loadedmetadata', function () {
-        video.play();
-      });
+      video.addEventListener('loadedmetadata', () => video.play());
     } else {
       alert('Your browser does not support HLS.');
     }
   </script>
-
 </body>
 </html>
