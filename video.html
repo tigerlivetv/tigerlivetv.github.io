@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ဘောလုံးပွဲ စီစဉ်ချက် (Auto Server Switch + Remote Control)</title>
-  <meta http-equiv="refresh" content="60"> <!-- 1 minute auto refresh -->
+  <title>ဘောလုံး Live Stream Player</title>
   <style>
     body {
       font-family: 'Myanmar Text', Arial, sans-serif;
@@ -23,7 +22,7 @@
       font-size: 16px;
     }
     .match-card {
-      background-color: #ffffff;
+      background-color: #fff;
       border-radius: 15px;
       padding: 20px;
       margin-bottom: 25px;
@@ -92,24 +91,13 @@
       z-index: 9999;
       padding: 20px;
       overflow: hidden;
-    }
-    #videoOverlay::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-        url('https://i.ibb.co/2Nj4ZRD/stadium.jpg') center/cover no-repeat;
-      filter: blur(12px);
-      opacity: 0.85;
-      z-index: -1;
-      pointer-events: none;
+      background: rgba(0,0,0,0.75);
     }
     #videoContainer {
       position: relative;
       width: 90%;
       max-width: 800px;
-      background: linear-gradient(135deg, #ff7e5f, #feb47b, #86a8e7, #91eae4);
+      background: #111;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 0 25px rgba(255, 126, 95, 0.8);
@@ -119,7 +107,7 @@
       position: absolute;
       top: 10px;
       right: 10px;
-      font-size: 14px;
+      font-size: 16px;
       color: white;
       background: rgba(0, 0, 0, 0.6);
       border: none;
@@ -134,22 +122,8 @@
       background: black;
       display: block;
     }
-    #switchNotice {
-      display:none;
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #ff9800;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 12px;
-      font-weight: bold;
-      z-index: 10000;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-      font-size: 14px;
-    }
   </style>
+  <meta http-equiv="refresh" content="60" />
 </head>
 <body>
 
@@ -210,109 +184,48 @@
 <!-- Video Player Overlay -->
 <div id="videoOverlay">
   <div id="videoContainer">
-    <button id="closeBtn" title="Close">Back</button>
-    <video id="videoPlayer" controls></video>
+    <button id="closeBtn" title="Back">Back</button>
+    <video id="videoPlayer" controls autoplay></video>
   </div>
 </div>
 
-<div id="switchNotice">Switching Server...</div>
-
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>
+  const buttons = document.querySelectorAll('.server-btn');
   const videoOverlay = document.getElementById('videoOverlay');
   const videoPlayer = document.getElementById('videoPlayer');
   const closeBtn = document.getElementById('closeBtn');
-  const serverButtons = document.querySelectorAll('.server-btn');
-  const switchNotice = document.getElementById('switchNotice');
-  let hls;
-  let autoSwitchIndex = 0;
-  let autoSwitchMax = 3;
-  let currentVideoSrcs = [];
-  let autoSwitching = false;
 
-  serverButtons.forEach(button => {
+  buttons.forEach(button => {
     button.addEventListener('click', () => {
-      const videoSrc = button.getAttribute('data-src');
-      currentVideoSrcs = Array.from(button.parentElement.querySelectorAll('.server-btn')).map(btn => btn.getAttribute('data-src'));
-      autoSwitchIndex = currentVideoSrcs.indexOf(videoSrc);
-      autoSwitching = false;
-      playStream(videoSrc);
-      videoOverlay.style.display = 'flex';
-      videoPlayer.focus();
+      const streamSrc = button.getAttribute('data-src');
+      if (streamSrc) {
+        videoPlayer.pause();
+        videoPlayer.removeAttribute('src');
+        videoPlayer.load();
+
+        videoPlayer.src = streamSrc;
+        videoOverlay.style.display = 'flex';
+        videoPlayer.load();
+        videoPlayer.play().catch(() => {
+          // Autoplay might be blocked by browser, ignore error.
+        });
+      }
     });
   });
 
-  function playStream(videoSrc) {
-    if (hls) { hls.destroy(); hls = null; }
-    if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
-      videoPlayer.src = videoSrc;
-    } else if (Hls.isSupported()) {
-      hls = new Hls();
-      hls.loadSource(videoSrc);
-      hls.attachMedia(videoPlayer);
-    } else {
-      alert('Your browser does not support HLS.');
-      return;
-    }
-    videoPlayer.play();
-  }
-
-  videoPlayer.addEventListener('error', () => {
-    if (autoSwitching) return;
-    autoSwitching = true;
-    autoSwitchIndex = (autoSwitchIndex + 1) % currentVideoSrcs.length;
-    if (autoSwitchIndex < autoSwitchMax) {
-      const nextSrc = currentVideoSrcs[autoSwitchIndex];
-      showSwitchNotice(`Switching to Server ${autoSwitchIndex + 1}...`);
-      setTimeout(() => {
-        playStream(nextSrc);
-        autoSwitching = false;
-      }, 2000);
-    } else {
-      alert("All servers failed to load.");
-    }
-  });
-
-  function showSwitchNotice(message) {
-    switchNotice.textContent = message;
-    switchNotice.style.display = 'block';
-    setTimeout(() => { switchNotice.style.display = 'none'; }, 2500);
-  }
-
   closeBtn.addEventListener('click', () => {
     videoPlayer.pause();
-    videoPlayer.src = '';
-    if (hls) { hls.destroy(); hls = null; }
+    videoPlayer.removeAttribute('src');
+    videoPlayer.load();
     videoOverlay.style.display = 'none';
   });
 
-  document.addEventListener('keydown', (e) => {
-    switch (e.key) {
-      case 'MediaPlayPause':
-      case 'Enter':
-      case ' ':
-        if (videoOverlay.style.display === 'flex') {
-          if (videoPlayer.paused) videoPlayer.play();
-          else videoPlayer.pause();
-        }
-        break;
-      case 'MediaStop':
-      case 'Escape':
-      case 'Backspace':
-        videoPlayer.pause();
-        videoPlayer.src = '';
-        if (hls) { hls.destroy(); hls = null; }
-        videoOverlay.style.display = 'none';
-        break;
-      case 'ArrowRight': videoPlayer.currentTime += 10; break;
-      case 'ArrowLeft': videoPlayer.currentTime -= 10; break;
-      case 'ArrowUp': videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1); break;
-      case 'ArrowDown': videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0); break;
-      case 'f': case 'F':
-        if (videoPlayer.requestFullscreen) videoPlayer.requestFullscreen();
-        break;
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && videoOverlay.style.display === 'flex') {
+      closeBtn.click();
     }
   });
 </script>
+
 </body>
 </html>
