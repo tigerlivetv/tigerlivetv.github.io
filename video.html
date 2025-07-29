@@ -1,42 +1,344 @@
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>sample m3u8 page</title>
-  </head>
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ဘောလုံးပွဲ စီစဉ်ချက် (Auto Server Switch + Remote Control)</title>
+  <style>
+    body {
+      font-family: 'Myanmar Text', Arial, sans-serif;
+      background-color: #e0f0ff;
+      padding: 20px;
+      margin: 0;
+    }
+    .competition {
+      background: #ff5722;
+      color: white;
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      font-size: 16px;
+    }
+    .match-card {
+      background-color: #ffffff;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 25px;
+      border: 2px solid #222;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7), 0 6px 6px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .teams {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    .teams img {
+      width: 60px;
+      height: 60px;
+    }
+    .match-info {
+      text-align: center;
+      margin: 10px 0;
+      font-size: 18px;
+    }
+    .match-info strong {
+      font-size: 20px;
+    }
+    .servers {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .server-btn {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      color: white;
+      font-weight: bold;
+      transition: 0.3s;
+      outline: none;
+    }
+    .server-1 { background-color: #f44336; }
+    .server-2 { background-color: #2196F3; }
+    .server-3 { background-color: #4CAF50; }
+    .server-btn:hover {
+      transform: scale(1.05);
+    }
+    @media (max-width: 600px) {
+      .teams img {
+        width: 50px;
+        height: 50px;
+      }
+      .match-info strong {
+        font-size: 18px;
+      }
+    }
 
-  <body>
-    <!-- CSS  -->
-    <!-- file source is from: https://gist.github.com/Fazzani/8f89546e188f8086a46073dc5d4e2928 -->
-    <!-- this html page is from: https://stackoverflow.com/questions/19782389/playing-m3u8-files-with-html-video-tag -->
-    <!-- sample page: https://jlypnc.csb.app/ -->
-    <link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet" />
+    /* Video Overlay & Background */
+    #videoOverlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      padding: 20px;
+      overflow: hidden;
+    }
+    #videoOverlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url('https://i.ibb.co/2Nj4ZRD/stadium.jpg') center/cover no-repeat;
+      filter: blur(12px);
+      opacity: 0.85;
+      z-index: -1;
+      pointer-events: none;
+    }
+    #videoContainer {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b, #86a8e7, #91eae4);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 25px rgba(255, 126, 95, 0.8);
+      border: 3px solid #fff;
+    }
+    #closeBtn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 14px;
+      color: white;
+      background: rgba(0, 0, 0, 0.6);
+      border: none;
+      border-radius: 12px;
+      padding: 6px 12px;
+      cursor: pointer;
+      z-index: 10;
+    }
+    video {
+      width: 100%;
+      height: auto;
+      background: black;
+      display: block;
+    }
 
-    <h1>Myanmar Music Tv Channel </h1>
-    <!-- HTML -->
-    <video
-      id="hls-example"
-      class="video-js vjs-default-skin"
-      width="700"
-      height="300"
-      controls
-    >
-      <source
-        type="application/x-mpegURL"
-        src="http://162.250.201.58:6211/pk/ONEGOLF/tracks-v1a1/mono.m3u8?Token=Samitvhd.com
-"
-      />
-    </video>
+    /* Switch Notice */
+    #switchNotice {
+      display:none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ff9800;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: bold;
+      z-index: 10000;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
 
-    <!-- JS code -->
-    <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
-    <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script>
-    <script src="https://vjs.zencdn.net/7.2.3/video.js"></script>
+<!-- Match 1 -->
+<div class="match-card">
+  <div class="competition">FIFA Club World Cup Final Stage</div>
+  <div class="teams">
+    <img src="https://images.fotmob.com/image_resources/logo/teamlogo/9863_small.png" alt="Fluminense" />
+    <div class="match-info">
+      <strong>Fluminense vs Al Hilal</strong><br />
+      <small>05 Jul | 1:30 AM</small>
+    </div>
+    <img src="https://images.fotmob.com/image_resources/logo/teamlogo/2529_small.png" alt="Al Hilal" />
+  </div>
+  <div class="servers">
+    <button class="server-btn server-1" data-src="https://pplive.comquas.com:5443/LiveApp/streams/CLcBFN71NkF61709008601656.m3u8">Server 1</button>
+    <button class="server-btn server-2" data-src="http://ppradio.b-cdn.net/LiveApp/streams/w3g3EYjBtqgJ1677679288037.m3u8">Server 2</button>
+    <button class="server-btn server-3" data-src="https://pplive.comquas.com:5443/LiveApp/streams/CLcBFN71NkF61709008601656.m3u8">Server 3</button>
+  </div>
+</div>
 
-    <script>
-      var player = videojs("hls-example");
-      player.play();
-    </script>
-  </body>
+<!-- Match 2 -->
+<div class="match-card">
+  <div class="competition">FIFA Club World Cup Final Stage</div>
+  <div class="teams">
+    <img src="https://images.fotmob.com/image_resources/logo/teamlogo/10283_small.png" alt="Palmeiras" />
+    <div class="match-info">
+      <strong>Palmeiras vs Chelsea</strong><br />
+      <small>05 Jul | 7:30 AM</small>
+    </div>
+    <img src="https://images.fotmob.com/image_resources/logo/teamlogo/8455_small.png" alt="Chelsea" />
+  </div>
+  <div class="servers">
+    <button class="server-btn server-1" data-src="https://tv.mahar.live/mahar/website.stream/mahar/website3/chunks.m3u8">Server 1</button>
+    <button class="server-btn server-2" data-src="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8">Server 2</button>
+    <button class="server-btn server-3" data-src="http://ppradio.b-cdn.net/LiveApp/streams/w3g3EYjBtqgJ1677679288037.m3u8">Server 3</button>
+  </div>
+</div>
+
+<!-- Match 3 -->
+<div class="match-card">
+  <div class="competition">FIFA Club World Cup Final Stage</div>
+  <div class="teams">
+    <img src="https://images.fotmob.com/image_resources/logo/teamlogo/9847_small.png" alt="PSG" />
+    <div class="match-info">
+      <strong>PSG vs Bayern Mnchen</strong><br />
+      <small>05 Jul | 10:30 PM</small>
+    </div>
+    <img src="https://images.fotmob.com/image_resources/logo/teamlogo/9823_small.png" alt="Bayern Mnchen" />
+  </div>
+  <div class="servers">
+    <button class="server-btn server-1" data-src="http://ppradio.b-cdn.net/LiveApp/streams/w3g3EYjBtqgJ1677679288037.m3u8">Server 1</button>
+    <button class="server-btn server-2" data-src="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8">Server 2</button>
+    <button class="server-btn server-3" data-src="https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8">Server 3</button>
+  </div>
+</div>
+
+<!-- Video Player Overlay -->
+<div id="videoOverlay">
+  <div id="videoContainer">
+    <button id="closeBtn" title="Close">Back</button>
+    <video id="videoPlayer" controls></video>
+  </div>
+</div>
+
+<!-- Notification Badge -->
+<div id="switchNotice">Switching Server...</div>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+  const videoOverlay = document.getElementById('videoOverlay');
+  const videoPlayer = document.getElementById('videoPlayer');
+  const closeBtn = document.getElementById('closeBtn');
+  const serverButtons = document.querySelectorAll('.server-btn');
+  const switchNotice = document.getElementById('switchNotice');
+  let hls;
+  let autoSwitchIndex = 0;
+  let autoSwitchMax = 3;
+  let currentVideoSrcs = [];
+  let autoSwitching = false;
+
+  serverButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const videoSrc = button.getAttribute('data-src');
+      currentVideoSrcs = Array.from(button.parentElement.querySelectorAll('.server-btn')).map(btn => btn.getAttribute('data-src'));
+      autoSwitchIndex = currentVideoSrcs.indexOf(videoSrc);
+      autoSwitching = false;
+
+      playStream(videoSrc);
+      videoOverlay.style.display = 'flex';
+      videoPlayer.focus();
+    });
+  });
+
+  function playStream(videoSrc) {
+    if (hls) {
+      hls.destroy();
+      hls = null;
+    }
+    if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
+      videoPlayer.src = videoSrc;
+    } else if (Hls.isSupported()) {
+      hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(videoPlayer);
+    } else {
+      alert('Your browser does not support HLS.');
+      return;
+    }
+    videoPlayer.play();
+  }
+
+  videoPlayer.addEventListener('error', () => {
+    if (autoSwitching) return;
+    autoSwitching = true;
+
+    autoSwitchIndex = (autoSwitchIndex + 1) % currentVideoSrcs.length;
+    if (autoSwitchIndex < autoSwitchMax) {
+      const nextSrc = currentVideoSrcs[autoSwitchIndex];
+      showSwitchNotice(`Switching to Server ${autoSwitchIndex + 1}...`);
+      setTimeout(() => {
+        playStream(nextSrc);
+        autoSwitching = false;
+      }, 2000);
+    } else {
+      alert("All servers failed to load.");
+    }
+  });
+
+  function showSwitchNotice(message) {
+    switchNotice.textContent = message;
+    switchNotice.style.display = 'block';
+    setTimeout(() => {
+      switchNotice.style.display = 'none';
+    }, 2500);
+  }
+
+  closeBtn.addEventListener('click', () => {
+    videoPlayer.pause();
+    videoPlayer.src = '';
+    if (hls) {
+      hls.destroy();
+      hls = null;
+    }
+    videoOverlay.style.display = 'none';
+  });
+
+  document.addEventListener('keydown', (e) => {
+    switch (e.key) {
+      case 'MediaPlayPause':
+      case 'Enter':
+      case ' ':
+        if (videoOverlay.style.display === 'flex') {
+          if (videoPlayer.paused) videoPlayer.play();
+          else videoPlayer.pause();
+        }
+        break;
+      case 'MediaStop':
+      case 'Escape':
+      case 'Backspace':
+        videoPlayer.pause();
+        videoPlayer.src = '';
+        if (hls) {
+          hls.destroy();
+          hls = null;
+        }
+        videoOverlay.style.display = 'none';
+        break;
+      case 'ArrowRight':
+        videoPlayer.currentTime += 10;
+        break;
+      case 'ArrowLeft':
+        videoPlayer.currentTime -= 10;
+        break;
+      case 'ArrowUp':
+        videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
+        break;
+      case 'ArrowDown':
+        videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
+        break;
+      case 'f':
+      case 'F':
+        if (videoPlayer.requestFullscreen) videoPlayer.requestFullscreen();
+        break;
+    }
+  });
+</script>
+</body>
 </html>
-Video Player အား နှိမ့်ကြည့်ပေးပါရန် 👇👇👇
