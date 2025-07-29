@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ဘောလုံးပွဲ စီစဉ်ချက် (Auto Server Switch + Remote Control)</title>
+  <meta http-equiv="refresh" content="300"> <!-- 5 minutes auto refresh -->
   <style>
     body {
       font-family: 'Myanmar Text', Arial, sans-serif;
@@ -82,8 +83,6 @@
         font-size: 18px;
       }
     }
-
-    /* Video Overlay & Background */
     #videoOverlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -135,8 +134,6 @@
       background: black;
       display: block;
     }
-
-    /* Switch Notice */
     #switchNotice {
       display:none;
       position: fixed;
@@ -168,9 +165,9 @@
     <img src="https://images.fotmob.com/image_resources/logo/teamlogo/2529_small.png" alt="Al Hilal" />
   </div>
   <div class="servers">
-    <button class="server-btn server-1" data-src="https://live.inplyr.com/room/528758.m3u8">Server 1</button>
-    <button class="server-btn server-2" data-src="https://live.inplyr.com/room/528758.m3u8">Server 2</button>
-    <button class="server-btn server-3" data-src="https://live.inplyr.com/room/528758.m3u8">Server 3</button>
+    <button class="server-btn server-1" data-src="https://pplive.comquas.com:5443/LiveApp/streams/CLcBFN71NkF61709008601656.m3u8">Server 1</button>
+    <button class="server-btn server-2" data-src="http://ppradio.b-cdn.net/LiveApp/streams/w3g3EYjBtqgJ1677679288037.m3u8">Server 2</button>
+    <button class="server-btn server-3" data-src="https://pplive.comquas.com:5443/LiveApp/streams/CLcBFN71NkF61709008601656.m3u8">Server 3</button>
   </div>
 </div>
 
@@ -218,7 +215,6 @@
   </div>
 </div>
 
-<!-- Notification Badge -->
 <div id="switchNotice">Switching Server...</div>
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -240,7 +236,6 @@
       currentVideoSrcs = Array.from(button.parentElement.querySelectorAll('.server-btn')).map(btn => btn.getAttribute('data-src'));
       autoSwitchIndex = currentVideoSrcs.indexOf(videoSrc);
       autoSwitching = false;
-
       playStream(videoSrc);
       videoOverlay.style.display = 'flex';
       videoPlayer.focus();
@@ -248,10 +243,7 @@
   });
 
   function playStream(videoSrc) {
-    if (hls) {
-      hls.destroy();
-      hls = null;
-    }
+    if (hls) { hls.destroy(); hls = null; }
     if (videoPlayer.canPlayType('application/vnd.apple.mpegurl')) {
       videoPlayer.src = videoSrc;
     } else if (Hls.isSupported()) {
@@ -268,7 +260,6 @@
   videoPlayer.addEventListener('error', () => {
     if (autoSwitching) return;
     autoSwitching = true;
-
     autoSwitchIndex = (autoSwitchIndex + 1) % currentVideoSrcs.length;
     if (autoSwitchIndex < autoSwitchMax) {
       const nextSrc = currentVideoSrcs[autoSwitchIndex];
@@ -285,18 +276,13 @@
   function showSwitchNotice(message) {
     switchNotice.textContent = message;
     switchNotice.style.display = 'block';
-    setTimeout(() => {
-      switchNotice.style.display = 'none';
-    }, 2500);
+    setTimeout(() => { switchNotice.style.display = 'none'; }, 2500);
   }
 
   closeBtn.addEventListener('click', () => {
     videoPlayer.pause();
     videoPlayer.src = '';
-    if (hls) {
-      hls.destroy();
-      hls = null;
-    }
+    if (hls) { hls.destroy(); hls = null; }
     videoOverlay.style.display = 'none';
   });
 
@@ -315,33 +301,18 @@
       case 'Backspace':
         videoPlayer.pause();
         videoPlayer.src = '';
-        if (hls) {
-          hls.destroy();
-          hls = null;
-        }
+        if (hls) { hls.destroy(); hls = null; }
         videoOverlay.style.display = 'none';
         break;
-      case 'ArrowRight':
-        videoPlayer.currentTime += 10;
-        break;
-      case 'ArrowLeft':
-        videoPlayer.currentTime -= 10;
-        break;
-      case 'ArrowUp':
-        videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1);
-        break;
-      case 'ArrowDown':
-        videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0);
-        break;
-      case 'f':
-      case 'F':
+      case 'ArrowRight': videoPlayer.currentTime += 10; break;
+      case 'ArrowLeft': videoPlayer.currentTime -= 10; break;
+      case 'ArrowUp': videoPlayer.volume = Math.min(videoPlayer.volume + 0.1, 1); break;
+      case 'ArrowDown': videoPlayer.volume = Math.max(videoPlayer.volume - 0.1, 0); break;
+      case 'f': case 'F':
         if (videoPlayer.requestFullscreen) videoPlayer.requestFullscreen();
         break;
     }
   });
-  <meta http-equiv="refresh" content="5;url=https://tigerlivetv.github.io/video.html"/>
 </script>
 </body>
 </html>
-
-
