@@ -1,230 +1,110 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ဘောလုံး Live Stream Player</title>
-  <style>
-    body {
-      font-family: 'Myanmar Text', Arial, sans-serif;
-      background-color: #e0f0ff;
-      padding: 20px;
-      margin: 0;
-    }
-    .competition {
-      background: #ff5722;
-      color: white;
-      font-weight: bold;
-      padding: 6px 12px;
-      border-radius: 8px;
-      margin-bottom: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      font-size: 16px;
-    }
-    .match-card {
-      background-color: #fff;
-      border-radius: 15px;
-      padding: 20px;
-      margin-bottom: 25px;
-      border: 2px solid #222;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7), 0 6px 6px rgba(0, 0, 0, 0.7);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .teams {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      flex-wrap: wrap;
-    }
-    .teams img {
-      width: 60px;
-      height: 60px;
-    }
-    .match-info {
-      text-align: center;
-      margin: 10px 0;
-      font-size: 18px;
-    }
-    .match-info strong {
-      font-size: 20px;
-    }
-    .servers {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .server-btn {
-      padding: 10px 15px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      color: white;
-      font-weight: bold;
-      transition: 0.3s;
-      outline: none;
-    }
-    .server-1 { background-color: #f44336; }
-    .server-2 { background-color: #2196F3; }
-    .server-3 { background-color: #4CAF50; }
-    .server-btn:hover {
-      transform: scale(1.05);
-    }
-    @media (max-width: 600px) {
-      .teams img {
-        width: 50px;
-        height: 50px;
-      }
-      .match-info strong {
-        font-size: 18px;
-      }
-    }
-    #videoOverlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      padding: 20px;
-      overflow: hidden;
-      background: rgba(0,0,0,0.75);
-    }
-    #videoContainer {
-      position: relative;
-      width: 90%;
-      max-width: 800px;
-      background: #111;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 25px rgba(255, 126, 95, 0.8);
-      border: 3px solid #fff;
-    }
-    #closeBtn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 16px;
-      color: white;
-      background: rgba(0, 0, 0, 0.6);
-      border: none;
-      border-radius: 12px;
-      padding: 6px 12px;
-      cursor: pointer;
-      z-index: 10;
-    }
-    video {
-      width: 100%;
-      height: auto;
-      background: black;
-      display: block;
-    }
-  </style>
-  <meta http-equiv="refresh" content="9" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi Player Selector</title>
+<style>
+body {
+    background: #000;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 10px;
+}
+.video-player {
+    width: 100%;
+    height: 500px;
+    background: black;
+}
+.thumbnail-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+.thumbnail {
+    cursor: pointer;
+    width: 150px;
+    text-align: center;
+}
+.thumbnail img {
+    width: 100%;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.thumbnail img:hover {
+    transform: scale(1.05);
+}
+select {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+</style>
 </head>
 <body>
 
-<!-- Match 1 -->
-<div class="match-card">
-  <div class="competition">FIFA Club World Cup Final Stage</div>
-  <div class="teams">
-    <img src="https://images.fotmob.com/image_resources/logo/teamlogo/9863_small.png" alt="Fluminense" />
-    <div class="match-info">
-      <strong>Fluminense vs Al Hilal</strong><br />
-      <small>05 Jul | 1:30 AM</small>
+<div class="container">
+    <video id="player" class="video-player" controls autoplay></video>
+    
+    <select id="playerSelect">
+        <option value="https://media1.mycinema.asia/media/films/Captain.America.Brave.New.World.2025/Captain.America.Brave.New.World.2025.m3u8">Player 1 - Main</option>
+        <option value="https://example.com/backup1.m3u8">Player 2 - Backup</option>
+        <option value="https://example.com/backup2.m3u8">Player 3 - Mirror</option>
+    </select>
+
+    <div class="thumbnail-list">
+        <div class="thumbnail" onclick="changeSource('https://media1.mycinema.asia/media/films/Captain.America.Brave.New.World.2025/Captain.America.Brave.New.World.2025.m3u8')">
+            <img src="https://via.placeholder.com/150x200?text=Captain+America" alt="Captain America">
+            <p>Captain America</p>
+        </div>
+        <div class="thumbnail" onclick="changeSource('https://example.com/movie2.m3u8')">
+            <img src="https://via.placeholder.com/150x200?text=Movie+2" alt="Movie 2">
+            <p>Movie 2</p>
+        </div>
+        <div class="thumbnail" onclick="changeSource('https://example.com/movie3.m3u8')">
+            <img src="https://via.placeholder.com/150x200?text=Movie+3" alt="Movie 3">
+            <p>Movie 3</p>
+        </div>
     </div>
-    <img src="https://images.fotmob.com/image_resources/logo/teamlogo/2529_small.png" alt="Al Hilal" />
-  </div>
-  <div class="servers">
-    <button class="server-btn server-1" data-src="https://live5.k8v4dh4.app/live/90725470.m3u8">Server 1</button>
-    <button class="server-btn server-2" data-src="https://live5.k8v4dh4.app/live/90725470.m3u8">Server 2</button>
-    <button class="server-btn server-3" data-src="https://live5.k8v4dh4.app/live/90725470.m3u8">Server 3</button>
-  </div>
 </div>
 
-<!-- Match 2 -->
-<div class="match-card">
-  <div class="competition">FIFA Club World Cup Final Stage</div>
-  <div class="teams">
-    <img src="https://images.fotmob.com/image_resources/logo/teamlogo/10283_small.png" alt="Palmeiras" />
-    <div class="match-info">
-      <strong>Palmeiras vs Chelsea</strong><br />
-      <small>05 Jul | 7:30 AM</small>
-    </div>
-    <img src="https://images.fotmob.com/image_resources/logo/teamlogo/8455_small.png" alt="Chelsea" />
-  </div>
-  <div class="servers">
-    <button class="server-btn server-1" data-src="https://live5.k8v4dh4.app/live/90725470.m3u8">Server 1</button>
-    <button class="server-btn server-2" data-src="https://live5.k8v4dh4.app/live/90725470.m3u8">Server 2</button>
-    <button class="server-btn server-3" data-src="https://live5.k8v4dh4.app/live/90725470.m3u8">Server 3</button>
-  </div>
-</div>
-
-<!-- Match 3 -->
-<div class="match-card">
-  <div class="competition">FIFA Club World Cup Final Stage</div>
-  <div class="teams">
-    <img src="https://images.fotmob.com/image_resources/logo/teamlogo/9847_small.png" alt="PSG" />
-    <div class="match-info">
-      <strong>PSG vs Bayern Mnchen</strong><br />
-      <small>05 Jul | 10:30 PM</small>
-    </div>
-    <img src="https://images.fotmob.com/image_resources/logo/teamlogo/9823_small.png" alt="Bayern Mnchen" />
-  </div>
-  <div class="servers">
-    <button class="server-btn server-1" data-src="https://live5.k8v4dh4.app/live/90725470.m3u8">Server 1</button>
-    <button class="server-btn server-2" data-src="https://live5.k8v4dh4.app/live/90725470.m3u8">Server 2</button>
-    <button class="server-btn server-3" data-src="https://live5.k8v4dh4.app/live/90725470.m3u8">Server 3</button>
-  </div>
-</div>
-
-<!-- Video Player Overlay -->
-<div id="videoOverlay">
-  <div id="videoContainer">
-    <button id="closeBtn" title="Back">Back</button>
-    <video id="videoPlayer" controls autoplay></video>
-  </div>
-</div>
-
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script>
-  const buttons = document.querySelectorAll('.server-btn');
-  const videoOverlay = document.getElementById('videoOverlay');
-  const videoPlayer = document.getElementById('videoPlayer');
-  const closeBtn = document.getElementById('closeBtn');
+const video = document.getElementById('player');
+const select = document.getElementById('playerSelect');
 
-  buttons.forEach(button => {
-    button.addEventListener('click', () => {
-      const streamSrc = button.getAttribute('data-src');
-      if (streamSrc) {
-        videoPlayer.pause();
-        videoPlayer.removeAttribute('src');
-        videoPlayer.load();
-
-        videoPlayer.src = streamSrc;
-        videoOverlay.style.display = 'flex';
-        videoPlayer.load();
-        videoPlayer.play().catch(() => {
-          // Autoplay might be blocked by browser, ignore error.
-        });
-      }
-    });
-  });
-
-  closeBtn.addEventListener('click', () => {
-    videoPlayer.pause();
-    videoPlayer.removeAttribute('src');
-    videoPlayer.load();
-    videoOverlay.style.display = 'none';
-  });
-
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && videoOverlay.style.display === 'flex') {
-      closeBtn.click();
+// HLS Player Function
+function playStream(url) {
+    if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(url);
+        hls.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = url;
     }
-  });
+}
+
+// Change video source from thumbnails
+function changeSource(url) {
+    playStream(url);
+    select.value = url; // update dropdown selection
+}
+
+// Change source from dropdown
+select.addEventListener('change', function() {
+    playStream(this.value);
+});
+
+// Initial Load
+playStream(select.value);
 </script>
 
 </body>
