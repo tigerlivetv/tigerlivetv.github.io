@@ -1,11 +1,11 @@
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=5300000,RESOLUTION=1920x1080
-https://d1211whpimeups.cloudfront.net/smil:rtb2/playlist.m3u8
+https://vsd216.okcdn.ru/hls/1633844005376.m3u8/sig/lrqZi3oRdPU/expires/1755403855911/srcIp/154.204.81.40/urls/185.226.53.56/clientType/1/srcAg/CHROME_ANDROID/mid/4525798399488/1633844005376_high/index.m3u8
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=3000000,RESOLUTION=1280x720
-https://d1211whpimeups.cloudfront.net/smil:rtb2/playlist.m3u8
+https://vsd216.okcdn.ru/hls/1633844005376.m3u8/sig/lrqZi3oRdPU/expires/1755403855911/srcIp/154.204.81.40/urls/185.226.53.56/clientType/1/srcAg/CHROME_ANDROID/mid/4525798399488/1633844005376_high/index.m3u8
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=1500000,RESOLUTION=854x480
-https://d1211whpimeups.cloudfront.net/smil:rtb2/playlist.m3u8
+https://vsd216.okcdn.ru/hls/1633844005376.m3u8/sig/lrqZi3oRdPU/expires/1755403855911/srcIp/154.204.81.40/urls/185.226.53.56/clientType/1/srcAg/CHROME_ANDROID/mid/4525798399488/1633844005376_high/index.m3u8
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=800000,RESOLUTION=640x360
-https://d1211whpimeups.cloudfront.net/smil:rtb2/playlist.m3u8
+https://vsd216.okcdn.ru/hls/1633844005376.m3u8/sig/lrqZi3oRdPU/expires/1755403855911/srcIp/154.204.81.40/urls/185.226.53.56/clientType/1/srcAg/CHROME_ANDROID/mid/4525798399488/1633844005376_high/index.m3u8
 
