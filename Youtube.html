@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8" />
+  <title>G LIVE CHANNEL Auto Theme</title>
+  <link href="https://vjs.zencdn.net/7.21.1/video-js.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+      font-family: 'Orbitron', 'Noto Sans Myanmar', 'Myanmar Text', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      backdrop-filter: blur(20px);
+    }
+    .video-wrapper {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      aspect-ratio: 16 / 9;
+      margin-top: 20px;
+      background: rgba(30, 30, 60, 0.7);
+      border: 2px solid #FFD700;
+      border-radius: 25px;
+      box-shadow: 0 12px 40px rgba(50, 50, 100, 0.7);
+      backdrop-filter: blur(15px);
+      overflow: hidden;
+    }
+    .video-js {
+      width: 100% !important;
+      height: 100% !important;
+      background: #000;
+      border-radius: 25px;
+    }
+    .g-live-text {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 10;
+      font-size: 18px;
+      font-weight: 800;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 10px;
+      transition: all 0.5s ease;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+    }
+    .live-text {
+      position: absolute;
+      top: 45px;
+      right: 12px;
+      z-index: 10;
+      font-size: 14px;
+      font-weight: 900;
+      color: #FF0000;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    }
+    .green-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: limegreen;
+      animation: blink 1.2s infinite;
+      box-shadow: 0 0 6px lime;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .marquee-inside {
+      position: absolute;
+      bottom: 8px;
+      left: 100%;
+      white-space: nowrap;
+      font-size: 15px;
+      font-weight: bold;
+      color: #FFD700;
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+      animation: scrollLeft 20s linear infinite;
+      z-index: 10;
+      pointer-events: none;
+    }
+    @keyframes scrollLeft {
+      0% { left: 100%; }
+      100% { left: -100%; }
+    }
+    .server-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 20px;
+      max-width: 900px;
+    }
+    .server-buttons button {
+      padding: 8px 16px;
+      border: 2px solid #000;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      background: linear-gradient(135deg, #ff6a00, #ee0979);
+      transition: background 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
+    }
+    .server-buttons button.s2 {
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+    }
+    .server-buttons button.s3 {
+      background: linear-gradient(135deg, #00f260, #0575e6);
+    }
+    .server-buttons button.youtube-btn {
+      background: linear-gradient(135deg, #FF0000, #cc0000);
+      font-weight: 900;
+      border: 2px solid #8b0000;
+      color: white;
+      box-shadow: 0 4px 20px rgba(255, 0, 0, 0.3);
+    }
+    .server-buttons button.fullscreen-btn {
+      background: linear-gradient(135deg, #11998e, #38ef7d);
+    }
+    .server-buttons button:hover {
+      transform: scale(1.05);
+      opacity: 0.95;
+    }
+    .server-buttons button.active {
+      opacity: 0.8;
+      transform: scale(1.1);
+      box-shadow: 0 0 12px 2px #FFD700;
+    }
+    .server-buttons button.youtube-btn.active {
+      box-shadow: 0 0 12px 3px #ff0000;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="video-wrapper" id="videoWrapper">
+    <video
+      id="videoPlayer"
+      class="video-js vjs-default-skin"
+      controls
+      autoplay
+      playsinline
+    ></video>
+
+    <div class="g-live-text" id="gLiveText">G LIVE CHANNEL</div>
+    <div class="live-text">
+      <span class="green-dot"></span> LIVE
+    </div>
+
+    <div class="marquee-inside">
+      G LIVE CHANNEL အမြဲတမ်းကြည့်ရှုအားပေးသော မိဘညီအစ်ကို မောင်နှမ တစ်ဦးစီကို ကျေးဇူးအထူးတင်ပါတယ်။
+    </div>
+  </div>
+
+  <div class="server-buttons" id="serverButtons">
+  <button class="youtube-btn" onclick="loadStream('https://www.youtube.com/watch?v=r6Ln8EoDrdY', 'video/youtube', this)">YouTube Live</button>
+    <button class="fullscreen-btn" onclick="toggleFullscreen()">Fullscreen</button>
+  </div>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/videojs-youtube/dist/Youtube.min.js"></script>
+
+  <script>
+    const player = videojs('videoPlayer');
+    let currentBtn = document.querySelector('.server-buttons button.active');
+
+    function loadStream(url, type, btn) {
+      if (currentBtn) currentBtn.classList.remove('active');
+      btn.classList.add('active');
+      currentBtn = btn;
+
+      player.src({ type: type, src: url });
+      player.ready(() => {
+        player.play().catch((err) => {
+          console.warn("Autoplay failed:", err);
+          player.muted(true);
+          player.play().catch(e => console.error("Still failed:", e));
+        });
+      });
+    }
+
+    function toggleFullscreen() {
+      const w = document.getElementById("videoWrapper");
+      if (!document.fullscreenElement) {
+        w.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    //  Auto Theme Change Logic
+    const themes = [
+      { background: "rgba(0,0,0,0.6)", color: "white" },
+      { background: "linear-gradient(135deg, #FFD700, #FFA500)", color: "black" },
+      { background: "linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet)", color: "white" },
+      { background: "#0f0", color: "black", boxShadow: "0 0 8px #0f0" },
+      { background: "rgba(0,123,255,0.2)", color: "white", backdropFilter: "blur(6px)" }
+    ];
+
+    function applyRandomTheme() {
+      const el = document.getElementById("gLiveText");
+      const theme = themes[Math.floor(Math.random() * themes.length)];
+      el.style.background = theme.background || "";
+      el.style.backgroundColor = theme.background || "";
+      el.style.color = theme.color || "white";
+      el.style.boxShadow = theme.boxShadow || "none";
+      el.style.backdropFilter = theme.backdropFilter || "none";
+    }
+
+    setInterval(applyRandomTheme, 3000); // 3 seconds
+    window.onload = () => {
+      document.querySelector('.s1').click();
+      applyRandomTheme(); // Initial theme
+    };
+  </script>
+
+</body>
+</html>
