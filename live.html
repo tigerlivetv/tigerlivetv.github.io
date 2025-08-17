@@ -156,7 +156,7 @@
   </div>
 
   <div class="server-buttons">
-    <button class="s1" onclick="loadStream('https://vsd96.okcdn.ru/hls/1633844005376.m3u8/sig/BNZFk0WSenQ/expires/1755361844832/srcIp/37.111.44.9/urls/45.136.20.35/clientType/0/srcAg/CHROME_ANDROID/mid/4525798399488/1633844005376_high/index.m3u8')">Server 1</button>
+    <button class="s1" onclick="loadStream('https://stream.lastlive.org/UK.Sky.Sports.Main.Event.FHD/index.m3u8?token=97be8ac729e108e6e0b5430166a10846885c3805-cb83e26a8b2cc737d6c01bc7b16c6307-1755444761-1755437561&remote=37.111.44.204')">Server 1</button>
     <button class="s2" onclick="loadStream('https://live5.k8v4dh4.app/live/24561735.m3u8')">Server 2</button>
     <button class="s3" onclick="loadStream('https://live5.k8v4dh4.app/live/24561735.m3u8')">Server 3</button>
     <button class="fullscreen-btn" onclick="toggleFullscreen()">Fullscreen</button>
@@ -165,7 +165,7 @@
   <script>
     const video = document.getElementById("videoPlayer");
     let hls;
-    const defaultUrl = "https://vsd96.okcdn.ru/hls/1633844005376.m3u8/sig/BNZFk0WSenQ/expires/1755361844832/srcIp/37.111.44.9/urls/45.136.20.35/clientType/0/srcAg/CHROME_ANDROID/mid/4525798399488/1633844005376_high/index.m3u8";
+    const defaultUrl = "https://stream.lastlive.org/UK.Sky.Sports.Main.Event.FHD/index.m3u8?token=97be8ac729e108e6e0b5430166a10846885c3805-cb83e26a8b2cc737d6c01bc7b16c6307-1755444761-1755437561&remote=37.111.44.204";
 
     function loadStream(url) {
       if (Hls.isSupported()) {
