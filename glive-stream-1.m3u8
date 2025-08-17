@@ -1,8 +1,8 @@
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=3000000,RESOLUTION=1280x720
-https://hls.streambtw.com/live/stream_1.m3u8
+https://live.lastlive.org/Arena.Sport.1.HR.HD/index.m3u8?token=26ac4dcbddd41aa043f8c52577ec7706eda628bc-5c8e23300377327535e7e51d3ed994cf-1755446608-1755439408&remote=37.111.44.204
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=1500000,RESOLUTION=854x480
-https://hls.streambtw.com/live/stream_1.m3u8
+https://live.lastlive.org/Arena.Sport.1.HR.HD/index.m3u8?token=26ac4dcbddd41aa043f8c52577ec7706eda628bc-5c8e23300377327535e7e51d3ed994cf-1755446608-1755439408&remote=37.111.44.204
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=800000,RESOLUTION=640x360
-https://hls.streambtw.com/live/stream_1.m3u8
+https://live.lastlive.org/Arena.Sport.1.HR.HD/index.m3u8?token=26ac4dcbddd41aa043f8c52577ec7706eda628bc-5c8e23300377327535e7e51d3ed994cf-1755446608-1755439408&remote=37.111.44.204
