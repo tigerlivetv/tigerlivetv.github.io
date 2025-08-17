@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>LastLive Player</title>
+<title>Nottingham Forest vs Brentford - LIVE</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
   <div class="video-wrapper">
     <div class="badges">
       <span class="badge bg-danger">LIVE</span>
-      <span class="viewer-badge"><i class="bi bi-eye"></i> <span id="viewerCount">0</span></span>
+      <span class="viewer-badge"><i class="bi bi-eye"></i> <span id="viewerCount">14</span></span>
     </div>
     <video id="video" controls autoplay playsinline></video>
     <img src="https://lastlive.org/site/logo.png" class="watermark" alt="Logo">
@@ -37,59 +37,32 @@
 
 <script>
 const video = document.getElementById('video');
-const viewerCountEl = document.getElementById('viewerCount');
-const asset = "PT.Eleven.Sports.2.HD";
-const host = "https://live.lastlive.org";
-const serverEndpoint = "http://localhost:3000/getStream";
 
-let hls;
-let renewTimer;
+// --- Direct HLS Stream URL ---
+const hlsUrl = "https://live.lastlive.org/PT.Eleven.Sports.2.HD/index.m3u8?token=4cfd6772b2dbd1f9a470dca3bcb0a8bbbe2ed7e5-f8e93f4f8932524f9bc439d28ad59f37-1755447085-1755439885";
 
-async function getStreamUrl() {
-  try {
-    const res = await fetch(`${serverEndpoint}?asset=${asset}`);
-    const data = await res.json();
-    // data: {url: "...", ttl: ...}
-    return data.url;
-  } catch(err) {
-    console.error('Failed to get stream URL', err);
-    return null;
-  }
-}
-
-async function startPlayer() {
-  const url = await getStreamUrl();
-  if (!url) return alert("Stream URL not available");
-
-  if (hls) hls.destroy();
-
-  if (Hls.isSupported()) {
-    hls = new Hls();
-    hls.loadSource(url);
+if(Hls.isSupported()){
+    const hls = new Hls();
+    hls.loadSource(hlsUrl);
     hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(()=>{}));
-    hls.on(Hls.Events.ERROR, (ev, data)=>{
-      if(data.fatal) hls.destroy();
+    hls.on(Hls.Events.MANIFEST_PARSED, ()=>video.play().catch(()=>{}));
+    hls.on(Hls.Events.ERROR, (event, data)=>{
+        if(data.fatal) console.error("HLS error:", data);
     });
-  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = url;
+} else if(video.canPlayType('application/vnd.apple.mpegurl')){
+    video.src = hlsUrl;
     video.addEventListener('loadedmetadata', ()=>video.play());
-  } else alert("Your browser does not support HLS");
-
-  // Auto refresh token every 2 minutes (replace with TTL*0.75)
-  if(renewTimer) clearTimeout(renewTimer);
-  renewTimer = setTimeout(startPlayer, 120000);
+} else {
+    alert("Your browser does not support HLS");
 }
 
-// Fake viewer count for demo (replace with actual API)
-function updateViewers(){
-  const count = Math.floor(Math.random()*1000); 
-  viewerCountEl.textContent = count;
-}
-setInterval(updateViewers, 8000);
-
-startPlayer();
-updateViewers();
+// --- Viewer count demo ---
+const viewerCountEl = document.getElementById('viewerCount');
+setInterval(()=>{
+    const fakeCount = 10 + Math.floor(Math.random()*10);
+    viewerCountEl.textContent = fakeCount;
+}, 8000);
 </script>
+
 </body>
 </html>
