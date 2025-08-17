@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="my">
-<head>
-  <meta charset="UTF-8" />
+<!DOCTYPE html><html lang="my"><head>
+  <meta charset="UTF-8">
   <title>G LIVE CHANNEL</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Noto+Sans+Myanmar&display=swap" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&amp;family=Noto+Sans+Myanmar&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script><style type="text/css">* {user-select: auto !important; -webkit-user-select: auto !important;}</style><input type="hidden" id="inject_idm_text_selection"><style></style>
   <style>
     body {
       margin: 0;
@@ -143,7 +141,7 @@
 <body>
 
   <div class="video-wrapper" id="videoWrapper">
-    <video id="videoPlayer" controls autoplay playsinline></video>
+    <video id="videoPlayer" controls="" autoplay="" playsinline="" src="blob:https://tigerlivetv.github.io/cd039ad5-0aa4-492d-a609-35731b470264"></video>
 
     <div class="g-live-text">G LIVE CHANNEL</div>
     <div class="live-text">
@@ -156,16 +154,16 @@
   </div>
 
   <div class="server-buttons">
-    <button class="s1" onclick="loadStream('https://stream.lastlive.org/UK.Sky.Sports.Main.Event.FHD/index.m3u8?token=97be8ac729e108e6e0b5430166a10846885c3805-cb83e26a8b2cc737d6c01bc7b16c6307-1755444761-1755437561&remote=37.111.44.204')">Server 1</button>
-    <button class="s2" onclick="loadStream('https://live5.k8v4dh4.app/live/24561735.m3u8')">Server 2</button>
-    <button class="s3" onclick="loadStream('https://live5.k8v4dh4.app/live/24561735.m3u8')">Server 3</button>
+    <button class="s1" onclick="loadStream('https://stream.lastlive.org/UK.Sky.Sports.Main.Event.FHD/tracks-v1a1/mono.m3u8?remote=37.111.44.204&token=a9dbfbefa0813712b82c27974ccd7fddd1f74c8a-5770194ea3f67e5a8688dacb6d22bf3f-1755445112-1755437912')">Server 1</button>
+    <button class="s2" onclick="loadStream('https://live.lastlive.org/Arena.Sport.1.HR.HD/tracks-v1a1/mono.m3u8?remote=37.111.44.204&token=6b04f54dad1089f78352d746f35dfcdd084c0530-bb9cd37d34d30b96acfde619a51f0e06-1755445738-1755438538')">Server 2</button>
+    <button class="s3" onclick="loadStream('https://live.lastlive.org/IT.SKY.SPORT.CALCIO.HD/index.m3u8?token=534e34a510a30affdbf3988f03a73b1c88f1729b-f5ec01f5713e10fdeacf8a40de63f244-1755445825-1755438625&remote=37.111.44.204')">Server 3</button>
     <button class="fullscreen-btn" onclick="toggleFullscreen()">Fullscreen</button>
   </div>
 
   <script>
     const video = document.getElementById("videoPlayer");
     let hls;
-    const defaultUrl = "https://stream.lastlive.org/UK.Sky.Sports.Main.Event.FHD/index.m3u8?token=97be8ac729e108e6e0b5430166a10846885c3805-cb83e26a8b2cc737d6c01bc7b16c6307-1755444761-1755437561&remote=37.111.44.204";
+    const defaultUrl = "https://stream.lastlive.org/UK.Sky.Sports.Main.Event.FHD/tracks-v1a1/mono.m3u8?remote=37.111.44.204&token=a9dbfbefa0813712b82c27974ccd7fddd1f74c8a-5770194ea3f67e5a8688dacb6d22bf3f-1755445112-1755437912";
 
     function loadStream(url) {
       if (Hls.isSupported()) {
@@ -202,5 +200,6 @@
     };
   </script>
 
-</body>
-</html>
+
+
+</body></html>
