@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>HLS Demo Player</title>
+  <title>Demo HLS Player</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <style>
     body {
       margin: 0;
-      background: #000;
+      background-color: #000;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -21,17 +21,33 @@
       border-radius: 12px;
       background: #000;
     }
+    /* Watermark top-right */
+    .watermark {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 72px;
+      opacity: 0.85;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .player-container {
+      position: relative;
+      width: 90%;
+      max-width: 900px;
+    }
   </style>
 </head>
 <body>
 
-  <video id="video" controls autoplay playsinline></video>
+  <div class="player-container">
+    <video id="video" controls autoplay playsinline></video>
+    <img src="https://lastlive.org/site/logo.png" alt="Logo" class="watermark">
+  </div>
 
   <script>
     const video = document.getElementById('video');
-
-    // ဒီမှာ မင်း HTML ထဲက m3u8 link ထည့်ထားတယ်
-    const videoSrc = "https://live.lastlive.org/PT.Eleven.Sports.2.HD/index.m3u8?token=4cfd6772b2dbd1f9a470dca3bcb0a8bbbe2ed7e5-f8e93f4f8932524f9bc439d28ad59f37-1755447085-1755439885&remote=37.111.44.204";
+    const videoSrc = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
 
     if (Hls.isSupported()) {
       const hls = new Hls();
@@ -40,14 +56,14 @@
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
         video.play().catch(() => {});
       });
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      // Safari ကတော့ native HLS support ရှိတယ်
-      video.src = videoSrc;
-      video.addEventListener('loadedmetadata', () => {
-        video.play().catch(() => {});
+      hls.on(Hls.Events.ERROR, (event, data) => {
+        console.error("HLS error", data);
       });
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = videoSrc;
+      video.addEventListener('loadedmetadata', () => video.play());
     } else {
-      alert("Your browser does not support HLS.");
+      alert("Your browser does not support HLS");
     }
   </script>
 
