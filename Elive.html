@@ -4,95 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nottingham Forest vs Brentford - LIVE</title>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<style>
-  body { margin: 0; background: #121212; color: white; font-family: sans-serif; }
-  .container { max-width: 960px; margin: 2rem auto; }
-  .video-wrapper { position: relative; border-radius: 12px; overflow: hidden; }
-  video { width: 100%; height: auto; display: block; background: black; }
-  .watermark { position: absolute; top: 0.5rem; right: 0.5rem; width: 72px; opacity: 0.85; z-index: 3; pointer-events: none; }
-  .badges { position: absolute; top: 0.5rem; left: 0.5rem; display: flex; gap: 0.5rem; z-index: 3; }
-  .viewer-badge { background: rgba(0,0,0,0.6); padding: 0.25rem 0.5rem; border-radius: 0.5rem; display: flex; align-items: center; gap: 0.25rem; font-size: 0.85rem; }
-</style>
 </head>
-<body>
+<body style="margin:0; background:black; display:flex; justify-content:center; align-items:center; height:100vh;">
 
-<div class="container">
-  <div class="d-flex align-items-center justify-content-between mb-3">
-    <h3>Nottingham Forest vs Brentford</h3>
-    <span>Premier League | 17-08-2025 07:30 PM</span>
-  </div>
-
-  <div class="video-wrapper">
-    <div class="badges">
-      <span class="badge bg-danger">LIVE</span>
-      <span class="viewer-badge"><i class="bi bi-eye"></i> <span id="viewerCount">14</span></span>
-    </div>
-    <video id="video" controls autoplay playsinline></video>
-    <img src="https://lastlive.org/site/logo.png" class="watermark" alt="Logo">
-  </div>
-</div>
-
-<script>
-const video = document.getElementById('video');
-const viewerCountEl = document.getElementById('viewerCount');
-
-// --- Config ---
-const asset = "PT.Eleven.Sports.2.HD";
-const host  = "https://live.lastlive.org";
-const renewIntervalSec = 120; // auto-renew every 2 min
-
-let hls;
-
-// --- Fetch tokenized stream URL ---
-async function getStreamUrl(){
-    try{
-        const res = await fetch(`https://lastlive.org/hls/renew?asset=${encodeURIComponent(asset)}&host=${encodeURIComponent(host)}`, {cache:'no-store'});
-        if(!res.ok) throw new Error(res.status);
-        const data = await res.json();
-        return data.url;
-    }catch(e){
-        console.error("Token fetch failed", e);
-        return null;
-    }
-}
-
-// --- Start player ---
-async function startPlayer(){
-    const url = await getStreamUrl();
-    if(!url){ alert("Cannot load stream"); return; }
-
-    if(Hls.isSupported()){
-        if(hls) hls.destroy();
-        hls = new Hls();
-        hls.loadSource(url);
-        hls.attachMedia(video);
-        hls.on(Hls.Events.MANIFEST_PARSED, ()=>video.play().catch(()=>{}));
-        hls.on(Hls.Events.ERROR, (ev,data)=>{
-            if(data.fatal){
-                console.error("HLS fatal error:", data);
-                startPlayer(); // retry
-            }
-        });
-    } else if(video.canPlayType('application/vnd.apple.mpegurl')){
-        video.src = url;
-        video.addEventListener('loadedmetadata', ()=>video.play());
-    } else {
-        alert("Your browser does not support HLS");
-    }
-}
-
-// --- Auto token renew ---
-setInterval(startPlayer, renewIntervalSec*1000);
-
-// --- Fake viewer count update ---
-setInterval(()=>{
-    const fakeCount = 10 + Math.floor(Math.random()*20);
-    viewerCountEl.textContent = fakeCount;
-}, 8000);
-
-startPlayer();
-</script>
+<!-- Default Media Player -->
+<video controls autoplay playsinline style="width:100%; max-width:960px; height:auto; background:black;">
+  <source src="https://live.lastlive.org/PT.Eleven.Sports.2.HD/tracks-v1a1/mono.m3u8?remote=37.111.44.204&token=4cfd6772b2dbd1f9a470dca3bcb0a8bbbe2ed7e5-f8e93f4f8932524f9bc439d28ad59f37-1755447085-1755439885" type="application/x-mpegURL">
+  Your browser does not support HTML5 video.
+</video>
 
 </body>
 </html>
