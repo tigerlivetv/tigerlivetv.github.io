@@ -154,7 +154,7 @@
   </div>
 
   <div class="server-buttons">
-    <button class="s1" onclick="loadStream('https://stream.lastlive.org/UK.Sky.Sports.Main.Event.FHD/tracks-v1a1/mono.m3u8?remote=37.111.44.204&token=a9dbfbefa0813712b82c27974ccd7fddd1f74c8a-5770194ea3f67e5a8688dacb6d22bf3f-1755445112-1755437912')">Server 1</button>
+    <button class="s1" onclick="loadStream('https://manifest.googlevideo.com/api/manifest/hls_variant/expire/1762293243/ei/myEKaeC6Fp-T4t4P59rxuQU/ip/116.206.138.57/id/dXIyMS61B68.42/source/yt_live_broadcast/requiressl/yes/xpc/EgVo2aDSNQ%3D%3D/hfr/1/playlist_duration/30/manifest_duration/30/maudio/1/bui/AdEuB5RelITX9y8TJWPGU_46_uwkugbqLiDSmLJGrlrvX2D_7WHcwhxkuJGmzk9FGtoYqk71CSVaiZrN/spc/6b0G_ILsS09IFuDmHPBUMd3qf4uiSQfDepgrTSBhNA3xe2YjQPWTpGA/vprv/1/go/1/rqh/5/pacing/0/nvgoi/1/ncsapi/1/keepalive/yes/fexp/51331020%2C51552689%2C51565116%2C51565681%2C51580968/dover/11/itag/0/playlist_type/DVR/sparams/expire%2Cei%2Cip%2Cid%2Csource%2Crequiressl%2Cxpc%2Chfr%2Cplaylist_duration%2Cmanifest_duration%2Cmaudio%2Cbui%2Cspc%2Cvprv%2Cgo%2Crqh%2Citag%2Cplaylist_type/sig/AJfQdSswRAIgVXrUtU8Chz_Tc8-r-PhGSlBKxsjBVXfhTEoZIFCa35kCIFYxsmsDKLSERVM4Bu1j0Ko1BFdsx2kxKJD2p1KXZO8a/file/index.m3u8')">Server 1</button>
     <button class="s2" onclick="loadStream('https://live.lastlive.org/Arena.Sport.1.HR.HD/tracks-v1a1/mono.m3u8?remote=37.111.44.204&token=6b04f54dad1089f78352d746f35dfcdd084c0530-bb9cd37d34d30b96acfde619a51f0e06-1755445738-1755438538')">Server 2</button>
     <button class="s3" onclick="loadStream('https://live.lastlive.org/IT.SKY.SPORT.CALCIO.HD/index.m3u8?token=534e34a510a30affdbf3988f03a73b1c88f1729b-f5ec01f5713e10fdeacf8a40de63f244-1755445825-1755438625&remote=37.111.44.204')">Server 3</button>
     <button class="fullscreen-btn" onclick="toggleFullscreen()">Fullscreen</button>
@@ -163,7 +163,7 @@
   <script>
     const video = document.getElementById("videoPlayer");
     let hls;
-    const defaultUrl = "https://stream.lastlive.org/UK.Sky.Sports.Main.Event.FHD/tracks-v1a1/mono.m3u8?remote=37.111.44.204&token=a9dbfbefa0813712b82c27974ccd7fddd1f74c8a-5770194ea3f67e5a8688dacb6d22bf3f-1755445112-1755437912";
+    const defaultUrl = "https://manifest.googlevideo.com/api/manifest/hls_variant/expire/1762293243/ei/myEKaeC6Fp-T4t4P59rxuQU/ip/116.206.138.57/id/dXIyMS61B68.42/source/yt_live_broadcast/requiressl/yes/xpc/EgVo2aDSNQ%3D%3D/hfr/1/playlist_duration/30/manifest_duration/30/maudio/1/bui/AdEuB5RelITX9y8TJWPGU_46_uwkugbqLiDSmLJGrlrvX2D_7WHcwhxkuJGmzk9FGtoYqk71CSVaiZrN/spc/6b0G_ILsS09IFuDmHPBUMd3qf4uiSQfDepgrTSBhNA3xe2YjQPWTpGA/vprv/1/go/1/rqh/5/pacing/0/nvgoi/1/ncsapi/1/keepalive/yes/fexp/51331020%2C51552689%2C51565116%2C51565681%2C51580968/dover/11/itag/0/playlist_type/DVR/sparams/expire%2Cei%2Cip%2Cid%2Csource%2Crequiressl%2Cxpc%2Chfr%2Cplaylist_duration%2Cmanifest_duration%2Cmaudio%2Cbui%2Cspc%2Cvprv%2Cgo%2Crqh%2Citag%2Cplaylist_type/sig/AJfQdSswRAIgVXrUtU8Chz_Tc8-r-PhGSlBKxsjBVXfhTEoZIFCa35kCIFYxsmsDKLSERVM4Bu1j0Ko1BFdsx2kxKJD2p1KXZO8a/file/index.m3u8";
 
     function loadStream(url) {
       if (Hls.isSupported()) {
