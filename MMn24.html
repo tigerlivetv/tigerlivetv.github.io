@@ -9,50 +9,364 @@
       maximum-scale=1.0,
       user-scalable=no">
 
-<title>OK Video Player</title>
+<title>မြန်မာ ဇာတ်လမ်းတွဲများ</title>
 
 <style>
 
 * {
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html,
 body {
     margin: 0;
     padding: 0;
-    width: 100%;
-    min-height: 100%;
-    background: #000;
+    background: #080808;
+    color: white;
     font-family: Arial, "Myanmar Text", sans-serif;
 }
 
 
 /* =========================
-   PLAYER AREA
+   HEADER
 ========================= */
 
-.player {
-    position: relative;
+.header {
 
-    width: 100%;
-    max-width: 1000px;
+    position: sticky;
+    top: 0;
 
-    margin: 20px auto;
+    z-index: 1000;
 
-    background: #000;
+    padding: 16px 15px;
 
-    overflow: hidden;
+    text-align: center;
 
-    border-radius: 14px;
+    background:
+        linear-gradient(
+            135deg,
+            #171717,
+            #080808
+        );
+
+    border-bottom: 1px solid #333;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.7);
+
+}
+
+.header h1 {
+
+    margin: 0;
+
+    font-size: 23px;
+
+    font-weight: bold;
+
+}
+
+.header p {
+
+    margin: 6px 0 0;
+
+    color: #aaa;
+
+    font-size: 13px;
+
 }
 
 
 /* =========================
-   VIDEO
+   SEARCH
 ========================= */
 
-.video-frame {
+.search-box {
+
+    max-width: 600px;
+
+    margin: 18px auto;
+
+    padding: 0 12px;
+
+}
+
+.search-box input {
+
+    width: 100%;
+
+    padding: 13px 18px;
+
+    border: 1px solid #444;
+
+    outline: none;
+
+    border-radius: 30px;
+
+    background: #151515;
+
+    color: white;
+
+    font-size: 15px;
+
+}
+
+.search-box input:focus {
+
+    border-color: #777;
+
+}
+
+
+/* =========================
+   MOVIE GRID
+========================= */
+
+.movie-grid {
+
+    width: 100%;
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 5px 12px 30px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+
+}
+
+
+/* =========================
+   MOVIE CARD
+========================= */
+
+.movie-card {
+
+    background: #151515;
+
+    border: 1px solid #333;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 20px rgba(0,0,0,0.6);
+
+    transition: 0.2s;
+
+}
+
+.movie-card:hover {
+
+    transform: translateY(-3px);
+
+    border-color: #777;
+
+}
+
+
+/* =========================
+   POSTER
+========================= */
+
+.poster {
+
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 16 / 10;
+
+    background: #222;
+
+    overflow: hidden;
+
+}
+
+.poster img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+}
+
+
+/* PLAY ICON */
+
+.play-icon {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(0,0,0,0.75);
+
+    border: 2px solid
+        rgba(255,255,255,0.8);
+
+    font-size: 23px;
+
+}
+
+
+/* CARD INFO */
+
+.movie-info {
+
+    padding: 11px;
+
+}
+
+.movie-title {
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    line-height: 1.5;
+
+}
+
+.movie-episode {
+
+    margin-top: 4px;
+
+    color: #999;
+
+    font-size: 12px;
+
+}
+
+
+/* =========================
+   PLAYER PAGE
+========================= */
+
+.player-page {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    background: #000;
+
+    overflow-y: auto;
+
+}
+
+
+/* PLAYER TOP */
+
+.player-top {
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 0 12px;
+
+    background: #101010;
+
+    border-bottom: 1px solid #333;
+
+}
+
+
+/* BACK BUTTON */
+
+.back-button {
+
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid #555;
+
+    border-radius: 50%;
+
+    background: #222;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+}
+
+.player-name {
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+
+}
+
+
+/* =========================
+   VIDEO PLAYER
+========================= */
+
+.player-container {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    background: #000;
+
+}
+
+
+.video-area {
+
     position: relative;
 
     width: 100%;
@@ -62,21 +376,22 @@ body {
     background: #000;
 
     overflow: hidden;
+
 }
 
 
-.video-frame iframe {
+.video-area iframe {
+
     position: absolute;
 
-    top: 0;
-    left: 0;
+    inset: 0;
 
     width: 100%;
+
     height: 100%;
 
     border: 0;
 
-    z-index: 1;
 }
 
 
@@ -89,19 +404,22 @@ body {
     position: absolute;
 
     left: 0;
-    right: 0;
+
     bottom: 0;
 
     width: 100%;
+
     height: 34px;
 
     overflow: hidden;
 
-    background: rgba(0,0,0,0.65);
+    background:
+        rgba(0,0,0,0.65);
 
-    z-index: 999999;
+    z-index: 20;
 
     pointer-events: none;
+
 }
 
 
@@ -109,9 +427,9 @@ body {
 
     position: absolute;
 
-    left: 100%;
-
     top: 0;
+
+    left: 100%;
 
     height: 34px;
 
@@ -119,18 +437,18 @@ body {
 
     white-space: nowrap;
 
-    color: #fff;
+    color: white;
 
     font-size: 16px;
 
     font-weight: bold;
 
     text-shadow:
-        0 2px 4px #000,
-        0 0 8px #000;
+        0 2px 4px #000;
 
     animation:
         moveText 12s linear infinite;
+
 }
 
 
@@ -148,73 +466,147 @@ body {
 
 
 /* =========================
-   FULLSCREEN BUTTON
+   PLAYER INFO
 ========================= */
 
-.control-area {
+.player-info {
 
-    width: 100%;
+    padding: 18px 15px 30px;
 
-    text-align: center;
+    max-width: 1100px;
 
-    padding: 12px;
+    margin: auto;
 
-    background: #0b0b0b;
+}
+
+.player-info h2 {
+
+    margin: 0;
+
+    font-size: 20px;
+
+}
+
+.player-info p {
+
+    color: #999;
+
+    font-size: 14px;
+
 }
 
 
-.fullscreen-button {
+/* FULLSCREEN */
+
+.fullscreen-btn {
+
+    margin-top: 10px;
+
+    padding: 11px 20px;
 
     border: 1px solid #555;
 
-    background: linear-gradient(
-        135deg,
-        #333,
-        #111
-    );
+    border-radius: 25px;
+
+    background: #181818;
 
     color: white;
 
-    padding: 10px 24px;
-
-    border-radius: 25px;
-
-    font-size: 15px;
-
-    font-weight: bold;
+    font-size: 14px;
 
     cursor: pointer;
+
 }
 
 
 /* =========================
-   CUSTOM FULLSCREEN
+   MOBILE
 ========================= */
 
-.player.custom-fullscreen {
+@media (max-width: 700px) {
 
-    position: fixed;
+    .movie-grid {
 
-    top: 0;
-    left: 0;
+        grid-template-columns:
+            repeat(2, 1fr);
 
-    width: 100vw;
-    height: 100vh;
+        gap: 10px;
 
-    max-width: none;
+        padding: 5px 8px 25px;
 
-    margin: 0;
+    }
 
-    border-radius: 0;
+    .movie-title {
 
-    z-index: 999999999;
+        font-size: 14px;
 
-    background: #000;
+    }
+
+    .movie-info {
+
+        padding: 9px;
+
+    }
+
+    .play-icon {
+
+        width: 45px;
+        height: 45px;
+
+        font-size: 19px;
+
+    }
+
 }
 
 
-.player.custom-fullscreen
-.video-frame {
+/* SMALL PHONE */
+
+@media (max-width: 380px) {
+
+    .movie-grid {
+
+        gap: 8px;
+
+    }
+
+    .movie-title {
+
+        font-size: 13px;
+
+    }
+
+}
+
+
+/* =========================
+   LANDSCAPE PLAYER
+========================= */
+
+.player-page.landscape {
+
+    background: #000;
+
+}
+
+.player-page.landscape
+.player-top {
+
+    display: none;
+
+}
+
+.player-page.landscape
+.player-container {
+
+    width: 100vw;
+
+    max-width: none;
+
+}
+
+.player-page.landscape
+.video-area {
 
     width: 100vw;
 
@@ -224,130 +616,45 @@ body {
 
 }
 
-
-/* စာတန်းက Fullscreen မှာလည်း
-   Video အောက်ဆုံးကို ကပ်နေမယ် */
-
-.player.custom-fullscreen
+.player-page.landscape
 .running-bar {
 
-    position: absolute;
-
     bottom: 0;
-    left: 0;
-
-    width: 100%;
 
     height: 40px;
 
-    z-index: 999999999;
 }
 
-
-.player.custom-fullscreen
+.player-page.landscape
 .running-text {
 
     height: 40px;
 
     line-height: 40px;
 
-    font-size: 19px;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 600px) {
-
-    .player {
-
-        margin: 10px auto;
-
-        border-radius: 10px;
-    }
-
-    .running-bar {
-
-        height: 30px;
-    }
-
-    .running-text {
-
-        height: 30px;
-
-        line-height: 30px;
-
-        font-size: 14px;
-    }
+    font-size: 18px;
 
 }
 
 
 /* =========================
-   LANDSCAPE
+   EMPTY
 ========================= */
 
-@media
-(orientation: landscape)
-and (max-height: 600px) {
+.no-result {
 
-    .player {
+    display: none;
 
-        width: 100vw;
+    text-align: center;
 
-        max-width: none;
+    padding: 50px 20px;
 
-        margin: 0;
-
-        border-radius: 0;
-    }
-
-    .video-frame {
-
-        width: 100vw;
-
-        height: 100vh;
-
-        aspect-ratio: auto;
-    }
-
-    .control-area {
-
-        position: absolute;
-
-        right: 10px;
-        top: 10px;
-
-        width: auto;
-
-        padding: 0;
-
-        background: transparent;
-
-        z-index: 9999999999;
-    }
-
-    .running-bar {
-
-        bottom: 0;
-
-        height: 38px;
-    }
-
-    .running-text {
-
-        height: 38px;
-
-        line-height: 38px;
-
-        font-size: 17px;
-    }
+    color: #777;
 
 }
 
 </style>
+
 </head>
 
 
@@ -355,31 +662,196 @@ and (max-height: 600px) {
 
 
 <!-- =========================
-     PLAYER
+     HOME
 ========================= -->
 
-<div class="player" id="player">
+<div id="homePage">
 
 
-    <div class="video-frame" id="videoFrame">
+    <header class="header">
+
+        <h1>🎬 မြန်မာ ဇာတ်လမ်းတွဲများ</h1>
+
+        <p>
+            မြန်မာဇာတ်လမ်းတွဲများကို
+            တစ်နေရာတည်းမှာ ကြည့်ရှုနိုင်ပါသည်
+        </p>
+
+    </header>
 
 
-        <!-- OK.RU VIDEO -->
+    <!-- SEARCH -->
 
-        <iframe
-            src="https://ok.ru/videoembed/16283322485483?nochat=1&autoplay=1"
-            allow="autoplay"
-            allowfullscreen>
-        </iframe>
+    <div class="search-box">
+
+        <input
+            type="search"
+            id="searchInput"
+            placeholder="ဇာတ်လမ်းတွဲ ရှာရန်..."
+            oninput="searchMovies()">
+
+    </div>
 
 
-        <!-- RUNNING TEXT -->
+    <!-- MOVIES -->
 
-        <div class="running-bar">
+    <div
+        class="movie-grid"
+        id="movieGrid">
 
-            <div class="running-text">
 
-                🔴 တိုက်ရိုက်ထုတ်လွှင့်မှုကို ကြည့်ရှုနေပါသည် 🔴
+        <!-- MOVIE 1 -->
+
+        <div
+            class="movie-card"
+            data-title="မြန်မာ ဇာတ်လမ်းတွဲ"
+            onclick="openPlayer(
+                'မြန်မာ ဇာတ်လမ်းတွဲ',
+                'အပိုင်း (၁)'
+            )">
+
+
+            <div class="poster">
+
+                <!-- ကိုယ့်ပုံကို ဒီနေရာမှာ ပြောင်းပါ -->
+
+                <img
+                    src="https://picsum.photos/800/500?random=11"
+                    alt="မြန်မာ ဇာတ်လမ်းတွဲ">
+
+                <div class="play-icon">
+                    ▶
+                </div>
+
+            </div>
+
+
+            <div class="movie-info">
+
+                <div class="movie-title">
+                    မြန်မာ ဇာတ်လမ်းတွဲ
+                </div>
+
+                <div class="movie-episode">
+                    အပိုင်း (၁)
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MOVIE 2 -->
+
+        <div
+            class="movie-card"
+            data-title="ဇာတ်လမ်းတွဲ အသစ်"
+            onclick="openPlayer(
+                'ဇာတ်လမ်းတွဲ အသစ်',
+                'အပိုင်း (၁)'
+            )">
+
+
+            <div class="poster">
+
+                <img
+                    src="https://picsum.photos/800/500?random=12"
+                    alt="ဇာတ်လမ်းတွဲ">
+
+                <div class="play-icon">
+                    ▶
+                </div>
+
+            </div>
+
+
+            <div class="movie-info">
+
+                <div class="movie-title">
+                    ဇာတ်လမ်းတွဲ အသစ်
+                </div>
+
+                <div class="movie-episode">
+                    အပိုင်း (၁)
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MOVIE 3 -->
+
+        <div
+            class="movie-card"
+            data-title="မြန်မာအချစ်ဇာတ်လမ်း"
+            onclick="openPlayer(
+                'မြန်မာအချစ်ဇာတ်လမ်း',
+                'အပိုင်း (၁)'
+            )">
+
+
+            <div class="poster">
+
+                <img
+                    src="https://picsum.photos/800/500?random=13"
+                    alt="မြန်မာအချစ်ဇာတ်လမ်း">
+
+                <div class="play-icon">
+                    ▶
+                </div>
+
+            </div>
+
+
+            <div class="movie-info">
+
+                <div class="movie-title">
+                    မြန်မာအချစ်ဇာတ်လမ်း
+                </div>
+
+                <div class="movie-episode">
+                    အပိုင်း (၁)
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MOVIE 4 -->
+
+        <div
+            class="movie-card"
+            data-title="မြန်မာဒရာမာ"
+            onclick="openPlayer(
+                'မြန်မာဒရာမာ',
+                'အပိုင်း (၁)'
+            )">
+
+
+            <div class="poster">
+
+                <img
+                    src="https://picsum.photos/800/500?random=14"
+                    alt="မြန်မာဒရာမာ">
+
+                <div class="play-icon">
+                    ▶
+                </div>
+
+            </div>
+
+
+            <div class="movie-info">
+
+                <div class="movie-title">
+                    မြန်မာဒရာမာ
+                </div>
+
+                <div class="movie-episode">
+                    အပိုင်း (၁)
+                </div>
 
             </div>
 
@@ -389,17 +861,11 @@ and (max-height: 600px) {
     </div>
 
 
-    <!-- CONTROL -->
+    <div
+        class="no-result"
+        id="noResult">
 
-    <div class="control-area">
-
-        <button
-            class="fullscreen-button"
-            onclick="toggleFullscreen()">
-
-            ⛶ Fullscreen
-
-        </button>
+        ရှာဖွေထားသော ဇာတ်လမ်းတွဲ မတွေ့ပါ။
 
     </div>
 
@@ -407,39 +873,219 @@ and (max-height: 600px) {
 </div>
 
 
+
+<!-- =========================
+     PLAYER PAGE
+========================= -->
+
+<div
+    class="player-page"
+    id="playerPage">
+
+
+    <div class="player-top">
+
+        <button
+            class="back-button"
+            onclick="closePlayer()">
+
+            ‹
+
+        </button>
+
+
+        <div
+            class="player-name"
+            id="playerName">
+
+            မြန်မာ ဇာတ်လမ်းတွဲ
+
+        </div>
+
+    </div>
+
+
+    <div class="player-container">
+
+
+        <div
+            class="video-area"
+            id="videoArea">
+
+
+            <!-- OK.RU VIDEO -->
+
+            <iframe
+                id="videoFrame"
+                src=""
+                allow="autoplay"
+                allowfullscreen>
+            </iframe>
+
+
+            <!-- RUNNING TEXT -->
+
+            <div class="running-bar">
+
+                <div class="running-text">
+
+                    🔴 မြန်မာဇာတ်လမ်းတွဲများကို
+                    အခမဲ့ကြည့်ရှုနိုင်ပါသည် 🔴
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="player-info">
+
+            <h2 id="episodeName">
+                အပိုင်း (၁)
+            </h2>
+
+            <p>
+                မြန်မာ ဇာတ်လမ်းတွဲ
+            </p>
+
+
+            <button
+                class="fullscreen-btn"
+                onclick="customFullscreen()">
+
+                ⛶ Fullscreen
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
 <script>
+
+/* =========================
+   VIDEO URL
+========================= */
+
+const OK_VIDEO =
+"https://ok.ru/videoembed/16283322485483?nochat=1&autoplay=1";
+
+
+/* =========================
+   OPEN PLAYER
+========================= */
+
+function openPlayer(
+    title,
+    episode
+) {
+
+    const home =
+        document.getElementById(
+            "homePage"
+        );
+
+    const player =
+        document.getElementById(
+            "playerPage"
+        );
+
+    const frame =
+        document.getElementById(
+            "videoFrame"
+        );
+
+    const name =
+        document.getElementById(
+            "playerName"
+        );
+
+    const episodeText =
+        document.getElementById(
+            "episodeName"
+        );
+
+
+    home.style.display = "none";
+
+    player.style.display = "block";
+
+    name.innerText = title;
+
+    episodeText.innerText =
+        episode;
+
+    frame.src = OK_VIDEO;
+
+
+    document.body.style.overflow =
+        "hidden";
+
+
+    restartText();
+
+}
+
+
+/* =========================
+   CLOSE PLAYER
+========================= */
+
+function closePlayer() {
+
+    const player =
+        document.getElementById(
+            "playerPage"
+        );
+
+    const frame =
+        document.getElementById(
+            "videoFrame"
+        );
+
+    player.style.display = "none";
+
+    frame.src = "";
+
+    document.getElementById(
+        "homePage"
+    ).style.display = "block";
+
+    document.body.style.overflow =
+        "auto";
+
+}
+
 
 /* =========================
    CUSTOM FULLSCREEN
 ========================= */
 
-function toggleFullscreen() {
+function customFullscreen() {
 
     const player =
-        document.getElementById("player");
+        document.getElementById(
+            "playerPage"
+        );
+
 
     player.classList.toggle(
-        "custom-fullscreen"
+        "landscape"
     );
-
-
-    const button =
-        document.querySelector(
-            ".fullscreen-button"
-        );
 
 
     if (
         player.classList.contains(
-            "custom-fullscreen"
+            "landscape"
         )
     ) {
-
-        button.innerHTML =
-            "✕ ထွက်မယ်";
-
-        /* Screen orientation lock
-           support ရှိရင် Landscape */
 
         if (
             screen.orientation &&
@@ -455,9 +1101,6 @@ function toggleFullscreen() {
     }
 
     else {
-
-        button.innerHTML =
-            "⛶ Fullscreen";
 
         if (
             screen.orientation &&
@@ -477,7 +1120,7 @@ function toggleFullscreen() {
 
 
 /* =========================
-   RESTART RUNNING TEXT
+   RUNNING TEXT RESTART
 ========================= */
 
 function restartText() {
@@ -487,12 +1130,80 @@ function restartText() {
             ".running-text"
         );
 
+    if (!text) return;
+
     text.style.animation = "none";
 
     void text.offsetWidth;
 
     text.style.animation =
         "moveText 12s linear infinite";
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchMovies() {
+
+    const input =
+        document.getElementById(
+            "searchInput"
+        );
+
+    const keyword =
+        input.value
+        .toLowerCase()
+        .trim();
+
+
+    const cards =
+        document.querySelectorAll(
+            ".movie-card"
+        );
+
+
+    let found = 0;
+
+
+    cards.forEach(
+        function(card) {
+
+            const title =
+                card.dataset.title
+                .toLowerCase();
+
+
+            if (
+                title.includes(keyword)
+            ) {
+
+                card.style.display =
+                    "block";
+
+                found++;
+
+            }
+
+            else {
+
+                card.style.display =
+                    "none";
+
+            }
+
+        }
+    );
+
+
+    document.getElementById(
+        "noResult"
+    ).style.display =
+        found === 0
+        ? "block"
+        : "none";
 
 }
 
@@ -513,42 +1224,9 @@ window.addEventListener(
     }
 );
 
-
-/* =========================
-   ESC KEY
-========================= */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (
-            event.key === "Escape"
-        ) {
-
-            const player =
-                document.getElementById(
-                    "player"
-                );
-
-            player.classList.remove(
-                "custom-fullscreen"
-            );
-
-            const button =
-                document.querySelector(
-                    ".fullscreen-button"
-                );
-
-            button.innerHTML =
-                "⛶ Fullscreen";
-
-        }
-
-    }
-);
-
 </script>
+
 
 </body>
 </html>
+
