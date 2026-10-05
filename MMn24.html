@@ -2,16 +2,19 @@
 <html lang="my">
 <head>
 <meta charset="UTF-8">
+
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0,
-      maximum-scale=1.0, user-scalable=no">
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
 
 <title>Live Video Player</title>
 
 <style>
+
 * {
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -20,290 +23,311 @@ body {
     padding: 0;
     width: 100%;
     min-height: 100%;
-    background: #050505;
-    font-family: Arial, "Myanmar Text", sans-serif;
-    color: #fff;
-}
-
-/* Main */
-.page {
-    width: 100%;
-    min-height: 100vh;
-    padding: 25px 12px;
-    background:
-        radial-gradient(circle at top, #242424 0%, #0b0b0b 45%, #000 100%);
-}
-
-/* Player Box */
-.player-box {
-    width: 100%;
-    max-width: 950px;
-    margin: 20px auto;
-    padding: 7px;
-    background: #111;
-    border: 1px solid #3a3a3a;
-    border-radius: 20px;
-    box-shadow:
-        0 0 25px rgba(255,255,255,0.06),
-        0 15px 45px rgba(0,0,0,0.9);
-}
-
-/* Video */
-.video-container {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
     background: #000;
-    border-radius: 15px;
+    font-family: Arial, "Myanmar Text", sans-serif;
 }
 
-/* OK.ru */
+
+/* =========================
+   VIDEO
+========================= */
+
+.video-container {
+
+    position: relative;
+
+    width: 100%;
+    max-width: 1000px;
+
+    aspect-ratio: 16 / 9;
+
+    margin: 20px auto;
+
+    background: #000;
+
+    overflow: hidden;
+
+    border-radius: 15px;
+
+}
+
+
+/* OK.RU */
+
 .video-container iframe {
+
     position: absolute;
-    top: 0;
-    left: 0;
+
+    inset: 0;
+
     width: 100%;
     height: 100%;
+
     border: 0;
+
+    z-index: 1;
+
 }
 
-/* Running Text */
+
+/* =========================
+   RUNNING TEXT
+   VIDEO အောက်ခြေနဲ့ တစ်ပြေးတည်း
+========================= */
+
 .scroll-wrapper {
+
     position: absolute;
+
     left: 0;
-    bottom: 12px;
+    bottom: 0;
 
     width: 100%;
+
+    height: 34px;
+
     overflow: hidden;
+
+    z-index: 9999999;
 
     pointer-events: none;
 
-    background: rgba(0,0,0,0.35);
-    padding: 5px 0;
+    background: rgba(0,0,0,0.55);
+
 }
 
+
+/* စာတန်း */
+
 .scroll-text {
-    display: inline-block;
+
+    position: absolute;
+
+    left: 100%;
+
+    top: 50%;
+
+    transform: translateY(-50%);
 
     white-space: nowrap;
 
+    color: #fff;
+
     font-size: 17px;
+
     font-weight: bold;
 
-    color: #fff;
+    line-height: 34px;
 
     text-shadow:
         0 2px 4px #000,
-        0 0 8px rgba(0,0,0,0.9);
+        0 0 8px #000;
 
-    padding-left: 100%;
+    animation:
+        runningText 12s linear infinite;
 
-    animation: runningText 13s linear infinite;
 }
+
+
+/* ပြေးခြင်း */
 
 @keyframes runningText {
 
     0% {
-        transform: translateX(0);
+        left: 100%;
     }
 
     100% {
-        transform: translateX(-100%);
+        left: -100%;
     }
 
 }
 
-/* Title */
-.player-title {
-    text-align: center;
-    padding: 13px 5px 5px;
 
-    font-size: 18px;
-    font-weight: bold;
-}
+/* =========================
+   FULLSCREEN
+========================= */
 
-.live-dot {
-    display: inline-block;
-
-    width: 9px;
-    height: 9px;
-
-    margin-right: 7px;
-
-    background: red;
-    border-radius: 50%;
-
-    box-shadow: 0 0 10px red;
-
-    animation: liveBlink 1s infinite;
-}
-
-@keyframes liveBlink {
-    50% {
-        opacity: 0.25;
-    }
-}
-
-/* Fullscreen Button */
-.fullscreen-btn {
-    display: block;
-
-    width: 100%;
-    max-width: 230px;
-
-    margin: 10px auto 8px;
-
-    padding: 12px 20px;
-
-    border: 1px solid #555;
-    border-radius: 30px;
-
-    background: linear-gradient(
-        135deg,
-        #333,
-        #111
-    );
-
-    color: white;
-
-    font-size: 15px;
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.fullscreen-btn:active {
-    transform: scale(0.96);
-}
-
-/* Landscape */
 .video-container:fullscreen {
+
     width: 100vw;
     height: 100vh;
+
+    max-width: none;
+
     aspect-ratio: auto;
+
+    margin: 0;
+
     border-radius: 0;
+
 }
 
-.video-container:fullscreen iframe {
+
+/* Fullscreen မှာလည်း အောက်ခြေနဲ့ တစ်ပြေးတည်း */
+
+.video-container:fullscreen
+.scroll-wrapper {
+
+    left: 0;
+    bottom: 0;
+
     width: 100%;
-    height: 100%;
+
+    height: 42px;
+
+    z-index: 99999999;
+
 }
 
-/* Mobile */
-@media (max-width: 600px) {
 
-    .page {
-        padding: 10px 5px;
-    }
+.video-container:fullscreen
+.scroll-text {
 
-    .player-box {
-        margin: 15px auto;
-        padding: 5px;
-        border-radius: 15px;
-    }
+    font-size: 21px;
+
+    line-height: 42px;
+
+}
+
+
+/* =========================
+   LANDSCAPE
+========================= */
+
+@media
+(orientation: landscape)
+and (max-height: 600px) {
 
     .video-container {
-        border-radius: 11px;
-    }
 
-    .scroll-text {
-        font-size: 14px;
-        animation-duration: 11s;
+        width: 100vw;
+
+        height: 100vh;
+
+        max-width: none;
+
+        aspect-ratio: auto;
+
+        margin: 0;
+
+        border-radius: 0;
+
     }
 
     .scroll-wrapper {
-        bottom: 8px;
-    }
 
-    .player-title {
-        font-size: 16px;
-    }
-}
+        bottom: 0;
 
-/* Android TV / Bigger Screen */
-@media (min-width: 1000px) {
+        height: 40px;
+
+    }
 
     .scroll-text {
-        font-size: 21px;
-    }
 
-    .player-title {
-        font-size: 20px;
+        font-size: 18px;
+
+        line-height: 40px;
+
     }
 
 }
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .video-container {
+
+        margin: 10px auto;
+
+        border-radius: 10px;
+
+    }
+
+    .scroll-wrapper {
+
+        height: 30px;
+
+    }
+
+    .scroll-text {
+
+        font-size: 14px;
+
+        line-height: 30px;
+
+    }
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
-<div class="page">
 
-    <div class="player-box">
+<div
+    class="video-container"
+    id="videoBox">
 
-        <div class="video-container" id="videoBox">
 
-            <!-- OK.RU VIDEO -->
-            <iframe
-                src="https://ok.ru/videoembed/16283322485483?nochat=1&autoplay=1"
-                allow="autoplay; fullscreen"
-                allowfullscreen>
-            </iframe>
+    <!-- OK.RU VIDEO -->
 
-            <!-- RUNNING TEXT -->
-            <div class="scroll-wrapper">
+    <iframe
+        src="https://ok.ru/videoembed/16283322485483?nochat=1&autoplay=1"
+        allow="autoplay; fullscreen"
+        allowfullscreen>
+    </iframe>
 
-                <div class="scroll-text">
-                    🔴 တိုက်ရိုက်ထုတ်လွှင့်မှုကို ကြည့်ရှုနေပါသည် 🔴
-                </div>
 
-            </div>
+    <!-- RUNNING TEXT -->
+
+    <div class="scroll-wrapper">
+
+        <div class="scroll-text">
+
+            🔴 တိုက်ရိုက်ထုတ်လွှင့်မှုကို ကြည့်ရှုနေပါသည် 🔴
 
         </div>
-
-        <div class="player-title">
-            <span class="live-dot"></span>
-            တိုက်ရိုက်ဗီဒီယို
-        </div>
-
-        <button
-            class="fullscreen-btn"
-            onclick="goFullscreen()">
-
-            ⛶ Fullscreen
-
-        </button>
 
     </div>
+
 
 </div>
 
 
 <script>
 
-function goFullscreen() {
+/* Rotate လုပ်ပြီးနောက် စာတန်း Animation ပြန်စ */
 
-    const player =
-        document.getElementById("videoBox");
+window.addEventListener(
+    "orientationchange",
+    function() {
 
-    if (player.requestFullscreen) {
+        setTimeout(function() {
 
-        player.requestFullscreen();
+            const text =
+                document.querySelector(
+                    ".scroll-text"
+                );
 
-    } else if (player.webkitRequestFullscreen) {
+            text.style.animation = "none";
 
-        player.webkitRequestFullscreen();
+            void text.offsetWidth;
 
-    } else if (player.msRequestFullscreen) {
+            text.style.animation =
+                "runningText 12s linear infinite";
 
-        player.msRequestFullscreen();
+        }, 300);
 
     }
-
-}
+);
 
 </script>
 
