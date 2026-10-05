@@ -9,7 +9,7 @@
       maximum-scale=1.0,
       user-scalable=no">
 
-<title>Live Video Player</title>
+<title>OK Video Player</title>
 
 <style>
 
@@ -29,17 +29,14 @@ body {
 
 
 /* =========================
-   VIDEO
+   PLAYER AREA
 ========================= */
 
-.video-container {
-
+.player {
     position: relative;
 
     width: 100%;
     max-width: 1000px;
-
-    aspect-ratio: 16 / 9;
 
     margin: 20px auto;
 
@@ -47,18 +44,32 @@ body {
 
     overflow: hidden;
 
-    border-radius: 15px;
-
+    border-radius: 14px;
 }
 
 
-/* OK.RU */
+/* =========================
+   VIDEO
+========================= */
 
-.video-container iframe {
+.video-frame {
+    position: relative;
 
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    background: #000;
+
+    overflow: hidden;
+}
+
+
+.video-frame iframe {
     position: absolute;
 
-    inset: 0;
+    top: 0;
+    left: 0;
 
     width: 100%;
     height: 100%;
@@ -66,78 +77,70 @@ body {
     border: 0;
 
     z-index: 1;
-
 }
 
 
 /* =========================
    RUNNING TEXT
-   VIDEO အောက်ခြေနဲ့ တစ်ပြေးတည်း
 ========================= */
 
-.scroll-wrapper {
+.running-bar {
 
     position: absolute;
 
     left: 0;
+    right: 0;
     bottom: 0;
 
     width: 100%;
-
     height: 34px;
 
     overflow: hidden;
 
-    z-index: 9999999;
+    background: rgba(0,0,0,0.65);
+
+    z-index: 999999;
 
     pointer-events: none;
-
-    background: rgba(0,0,0,0.55);
-
 }
 
 
-/* စာတန်း */
-
-.scroll-text {
+.running-text {
 
     position: absolute;
 
     left: 100%;
 
-    top: 50%;
+    top: 0;
 
-    transform: translateY(-50%);
+    height: 34px;
+
+    line-height: 34px;
 
     white-space: nowrap;
 
     color: #fff;
 
-    font-size: 17px;
+    font-size: 16px;
 
     font-weight: bold;
-
-    line-height: 34px;
 
     text-shadow:
         0 2px 4px #000,
         0 0 8px #000;
 
     animation:
-        runningText 12s linear infinite;
-
+        moveText 12s linear infinite;
 }
 
 
-/* ပြေးခြင်း */
+@keyframes moveText {
 
-@keyframes runningText {
-
-    0% {
+    from {
         left: 100%;
     }
 
-    100% {
+    to {
         left: -100%;
     }
 
@@ -145,48 +148,139 @@ body {
 
 
 /* =========================
-   FULLSCREEN
+   FULLSCREEN BUTTON
 ========================= */
 
-.video-container:fullscreen {
+.control-area {
+
+    width: 100%;
+
+    text-align: center;
+
+    padding: 12px;
+
+    background: #0b0b0b;
+}
+
+
+.fullscreen-button {
+
+    border: 1px solid #555;
+
+    background: linear-gradient(
+        135deg,
+        #333,
+        #111
+    );
+
+    color: white;
+
+    padding: 10px 24px;
+
+    border-radius: 25px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   CUSTOM FULLSCREEN
+========================= */
+
+.player.custom-fullscreen {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
 
     width: 100vw;
     height: 100vh;
 
     max-width: none;
 
-    aspect-ratio: auto;
-
     margin: 0;
 
     border-radius: 0;
 
+    z-index: 999999999;
+
+    background: #000;
 }
 
 
-/* Fullscreen မှာလည်း အောက်ခြေနဲ့ တစ်ပြေးတည်း */
+.player.custom-fullscreen
+.video-frame {
 
-.video-container:fullscreen
-.scroll-wrapper {
+    width: 100vw;
 
-    left: 0;
+    height: 100vh;
+
+    aspect-ratio: auto;
+
+}
+
+
+/* စာတန်းက Fullscreen မှာလည်း
+   Video အောက်ဆုံးကို ကပ်နေမယ် */
+
+.player.custom-fullscreen
+.running-bar {
+
+    position: absolute;
+
     bottom: 0;
+    left: 0;
 
     width: 100%;
 
-    height: 42px;
+    height: 40px;
 
-    z-index: 99999999;
-
+    z-index: 999999999;
 }
 
 
-.video-container:fullscreen
-.scroll-text {
+.player.custom-fullscreen
+.running-text {
 
-    font-size: 21px;
+    height: 40px;
 
-    line-height: 42px;
+    line-height: 40px;
+
+    font-size: 19px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .player {
+
+        margin: 10px auto;
+
+        border-radius: 10px;
+    }
+
+    .running-bar {
+
+        height: 30px;
+    }
+
+    .running-text {
+
+        height: 30px;
+
+        line-height: 30px;
+
+        font-size: 14px;
+    }
 
 }
 
@@ -199,102 +293,113 @@ body {
 (orientation: landscape)
 and (max-height: 600px) {
 
-    .video-container {
+    .player {
+
+        width: 100vw;
+
+        max-width: none;
+
+        margin: 0;
+
+        border-radius: 0;
+    }
+
+    .video-frame {
 
         width: 100vw;
 
         height: 100vh;
 
-        max-width: none;
-
         aspect-ratio: auto;
-
-        margin: 0;
-
-        border-radius: 0;
-
     }
 
-    .scroll-wrapper {
+    .control-area {
+
+        position: absolute;
+
+        right: 10px;
+        top: 10px;
+
+        width: auto;
+
+        padding: 0;
+
+        background: transparent;
+
+        z-index: 9999999999;
+    }
+
+    .running-bar {
 
         bottom: 0;
 
-        height: 40px;
-
+        height: 38px;
     }
 
-    .scroll-text {
+    .running-text {
 
-        font-size: 18px;
+        height: 38px;
 
-        line-height: 40px;
+        line-height: 38px;
 
-    }
-
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 600px) {
-
-    .video-container {
-
-        margin: 10px auto;
-
-        border-radius: 10px;
-
-    }
-
-    .scroll-wrapper {
-
-        height: 30px;
-
-    }
-
-    .scroll-text {
-
-        font-size: 14px;
-
-        line-height: 30px;
-
+        font-size: 17px;
     }
 
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<div
-    class="video-container"
-    id="videoBox">
+<!-- =========================
+     PLAYER
+========================= -->
+
+<div class="player" id="player">
 
 
-    <!-- OK.RU VIDEO -->
-
-    <iframe
-        src="https://ok.ru/videoembed/16283322485483?nochat=1&autoplay=1"
-        allow="autoplay; fullscreen"
-        allowfullscreen>
-    </iframe>
+    <div class="video-frame" id="videoFrame">
 
 
-    <!-- RUNNING TEXT -->
+        <!-- OK.RU VIDEO -->
 
-    <div class="scroll-wrapper">
+        <iframe
+            src="https://ok.ru/videoembed/16283322485483?nochat=1&autoplay=1"
+            allow="autoplay"
+            allowfullscreen>
+        </iframe>
 
-        <div class="scroll-text">
 
-            🔴 တိုက်ရိုက်ထုတ်လွှင့်မှုကို ကြည့်ရှုနေပါသည် 🔴
+        <!-- RUNNING TEXT -->
+
+        <div class="running-bar">
+
+            <div class="running-text">
+
+                🔴 တိုက်ရိုက်ထုတ်လွှင့်မှုကို ကြည့်ရှုနေပါသည် 🔴
+
+            </div>
 
         </div>
+
+
+    </div>
+
+
+    <!-- CONTROL -->
+
+    <div class="control-area">
+
+        <button
+            class="fullscreen-button"
+            onclick="toggleFullscreen()">
+
+            ⛶ Fullscreen
+
+        </button>
 
     </div>
 
@@ -304,27 +409,141 @@ and (max-height: 600px) {
 
 <script>
 
-/* Rotate လုပ်ပြီးနောက် စာတန်း Animation ပြန်စ */
+/* =========================
+   CUSTOM FULLSCREEN
+========================= */
+
+function toggleFullscreen() {
+
+    const player =
+        document.getElementById("player");
+
+    player.classList.toggle(
+        "custom-fullscreen"
+    );
+
+
+    const button =
+        document.querySelector(
+            ".fullscreen-button"
+        );
+
+
+    if (
+        player.classList.contains(
+            "custom-fullscreen"
+        )
+    ) {
+
+        button.innerHTML =
+            "✕ ထွက်မယ်";
+
+        /* Screen orientation lock
+           support ရှိရင် Landscape */
+
+        if (
+            screen.orientation &&
+            screen.orientation.lock
+        ) {
+
+            screen.orientation.lock(
+                "landscape"
+            ).catch(() => {});
+
+        }
+
+    }
+
+    else {
+
+        button.innerHTML =
+            "⛶ Fullscreen";
+
+        if (
+            screen.orientation &&
+            screen.orientation.unlock
+        ) {
+
+            screen.orientation.unlock();
+
+        }
+
+    }
+
+
+    restartText();
+
+}
+
+
+/* =========================
+   RESTART RUNNING TEXT
+========================= */
+
+function restartText() {
+
+    const text =
+        document.querySelector(
+            ".running-text"
+        );
+
+    text.style.animation = "none";
+
+    void text.offsetWidth;
+
+    text.style.animation =
+        "moveText 12s linear infinite";
+
+}
+
+
+/* =========================
+   ROTATE
+========================= */
 
 window.addEventListener(
     "orientationchange",
     function() {
 
-        setTimeout(function() {
+        setTimeout(
+            restartText,
+            400
+        );
 
-            const text =
-                document.querySelector(
-                    ".scroll-text"
+    }
+);
+
+
+/* =========================
+   ESC KEY
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            const player =
+                document.getElementById(
+                    "player"
                 );
 
-            text.style.animation = "none";
+            player.classList.remove(
+                "custom-fullscreen"
+            );
 
-            void text.offsetWidth;
+            const button =
+                document.querySelector(
+                    ".fullscreen-button"
+                );
 
-            text.style.animation =
-                "runningText 12s linear infinite";
+            button.innerHTML =
+                "⛶ Fullscreen";
 
-        }, 300);
+        }
 
     }
 );
