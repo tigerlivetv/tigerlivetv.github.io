@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0,
-      maximum-scale=1.0, user-scalable=no">
+               maximum-scale=1.0, user-scalable=no">
 
 <title>မြန်မာ ဇာတ်လမ်းတွဲ</title>
 
@@ -13,64 +13,44 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
+html,
+body{
     width:100%;
     min-height:100%;
     background:#050505;
-    color:white;
-    font-family:
-        "Noto Sans Myanmar",
-        "Myanmar Text",
-        Arial,
-        sans-serif;
+    color:#fff;
+    font-family:"Noto Sans Myanmar","Myanmar Text",Arial,sans-serif;
 }
 
-/* ================= HEADER ================= */
+/* =========================
+   TOP BAR
+========================= */
 
 .topbar{
     width:100%;
-    height:105px;
-    background:#080808;
+    height:52px;
+    background:linear-gradient(180deg,#151515,#080808);
     display:flex;
     align-items:center;
-    justify-content:space-between;
-    overflow:hidden;
+    padding:0 14px;
+    border-bottom:1px solid #242424;
 }
 
 .title{
-    width:68%;
-    height:105px;
-    display:flex;
-    align-items:center;
-    padding:0 22px;
-    font-size:22px;
+    width:100%;
+    font-size:15px;
     font-weight:bold;
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
 }
 
-.exit{
-    width:32%;
-    height:105px;
-    background:#ed3838;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    font-size:20px;
-    cursor:pointer;
-}
-
-.exit span{
-    font-size:35px;
-    margin-right:5px;
-    font-weight:200;
-}
-
-/* ================= VIDEO ================= */
+/* =========================
+   VIDEO AREA
+========================= */
 
 .video-box{
     width:100%;
@@ -81,36 +61,40 @@ html,body{
 
 .video{
     width:100%;
-    aspect-ratio:16 / 9;
+    aspect-ratio:16/9;
     display:block;
     border:0;
     background:#000;
 }
 
-/* ================= RUNNING TEXT ================= */
+/* =========================
+   RUNNING TEXT
+========================= */
 
 .running{
     position:absolute;
     left:0;
     bottom:0;
     width:100%;
-    height:58px;
-    background:rgba(0,0,0,.82);
+    height:34px;
+    background:rgba(0,0,0,.78);
     overflow:hidden;
     z-index:5;
     display:flex;
     align-items:center;
+    pointer-events:none;
+    border-top:1px solid rgba(255,255,255,.08);
 }
 
 .running-text{
     position:absolute;
     white-space:nowrap;
-    font-size:20px;
-    color:white;
-    animation:run 16s linear infinite;
+    font-size:14px;
+    color:#fff;
+    animation:runText 18s linear infinite;
 }
 
-@keyframes run{
+@keyframes runText{
     0%{
         transform:translateX(100%);
     }
@@ -120,90 +104,104 @@ html,body{
     }
 }
 
-/* ================= BUTTON AREA ================= */
+/* =========================
+   CONTROL AREA
+========================= */
 
-.buttons{
+.controls{
     width:100%;
-    min-height:125px;
-    background:#111;
+    padding:14px 10px 16px;
+    background:
+        linear-gradient(
+            180deg,
+            #121212,
+            #080808
+        );
+
     display:flex;
     justify-content:center;
     align-items:center;
-    gap:20px;
-    padding:20px;
+    gap:9px;
+
+    border-top:1px solid #222;
 }
+
+/* =========================
+   BUTTON
+========================= */
 
 .btn{
-    border:0;
-    color:white;
+    min-width:92px;
+    height:43px;
+
+    border:none;
+    border-radius:12px;
+
+    color:#fff;
     font-family:inherit;
-    font-size:19px;
-    padding:17px 28px;
-    border-radius:13px;
+    font-size:13px;
+    font-weight:bold;
+
     cursor:pointer;
-    box-shadow:0 4px 10px rgba(0,0,0,.35);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:5px;
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,.45);
+
+    transition:
+        transform .15s ease,
+        filter .15s ease;
 }
+
+.btn:active{
+    transform:scale(.94);
+    filter:brightness(.85);
+}
+
+/* Back */
 
 .back{
-    background:#2869e8;
+    background:linear-gradient(
+        135deg,
+        #2878ff,
+        #1553c7
+    );
 }
+
+/* Rotate */
+
+.rotate{
+    background:linear-gradient(
+        135deg,
+        #ffae24,
+        #e27600
+    );
+}
+
+/* Fullscreen */
 
 .full{
-    background:#18a948;
+    background:linear-gradient(
+        135deg,
+        #18bd61,
+        #079342
+    );
 }
 
-/* ================= MOBILE ================= */
+/* =========================
+   FULLSCREEN MODE
+========================= */
 
-@media(max-width:600px){
-
-    .topbar{
-        height:105px;
-    }
-
-    .title{
-        width:68%;
-        height:105px;
-        font-size:19px;
-        padding:0 12px;
-    }
-
-    .exit{
-        width:32%;
-        height:105px;
-        font-size:18px;
-    }
-
-    .exit span{
-        font-size:32px;
-    }
-
-    .running{
-        height:55px;
-    }
-
-    .running-text{
-        font-size:19px;
-    }
-
-    .buttons{
-        min-height:115px;
-        gap:18px;
-        padding:18px 10px;
-    }
-
-    .btn{
-        font-size:17px;
-        padding:16px 18px;
-    }
-}
-
-/* ================= LANDSCAPE ================= */
-
-.player-fullscreen{
+body.player-fullscreen{
     position:fixed;
     inset:0;
     width:100vw;
     height:100vh;
+    overflow:hidden;
     background:#000;
     z-index:99999;
 }
@@ -227,49 +225,119 @@ html,body{
     bottom:0;
 }
 
-.player-fullscreen .buttons{
+.player-fullscreen .controls{
     display:none;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .topbar{
+        height:50px;
+        padding:0 12px;
+    }
+
+    .title{
+        font-size:14px;
+    }
+
+    .controls{
+        padding:
+            13px 6px
+            15px;
+
+        gap:6px;
+    }
+
+    .btn{
+        flex:1;
+        min-width:0;
+        height:42px;
+        font-size:12px;
+        border-radius:11px;
+    }
+
+    .running{
+        height:32px;
+    }
+
+    .running-text{
+        font-size:13px;
+    }
+}
+
+/* =========================
+   SMALL PHONE
+========================= */
+
+@media(max-width:360px){
+
+    .controls{
+        gap:5px;
+    }
+
+    .btn{
+        font-size:11px;
+        height:40px;
+    }
 }
 </style>
 </head>
 
+
 <body>
 
-<!-- ================= TOP ================= -->
+<!-- =========================
+     TITLE
+========================= -->
 
 <div class="topbar">
 
-    <div class="title" id="videoTitle">
-        မြန်မာ ဇာတ်လမ်းတွဲ အပိုင်း (၁)
-    </div>
+    <div
+        class="title"
+        id="videoTitle">
 
-    <div class="exit" onclick="closePlayer()">
-        <span>×</span>
-        ပြန်ထွက်မယ်
+        Mi Series Official မုန်းမာန်ငြိုး အပိုင်း (၂၄)
+
     </div>
 
 </div>
 
 
-<!-- ================= VIDEO ================= -->
+<!-- =========================
+     VIDEO
+========================= -->
 
-<div class="video-box" id="videoBox">
+<div
+    class="video-box"
+    id="videoBox">
 
     <iframe
         id="videoFrame"
         class="video"
+
         src="https://ok.ru/videoembed/16283322485483?nochat=1&autoplay=1"
+
         frameborder="0"
-        allow="autoplay; fullscreen"
+
+        allow="autoplay; fullscreen; picture-in-picture"
+
         allowfullscreen>
+
     </iframe>
 
-    <!-- VIDEO အောက်ခြေ Running Text -->
+
+    <!-- စာပြေး -->
 
     <div class="running">
 
         <div class="running-text">
-            🔴 မြန်မာ ဇာတ်လမ်းတွဲများကို ကြည့်ရှုနိုင်ပါသည် 🔴
+
+            🔴ချစ်စွာသော မိဘပြည်သူ ညီအစ်ကို မောင်နှမ များ ခင်ဗျာ Mi Series Official Tiktok Channel မှမြန်မာ ဇာတ်လမ်းတွဲများကို ကြည့်ရှုနိုင်ပါပြီ ခင်ဗျာ 🔴
+
         </div>
 
     </div>
@@ -277,34 +345,55 @@ html,body{
 </div>
 
 
-<!-- ================= BUTTONS ================= -->
+<!-- =========================
+     BUTTONS
+========================= -->
 
-<div class="buttons">
+<div class="controls">
 
     <button
         class="btn back"
         onclick="closePlayer()">
+
         ← ပြန်ထွက်မယ်
+
     </button>
+
+
+    <button
+        class="btn rotate"
+        onclick="rotatePhone()">
+
+        ↻ လှည့်မယ်
+
+    </button>
+
 
     <button
         class="btn full"
         onclick="fullScreen()">
-        ⛶ မျက်နှာပြင်အပြည့်
+
+        ⛶ အပြည့်
+
     </button>
 
 </div>
 
 
+
 <script>
 
-/* ================= VIDEO LINK ================= */
+/* =========================
+   VIDEO LINK
+========================= */
 
 const videoLink =
 "https://ok.ru/videoembed/16283322485483?nochat=1&autoplay=1";
 
 
-/* ================= PLAYER ================= */
+/* =========================
+   OPEN VIDEO
+========================= */
 
 function openVideo(title, link){
 
@@ -317,7 +406,9 @@ function openVideo(title, link){
 }
 
 
-/* ================= CLOSE ================= */
+/* =========================
+   CLOSE VIDEO
+========================= */
 
 function closePlayer(){
 
@@ -327,26 +418,127 @@ function closePlayer(){
 }
 
 
-/* ================= FULLSCREEN ================= */
+/* =========================
+   PHONE ROTATE
+========================= */
 
-async function fullScreen(){
+let isLandscape = false;
 
-    const page = document.documentElement;
 
-    const player =
-        document.getElementById("videoBox");
+async function rotatePhone(){
 
-    if(
-        !document.fullscreenElement
-    ){
+    try{
+
+        /*
+         * Browser fullscreen မဝင်သေးရင်
+         * orientation lock တချို့ browser တွေမှာ
+         * အလုပ်မလုပ်နိုင်ပါ။
+         */
+
+        if(
+            screen.orientation &&
+            screen.orientation.lock
+        ){
+
+            if(!isLandscape){
+
+                await screen.orientation
+                    .lock("landscape");
+
+                isLandscape = true;
+
+            }else{
+
+                await screen.orientation
+                    .lock("portrait");
+
+                isLandscape = false;
+
+            }
+
+        }else{
+
+            alert(
+                "ဒီဖုန်း Browser မှာ Screen လှည့်ခြင်းကို မထောက်ပံ့ပါ။"
+            );
+
+        }
+
+    }catch(error){
+
+        /*
+         * Android Chrome တချို့မှာ
+         * orientation.lock() ကို
+         * fullscreen အတွင်းမှာပဲ ခွင့်ပြုပါတယ်။
+         */
 
         try{
 
-            await page.requestFullscreen();
+            if(!document.fullscreenElement){
 
-            player.classList.add(
+                await document.documentElement
+                    .requestFullscreen();
+
+            }
+
+            if(
+                screen.orientation &&
+                screen.orientation.lock
+            ){
+
+                if(!isLandscape){
+
+                    await screen.orientation
+                        .lock("landscape");
+
+                    isLandscape = true;
+
+                }else{
+
+                    await screen.orientation
+                        .lock("portrait");
+
+                    isLandscape = false;
+
+                }
+
+            }
+
+        }catch(e){
+
+            alert(
+                "ဖုန်းရဲ့ Auto Rotate ကို ဖွင့်ထားပေးပါ။"
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =========================
+   FULLSCREEN
+========================= */
+
+async function fullScreen(){
+
+    const body =
+        document.body;
+
+    if(!document.fullscreenElement){
+
+        try{
+
+            await document.documentElement
+                .requestFullscreen();
+
+            body.classList.add(
                 "player-fullscreen"
             );
+
+
+            /* Landscape */
 
             if(
                 screen.orientation &&
@@ -357,14 +549,13 @@ async function fullScreen(){
                     .lock("landscape")
                     .catch(()=>{});
 
+                isLandscape = true;
+
             }
 
-        }catch(e){
+        }catch(error){
 
-            /* Browser fullscreen မရရင်
-               CSS fullscreen */
-
-            document.body.classList.add(
+            body.classList.add(
                 "player-fullscreen"
             );
 
@@ -376,13 +567,10 @@ async function fullScreen(){
 
             await document.exitFullscreen();
 
-        }catch(e){}
+        }catch(error){}
 
-        player.classList.remove(
-            "player-fullscreen"
-        );
 
-        document.body.classList.remove(
+        body.classList.remove(
             "player-fullscreen"
         );
 
@@ -391,7 +579,9 @@ async function fullScreen(){
 }
 
 
-/* ================= FULLSCREEN CHANGE ================= */
+/* =========================
+   FULLSCREEN CHANGE
+========================= */
 
 document.addEventListener(
     "fullscreenchange",
@@ -399,16 +589,43 @@ document.addEventListener(
 
         if(!document.fullscreenElement){
 
-            document
-                .getElementById("videoBox")
-                .classList.remove(
-                    "player-fullscreen"
-                );
+            document.body.classList.remove(
+                "player-fullscreen"
+            );
 
         }
 
     }
 );
+
+
+/* =========================
+   SCREEN ORIENTATION CHANGE
+========================= */
+
+if(screen.orientation){
+
+    screen.orientation.addEventListener(
+        "change",
+        function(){
+
+            if(
+                screen.orientation.type
+                .includes("landscape")
+            ){
+
+                isLandscape = true;
+
+            }else{
+
+                isLandscape = false;
+
+            }
+
+        }
+    );
+
+}
 
 </script>
 
