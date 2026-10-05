@@ -2,1231 +2,979 @@
 <html lang="my">
 <head>
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width,
-      initial-scale=1.0,
-      maximum-scale=1.0,
-      user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>မြန်မာ ဇာတ်လမ်းတွဲများ</title>
 
 <style>
-
-* {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-html,
-body {
-    margin: 0;
-    padding: 0;
-    background: #080808;
-    color: white;
-    font-family: Arial, "Myanmar Text", sans-serif;
+body{
+    font-family:
+        "Noto Sans Myanmar",
+        "Myanmar Text",
+        Arial,
+        sans-serif;
+    background:#eef3f8;
+    color:#222;
 }
 
+/* ================= HEADER ================= */
 
-/* =========================
-   HEADER
-========================= */
-
-.header {
-
-    position: sticky;
-    top: 0;
-
-    z-index: 1000;
-
-    padding: 16px 15px;
-
-    text-align: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #171717,
-            #080808
-        );
-
-    border-bottom: 1px solid #333;
-
-    box-shadow:
-        0 4px 15px rgba(0,0,0,0.7);
-
+.header{
+    background:linear-gradient(135deg,#111827,#2563eb);
+    color:white;
+    padding:18px 15px;
+    text-align:center;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 4px 15px rgba(0,0,0,.25);
 }
 
-.header h1 {
-
-    margin: 0;
-
-    font-size: 23px;
-
-    font-weight: bold;
-
+.header h1{
+    font-size:23px;
+    margin-bottom:12px;
 }
 
-.header p {
-
-    margin: 6px 0 0;
-
-    color: #aaa;
-
-    font-size: 13px;
-
+.search-box{
+    width:100%;
+    max-width:600px;
+    margin:auto;
 }
 
-
-/* =========================
-   SEARCH
-========================= */
-
-.search-box {
-
-    max-width: 600px;
-
-    margin: 18px auto;
-
-    padding: 0 12px;
-
+.search-box input{
+    width:100%;
+    padding:13px 18px;
+    border:none;
+    outline:none;
+    border-radius:30px;
+    font-size:16px;
 }
 
-.search-box input {
+/* ================= HOME ================= */
 
-    width: 100%;
-
-    padding: 13px 18px;
-
-    border: 1px solid #444;
-
-    outline: none;
-
-    border-radius: 30px;
-
-    background: #151515;
-
-    color: white;
-
-    font-size: 15px;
-
+.home{
+    padding:18px;
+    max-width:1200px;
+    margin:auto;
 }
 
-.search-box input:focus {
-
-    border-color: #777;
-
+.section-title{
+    font-size:20px;
+    font-weight:bold;
+    margin:5px 0 18px;
 }
 
+/* ================= MOVIE GRID ================= */
 
-/* =========================
-   MOVIE GRID
-========================= */
-
-.movie-grid {
-
-    width: 100%;
-
-    max-width: 1200px;
-
-    margin: auto;
-
-    padding: 5px 12px 30px;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 15px;
-
+.movie-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    gap:15px;
 }
 
-
-/* =========================
-   MOVIE CARD
-========================= */
-
-.movie-card {
-
-    background: #151515;
-
-    border: 1px solid #333;
-
-    border-radius: 14px;
-
-    overflow: hidden;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 7px 20px rgba(0,0,0,0.6);
-
-    transition: 0.2s;
-
+.movie-card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+    transition:.2s;
 }
 
-.movie-card:hover {
-
-    transform: translateY(-3px);
-
-    border-color: #777;
-
+.movie-card:hover{
+    transform:translateY(-4px);
 }
 
-
-/* =========================
-   POSTER
-========================= */
-
-.poster {
-
-    position: relative;
-
-    width: 100%;
-
-    aspect-ratio: 16 / 10;
-
-    background: #222;
-
-    overflow: hidden;
-
+.movie-image{
+    width:100%;
+    aspect-ratio:3/4;
+    object-fit:cover;
+    display:block;
+    background:#ddd;
 }
 
-.poster img {
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
-    display: block;
-
+.movie-info{
+    padding:10px;
 }
 
-
-/* PLAY ICON */
-
-.play-icon {
-
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    transform:
-        translate(-50%, -50%);
-
-    width: 55px;
-    height: 55px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background:
-        rgba(0,0,0,0.75);
-
-    border: 2px solid
-        rgba(255,255,255,0.8);
-
-    font-size: 23px;
-
+.movie-title{
+    font-size:15px;
+    font-weight:bold;
+    line-height:1.5;
 }
 
-
-/* CARD INFO */
-
-.movie-info {
-
-    padding: 11px;
-
+.movie-episodes{
+    color:#777;
+    font-size:13px;
+    margin-top:4px;
 }
 
-.movie-title {
+/* ================= EPISODE PAGE ================= */
 
-    font-size: 16px;
-
-    font-weight: bold;
-
-    line-height: 1.5;
-
+.episode-page{
+    display:none;
+    padding:20px;
+    max-width:900px;
+    margin:auto;
 }
 
-.movie-episode {
-
-    margin-top: 4px;
-
-    color: #999;
-
-    font-size: 12px;
-
+.back-btn{
+    border:none;
+    background:#222;
+    color:white;
+    padding:11px 18px;
+    border-radius:25px;
+    cursor:pointer;
+    font-size:15px;
+    margin-bottom:20px;
 }
 
-
-/* =========================
-   PLAYER PAGE
-========================= */
-
-.player-page {
-
-    display: none;
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 99999;
-
-    background: #000;
-
-    overflow-y: auto;
-
+.series-header{
+    background:white;
+    padding:15px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
+    margin-bottom:18px;
 }
 
-
-/* PLAYER TOP */
-
-.player-top {
-
-    height: 58px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    padding: 0 12px;
-
-    background: #101010;
-
-    border-bottom: 1px solid #333;
-
+.series-header h2{
+    margin-bottom:5px;
 }
 
-
-/* BACK BUTTON */
-
-.back-button {
-
-    width: 40px;
-    height: 40px;
-
-    border: 1px solid #555;
-
-    border-radius: 50%;
-
-    background: #222;
-
-    color: white;
-
-    font-size: 20px;
-
-    cursor: pointer;
-
+.episode-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
+    gap:12px;
 }
 
-.player-name {
-
-    font-size: 17px;
-
-    font-weight: bold;
-
-    overflow: hidden;
-
-    white-space: nowrap;
-
-    text-overflow: ellipsis;
-
+.episode-card{
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,.12);
+    cursor:pointer;
 }
 
-
-/* =========================
-   VIDEO PLAYER
-========================= */
-
-.player-container {
-
-    position: relative;
-
-    width: 100%;
-
-    max-width: 1100px;
-
-    margin: 0 auto;
-
-    background: #000;
-
+.episode-card img{
+    width:100%;
+    aspect-ratio:16/10;
+    object-fit:cover;
+    display:block;
 }
 
-
-.video-area {
-
-    position: relative;
-
-    width: 100%;
-
-    aspect-ratio: 16 / 9;
-
-    background: #000;
-
-    overflow: hidden;
-
+.episode-name{
+    padding:10px;
+    font-weight:bold;
+    text-align:center;
 }
 
+/* ================= PLAYER PAGE ================= */
 
-.video-area iframe {
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    border: 0;
-
+.player-page{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#080808;
+    z-index:9999;
+    overflow:auto;
 }
 
-
-/* =========================
-   RUNNING TEXT
-========================= */
-
-.running-bar {
-
-    position: absolute;
-
-    left: 0;
-
-    bottom: 0;
-
-    width: 100%;
-
-    height: 34px;
-
-    overflow: hidden;
-
-    background:
-        rgba(0,0,0,0.65);
-
-    z-index: 20;
-
-    pointer-events: none;
-
+.player-top{
+    height:55px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:8px 12px;
+    background:#111;
+    color:white;
 }
 
-
-.running-text {
-
-    position: absolute;
-
-    top: 0;
-
-    left: 100%;
-
-    height: 34px;
-
-    line-height: 34px;
-
-    white-space: nowrap;
-
-    color: white;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    text-shadow:
-        0 2px 4px #000;
-
-    animation:
-        moveText 12s linear infinite;
-
+.player-title{
+    font-size:15px;
+    font-weight:bold;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
 }
 
+.close-btn{
+    border:none;
+    background:#e53935;
+    color:white;
+    padding:8px 13px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:14px;
+}
 
-@keyframes moveText {
+/* ================= VIDEO ================= */
 
-    from {
-        left: 100%;
+.video-area{
+    width:100%;
+    max-width:1100px;
+    margin:0 auto;
+    position:relative;
+    background:#000;
+    overflow:hidden;
+}
+
+.video-frame{
+    width:100%;
+    aspect-ratio:16/9;
+    border:0;
+    display:block;
+    background:#000;
+}
+
+/* Running text */
+
+.running-text{
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:32px;
+    background:rgba(0,0,0,.75);
+    color:#fff;
+    overflow:hidden;
+    z-index:20;
+    pointer-events:none;
+}
+
+.running-text span{
+    position:absolute;
+    white-space:nowrap;
+    line-height:32px;
+    font-size:14px;
+    animation:marquee 18s linear infinite;
+}
+
+@keyframes marquee{
+    from{
+        transform:translateX(100%);
+    }
+    to{
+        transform:translateX(-100%);
+    }
+}
+
+/* Player buttons */
+
+.player-controls{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    padding:12px;
+    background:#111;
+}
+
+.control-btn{
+    border:none;
+    background:#2563eb;
+    color:white;
+    padding:10px 16px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.control-btn.full{
+    background:#16a34a;
+}
+
+/* ================= CUSTOM FULLSCREEN ================= */
+
+.player-page.custom-fullscreen{
+    display:block;
+    background:#000;
+}
+
+.player-page.custom-fullscreen .player-top{
+    display:none;
+}
+
+.player-page.custom-fullscreen .video-area{
+    width:100vw;
+    height:100vh;
+    max-width:none;
+}
+
+.player-page.custom-fullscreen .video-frame{
+    width:100%;
+    height:100%;
+    aspect-ratio:auto;
+}
+
+.player-page.custom-fullscreen .running-text{
+    bottom:0;
+}
+
+/* ================= EMPTY ================= */
+
+.no-result{
+    text-align:center;
+    padding:40px 10px;
+    color:#777;
+    display:none;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:600px){
+
+    .header h1{
+        font-size:20px;
     }
 
-    to {
-        left: -100%;
+    .home{
+        padding:12px;
+    }
+
+    .movie-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .movie-title{
+        font-size:14px;
+    }
+
+    .episode-page{
+        padding:12px;
+    }
+
+    .episode-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .player-controls{
+        padding:8px;
+    }
+
+    .control-btn{
+        padding:9px 12px;
+        font-size:13px;
     }
 
 }
 
+/* ================= LANDSCAPE PHONE ================= */
 
-/* =========================
-   PLAYER INFO
-========================= */
+@media(max-height:500px) and (orientation:landscape){
 
-.player-info {
-
-    padding: 18px 15px 30px;
-
-    max-width: 1100px;
-
-    margin: auto;
-
-}
-
-.player-info h2 {
-
-    margin: 0;
-
-    font-size: 20px;
-
-}
-
-.player-info p {
-
-    color: #999;
-
-    font-size: 14px;
-
-}
-
-
-/* FULLSCREEN */
-
-.fullscreen-btn {
-
-    margin-top: 10px;
-
-    padding: 11px 20px;
-
-    border: 1px solid #555;
-
-    border-radius: 25px;
-
-    background: #181818;
-
-    color: white;
-
-    font-size: 14px;
-
-    cursor: pointer;
-
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 700px) {
-
-    .movie-grid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
-
-        gap: 10px;
-
-        padding: 5px 8px 25px;
-
+    .player-top{
+        height:45px;
     }
 
-    .movie-title {
-
-        font-size: 14px;
-
-    }
-
-    .movie-info {
-
-        padding: 9px;
-
-    }
-
-    .play-icon {
-
-        width: 45px;
-        height: 45px;
-
-        font-size: 19px;
-
+    .video-area{
+        max-width:none;
     }
 
 }
-
-
-/* SMALL PHONE */
-
-@media (max-width: 380px) {
-
-    .movie-grid {
-
-        gap: 8px;
-
-    }
-
-    .movie-title {
-
-        font-size: 13px;
-
-    }
-
-}
-
-
-/* =========================
-   LANDSCAPE PLAYER
-========================= */
-
-.player-page.landscape {
-
-    background: #000;
-
-}
-
-.player-page.landscape
-.player-top {
-
-    display: none;
-
-}
-
-.player-page.landscape
-.player-container {
-
-    width: 100vw;
-
-    max-width: none;
-
-}
-
-.player-page.landscape
-.video-area {
-
-    width: 100vw;
-
-    height: 100vh;
-
-    aspect-ratio: auto;
-
-}
-
-.player-page.landscape
-.running-bar {
-
-    bottom: 0;
-
-    height: 40px;
-
-}
-
-.player-page.landscape
-.running-text {
-
-    height: 40px;
-
-    line-height: 40px;
-
-    font-size: 18px;
-
-}
-
-
-/* =========================
-   EMPTY
-========================= */
-
-.no-result {
-
-    display: none;
-
-    text-align: center;
-
-    padding: 50px 20px;
-
-    color: #777;
-
-}
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =========================
-     HOME
-========================= -->
+<!-- ================= HOME ================= -->
 
 <div id="homePage">
 
-
-    <header class="header">
+    <div class="header">
 
         <h1>🎬 မြန်မာ ဇာတ်လမ်းတွဲများ</h1>
 
-        <p>
-            မြန်မာဇာတ်လမ်းတွဲများကို
-            တစ်နေရာတည်းမှာ ကြည့်ရှုနိုင်ပါသည်
-        </p>
-
-    </header>
-
-
-    <!-- SEARCH -->
-
-    <div class="search-box">
-
-        <input
-            type="search"
-            id="searchInput"
-            placeholder="ဇာတ်လမ်းတွဲ ရှာရန်..."
-            oninput="searchMovies()">
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="ဇာတ်လမ်းတွဲရှာရန်..."
+                oninput="searchMovies()"
+            >
+        </div>
 
     </div>
 
+    <main class="home">
 
-    <!-- MOVIES -->
-
-    <div
-        class="movie-grid"
-        id="movieGrid">
-
-
-        <!-- MOVIE 1 -->
-
-        <div
-            class="movie-card"
-            data-title="မြန်မာ ဇာတ်လမ်းတွဲ"
-            onclick="openPlayer(
-                'မြန်မာ ဇာတ်လမ်းတွဲ',
-                'အပိုင်း (၁)'
-            )">
-
-
-            <div class="poster">
-
-                <!-- ကိုယ့်ပုံကို ဒီနေရာမှာ ပြောင်းပါ -->
-
-                <img
-                    src="https://picsum.photos/800/500?random=11"
-                    alt="မြန်မာ ဇာတ်လမ်းတွဲ">
-
-                <div class="play-icon">
-                    ▶
-                </div>
-
-            </div>
-
-
-            <div class="movie-info">
-
-                <div class="movie-title">
-                    မြန်မာ ဇာတ်လမ်းတွဲ
-                </div>
-
-                <div class="movie-episode">
-                    အပိုင်း (၁)
-                </div>
-
-            </div>
-
+        <div class="section-title">
+            မြန်မာ ဇာတ်လမ်းတွဲများ
         </div>
 
+        <div id="movieGrid" class="movie-grid"></div>
 
-        <!-- MOVIE 2 -->
-
-        <div
-            class="movie-card"
-            data-title="ဇာတ်လမ်းတွဲ အသစ်"
-            onclick="openPlayer(
-                'ဇာတ်လမ်းတွဲ အသစ်',
-                'အပိုင်း (၁)'
-            )">
-
-
-            <div class="poster">
-
-                <img
-                    src="https://picsum.photos/800/500?random=12"
-                    alt="ဇာတ်လမ်းတွဲ">
-
-                <div class="play-icon">
-                    ▶
-                </div>
-
-            </div>
-
-
-            <div class="movie-info">
-
-                <div class="movie-title">
-                    ဇာတ်လမ်းတွဲ အသစ်
-                </div>
-
-                <div class="movie-episode">
-                    အပိုင်း (၁)
-                </div>
-
-            </div>
-
+        <div id="noResult" class="no-result">
+            ရှာဖွေထားသော ဇာတ်လမ်းတွဲ မတွေ့ပါ။
         </div>
 
-
-        <!-- MOVIE 3 -->
-
-        <div
-            class="movie-card"
-            data-title="မြန်မာအချစ်ဇာတ်လမ်း"
-            onclick="openPlayer(
-                'မြန်မာအချစ်ဇာတ်လမ်း',
-                'အပိုင်း (၁)'
-            )">
-
-
-            <div class="poster">
-
-                <img
-                    src="https://picsum.photos/800/500?random=13"
-                    alt="မြန်မာအချစ်ဇာတ်လမ်း">
-
-                <div class="play-icon">
-                    ▶
-                </div>
-
-            </div>
-
-
-            <div class="movie-info">
-
-                <div class="movie-title">
-                    မြန်မာအချစ်ဇာတ်လမ်း
-                </div>
-
-                <div class="movie-episode">
-                    အပိုင်း (၁)
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- MOVIE 4 -->
-
-        <div
-            class="movie-card"
-            data-title="မြန်မာဒရာမာ"
-            onclick="openPlayer(
-                'မြန်မာဒရာမာ',
-                'အပိုင်း (၁)'
-            )">
-
-
-            <div class="poster">
-
-                <img
-                    src="https://picsum.photos/800/500?random=14"
-                    alt="မြန်မာဒရာမာ">
-
-                <div class="play-icon">
-                    ▶
-                </div>
-
-            </div>
-
-
-            <div class="movie-info">
-
-                <div class="movie-title">
-                    မြန်မာဒရာမာ
-                </div>
-
-                <div class="movie-episode">
-                    အပိုင်း (၁)
-                </div>
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-
-    <div
-        class="no-result"
-        id="noResult">
-
-        ရှာဖွေထားသော ဇာတ်လမ်းတွဲ မတွေ့ပါ။
-
-    </div>
-
+    </main>
 
 </div>
 
 
+<!-- ================= EPISODE PAGE ================= -->
 
-<!-- =========================
-     PLAYER PAGE
-========================= -->
+<div id="episodePage" class="episode-page">
 
-<div
-    class="player-page"
-    id="playerPage">
+    <button class="back-btn" onclick="showHome()">
+        ← နောက်သို့
+    </button>
 
+    <div class="series-header">
+
+        <h2 id="seriesTitle"></h2>
+
+        <div id="seriesCount"></div>
+
+    </div>
+
+    <div id="episodeGrid" class="episode-grid"></div>
+
+</div>
+
+
+<!-- ================= PLAYER ================= -->
+
+<div id="playerPage" class="player-page">
 
     <div class="player-top">
 
-        <button
-            class="back-button"
-            onclick="closePlayer()">
+        <div id="playerTitle" class="player-title">
+            Video
+        </div>
 
-            ‹
-
+        <button class="close-btn" onclick="closePlayer()">
+            ✕ ပြန်ထွက်မယ်
         </button>
 
+    </div>
 
-        <div
-            class="player-name"
-            id="playerName">
+    <div class="video-area">
 
-            မြန်မာ ဇာတ်လမ်းတွဲ
+        <iframe
+            id="videoFrame"
+            class="video-frame"
+            src=""
+            frameborder="0"
+            allow="autoplay; fullscreen"
+            allowfullscreen>
+        </iframe>
 
+        <div class="running-text">
+            <span id="runningText">
+                🔴 မြန်မာ ဇာတ်လမ်းတွဲများကို ကြည့်ရှုနိုင်ပါသည် 🔴
+            </span>
         </div>
 
     </div>
 
+    <div class="player-controls">
 
-    <div class="player-container">
+        <button
+            class="control-btn"
+            onclick="closePlayer()">
+            ← ပြန်ထွက်မယ်
+        </button>
 
-
-        <div
-            class="video-area"
-            id="videoArea">
-
-
-            <!-- OK.RU VIDEO -->
-
-            <iframe
-                id="videoFrame"
-                src=""
-                allow="autoplay"
-                allowfullscreen>
-            </iframe>
-
-
-            <!-- RUNNING TEXT -->
-
-            <div class="running-bar">
-
-                <div class="running-text">
-
-                    🔴 မြန်မာဇာတ်လမ်းတွဲများကို
-                    အခမဲ့ကြည့်ရှုနိုင်ပါသည် 🔴
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-        <div class="player-info">
-
-            <h2 id="episodeName">
-                အပိုင်း (၁)
-            </h2>
-
-            <p>
-                မြန်မာ ဇာတ်လမ်းတွဲ
-            </p>
-
-
-            <button
-                class="fullscreen-btn"
-                onclick="customFullscreen()">
-
-                ⛶ Fullscreen
-
-            </button>
-
-        </div>
-
+        <button
+            class="control-btn full"
+            onclick="customFullscreen()">
+            ⛶ မျက်နှာပြင်အပြည့်
+        </button>
 
     </div>
 
 </div>
-
 
 
 <script>
 
-/* =========================
-   VIDEO URL
-========================= */
+/* =====================================================
+   ဇာတ်လမ်းတွဲ + အပိုင်း + ပုံ + Video Link
+   ဒီနေရာမှာ ကိုယ့် Link တွေထည့်ပါ
+===================================================== */
 
-const OK_VIDEO =
-"https://ok.ru/videoembed/16283322485483?nochat=1&autoplay=1";
+const series = [
+
+    {
+        title: "မြန်မာ ဇာတ်လမ်းတွဲ အမှတ် (၁)",
+
+        image: "https://via.placeholder.com/600x800?text=Series+1",
+
+        episodes: [
+
+            {
+                episode: "အပိုင်း (၁)",
+
+                image: "https://via.placeholder.com/600x350?text=Episode+1",
+
+                video:
+                "https://ok.ru/videoembed/16283322485483?nochat=1&autoplay=1"
+            },
+
+            {
+                episode: "အပိုင်း (၂)",
+
+                image: "https://via.placeholder.com/600x350?text=Episode+2",
+
+                video:
+                "https://ok.ru/videoembed/VIDEO_ID_2?nochat=1&autoplay=1"
+            },
+
+            {
+                episode: "အပိုင်း (၃)",
+
+                image: "https://via.placeholder.com/600x350?text=Episode+3",
+
+                video:
+                "https://ok.ru/videoembed/VIDEO_ID_3?nochat=1&autoplay=1"
+            },
+
+            {
+                episode: "အပိုင်း (၄)",
+
+                image: "https://via.placeholder.com/600x350?text=Episode+4",
+
+                video:
+                "https://ok.ru/videoembed/VIDEO_ID_4?nochat=1&autoplay=1"
+            }
+
+        ]
+    },
 
 
-/* =========================
-   OPEN PLAYER
-========================= */
+    {
+        title: "မြန်မာ ဇာတ်လမ်းတွဲ အမှတ် (၂)",
 
-function openPlayer(
-    title,
-    episode
-) {
+        image: "https://via.placeholder.com/600x800?text=Series+2",
 
-    const home =
-        document.getElementById(
-            "homePage"
-        );
+        episodes: [
 
-    const player =
-        document.getElementById(
-            "playerPage"
-        );
+            {
+                episode: "အပိုင်း (၁)",
+
+                image: "https://via.placeholder.com/600x350?text=Episode+1",
+
+                video:
+                "https://ok.ru/videoembed/VIDEO_ID_5?nochat=1&autoplay=1"
+            },
+
+            {
+                episode: "အပိုင်း (၂)",
+
+                image: "https://via.placeholder.com/600x350?text=Episode+2",
+
+                video:
+                "https://ok.ru/videoembed/VIDEO_ID_6?nochat=1&autoplay=1"
+            },
+
+            {
+                episode: "အပိုင်း (၃)",
+
+                image: "https://via.placeholder.com/600x350?text=Episode+3",
+
+                video:
+                "https://ok.ru/videoembed/VIDEO_ID_7?nochat=1&autoplay=1"
+            }
+
+        ]
+    },
+
+
+    {
+        title: "မြန်မာ ဇာတ်လမ်းတွဲ အမှတ် (၃)",
+
+        image: "https://via.placeholder.com/600x800?text=Series+3",
+
+        episodes: [
+
+            {
+                episode: "အပိုင်း (၁)",
+
+                image: "https://via.placeholder.com/600x350?text=Episode+1",
+
+                video:
+                "https://ok.ru/videoembed/VIDEO_ID_8?nochat=1&autoplay=1"
+            },
+
+            {
+                episode: "အပိုင်း (၂)",
+
+                image: "https://via.placeholder.com/600x350?text=Episode+2",
+
+                video:
+                "https://ok.ru/videoembed/VIDEO_ID_9?nochat=1&autoplay=1"
+            }
+
+        ]
+    }
+
+];
+
+
+/* =====================================================
+   HOME PAGE ပြ
+===================================================== */
+
+const movieGrid =
+    document.getElementById("movieGrid");
+
+function renderSeries(list = series){
+
+    movieGrid.innerHTML = "";
+
+    list.forEach((item,index)=>{
+
+        const card =
+        document.createElement("div");
+
+        card.className = "movie-card";
+
+        card.onclick = function(){
+
+            openSeries(index);
+
+        };
+
+        card.innerHTML = `
+
+            <img
+                class="movie-image"
+                src="${item.image}"
+                alt="${item.title}"
+                onerror="this.src='https://via.placeholder.com/600x800?text=No+Image'"
+            >
+
+            <div class="movie-info">
+
+                <div class="movie-title">
+                    ${item.title}
+                </div>
+
+                <div class="movie-episodes">
+                    ${item.episodes.length} ပိုင်း
+                </div>
+
+            </div>
+
+        `;
+
+        movieGrid.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   SERIES OPEN
+===================================================== */
+
+function openSeries(index){
+
+    const item = series[index];
+
+    document.getElementById("homePage")
+        .style.display = "none";
+
+    document.getElementById("episodePage")
+        .style.display = "block";
+
+    document.getElementById("seriesTitle")
+        .textContent = item.title;
+
+    document.getElementById("seriesCount")
+        .textContent =
+        "စုစုပေါင်း " +
+        item.episodes.length +
+        " ပိုင်း";
+
+    const episodeGrid =
+        document.getElementById("episodeGrid");
+
+    episodeGrid.innerHTML = "";
+
+    item.episodes.forEach((ep,index2)=>{
+
+        const card =
+        document.createElement("div");
+
+        card.className = "episode-card";
+
+        card.onclick = function(){
+
+            openPlayer(
+                item.title,
+                ep.episode,
+                ep.video
+            );
+
+        };
+
+        card.innerHTML = `
+
+            <img
+                src="${ep.image}"
+                alt="${ep.episode}"
+                onerror="this.src='https://via.placeholder.com/600x350?text=No+Image'"
+            >
+
+            <div class="episode-name">
+                ▶ ${ep.episode}
+            </div>
+
+        `;
+
+        episodeGrid.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   PLAYER OPEN
+===================================================== */
+
+function openPlayer(title,episode,videoUrl){
+
+    const playerPage =
+        document.getElementById("playerPage");
 
     const frame =
-        document.getElementById(
-            "videoFrame"
-        );
+        document.getElementById("videoFrame");
 
-    const name =
-        document.getElementById(
-            "playerName"
-        );
+    document.getElementById("playerTitle")
+        .textContent =
+        title + " — " + episode;
 
-    const episodeText =
-        document.getElementById(
-            "episodeName"
-        );
+    frame.src = videoUrl;
 
+    playerPage.style.display = "block";
 
-    home.style.display = "none";
-
-    player.style.display = "block";
-
-    name.innerText = title;
-
-    episodeText.innerText =
-        episode;
-
-    frame.src = OK_VIDEO;
-
-
-    document.body.style.overflow =
-        "hidden";
-
+    document.body.style.overflow = "hidden";
 
     restartText();
 
 }
 
 
-/* =========================
-   CLOSE PLAYER
-========================= */
+/* =====================================================
+   PLAYER CLOSE
+===================================================== */
 
-function closePlayer() {
+function closePlayer(){
 
-    const player =
-        document.getElementById(
-            "playerPage"
-        );
+    const playerPage =
+        document.getElementById("playerPage");
 
     const frame =
-        document.getElementById(
-            "videoFrame"
-        );
+        document.getElementById("videoFrame");
 
-    player.style.display = "none";
+    playerPage.classList.remove(
+        "custom-fullscreen"
+    );
 
     frame.src = "";
 
-    document.getElementById(
-        "homePage"
-    ).style.display = "block";
+    playerPage.style.display = "none";
 
-    document.body.style.overflow =
-        "auto";
+    document.body.style.overflow = "";
 
 }
 
 
-/* =========================
+/* =====================================================
    CUSTOM FULLSCREEN
-========================= */
+===================================================== */
 
-function customFullscreen() {
+async function customFullscreen(){
 
-    const player =
-        document.getElementById(
-            "playerPage"
+    const playerPage =
+        document.getElementById("playerPage");
+
+    if(
+        !playerPage.classList.contains(
+            "custom-fullscreen"
+        )
+    ){
+
+        playerPage.classList.add(
+            "custom-fullscreen"
         );
 
+        try{
 
-    player.classList.toggle(
-        "landscape"
-    );
+            if(
+                document.documentElement.requestFullscreen
+            ){
 
+                await document.documentElement
+                    .requestFullscreen();
 
-    if (
-        player.classList.contains(
-            "landscape"
-        )
-    ) {
+            }
 
-        if (
-            screen.orientation &&
-            screen.orientation.lock
-        ) {
+            if(
+                screen.orientation &&
+                screen.orientation.lock
+            ){
 
-            screen.orientation.lock(
-                "landscape"
-            ).catch(() => {});
+                await screen.orientation
+                    .lock("landscape")
+                    .catch(()=>{});
+
+            }
+
+        }catch(error){
+
+            console.log(error);
+
+        }
+
+    }else{
+
+        playerPage.classList.remove(
+            "custom-fullscreen"
+        );
+
+        try{
+
+            if(document.fullscreenElement){
+
+                await document.exitFullscreen();
+
+            }
+
+            if(
+                screen.orientation &&
+                screen.orientation.unlock
+            ){
+
+                screen.orientation.unlock();
+
+            }
+
+        }catch(error){
+
+            console.log(error);
 
         }
 
     }
-
-    else {
-
-        if (
-            screen.orientation &&
-            screen.orientation.unlock
-        ) {
-
-            screen.orientation.unlock();
-
-        }
-
-    }
-
-
-    restartText();
 
 }
 
 
-/* =========================
+/* =====================================================
    RUNNING TEXT RESTART
-========================= */
+===================================================== */
 
-function restartText() {
+function restartText(){
 
     const text =
-        document.querySelector(
-            ".running-text"
-        );
-
-    if (!text) return;
+        document.getElementById("runningText");
 
     text.style.animation = "none";
 
     void text.offsetWidth;
 
     text.style.animation =
-        "moveText 12s linear infinite";
+        "marquee 18s linear infinite";
 
 }
 
 
-/* =========================
+/* =====================================================
    SEARCH
-========================= */
+===================================================== */
 
-function searchMovies() {
-
-    const input =
-        document.getElementById(
-            "searchInput"
-        );
+function searchMovies(){
 
     const keyword =
-        input.value
+        document.getElementById("searchInput")
+        .value
         .toLowerCase()
         .trim();
 
-
     const cards =
-        document.querySelectorAll(
-            ".movie-card"
-        );
-
+        document.querySelectorAll(".movie-card");
 
     let found = 0;
 
+    series.forEach((item,index)=>{
 
-    cards.forEach(
-        function(card) {
+        const card = cards[index];
 
-            const title =
-                card.dataset.title
-                .toLowerCase();
+        if(!card) return;
 
+        const match =
+            item.title
+            .toLowerCase()
+            .includes(keyword);
 
-            if (
-                title.includes(keyword)
-            ) {
+        card.style.display =
+            match ? "block" : "none";
 
-                card.style.display =
-                    "block";
+        if(match) found++;
 
-                found++;
+    });
 
-            }
-
-            else {
-
-                card.style.display =
-                    "none";
-
-            }
-
-        }
-    );
-
-
-    document.getElementById(
-        "noResult"
-    ).style.display =
-        found === 0
-        ? "block"
-        : "none";
+    document.getElementById("noResult")
+        .style.display =
+        found === 0 ? "block" : "none";
 
 }
 
 
-/* =========================
-   ROTATE
-========================= */
+/* =====================================================
+   BACK HOME
+===================================================== */
 
-window.addEventListener(
-    "orientationchange",
-    function() {
+function showHome(){
 
-        setTimeout(
-            restartText,
-            400
-        );
+    document.getElementById("episodePage")
+        .style.display = "none";
+
+    document.getElementById("homePage")
+        .style.display = "block";
+
+}
+
+
+/* =====================================================
+   INITIAL
+===================================================== */
+
+renderSeries();
+
+
+/* Browser fullscreen ပိတ်သွားရင်
+   Custom fullscreen ကိုလည်း ပြန်ပိတ် */
+
+document.addEventListener(
+    "fullscreenchange",
+    function(){
+
+        if(!document.fullscreenElement){
+
+            document.getElementById("playerPage")
+                .classList.remove(
+                    "custom-fullscreen"
+                );
+
+        }
 
     }
 );
 
 </script>
 
-
 </body>
 </html>
-
