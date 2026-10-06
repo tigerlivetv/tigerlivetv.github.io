@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
-
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width,
-initial-scale=1.0,
-maximum-scale=1.0,
-user-scalable=no">
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
 
 <title>မုန်းမာန်ငြိုး</title>
 
@@ -25,16 +24,55 @@ user-scalable=no">
     -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
+html{
+    scroll-behavior:smooth;
+}
+
+body{
     width:100%;
-    min-height:100%;
-    background:#070707;
+    min-height:100vh;
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(255,23,68,.16),
+            transparent 35%
+        ),
+        #070709;
     color:#fff;
     font-family:
-    "Noto Sans Myanmar",
-    "Myanmar Text",
-    Arial,
-    sans-serif;
+        "Noto Sans Myanmar",
+        "Myanmar Text",
+        Arial,
+        sans-serif;
+    overflow-x:hidden;
+}
+
+/* Decorative glow */
+
+body:before{
+    content:"";
+    position:fixed;
+    width:260px;
+    height:260px;
+    top:-120px;
+    right:-100px;
+    background:rgba(255,20,70,.12);
+    filter:blur(80px);
+    pointer-events:none;
+    z-index:-1;
+}
+
+body:after{
+    content:"";
+    position:fixed;
+    width:220px;
+    height:220px;
+    bottom:-100px;
+    left:-80px;
+    background:rgba(190,0,55,.10);
+    filter:blur(75px);
+    pointer-events:none;
+    z-index:-1;
 }
 
 
@@ -43,71 +81,80 @@ html,body{
 ========================= */
 
 .header{
-
-    height:64px;
+    height:68px;
+    padding:0 17px;
 
     display:flex;
     align-items:center;
 
-    padding:0 17px;
+    position:sticky;
+    top:0;
+    z-index:100;
 
     background:
-    linear-gradient(
-        135deg,
-        #181818,
-        #090909
-    );
+        linear-gradient(
+            180deg,
+            rgba(18,18,21,.98),
+            rgba(8,8,10,.96)
+        );
 
-    border-bottom:1px solid #252525;
+    border-bottom:1px solid rgba(255,255,255,.07);
 
-    position:relative;
-
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.45);
 }
 
-
-/* red light */
-
 .header:before{
-
     content:"";
 
     width:4px;
-    height:32px;
+    height:34px;
 
-    background:#ff1744;
+    margin-right:12px;
 
     border-radius:10px;
 
-    margin-right:11px;
+    background:
+        linear-gradient(
+            180deg,
+            #ff1744,
+            #ff4d6d
+        );
 
     box-shadow:
-    0 0 12px
-    rgba(255,23,68,.7);
-
+        0 0 8px rgba(255,23,68,.9),
+        0 0 22px rgba(255,23,68,.35);
 }
-
 
 .header-title{
+    font-size:19px;
+    font-weight:900;
+    letter-spacing:.3px;
 
-    font-size:18px;
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #ffb6c5
+        );
 
-    font-weight:bold;
-
-    letter-spacing:.2px;
-
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
 }
 
-
 .header-sub{
+    margin-left:auto;
 
-    position:absolute;
+    padding:6px 10px;
 
-    right:15px;
+    border:1px solid rgba(255,23,68,.25);
+    border-radius:20px;
 
+    color:#aaa;
     font-size:10px;
 
-    color:#888;
-
+    background:rgba(255,23,68,.05);
 }
 
 
@@ -116,32 +163,45 @@ html,body{
 ========================= */
 
 .player{
-
     display:none;
 
     width:100%;
+    padding:12px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #0a0a0d,
+            #050506
+        );
+
+    border-bottom:1px solid #1c1c20;
+}
+
+.player-box{
+    position:relative;
+    width:100%;
+    overflow:hidden;
+
+    border-radius:17px;
+
+    border:1px solid rgba(255,23,68,.38);
 
     background:#000;
 
-    position:relative;
-
+    box-shadow:
+        0 0 0 1px rgba(255,23,68,.05),
+        0 0 30px rgba(255,23,68,.12);
 }
 
-
-/* Video */
-
 .video{
-
     width:100%;
-
     aspect-ratio:16/9;
 
     display:block;
 
     border:0;
-
     background:#000;
-
 }
 
 
@@ -150,78 +210,70 @@ html,body{
 ========================= */
 
 .ad-bar{
-
-    height:39px;
+    height:40px;
 
     width:100%;
 
     overflow:hidden;
 
     display:flex;
-
     align-items:center;
 
     position:relative;
 
     background:
-    linear-gradient(
-        90deg,
-        #130b0d,
-        #211014,
-        #130b0d
-    );
+        linear-gradient(
+            90deg,
+            #17090d,
+            #260e15,
+            #17090d
+        );
 
-    border-top:1px solid #35151b;
-    border-bottom:1px solid #35151b;
-
+    border-top:1px solid rgba(255,23,68,.18);
+    border-bottom:1px solid rgba(255,23,68,.18);
 }
 
-
 .ad-label{
-
     position:absolute;
-
     left:8px;
+    z-index:3;
 
-    z-index:2;
+    padding:5px 8px;
 
-    padding:4px 7px;
+    border-radius:7px;
 
-    border-radius:5px;
-
-    background:#e50936;
+    background:
+        linear-gradient(
+            135deg,
+            #ff1744,
+            #b90030
+        );
 
     color:#fff;
 
     font-size:10px;
+    font-weight:900;
 
-    font-weight:bold;
-
+    box-shadow:
+        0 3px 12px rgba(255,23,68,.25);
 }
 
-
 .ad-text{
-
     position:absolute;
-
     left:0;
 
     white-space:nowrap;
 
-    padding-left:70px;
+    padding-left:75px;
 
-    color:#ffd45a;
-
-    font-size:13px;
+    color:#ffd76a;
+    font-size:12px;
 
     animation:
-    adRun 20s linear infinite;
-
+        adRun 20s linear infinite;
 }
 
-
 @keyframes adRun{
-
     0%{
         transform:translateX(100%);
     }
@@ -229,7 +281,6 @@ html,body{
     100%{
         transform:translateX(-100%);
     }
-
 }
 
 
@@ -238,123 +289,120 @@ html,body{
 ========================= */
 
 .player-controls{
-
     display:flex;
-
     justify-content:center;
 
-    gap:9px;
+    gap:10px;
 
-    padding:11px;
+    padding:12px 4px 2px;
 
-    background:#0b0b0b;
-
+    background:#08080a;
 }
 
-
 .control-btn{
+    min-width:135px;
+    height:42px;
 
-    height:40px;
+    padding:0 18px;
 
-    padding:0 17px;
+    border:1px solid rgba(255,255,255,.08);
 
-    border:0;
-
-    border-radius:10px;
+    border-radius:12px;
 
     color:#fff;
 
     font-family:inherit;
-
     font-size:12px;
-
-    font-weight:bold;
+    font-weight:900;
 
     cursor:pointer;
 
-    box-shadow:
-    0 4px 12px
-    rgba(0,0,0,.35);
-
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease;
 }
 
+.control-btn:active{
+    transform:scale(.95);
+}
 
 .close-btn{
-
     background:
-    linear-gradient(
-        135deg,
-        #e63946,
-        #b5122b
-    );
+        linear-gradient(
+            135deg,
+            #ff3156,
+            #b80d30
+        );
 
+    box-shadow:
+        0 5px 18px rgba(255,23,68,.18);
 }
 
-
 .full-btn{
-
     background:
-    linear-gradient(
-        135deg,
-        #00b960,
-        #087c43
-    );
+        linear-gradient(
+            135deg,
+            #25252b,
+            #111116
+        );
 
+    border-color:#34343c;
+}
+
+.full-btn:hover{
+    border-color:#ff3156;
 }
 
 
 /* =========================
-   SECTION TITLE
+   SECTION
 ========================= */
 
 .section{
-
-    padding:18px 13px 8px;
-
+    padding:22px 13px 9px;
 }
-
 
 .section-title{
-
     display:flex;
-
     align-items:center;
+    gap:10px;
 
-    gap:8px;
-
-    font-size:16px;
-
-    font-weight:bold;
-
+    font-size:17px;
+    font-weight:900;
 }
-
 
 .section-title:before{
-
     content:"";
 
-    width:4px;
-    height:22px;
+    width:5px;
+    height:25px;
 
-    border-radius:5px;
+    border-radius:8px;
 
-    background:#ff1744;
+    background:
+        linear-gradient(
+            180deg,
+            #ff1744,
+            #ff5b79
+        );
 
     box-shadow:
-    0 0 9px
-    rgba(255,23,68,.7);
-
+        0 0 12px rgba(255,23,68,.65);
 }
 
-
 .section-count{
-
     margin-left:auto;
 
-    font-size:11px;
+    padding:5px 10px;
 
+    border:1px solid #24242a;
+
+    border-radius:20px;
+
+    font-size:10px;
     color:#777;
 
+    background:#0e0e11;
 }
 
 
@@ -363,10 +411,7 @@ html,body{
 ========================= */
 
 .list{
-
-    padding:
-    8px 12px 25px;
-
+    padding:8px 12px 28px;
 }
 
 
@@ -375,51 +420,44 @@ html,body{
 ========================= */
 
 .episode{
-
     position:relative;
 
     width:100%;
+    min-height:92px;
 
-    min-height:84px;
-
-    margin-bottom:11px;
-
-    padding:13px 13px 13px 16px;
+    margin-bottom:12px;
+    padding:13px 11px 13px 14px;
 
     display:flex;
-
     align-items:center;
 
-    gap:13px;
+    gap:12px;
 
     background:
-    linear-gradient(
-        135deg,
-        #191919,
-        #0d0d0d
-    );
+        linear-gradient(
+            135deg,
+            #19191d,
+            #0e0e11
+        );
 
-    border:1px solid #292929;
+    border:1px solid #29292f;
 
-    border-radius:15px;
+    border-radius:16px;
 
     overflow:hidden;
 
     cursor:pointer;
 
     box-shadow:
-    0 6px 18px
-    rgba(0,0,0,.35);
+        0 7px 22px rgba(0,0,0,.35);
 
     transition:
-    transform .15s ease,
-    border-color .15s ease;
-
+        transform .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease;
 }
 
-
 .episode:before{
-
     content:"";
 
     position:absolute;
@@ -427,29 +465,39 @@ html,body{
     left:0;
     top:0;
 
-    width:3px;
+    width:4px;
     height:100%;
 
-    background:#ff1744;
+    background:
+        linear-gradient(
+            180deg,
+            #ff1744,
+            #b90031
+        );
 
+    box-shadow:
+        0 0 12px rgba(255,23,68,.4);
 }
 
+.episode:hover{
+    border-color:rgba(255,23,68,.45);
+
+    box-shadow:
+        0 10px 28px rgba(255,23,68,.08);
+}
 
 .episode:active{
-
     transform:scale(.975);
-
-    border-color:#555;
-
 }
 
 
-/* Number */
+/* =========================
+   NUMBER
+========================= */
 
 .ep-number{
-
-    width:48px;
-    height:48px;
+    width:50px;
+    height:50px;
 
     flex-shrink:0;
 
@@ -457,84 +505,95 @@ html,body{
     align-items:center;
     justify-content:center;
 
-    border-radius:12px;
+    border-radius:14px;
 
     background:
-    linear-gradient(
-        135deg,
-        #252525,
-        #111
-    );
+        linear-gradient(
+            145deg,
+            #28282d,
+            #101013
+        );
 
-    border:1px solid #343434;
+    border:1px solid #3a3a42;
 
-    color:#ff365a;
+    color:#ff365b;
 
     font-size:17px;
+    font-weight:900;
 
-    font-weight:bold;
-
+    box-shadow:
+        inset 0 0 15px rgba(255,23,68,.04);
 }
 
 
-/* Info */
+/* =========================
+   INFO
+========================= */
 
 .ep-info{
-
     flex:1;
-
     min-width:0;
-
 }
-
 
 .ep-title{
-
     font-size:14px;
+    font-weight:900;
+    line-height:1.55;
 
-    font-weight:bold;
-
-    line-height:1.6;
-
+    white-space:normal;
 }
 
-
 .ep-status{
-
-    margin-top:4px;
+    margin-top:5px;
 
     font-size:10px;
 
-    color:#8f8f8f;
-
+    color:#85858c;
 }
 
 
-/* Watch */
+/* =========================
+   WATCH BUTTON
+========================= */
 
 .watch{
-
     flex-shrink:0;
 
-    padding:8px 11px;
+    min-width:67px;
 
-    border-radius:9px;
+    padding:10px 10px;
+
+    text-align:center;
+
+    border-radius:11px;
 
     background:
-    linear-gradient(
-        135deg,
-        #ed1742,
-        #b80f2e
-    );
+        linear-gradient(
+            135deg,
+            #ff1d4d,
+            #c30d35
+        );
+
+    border:1px solid rgba(255,255,255,.08);
 
     font-size:11px;
-
-    font-weight:bold;
+    font-weight:900;
 
     box-shadow:
-    0 4px 10px
-    rgba(237,23,66,.2);
+        0 5px 16px rgba(255,23,68,.18);
 
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease;
+}
+
+.episode:hover .watch{
+    box-shadow:
+        0 6px 22px rgba(255,23,68,.3);
+}
+
+.episode:active .watch{
+    transform:scale(.94);
 }
 
 
@@ -543,15 +602,34 @@ html,body{
 ========================= */
 
 .footer{
+    position:relative;
 
     text-align:center;
 
-    padding:15px;
+    padding:18px 15px 28px;
 
     color:#555;
 
     font-size:10px;
+}
 
+.footer:before{
+    content:"";
+
+    display:block;
+
+    width:90px;
+    height:1px;
+
+    margin:0 auto 12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ff1744,
+            transparent
+        );
 }
 
 
@@ -560,7 +638,6 @@ html,body{
 ========================= */
 
 body.fullscreen{
-
     position:fixed;
 
     inset:0;
@@ -573,42 +650,42 @@ body.fullscreen{
     background:#000;
 
     z-index:99999;
-
 }
-
 
 body.fullscreen .header,
 body.fullscreen .section,
 body.fullscreen .list,
 body.fullscreen .footer{
-
     display:none;
-
 }
 
-
 body.fullscreen .player{
-
     display:block;
 
     width:100vw;
     height:100vh;
 
+    padding:0;
 }
 
+body.fullscreen .player-box{
+    width:100vw;
+    height:100vh;
+
+    border:0;
+    border-radius:0;
+
+    box-shadow:none;
+}
 
 body.fullscreen .video{
-
     width:100vw;
     height:100vh;
 
     aspect-ratio:auto;
-
 }
 
-
 body.fullscreen .ad-bar{
-
     position:absolute;
 
     left:0;
@@ -616,13 +693,11 @@ body.fullscreen .ad-bar{
 
     z-index:20;
 
+    opacity:.92;
 }
 
-
 body.fullscreen .player-controls{
-
     display:none;
-
 }
 
 
@@ -633,59 +708,69 @@ body.fullscreen .player-controls{
 @media(max-width:600px){
 
     .header{
-
-        height:58px;
-
+        height:60px;
         padding:0 14px;
-
     }
 
     .header-title{
-
-        font-size:16px;
-
+        font-size:17px;
     }
 
     .header-sub{
-
         font-size:9px;
+        padding:5px 8px;
+    }
 
+    .player{
+        padding:9px;
+    }
+
+    .player-box{
+        border-radius:14px;
+    }
+
+    .section{
+        padding-top:19px;
     }
 
     .episode{
-
-        min-height:80px;
+        min-height:84px;
 
         padding:
-        11px 10px 11px 13px;
+            11px 9px 11px 13px;
 
         gap:10px;
-
     }
 
     .ep-number{
+        width:45px;
+        height:45px;
 
-        width:43px;
-        height:43px;
+        border-radius:12px;
 
         font-size:15px;
-
     }
 
     .ep-title{
+        font-size:12.5px;
+    }
 
-        font-size:13px;
-
+    .ep-status{
+        font-size:9px;
     }
 
     .watch{
+        min-width:62px;
 
-        padding:7px 9px;
+        padding:8px 7px;
 
         font-size:10px;
-
     }
 
+    .control-btn{
+        min-width:125px;
+        height:40px;
+    }
 }
 
 
@@ -695,29 +780,37 @@ body.fullscreen .player-controls{
 
 @media(max-width:360px){
 
-    .ep-number{
+    .header-title{
+        font-size:15px;
+    }
 
+    .episode{
+        padding-left:11px;
+    }
+
+    .ep-number{
         width:40px;
         height:40px;
-
+        font-size:14px;
     }
 
     .ep-title{
-
-        font-size:12px;
-
+        font-size:11.5px;
     }
 
     .watch{
-
-        padding:6px 7px;
-
+        min-width:57px;
+        padding:7px 5px;
+        font-size:9px;
     }
 
+    .control-btn{
+        min-width:115px;
+        font-size:11px;
+    }
 }
 
 </style>
-
 </head>
 
 
@@ -745,62 +838,54 @@ body.fullscreen .player-controls{
      PLAYER
 ========================= -->
 
-<div
-class="player"
-id="player">
+<div class="player" id="player">
 
+    <div class="player-box">
 
-    <iframe
-        id="videoFrame"
-        class="video"
-        src=""
-        frameborder="0"
+        <iframe
+            id="videoFrame"
+            class="video"
+            src=""
+            frameborder="0"
+            allow="
+                autoplay;
+                fullscreen;
+                picture-in-picture;
+                encrypted-media"
+            allowfullscreen>
+        </iframe>
 
-        allow="
-        autoplay;
-        fullscreen;
-        picture-in-picture;
-        encrypted-media"
+        <div class="ad-bar">
 
-        allowfullscreen>
-    </iframe>
+            <div class="ad-label">
+                ကြော်ငြာ
+            </div>
 
-
-    <!-- Advertisement -->
-
-    <div class="ad-bar">
-
-        <div class="ad-label">
-            ကြော်ငြာ
-        </div>
-
-        <div class="ad-text">
-
-            📢 မုန်းမာန်ငြိုး ဇာတ်လမ်းတွဲကို
-            အပိုင်းစုံ အစအဆုံး ကြည့်ရှုနိုင်ပါသည်
-            📢
+            <div class="ad-text">
+                📢 မုန်းမာန်ငြိုး ဇာတ်လမ်းတွဲကို
+                အပိုင်းစုံ အစအဆုံး ကြည့်ရှုနိုင်ပါသည် 📢
+            </div>
 
         </div>
 
     </div>
 
 
-    <!-- Controls -->
+    <!-- CONTROLS -->
 
     <div class="player-controls">
 
         <button
-        class="control-btn close-btn"
-        onclick="closeVideo()">
+            class="control-btn close-btn"
+            onclick="closeVideo()">
 
             ✕ ပိတ်မယ်
 
         </button>
 
-
         <button
-        class="control-btn full-btn"
-        onclick="fullScreen()">
+            class="control-btn full-btn"
+            onclick="fullScreen()">
 
             ⛶ Full Video
 
@@ -835,130 +920,102 @@ id="player">
 ========================= -->
 
 <div class="list">
-    <!-- EPISODE 24 -->
+
+
+    <!-- EPISODE 25 -->
 
     <div
-    class="episode"
-
-    onclick="playVideo(
-    'မုန်းမာန်ငြိုး အပိုင်း (၂၅) အစအဆုံး',
-    'https://ok.ru/videoembed/16297245936363?nochat=1&autoplay=1 '
-    )">
-
+        class="episode"
+        onclick="playVideo(
+            'မုန်းမာန်ငြိုး အပိုင်း (၂၅) အစအဆုံး',
+            'https://ok.ru/videoembed/16297245936363?nochat=1&autoplay=1'
+        )">
 
         <div class="ep-number">
             ၂၅
         </div>
 
-
         <div class="ep-info">
 
             <div class="ep-title">
-
                 မုန်းမာန်ငြိုး
                 အပိုင်း (၂၅) အစအဆုံး
-
             </div>
 
             <div class="ep-status">
-
                 ▶ အစအဆုံး ကြည့်ရှုရန်
-
             </div>
 
         </div>
 
-
         <div class="watch">
-
             ကြည့်မယ်
-
         </div>
 
     </div>
 
+
     <!-- EPISODE 24 -->
 
     <div
-    class="episode"
-
-    onclick="playVideo(
-    'မုန်းမာန်ငြိုး အပိုင်း (၂၄) အစအဆုံး',
-    'https://ok.ru/videoembed/16283322485483?nochat=1&autoplay=1'
-    )">
-
+        class="episode"
+        onclick="playVideo(
+            'မုန်းမာန်ငြိုး အပိုင်း (၂၄) အစအဆုံး',
+            'https://ok.ru/videoembed/16283322485483?nochat=1&autoplay=1'
+        )">
 
         <div class="ep-number">
             ၂၄
         </div>
 
-
         <div class="ep-info">
 
             <div class="ep-title">
-
                 မုန်းမာန်ငြိုး
                 အပိုင်း (၂၄) အစအဆုံး
-
             </div>
 
             <div class="ep-status">
-
                 ▶ အစအဆုံး ကြည့်ရှုရန်
-
             </div>
 
         </div>
 
-
         <div class="watch">
-
             ကြည့်မယ်
-
         </div>
 
     </div>
-
 
 
     <!-- EPISODE 23 -->
 
     <div
-    class="episode"
-
-    onclick="playVideo(
-    'မုန်းမာန်ငြိုး အပိုင်း (၂၃) အစအဆုံး',
-    'https://ok.ru/videoembed/16274289068779?nochat=1&autoplay=1'
-    )">
-
+        class="episode"
+        onclick="playVideo(
+            'မုန်းမာန်ငြိုး အပိုင်း (၂၃) အစအဆုံး',
+            'https://ok.ru/videoembed/16274289068779?nochat=1&autoplay=1'
+        )">
 
         <div class="ep-number">
             ၂၃
         </div>
 
-
         <div class="ep-info">
 
             <div class="ep-title">
-
                 မုန်းမာန်ငြိုး
                 အပိုင်း (၂၃) အစအဆုံး
-
             </div>
 
             <div class="ep-status">
-
                 ▶ အစအဆုံး ကြည့်ရှုရန်
-
             </div>
 
         </div>
 
-
         <div class="watch">
-
             ကြည့်မယ်
-
         </div>
 
     </div>
@@ -967,65 +1024,60 @@ id="player">
 </div>
 
 
-<!-- Footer -->
+<!-- =========================
+     FOOTER
+========================= -->
 
 <div class="footer">
-
     မုန်းမာန်ငြိုး ဇာတ်လမ်းတွဲ
-
 </div>
 
 
-
 <script>
-
 
 /* =========================
    PLAY VIDEO
 ========================= */
 
-function playVideo(title,link){
+function playVideo(title, link){
 
     const player =
-    document.getElementById("player");
+        document.getElementById("player");
 
     const frame =
-    document.getElementById("videoFrame");
-
+        document.getElementById("videoFrame");
 
     frame.src = link;
 
-    player.style.display =
-    "block";
+    player.style.display = "block";
 
+    setTimeout(() => {
 
-    player.scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-    });
+        player.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
 
+    },50);
 }
 
 
 /* =========================
-   CLOSE
+   CLOSE VIDEO
 ========================= */
 
 function closeVideo(){
 
     const frame =
-    document.getElementById("videoFrame");
+        document.getElementById("videoFrame");
 
     frame.src = "";
 
-
     document.getElementById("player")
-    .style.display = "none";
-
+        .style.display = "none";
 
     document.body
-    .classList.remove("fullscreen");
-
+        .classList.remove("fullscreen");
 }
 
 
@@ -1036,8 +1088,7 @@ function closeVideo(){
 async function fullScreen(){
 
     const player =
-    document.getElementById("player");
-
+        document.getElementById("player");
 
     if(!document.fullscreenElement){
 
@@ -1046,8 +1097,7 @@ async function fullScreen(){
             await player.requestFullscreen();
 
             document.body
-            .classList.add("fullscreen");
-
+                .classList.add("fullscreen");
 
             if(
                 screen.orientation &&
@@ -1055,8 +1105,8 @@ async function fullScreen(){
             ){
 
                 await screen.orientation
-                .lock("landscape")
-                .catch(()=>{});
+                    .lock("landscape")
+                    .catch(()=>{});
 
             }
 
@@ -1065,7 +1115,7 @@ async function fullScreen(){
         catch(error){
 
             document.body
-            .classList.add("fullscreen");
+                .classList.add("fullscreen");
 
         }
 
@@ -1081,12 +1131,9 @@ async function fullScreen(){
 
         catch(error){}
 
-
         document.body
-        .classList.remove("fullscreen");
-
+            .classList.remove("fullscreen");
     }
-
 }
 
 
@@ -1101,9 +1148,7 @@ document.addEventListener(
         if(!document.fullscreenElement){
 
             document.body
-            .classList.remove(
-                "fullscreen"
-            );
+                .classList.remove("fullscreen");
 
         }
 
@@ -1112,8 +1157,5 @@ document.addEventListener(
 
 </script>
 
-
 </body>
 </html>
-
-
