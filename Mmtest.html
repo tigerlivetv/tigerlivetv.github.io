@@ -19,9 +19,8 @@ body{
         "Myanmar Text",
         Arial,
         sans-serif;
-    background:#050507;
+    background:#080808;
     color:#fff;
-    min-height:100vh;
 }
 
 /* ================= HEADER ================= */
@@ -30,7 +29,8 @@ body{
     position:sticky;
     top:0;
     z-index:1000;
-    height:64px;
+
+    height:62px;
 
     display:flex;
     align-items:center;
@@ -38,74 +38,49 @@ body{
 
     padding:0 18px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #100006,
-            #09090c 55%,
-            #160008
-        );
+    background:#0d0d0f;
 
-    border-bottom:1px solid rgba(255,30,70,.25);
+    border-bottom:1px solid #27272a;
 
-    box-shadow:
-        0 5px 25px rgba(0,0,0,.55);
+    box-shadow:0 4px 18px rgba(0,0,0,.5);
 }
 
 .logo-title{
     font-size:21px;
-    font-weight:800;
-    letter-spacing:.3px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ff1744,
-            #ff4d73,
-            #fff
-        );
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+    font-weight:bold;
+    color:#fff;
 }
 
 .sub-title{
-    font-size:12px;
     color:#999;
+    font-size:13px;
 }
 
-/* ================= HERO IMAGE ================= */
+
+/* ================= HERO ================= */
 
 .hero-image{
-    width:100%;
-    padding:10px 10px 5px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #09090b,
-            #050507
-        );
+    padding:12px 10px 6px;
+    background:#080808;
 }
 
 .hero-image img{
     display:block;
 
     width:100%;
-    height:auto;
+    max-width:900px;
 
-    max-height:280px;
+    height:260px;
+
+    margin:auto;
 
     object-fit:cover;
 
-    border-radius:17px;
+    border-radius:15px;
 
-    border:1px solid rgba(255,23,68,.35);
-
-    box-shadow:
-        0 0 20px rgba(255,23,68,.12),
-        0 8px 30px rgba(0,0,0,.55);
+    border:1px solid #292929;
 }
+
 
 /* ================= PLAYER ================= */
 
@@ -119,21 +94,17 @@ body{
     width:100%;
     max-width:900px;
 
-    margin:auto;
+    aspect-ratio:16/9;
 
-    aspect-ratio:16 / 9;
+    margin:auto;
 
     background:#000;
 
-    border-radius:16px;
+    border-radius:14px;
 
     overflow:hidden;
 
-    border:1px solid rgba(255,23,68,.25);
-
-    box-shadow:
-        0 0 25px rgba(255,0,55,.08),
-        0 12px 35px rgba(0,0,0,.55);
+    border:1px solid #252525;
 
     display:none;
 }
@@ -142,10 +113,10 @@ body{
     width:100%;
     height:100%;
     border:0;
-    display:block;
 }
 
-/* ================= PLAYER CONTROLS ================= */
+
+/* ================= PLAYER BUTTON ================= */
 
 .player-controls{
     position:absolute;
@@ -154,6 +125,7 @@ body{
     bottom:10px;
 
     display:flex;
+
     gap:7px;
 
     z-index:10;
@@ -163,94 +135,82 @@ body{
     width:38px;
     height:38px;
 
-    border:1px solid rgba(255,255,255,.15);
+    border:1px solid #444;
 
-    border-radius:10px;
+    border-radius:9px;
 
-    background:rgba(0,0,0,.72);
+    background:rgba(0,0,0,.8);
 
     color:#fff;
 
     cursor:pointer;
 
     font-size:16px;
-
-    backdrop-filter:blur(8px);
-
-    transition:.2s;
 }
 
 .control-btn:hover{
-    background:#ff1744;
-    border-color:#ff1744;
+    background:#e50914;
+    border-color:#e50914;
 }
 
-/* ================= AD BAR ================= */
+
+/* ================= AD ================= */
 
 .ad-bar{
     width:calc(100% - 20px);
     max-width:900px;
 
-    margin:10px auto;
-
     min-height:48px;
+
+    margin:10px auto;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    border-radius:12px;
+    background:#101012;
 
-    background:
-        linear-gradient(
-            90deg,
-            #100006,
-            #17070b,
-            #100006
-        );
+    border:1px solid #242426;
 
-    border:1px solid rgba(255,23,68,.18);
+    border-radius:10px;
 
     color:#777;
 
     font-size:13px;
 }
 
-/* ================= EPISODE HEADER ================= */
+
+/* ================= EPISODE TITLE ================= */
 
 .episode-head{
     width:calc(100% - 20px);
     max-width:900px;
 
-    margin:18px auto 10px;
+    margin:18px auto 12px;
 
     display:flex;
     align-items:center;
     justify-content:space-between;
 
-    padding:14px 16px;
+    padding:13px 15px;
 
-    border-radius:14px;
+    background:#101012;
 
-    background:
-        linear-gradient(
-            135deg,
-            #11070a,
-            #0b0b0e
-        );
+    border:1px solid #242426;
 
-    border:1px solid rgba(255,23,68,.18);
+    border-radius:11px;
 }
 
 .episode-title{
     font-size:18px;
-    font-weight:800;
+    font-weight:bold;
 }
 
 .episode-count{
+    color:#888;
     font-size:12px;
-    color:#999;
 }
+
 
 /* ================= EPISODES ================= */
 
@@ -258,78 +218,118 @@ body{
     width:calc(100% - 20px);
     max-width:900px;
 
-    margin:0 auto 30px;
+    margin:auto;
 
     display:grid;
 
     grid-template-columns:
         repeat(2,1fr);
 
-    gap:10px;
+    gap:12px;
+
+    padding-bottom:30px;
 }
+
+
+/* ================= EPISODE CARD ================= */
 
 .episode{
     position:relative;
 
-    padding:14px 15px;
+    overflow:hidden;
+
+    padding:0;
+
+    background:#111113;
+
+    border:1px solid #29292c;
 
     border-radius:13px;
 
-    border:1px solid rgba(255,255,255,.07);
-
-    background:
-        linear-gradient(
-            135deg,
-            #111114,
-            #0a0a0c
-        );
-
     color:#fff;
-
-    cursor:pointer;
 
     text-align:left;
 
-    transition:
-        transform .2s,
-        border-color .2s,
-        background .2s;
+    cursor:pointer;
 
-    overflow:hidden;
-}
+    transition:.2s;
 
-.episode::before{
-    content:"";
-
-    position:absolute;
-
-    left:0;
-    top:0;
-    bottom:0;
-
-    width:3px;
-
-    background:#ff1744;
-
-    opacity:.65;
+    appearance:none;
 }
 
 .episode:hover{
+    border-color:#555;
+
     transform:translateY(-2px);
 
-    border-color:
-        rgba(255,23,68,.5);
-
-    background:
-        linear-gradient(
-            135deg,
-            #1b0b10,
-            #0d0d10
-        );
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.35);
 }
 
-.episode:active{
-    transform:scale(.98);
+
+/* ================= EPISODE IMAGE ================= */
+
+.episode-image{
+    position:relative;
+
+    width:100%;
+
+    aspect-ratio:16/9;
+
+    overflow:hidden;
+
+    background:#1a1a1c;
+}
+
+.episode-image img{
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+    transition:.3s;
+}
+
+.episode:hover .episode-image img{
+    transform:scale(1.04);
+}
+
+
+/* ================= PLAY ICON ================= */
+
+.play-icon{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:46px;
+    height:46px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:rgba(0,0,0,.72);
+
+    border:1px solid rgba(255,255,255,.3);
+
+    font-size:18px;
+
+    opacity:.95;
+}
+
+
+/* ================= EPISODE INFO ================= */
+
+.episode-info{
+    padding:11px 12px 13px;
 }
 
 .episode-main{
@@ -337,9 +337,13 @@ body{
 
     font-size:14px;
 
-    font-weight:700;
+    font-weight:bold;
 
-    padding-left:4px;
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
 }
 
 .episode-sub{
@@ -347,37 +351,53 @@ body{
 
     margin-top:4px;
 
-    font-size:11px;
-
     color:#777;
 
-    padding-left:4px;
+    font-size:11px;
 }
 
-/* ================= ACTIVE EPISODE ================= */
+
+/* ================= ACTIVE ================= */
 
 .episode.active{
-    border-color:#ff1744;
+    border-color:#e50914;
 
     box-shadow:
-        0 0 15px rgba(255,23,68,.12);
+        0 0 15px rgba(229,9,20,.15);
 }
 
-.episode.active::before{
-    opacity:1;
+.episode.active::after{
+    content:"ကြည့်နေသည်";
+
+    position:absolute;
+
+    top:8px;
+    left:8px;
+
+    padding:4px 8px;
+
+    border-radius:5px;
+
+    background:#e50914;
+
+    color:#fff;
+
+    font-size:10px;
 }
+
 
 /* ================= FOOTER ================= */
 
 .footer{
     text-align:center;
 
-    padding:20px 10px 30px;
+    padding:15px 10px 30px;
 
     color:#555;
 
     font-size:11px;
 }
+
 
 /* ================= MOBILE ================= */
 
@@ -397,12 +417,12 @@ body{
     }
 
     .hero-image{
-        padding:8px 8px 3px;
+        padding:8px 8px 5px;
     }
 
     .hero-image img{
-        max-height:190px;
-        border-radius:14px;
+        height:190px;
+        border-radius:12px;
     }
 
     .player-section{
@@ -410,22 +430,12 @@ body{
     }
 
     .player-box{
-        border-radius:12px;
-    }
-
-    .ad-bar{
-        width:calc(100% - 16px);
-        min-height:44px;
-        font-size:11px;
+        border-radius:11px;
     }
 
     .episode-head{
         width:calc(100% - 16px);
-        padding:12px 13px;
-    }
-
-    .episode-title{
-        font-size:16px;
+        padding:11px 13px;
     }
 
     .episodes{
@@ -438,8 +448,11 @@ body{
     }
 
     .episode{
-        padding:12px 10px;
-        border-radius:11px;
+        border-radius:10px;
+    }
+
+    .episode-info{
+        padding:9px 9px 11px;
     }
 
     .episode-main{
@@ -447,21 +460,21 @@ body{
     }
 
     .episode-sub{
-        font-size:10px;
-    }
-}
-
-@media(max-width:360px){
-
-    .episodes{
-        grid-template-columns:1fr;
+        font-size:9px;
     }
 
+    .play-icon{
+        width:38px;
+        height:38px;
+
+        font-size:15px;
+    }
 }
 </style>
 </head>
 
 <body>
+
 
 <!-- ================= HEADER ================= -->
 
@@ -478,7 +491,7 @@ body{
 </header>
 
 
-<!-- ================= HERO IMAGE ================= -->
+<!-- ================= MAIN IMAGE ================= -->
 
 <div class="hero-image">
 
@@ -490,7 +503,7 @@ body{
 </div>
 
 
-<!-- ================= PLAYER ================= -->
+<!-- ================= VIDEO PLAYER ================= -->
 
 <section class="player-section">
 
@@ -502,25 +515,21 @@ body{
         <iframe
             id="videoFrame"
             src=""
-            allowfullscreen
             allow="autoplay; fullscreen; picture-in-picture"
-        ></iframe>
+            allowfullscreen>
+        </iframe>
 
         <div class="player-controls">
 
             <button
                 class="control-btn"
-                onclick="closeVideo()"
-                title="ပိတ်မည်"
-            >
+                onclick="closeVideo()">
                 ✕
             </button>
 
             <button
                 class="control-btn"
-                onclick="fullScreen()"
-                title="Full Screen"
-            >
+                onclick="fullScreen()">
                 ⛶
             </button>
 
@@ -538,7 +547,7 @@ body{
 </div>
 
 
-<!-- ================= EPISODE HEADER ================= -->
+<!-- ================= EPISODE TITLE ================= -->
 
 <div class="episode-head">
 
@@ -557,23 +566,42 @@ body{
 
 <div class="episodes">
 
+
     <!-- LIVE -->
 
     <button
         class="episode"
         onclick="playVideo(
+            this,
             'Mahar Tv Channel Live',
             'https://ygncdn.com/live/mahar/1080p/chunks.m3u8'
         )"
     >
 
-        <span class="episode-main">
-            📺 Mahar Tv Channel Live
-        </span>
+        <div class="episode-image">
 
-        <span class="episode-sub">
-            Live Channel
-        </span>
+            <img
+                src="https://i.imgur.com/Rz27e7Z.jpeg"
+                alt="Mahar Tv Channel Live"
+            >
+
+            <div class="play-icon">
+                ▶
+            </div>
+
+        </div>
+
+        <div class="episode-info">
+
+            <span class="episode-main">
+                Mahar Tv Channel Live
+            </span>
+
+            <span class="episode-sub">
+                Live Channel
+            </span>
+
+        </div>
 
     </button>
 
@@ -583,18 +611,36 @@ body{
     <button
         class="episode"
         onclick="playVideo(
+            this,
             'အပိုင်း ၂၈',
             'https://ok.ru/videoembed/16335686732523?nochat=1&autoplay=1'
         )"
     >
 
-        <span class="episode-main">
-            အပိုင်း ၂၈
-        </span>
+        <div class="episode-image">
 
-        <span class="episode-sub">
-            Episode 28
-        </span>
+            <img
+                src="https://i.imgur.com/Rz27e7Z.jpeg"
+                alt="အပိုင်း ၂၈"
+            >
+
+            <div class="play-icon">
+                ▶
+            </div>
+
+        </div>
+
+        <div class="episode-info">
+
+            <span class="episode-main">
+                အပိုင်း ၂၈
+            </span>
+
+            <span class="episode-sub">
+                Episode 28
+            </span>
+
+        </div>
 
     </button>
 
@@ -604,18 +650,36 @@ body{
     <button
         class="episode"
         onclick="playVideo(
+            this,
             'အပိုင်း ၂၇',
             'https://ok.ru/videoembed/16308769983211?nochat=1&autoplay=1'
         )"
     >
 
-        <span class="episode-main">
-            အပိုင်း ၂၇
-        </span>
+        <div class="episode-image">
 
-        <span class="episode-sub">
-            Episode 27
-        </span>
+            <img
+                src="https://i.imgur.com/Rz27e7Z.jpeg"
+                alt="အပိုင်း ၂၇"
+            >
+
+            <div class="play-icon">
+                ▶
+            </div>
+
+        </div>
+
+        <div class="episode-info">
+
+            <span class="episode-main">
+                အပိုင်း ၂၇
+            </span>
+
+            <span class="episode-sub">
+                Episode 27
+            </span>
+
+        </div>
 
     </button>
 
@@ -625,18 +689,36 @@ body{
     <button
         class="episode"
         onclick="playVideo(
+            this,
             'အပိုင်း ၂၆',
             'https://ok.ru/videoembed/16308769983211?nochat=1&autoplay=1'
         )"
     >
 
-        <span class="episode-main">
-            အပိုင်း ၂၆
-        </span>
+        <div class="episode-image">
 
-        <span class="episode-sub">
-            Episode 26
-        </span>
+            <img
+                src="https://i.imgur.com/Rz27e7Z.jpeg"
+                alt="အပိုင်း ၂၆"
+            >
+
+            <div class="play-icon">
+                ▶
+            </div>
+
+        </div>
+
+        <div class="episode-info">
+
+            <span class="episode-main">
+                အပိုင်း ၂၆
+            </span>
+
+            <span class="episode-sub">
+                Episode 26
+            </span>
+
+        </div>
 
     </button>
 
@@ -646,18 +728,36 @@ body{
     <button
         class="episode"
         onclick="playVideo(
+            this,
             'အပိုင်း ၂၅',
             'https://ok.ru/videoembed/16297245936363?nochat=1&autoplay=1'
         )"
     >
 
-        <span class="episode-main">
-            အပိုင်း ၂၅
-        </span>
+        <div class="episode-image">
 
-        <span class="episode-sub">
-            Episode 25
-        </span>
+            <img
+                src="https://i.imgur.com/Rz27e7Z.jpeg"
+                alt="အပိုင်း ၂၅"
+            >
+
+            <div class="play-icon">
+                ▶
+            </div>
+
+        </div>
+
+        <div class="episode-info">
+
+            <span class="episode-main">
+                အပိုင်း ၂၅
+            </span>
+
+            <span class="episode-sub">
+                Episode 25
+            </span>
+
+        </div>
 
     </button>
 
@@ -667,18 +767,36 @@ body{
     <button
         class="episode"
         onclick="playVideo(
+            this,
             'အပိုင်း ၂၄',
             'https://ok.ru/videoembed/16283322485483?nochat=1&autoplay=1'
         )"
     >
 
-        <span class="episode-main">
-            အပိုင်း ၂၄
-        </span>
+        <div class="episode-image">
 
-        <span class="episode-sub">
-            Episode 24
-        </span>
+            <img
+                src="https://i.imgur.com/Rz27e7Z.jpeg"
+                alt="အပိုင်း ၂၄"
+            >
+
+            <div class="play-icon">
+                ▶
+            </div>
+
+        </div>
+
+        <div class="episode-info">
+
+            <span class="episode-main">
+                အပိုင်း ၂၄
+            </span>
+
+            <span class="episode-sub">
+                Episode 24
+            </span>
+
+        </div>
 
     </button>
 
@@ -688,20 +806,39 @@ body{
     <button
         class="episode"
         onclick="playVideo(
+            this,
             'အပိုင်း ၂၃',
             'https://ok.ru/videoembed/16274289068779?nochat=1&autoplay=1'
         )"
     >
 
-        <span class="episode-main">
-            အပိုင်း ၂၃
-        </span>
+        <div class="episode-image">
 
-        <span class="episode-sub">
-            Episode 23
-        </span>
+            <img
+                src="https://i.imgur.com/Rz27e7Z.jpeg"
+                alt="အပိုင်း ၂၃"
+            >
+
+            <div class="play-icon">
+                ▶
+            </div>
+
+        </div>
+
+        <div class="episode-info">
+
+            <span class="episode-main">
+                အပိုင်း ၂၃
+            </span>
+
+            <span class="episode-sub">
+                Episode 23
+            </span>
+
+        </div>
 
     </button>
+
 
 </div>
 
@@ -717,7 +854,7 @@ body{
 
 /* ================= PLAY VIDEO ================= */
 
-function playVideo(title, link){
+function playVideo(button, title, link){
 
     const playerBox =
         document.getElementById("playerBox");
@@ -729,26 +866,35 @@ function playVideo(title, link){
 
     playerBox.style.display = "block";
 
-    // Player ဆီကို scroll
-    playerBox.scrollIntoView({
-        behavior:"smooth",
-        block:"center"
-    });
 
-    // Active episode
-    document.querySelectorAll(".episode")
-        .forEach(function(btn){
-            btn.classList.remove("active");
+    /* Active Episode */
+
+    document
+        .querySelectorAll(".episode")
+        .forEach(function(item){
+
+            item.classList.remove("active");
+
         });
 
-    // နှိပ်ထားတဲ့ button ကို active ပြ
-    if(event && event.currentTarget){
-        event.currentTarget.classList.add("active");
-    }
+    button.classList.add("active");
+
+
+    /* Scroll Player */
+
+    setTimeout(function(){
+
+        playerBox.scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
+
+    },100);
+
 }
 
 
-/* ================= CLOSE VIDEO ================= */
+/* ================= CLOSE ================= */
 
 function closeVideo(){
 
@@ -762,14 +908,19 @@ function closeVideo(){
 
     playerBox.style.display = "none";
 
-    document.querySelectorAll(".episode")
-        .forEach(function(btn){
-            btn.classList.remove("active");
+
+    document
+        .querySelectorAll(".episode")
+        .forEach(function(item){
+
+            item.classList.remove("active");
+
         });
+
 }
 
 
-/* ================= FULL SCREEN ================= */
+/* ================= FULLSCREEN ================= */
 
 function fullScreen(){
 
@@ -780,35 +931,19 @@ function fullScreen(){
 
         playerBox.requestFullscreen();
 
-    }else if(playerBox.webkitRequestFullscreen){
+    }
+    else if(playerBox.webkitRequestFullscreen){
 
         playerBox.webkitRequestFullscreen();
 
-    }else if(playerBox.msRequestFullscreen){
+    }
+    else if(playerBox.msRequestFullscreen){
 
         playerBox.msRequestFullscreen();
 
     }
+
 }
-
-
-/* ================= FULLSCREEN CHANGE ================= */
-
-document.addEventListener(
-    "fullscreenchange",
-    function(){
-
-        const playerBox =
-            document.getElementById("playerBox");
-
-        if(!document.fullscreenElement){
-
-            playerBox.style.width = "100%";
-            playerBox.style.height = "";
-        }
-
-    }
-);
 
 </script>
 
