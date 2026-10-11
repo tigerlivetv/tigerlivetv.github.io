@@ -8,6 +8,16 @@
 <title>MI SERIES OFFICIAL</title>
 
 <style>
+:root {
+  --bg: #100808;
+  --panel: #211111;
+  --red: #e00000;
+  --red-light: #ff4545;
+  --text: #ffffff;
+  --muted: #c0a5a5;
+  --border: #492323;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -15,68 +25,70 @@
 }
 
 body {
-  background: #100808;
-  color: #fff;
+  background: var(--bg);
+  color: var(--text);
   font-family: Arial, sans-serif;
-  padding-bottom: 30px;
+  line-height: 1.5;
+  padding-bottom: 25px;
 }
 
 header {
-  background: linear-gradient(135deg, #300707, #a60000, #260000);
-  padding: 20px 12px;
+  background: linear-gradient(135deg, #240000, #a60000, #310000);
+  border-bottom: 2px solid var(--red-light);
+  padding: 22px 12px;
   text-align: center;
-  border-bottom: 2px solid #ff3030;
 }
 
 .logo {
-  color: #fff;
   font-size: 27px;
   font-weight: 900;
   letter-spacing: 1px;
-  text-shadow: 0 0 12px #ff2020;
+  text-shadow: 0 0 14px #ff2525;
 }
 
 .tagline {
+  color: #f0caca;
   font-size: 12px;
-  color: #ffdede;
-  margin-top: 7px;
+  margin-top: 6px;
 }
 
 .container {
-  max-width: 850px;
+  width: 100%;
+  max-width: 900px;
   margin: auto;
   padding: 12px;
 }
 
 .section {
-  margin-top: 20px;
+  margin-top: 22px;
 }
 
 .section-heading {
   display: flex;
   align-items: center;
-  gap: 9px;
-  margin-bottom: 12px;
+  gap: 10px;
   padding: 12px;
-  background: #211010;
-  border-left: 4px solid #ff2424;
+  margin-bottom: 12px;
+  border-left: 4px solid var(--red-light);
+  background: linear-gradient(90deg, #321111, #1b0d0d);
   border-radius: 7px;
 }
 
 .section-heading h2 {
-  font-size: 17px;
   flex: 1;
+  font-size: 16px;
 }
 
-.section-count {
+.count {
   font-size: 11px;
   color: #ffbaba;
+  white-space: nowrap;
 }
 
-.live-box {
-  background: #1c1010;
+.player-panel {
   padding: 12px;
-  border: 1px solid #512020;
+  background: #1b0d0d;
+  border: 1px solid var(--border);
   border-radius: 10px;
 }
 
@@ -90,6 +102,7 @@ header {
 }
 
 .video-frame iframe {
+  display: block;
   width: 100%;
   height: 100%;
   border: 0;
@@ -97,25 +110,25 @@ header {
 }
 
 .player-title {
-  font-size: 15px;
+  color: #ffe0e0;
+  font-size: 14px;
   font-weight: bold;
-  margin: 12px 0;
-  color: #ffdddd;
   overflow-wrap: anywhere;
+  margin: 12px 0;
 }
 
-.player-buttons {
+.button-row {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
 .btn {
-  border: none;
-  border-radius: 6px;
-  background: #d40000;
-  color: #fff;
+  border: 0;
+  background: var(--red);
+  color: white;
   padding: 10px 13px;
+  border-radius: 6px;
   font-size: 13px;
   font-weight: bold;
   cursor: pointer;
@@ -124,6 +137,43 @@ header {
 .btn.secondary {
   background: #332020;
   border: 1px solid #704040;
+}
+
+.live-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px;
+  border-radius: 9px;
+  background: linear-gradient(100deg, #301010, #190c0c);
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.live-icon {
+  width: 45px;
+  height: 45px;
+  min-width: 45px;
+  display: grid;
+  place-items: center;
+  background: #bd0000;
+  border-radius: 8px;
+  font-weight: 900;
+}
+
+.live-info {
+  flex: 1;
+}
+
+.live-title {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.live-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
 }
 
 .episode-list {
@@ -135,29 +185,29 @@ header {
 .episode {
   display: flex;
   align-items: center;
-  gap: 12px;
-  background: linear-gradient(100deg, #241111, #170d0d);
-  border: 1px solid #402020;
-  border-radius: 9px;
+  gap: 10px;
   padding: 12px;
+  border: 1px solid var(--border);
+  background: linear-gradient(100deg, #261212, #170c0c);
+  border-radius: 9px;
   cursor: pointer;
-  transition: .2s;
+  min-width: 0;
 }
 
 .episode:active {
-  transform: scale(.985);
+  transform: scale(.99);
 }
 
 .episode-number {
   width: 42px;
   height: 42px;
   min-width: 42px;
-  border-radius: 8px;
   display: grid;
   place-items: center;
-  background: #a90000;
-  font-size: 17px;
+  background: #ad0000;
+  border-radius: 8px;
   font-weight: bold;
+  font-size: 17px;
 }
 
 .episode-info {
@@ -166,25 +216,25 @@ header {
 }
 
 .episode-title {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
-  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .episode-sub {
-  color: #bca6a6;
-  font-size: 12px;
+  color: var(--muted);
+  font-size: 11px;
   margin-top: 4px;
 }
 
 .watch {
-  background: #e00000;
-  color: white;
-  border: none;
-  padding: 9px 11px;
+  color: #fff;
+  background: #d90000;
+  border: 0;
   border-radius: 6px;
+  padding: 9px 10px;
+  font-size: 11px;
   font-weight: bold;
-  font-size: 12px;
   white-space: nowrap;
 }
 
@@ -193,14 +243,14 @@ header {
 }
 
 .notice {
-  background: #211313;
-  border: 1px solid #482424;
-  color: #d7baba;
+  margin-top: 12px;
   padding: 12px;
+  color: #d5bcbc;
+  background: #211313;
+  border: 1px solid var(--border);
+  border-radius: 8px;
   font-size: 12px;
   line-height: 1.8;
-  border-radius: 8px;
-  margin-top: 12px;
 }
 
 footer {
@@ -210,7 +260,7 @@ footer {
   font-size: 12px;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 620px) {
   .episode-list {
     grid-template-columns: 1fr 1fr;
   }
@@ -232,27 +282,27 @@ footer {
 <main class="container">
 
   <!-- ဗီဒီယိုဖွင့်စက် -->
-  <section class="section">
+  <section class="section" id="playerSection">
     <div class="section-heading">
-      <h2 id="playerHeading">ဇာတ်လမ်းရွေးချယ်ပါ</h2>
+      <h2 id="playerHeading">ဗီဒီယိုဖွင့်စက်</h2>
     </div>
 
-    <div class="live-box">
+    <div class="player-panel">
       <div class="video-frame" id="videoFrame">
         <iframe
           id="videoPlayer"
           src="about:blank"
+          title="ဗီဒီယိုဖွင့်စက်"
           allow="autoplay; fullscreen; picture-in-picture"
-          allowfullscreen
-          title="ဗီဒီယိုဖွင့်စက်">
+          allowfullscreen>
         </iframe>
       </div>
 
       <div class="player-title" id="playerTitle">
-        ကြည့်ရှုလိုသော အပိုင်းကို ရွေးချယ်ပါ
+        ကြည့်ရှုလိုသော ဇာတ်လမ်းအပိုင်းကို ရွေးချယ်ပါ
       </div>
 
-      <div class="player-buttons">
+      <div class="button-row">
         <button class="btn" onclick="openFullscreen()">
           မျက်နှာပြင်အပြည့်
         </button>
@@ -272,20 +322,22 @@ footer {
   <section class="section">
     <div class="section-heading">
       <h2>မဟာ ရုပ်သံတိုက်ရိုက်</h2>
-      <span class="section-count">တိုက်ရိုက်</span>
+      <span class="count">တိုက်ရိုက်</span>
     </div>
 
-    <div class="episode" onclick="playLive()">
-      <div class="episode-number">TV</div>
-      <div class="episode-info">
-        <div class="episode-title">မဟာ ရုပ်သံလိုင်း</div>
-        <div class="episode-sub">တိုက်ရိုက်ကြည့်ရှုရန် နှိပ်ပါ</div>
+    <div class="live-card" onclick="playLive()">
+      <div class="live-icon">TV</div>
+
+      <div class="live-info">
+        <div class="live-title">မဟာ ရုပ်သံလိုင်း</div>
+        <div class="live-sub">တိုက်ရိုက်ကြည့်ရှုရန် နှိပ်ပါ</div>
       </div>
+
       <button class="watch">ကြည့်မယ်</button>
     </div>
 
     <div class="notice">
-      တိုက်ရိုက်ထုတ်လွှင့်မှုလင့်ခ်သည် အင်တာနက်နှင့် ရုပ်သံဆာဗာအခြေအနေပေါ် မူတည်၍ ဖွင့်မရနိုင်ပါ။
+      ရုပ်သံတိုက်ရိုက်လင့်ခ်သည် ဆာဗာအခြေအနေပေါ် မူတည်၍ ဖွင့်မရနိုင်ပါ။
     </div>
   </section>
 
@@ -293,23 +345,23 @@ footer {
   <section class="section">
     <div class="section-heading">
       <h2>မုန်းမာန်ငြိုး</h2>
-      <span class="section-count">အပိုင်းများ</span>
+      <span class="count">အပိုင်း ၆ ပိုင်း</span>
     </div>
 
     <div class="episode-list" id="moonList"></div>
   </section>
 
-  <!-- တာတေ -->
+  <!-- တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ -->
   <section class="section">
     <div class="section-heading">
       <h2>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ</h2>
-      <span class="section-count">အပိုင်း ၂၀</span>
+      <span class="count">အပိုင်း ၂၀</span>
     </div>
 
     <div class="episode-list" id="tateList"></div>
 
     <div class="notice">
-      မှတ်ချက်။ တာတေ အပိုင်း (၁) ၏ လင့်ခ်ကို ထည့်သွင်းထားပါသည်။ အပိုင်း (၂) မှ (၂၀) အထိ ကြည့်ရှုနိုင်ရန် သက်ဆိုင်ရာ ဗီဒီယိုလင့်ခ်များကို ထပ်ထည့်ပေးရပါမည်။
+      တာတေအပိုင်း (၁) အတွက် ဗီဒီယိုလင့်ခ် ထည့်ထားပြီးပါပြီ။ အပိုင်း (၂) မှ (၂၀) အထိ အမှန်တကယ်ရှိသော ဗီဒီယိုလင့်ခ်များ ထည့်သွင်းရန် လိုအပ်ပါသည်။
     </div>
   </section>
 
@@ -322,6 +374,7 @@ footer {
 </footer>
 
 <script>
+/* မုန်းမာန်ငြိုး ဗီဒီယိုလင့်ခ်များ */
 const moonEpisodes = [
   {
     ep: 28,
@@ -349,33 +402,49 @@ const moonEpisodes = [
   }
 ];
 
+/* တာတေ အပိုင်း ၂၀
+   အပိုင်း ၁ လင့်ခ်သာ ရရှိထားသည်။
+   ကျန်အပိုင်းများ၏ url နေရာတွင် လင့်ခ်ထည့်ပါ။ */
 const tateEpisodes = [
-  {
-    ep: 1,
-    url: "https://ok.ru/videoembed/16360441252587?nochat=1"
-  },
-  ...Array.from({ length: 19 }, (_, index) => ({
-    ep: index + 2,
-    url: ""
-  }))
+  { ep: 1, url: "https://ok.ru/videoembed/16360441252587?nochat=1" },
+  { ep: 2, url: "" },
+  { ep: 3, url: "" },
+  { ep: 4, url: "" },
+  { ep: 5, url: "" },
+  { ep: 6, url: "" },
+  { ep: 7, url: "" },
+  { ep: 8, url: "" },
+  { ep: 9, url: "" },
+  { ep: 10, url: "" },
+  { ep: 11, url: "" },
+  { ep: 12, url: "" },
+  { ep: 13, url: "" },
+  { ep: 14, url: "" },
+  { ep: 15, url: "" },
+  { ep: 16, url: "" },
+  { ep: 17, url: "" },
+  { ep: 18, url: "" },
+  { ep: 19, url: "" },
+  { ep: 20, url: "" }
 ];
 
-function toMyanmarNumber(number) {
-  return String(number).replace(/[0-9]/g, digit =>
-    "၀၁၂၃၄၅၆၇၈၉"[Number(digit)]
-  );
+function myNumber(number) {
+  return String(number).replace(/[0-9]/g, function(digit) {
+    return "၀၁၂၃၄၅၆၇၈၉"[Number(digit)];
+  });
 }
 
+/* အပိုင်းစာရင်းများ ဖန်တီးခြင်း */
 function renderEpisodes(listId, episodes, seriesName) {
   const list = document.getElementById(listId);
 
-  episodes.forEach(item => {
+  episodes.forEach(function(item) {
     const card = document.createElement("div");
     card.className = "episode";
 
     const number = document.createElement("div");
     number.className = "episode-number";
-    number.textContent = toMyanmarNumber(item.ep);
+    number.textContent = myNumber(item.ep);
 
     const info = document.createElement("div");
     info.className = "episode-info";
@@ -386,8 +455,7 @@ function renderEpisodes(listId, episodes, seriesName) {
 
     const subtitle = document.createElement("div");
     subtitle.className = "episode-sub";
-    subtitle.textContent =
-      "အပိုင်း (" + toMyanmarNumber(item.ep) + ")";
+    subtitle.textContent = "အပိုင်း (" + myNumber(item.ep) + ")";
 
     const button = document.createElement("button");
     button.className = "watch";
@@ -395,21 +463,23 @@ function renderEpisodes(listId, episodes, seriesName) {
 
     info.appendChild(title);
     info.appendChild(subtitle);
+
     card.appendChild(number);
     card.appendChild(info);
     card.appendChild(button);
 
     if (item.url) {
-      card.onclick = () => playVideo(
-        seriesName + " အပိုင်း (" + toMyanmarNumber(item.ep) + ")",
-        item.url
-      );
+      card.onclick = function() {
+        playVideo(
+          seriesName + " အပိုင်း (" + myNumber(item.ep) + ")",
+          item.url
+        );
+      };
     } else {
       card.classList.add("disabled");
-      card.onclick = () => {
+      card.onclick = function() {
         alert(
-          seriesName + " အပိုင်း (" +
-          toMyanmarNumber(item.ep) +
+          seriesName + " အပိုင်း (" + myNumber(item.ep) +
           ") အတွက် ဗီဒီယိုလင့်ခ် မထည့်ရသေးပါ။"
         );
       };
@@ -419,20 +489,23 @@ function renderEpisodes(listId, episodes, seriesName) {
   });
 }
 
+/* ဗီဒီယိုဖွင့်ခြင်း */
 function playVideo(title, url) {
   document.getElementById("videoPlayer").src = url;
   document.getElementById("playerTitle").textContent = title;
   document.getElementById("playerHeading").textContent = "ယခုကြည့်ရှုနေသည်";
 
-  document.getElementById("videoFrame").scrollIntoView({
+  document.getElementById("playerSection").scrollIntoView({
     behavior: "smooth",
     block: "start"
   });
 }
 
+/* မဟာတိုက်ရိုက်
+   မှတ်ချက် - m3u8 လင့်ခ်ကို iframe က မဖွင့်နိုင်သော
+   ဘရောက်ဇာများတွင် HLS ဖွင့်စက် လိုအပ်နိုင်သည်။ */
 function playLive() {
-  const liveUrl =
-    "https://ygncdn.com/live/mahar/1080p/chunks.m3u8";
+  const liveUrl = "https://ygncdn.com/live/mahar/1080p/chunks.m3u8";
 
   document.getElementById("playerTitle").textContent =
     "မဟာ ရုပ်သံတိုက်ရိုက်";
@@ -442,20 +515,24 @@ function playLive() {
 
   document.getElementById("videoPlayer").src = liveUrl;
 
-  document.getElementById("videoFrame").scrollIntoView({
+  document.getElementById("playerSection").scrollIntoView({
     behavior: "smooth",
     block: "start"
   });
 }
 
+/* ဗီဒီယိုပိတ်ခြင်း */
 function closeVideo() {
   document.getElementById("videoPlayer").src = "about:blank";
+
   document.getElementById("playerTitle").textContent =
     "ဗီဒီယိုပိတ်ထားသည်";
+
   document.getElementById("playerHeading").textContent =
-    "ဇာတ်လမ်းရွေးချယ်ပါ";
+    "ဗီဒီယိုဖွင့်စက်";
 }
 
+/* မျက်နှာပြင်အပြည့် */
 function openFullscreen() {
   const frame = document.getElementById("videoFrame");
 
@@ -464,16 +541,13 @@ function openFullscreen() {
   } else if (frame.webkitRequestFullscreen) {
     frame.webkitRequestFullscreen();
   } else {
-    alert("သင့်ဖုန်းဘရောက်ဇာတွင် မျက်နှာပြင်အပြည့်လုပ်ဆောင်ချက် မရနိုင်ပါ။");
+    alert("ဒီဘရောက်ဇာမှာ မျက်နှာပြင်အပြည့်လုပ်ဆောင်ချက် မရနိုင်ပါ။");
   }
 }
 
+/* စာရင်းနှစ်ခုစလုံး ပြသခြင်း */
 renderEpisodes("moonList", moonEpisodes, "မုန်းမာန်ငြိုး");
-renderEpisodes(
-  "tateList",
-  tateEpisodes,
-  "တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ"
-);
+renderEpisodes("tateList", tateEpisodes, "တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ");
 </script>
 
 </body>
