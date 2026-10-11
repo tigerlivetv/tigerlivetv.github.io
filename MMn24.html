@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="theme-color" content="#08080c">
-<title>မုန်းမာန်ငြိုး | Myanmar TV</title>
+<title>Myanmar TV | မုန်းမာန်ငြိုး နှင့် တာတေ</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
@@ -65,7 +65,16 @@ body.fullscreen .player{display:block!important;position:fixed;inset:0;z-index:9
 body.fullscreen .player-box{width:100%;height:100%;border:0;border-radius:0;box-shadow:none}
 body.fullscreen .video{width:100%;height:100%;aspect-ratio:auto}
 body.fullscreen .player-title,body.fullscreen .player-controls,body.fullscreen .ad-bar{display:none}
-@media(max-width:360px){.header{padding:0 10px}.brand{font-size:14px}.live-card{gap:8px;padding:10px}.live-watch{padding:9px 8px}.episode{gap:8px;padding:10px}.episode-number{width:39px;height:39px}.episode-title{font-size:11px}.watch{padding:9px 8px;font-size:9px}}
+@media(max-width:360px){
+.header{padding:0 10px}
+.brand{font-size:14px}
+.live-card{gap:8px;padding:10px}
+.live-watch{padding:9px 8px}
+.episode{gap:8px;padding:10px}
+.episode-number{width:39px;height:39px}
+.episode-title{font-size:11px}
+.watch{padding:9px 8px;font-size:9px}
+}
 </style>
 </head>
 <body>
@@ -78,8 +87,8 @@ body.fullscreen .player-title,body.fullscreen .player-controls,body.fullscreen .
 
 <section class="hero">
   <span class="hero-tag">MYANMAR DRAMA SERIES</span>
-  <h1>မုန်းမာန်ငြိုး</h1>
-  <p>ဇာတ်လမ်းတွဲ အပိုင်းများကို တစ်နေရာတည်းမှာ ရွေးချယ်ကြည့်ရှုလိုက်ပါ။</p>
+  <h1>မြန်မာဇာတ်လမ်းတွဲများ</h1>
+  <p>မုန်းမာန်ငြိုးနှင့် တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများကို တစ်နေရာတည်းမှာ ရွေးချယ်ကြည့်ရှုလိုက်ပါ။</p>
   <div class="hero-line"></div>
 </section>
 
@@ -91,7 +100,7 @@ body.fullscreen .player-title,body.fullscreen .player-controls,body.fullscreen .
       <div id="nowTitle">ဗီဒီယိုကို ရွေးချယ်ပါ</div>
     </div>
   </div>
-  <div class="ad-bar">မုန်းမာန်ငြိုး ဇာတ်လမ်းတွဲနှင့် Mahar TV Channel</div>
+  <div class="ad-bar">မုန်းမာန်ငြိုး၊ တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများနှင့် Mahar TV Channel</div>
   <div class="player-controls">
     <button class="btn btn-dark" onclick="closeVideo()">✕ ပိတ်မယ်</button>
     <button class="btn btn-red" onclick="fullScreen()">⛶ Full Video</button>
@@ -116,10 +125,11 @@ body.fullscreen .player-title,body.fullscreen .player-controls,body.fullscreen .
   <button class="live-watch" onclick="playVideo('Mahar TV Channel Live','https://ygncdn.com/live/mahar/1080p/chunks.m3u8')">▶ ကြည့်မယ်</button>
 </div>
 
+<!-- မုန်းမာန်ငြိုး -->
 <section class="section">
   <div class="section-heading">
     <div class="section-mark"></div>
-    <h2>ဇာတ်လမ်းတွဲ အပိုင်းများ</h2>
+    <h2>မုန်းမာန်ငြိုး ဇာတ်လမ်းတွဲ</h2>
     <span class="section-count">၆ ပိုင်း</span>
   </div>
 </section>
@@ -145,25 +155,101 @@ body.fullscreen .player-title,body.fullscreen .player-controls,body.fullscreen .
   </div>
 </div>
 
+<!-- တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ -->
+<section class="section">
+  <div class="section-heading">
+    <div class="section-mark"></div>
+    <h2>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ</h2>
+    <span class="section-count">၆ ပိုင်း</span>
+  </div>
+</section>
+
+<div class="episode-list">
+
+  <div class="episode" onclick="playVideo('တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း (၆)','https://ok.ru/videoembed/16360441252587?nochat=1')">
+    <div class="episode-number">၆</div>
+    <div class="episode-info">
+      <div class="episode-title">တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း (၆)</div>
+      <div class="episode-sub">▶ အပိုင်းမထွက်သေးပါ</div>
+    </div>
+    <button class="watch">▶ ကြည့်မယ်</button>
+  </div>
+
+  <div class="episode" onclick="playVideo('တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း (၅)','https://ok.ru/videoembed/16362485844715?nochat=1)">
+    <div class="episode-number">၅</div>
+    <div class="episode-info">
+      <div class="episode-title">တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း (၅)</div>
+      <div class="episode-sub">▶ အစအဆုံး ကြည့်ရှုရန်</div>
+    </div>
+    <button class="watch">▶ ကြည့်မယ်</button>
+  </div>
+
+ <div class="episode" onclick="playVideo('တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း (၄)','https://ok.ru/videoembed/16362301491947?nochat=1)">
+    <div class="episode-number">၄</div>
+    <div class="episode-info">
+      <div class="episode-title">တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း (၄)</div>
+      <div class="episode-sub">▶ အစအဆုံး ကြည့်ရှုရန်</div>
+    </div>
+    <button class="watch">▶ ကြည့်မယ်</button>
+  </div>
+
+  <div class="episode" onclick="playVideo('တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း (၃)','https://ok.ru/videoembed/16362173237995?nochat=1)">
+    <div class="episode-number">၃</div>
+    <div class="episode-info">
+      <div class="episode-title">တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း (၃)</div>
+      <div class="episode-sub">▶ အစအဆုံး ကြည့်ရှုရန်</div>
+    </div>
+    <button class="watch">▶ ကြည့်မယ်</button>
+  </div>
+
+<div class="episode" onclick="playVideo('တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း (၂)','https://ok.ru/videoembed/16362025585387?nochat=1)">
+    <div class="episode-number">၂</div>
+    <div class="episode-info">
+      <div class="episode-title">တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း (၂)</div>
+      <div class="episode-sub">▶ အစအဆုံး ကြည့်ရှုရန်</div>
+    </div>
+    <button class="watch">▶ ကြည့်မယ်</button>
+  </div>
+
+<div class="episode" onclick="playVideo('တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း (၁)','https://ok.ru/videoembed/16360441252587?nochat=1')">
+    <div class="episode-number">၁</div>
+    <div class="episode-info">
+      <div class="episode-title">တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း (၁)</div>
+      <div class="episode-sub">▶ အစအဆုံး ကြည့်ရှုရန်</div>
+    </div>
+    <button class="watch">▶ ကြည့်မယ်</button>
+  </div>
+
+</div>
+
 <footer class="footer">
   <div class="footer-brand">MYANMAR TV</div>
-  <p>မုန်းမာန်ငြိုး ဇာတ်လမ်းတွဲ<br>ဗီဒီယိုဖွင့်ရန် အပိုင်းတစ်ခုကို ရွေးချယ်ပါ။</p>
+  <p>မြန်မာဇာတ်လမ်းတွဲများ<br>ဗီဒီယိုဖွင့်ရန် အပိုင်းတစ်ခုကို ရွေးချယ်ပါ။</p>
 </footer>
 
 <script>
 function playVideo(title, link) {
   const player = document.getElementById('player');
   const frame = document.getElementById('videoFrame');
+
   document.getElementById('nowTitle').textContent = title;
   frame.src = link.trim();
   player.classList.add('show');
-  setTimeout(() => player.scrollIntoView({behavior:'smooth', block:'start'}), 80);
+
+  setTimeout(() => {
+    player.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 80);
+}
+
+function playTateEpisode(number) {
+  alert('တာတေ အပိုင်း (' + number + ') အတွက် ဗီဒီယိုလင့်ခ် ထည့်ရန် လိုအပ်ပါသေးတယ်။');
 }
 
 function closeVideo() {
   document.getElementById('videoFrame').src = 'about:blank';
   document.getElementById('player').classList.remove('show');
   document.body.classList.remove('fullscreen');
+
   if (document.fullscreenElement && document.exitFullscreen) {
     document.exitFullscreen().catch(() => {});
   }
@@ -171,10 +257,12 @@ function closeVideo() {
 
 async function fullScreen() {
   const player = document.getElementById('player');
+
   try {
     if (!document.fullscreenElement) {
       await player.requestFullscreen();
       document.body.classList.add('fullscreen');
+
       if (screen.orientation && screen.orientation.lock) {
         await screen.orientation.lock('landscape').catch(() => {});
       }
@@ -193,5 +281,6 @@ document.addEventListener('fullscreenchange', () => {
   }
 });
 </script>
+
 </body>
 </html>
