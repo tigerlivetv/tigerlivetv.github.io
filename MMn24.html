@@ -272,6 +272,22 @@ body {
   border: 1px solid rgba(255,38,61,.18);
 }
 
+.episode-number-box {
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ff334b, #a9001a);
+  color: #fff;
+  border: 1px solid rgba(255,38,61,.35);
+  box-shadow: 0 0 15px rgba(255,38,61,.15);
+  font-size: 20px;
+  font-weight: 800;
+}
+
 .live-info {
   min-width: 0;
   flex: 1;
@@ -375,6 +391,12 @@ body.fullscreen .video {
   .live-info h3 {
     font-size: 11px;
   }
+
+  .episode-number-box {
+    width: 39px;
+    height: 39px;
+    font-size: 18px;
+  }
 }
 </style>
 </head>
@@ -383,12 +405,10 @@ body.fullscreen .video {
 
 <header class="header">
   <div class="logo">▶</div>
-
   <div class="brand">
     <h1>MYANMAR TV</h1>
     <p>DRAMA • SERIES • LIVE</p>
   </div>
-
   <div class="header-badge">● TV CHANNEL</div>
 </header>
 
@@ -405,7 +425,6 @@ body.fullscreen .video {
 
   <!-- VIDEO PLAYER -->
   <section class="player" id="player">
-
     <div class="player-top">
       <div>
         <div class="now-playing">NOW PLAYING</div>
@@ -413,13 +432,8 @@ body.fullscreen .video {
       </div>
 
       <div class="player-actions">
-        <button class="control-btn" onclick="fullScreen()">
-          ⛶ Full
-        </button>
-
-        <button class="control-btn" onclick="closeVideo()">
-          ✕ ပိတ်မယ်
-        </button>
+        <button class="control-btn" onclick="fullScreen()">⛶ Full</button>
+        <button class="control-btn" onclick="closeVideo()">✕ ပိတ်မယ်</button>
       </div>
     </div>
 
@@ -439,16 +453,13 @@ body.fullscreen .video {
     </div>
 
     <div class="player-help" id="playerHelp">
-      ဗီဒီယိုဖွင့်မရပါက အောက်ပါလင့်ခ်မှ တိုက်ရိုက်ကြည့်ရှုနိုင်ပါသည်။
+      ဗီဒီယိုဖွင့်မရပါက မူရင်းဗီဒီယိုလင့်ခ်ကို ဖွင့်ကြည့်ပါ။
       <br>
-      <span class="open-original" onclick="openOriginal()">
-        မူရင်းဗီဒီယိုကို ဖွင့်ရန်
-      </span>
+      <span class="open-original" onclick="openOriginal()">မူရင်းဗီဒီယိုကို ဖွင့်ရန်</span>
     </div>
-
   </section>
 
-  <!-- LIVE TV -->
+  <!-- MAHAR TV -->
   <div class="section-title">
     <div>
       <h2>တိုက်ရိုက်ရုပ်သံ</h2>
@@ -457,44 +468,25 @@ body.fullscreen .video {
     <div class="section-tag">LIVE TV</div>
   </div>
 
-  <!-- MAHAR TV -->
   <div class="live-card">
     <div class="live-icon">▶</div>
-
     <div class="live-info">
       <div class="live-badge">● LIVE</div>
       <h3>Mahar TV Channel Live</h3>
       <p>တိုက်ရိုက်ရုပ်သံ ကြည့်ရှုရန်</p>
     </div>
-
-    <button
-      class="live-watch"
-      onclick="playVideo(
-        'Mahar TV Channel Live',
-        'https://ygncdn.com/live/mahar/1080p/chunks.m3u8'
-      )">
-      ▶ ကြည့်မယ်
-    </button>
+    <button class="live-watch" onclick="playVideo('Mahar TV Channel Live','https://ygncdn.com/live/mahar/1080p/chunks.m3u8')">▶ ကြည့်မယ်</button>
   </div>
 
   <!-- THAR CHAW MOVIE -->
   <div class="live-card">
     <div class="live-icon">▶</div>
-
     <div class="live-info">
       <div class="live-badge">● MOVIE</div>
       <h3>သားချော မြန်မာ့ရုပ်ရှင်ဇာတ်ကားကြီး</h3>
       <p>ရုပ်ရှင်ဇာတ်ကားကြီး ကြည့်ရှုရန်</p>
     </div>
-
-    <button
-      class="live-watch"
-      onclick="playVideo(
-        'သားချော မြန်မာ့ရုပ်ရှင်ဇာတ်ကားကြီး',
-        'https://ok.ru/videoembed/16389445847787?nochat=1&autoplay=1'
-      )">
-      ▶ ကြည့်မယ်
-    </button>
+    <button class="live-watch" onclick="playVideo('သားချော မြန်မာ့ရုပ်ရှင်ဇာတ်ကားကြီး','https://ok.ru/videoembed/16389445847787?nochat=1&autoplay=1')">▶ ကြည့်မယ်</button>
   </div>
 
   <!-- CHAN MYAY SAY KYAUNG -->
@@ -503,98 +495,83 @@ body.fullscreen .video {
       <h2>ချမ်းမြေ့စေကြောင်း</h2>
       <p>မြန်မာဇာတ်လမ်းတွဲ</p>
     </div>
-    <div class="section-tag">1 EPISODE</div>
+    <div class="section-tag">အပိုင်း ၁</div>
   </div>
 
   <div class="live-card">
-    <div class="live-icon">▶</div>
-
+    <div class="episode-number-box">၁</div>
     <div class="live-info">
-      <div class="live-badge">● EPISODE 1</div>
-      <h3>ချမ်းမြေ့စေကြောင်း မြန်မာဇာတ်လမ်းတွဲ အပိုင်း ၁</h3>
+      <div class="live-badge">● အပိုင်း ၁</div>
+      <h3>ချမ်းမြေ့စေကြောင်း မြန်မာဇာတ်လမ်းတွဲ</h3>
       <p>အပိုင်း ၁ အစအဆုံး ကြည့်ရှုရန်</p>
     </div>
-
-    <button
-      class="live-watch"
-      onclick="playVideo(
-        'ချမ်းမြေ့စေကြောင်း မြန်မာဇာတ်လမ်းတွဲ အပိုင်း ၁ အစအဆုံး',
-        'https://ok.ru/videoembed/16398995098347?nochat=1&autoplay=1'
-      )">
-      ▶ ကြည့်မယ်
-    </button>
+    <button class="live-watch" onclick="playVideo('ချမ်းမြေ့စေကြောင်း မြန်မာဇာတ်လမ်းတွဲ အပိုင်း ၁ အစအဆုံး','https://ok.ru/videoembed/16398995098347?nochat=1&autoplay=1')">▶ ကြည့်မယ်</button>
   </div>
 
-  <!-- TATE GAMBIRA SERIES -->
+  <!-- TATE SERIES -->
   <div class="section-title">
     <div>
       <h2>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ</h2>
       <p>မြန်မာဇာတ်လမ်းတွဲ အပိုင်းများ</p>
     </div>
-    <div class="section-tag">6 EPISODES</div>
+    <div class="section-tag">အပိုင်း ၆ ပိုင်း</div>
   </div>
 
-  <!-- EPISODE 6 -->
   <div class="live-card">
-    <div class="live-icon">▶</div>
+    <div class="episode-number-box">၆</div>
     <div class="live-info">
-      <div class="live-badge">● EPISODE 6</div>
-      <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၆</h3>
+      <div class="live-badge">● အပိုင်း ၆</div>
+      <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ</h3>
       <p>အပိုင်း ၆ ကြည့်ရှုရန်</p>
     </div>
     <button class="live-watch" onclick="playVideo('တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၆','https://ok.ru/videoembed/16375042673387?nochat=1&autoplay=1')">▶ ကြည့်မယ်</button>
   </div>
 
-  <!-- EPISODE 5 -->
   <div class="live-card">
-    <div class="live-icon">▶</div>
+    <div class="episode-number-box">၅</div>
     <div class="live-info">
-      <div class="live-badge">● EPISODE 5</div>
-      <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၅</h3>
+      <div class="live-badge">● အပိုင်း ၅</div>
+      <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ</h3>
       <p>အပိုင်း ၅ ကြည့်ရှုရန်</p>
     </div>
     <button class="live-watch" onclick="playVideo('တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၅','https://ok.ru/videoembed/16362485844715?nochat=1&autoplay=1')">▶ ကြည့်မယ်</button>
   </div>
 
-  <!-- EPISODE 4 -->
   <div class="live-card">
-    <div class="live-icon">▶</div>
+    <div class="episode-number-box">၄</div>
     <div class="live-info">
-      <div class="live-badge">● EPISODE 4</div>
-      <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၄</h3>
+      <div class="live-badge">● အပိုင်း ၄</div>
+      <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ</h3>
       <p>အပိုင်း ၄ ကြည့်ရှုရန်</p>
     </div>
     <button class="live-watch" onclick="playVideo('တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၄','https://ok.ru/videoembed/16362301491947?nochat=1&autoplay=1')">▶ ကြည့်မယ်</button>
   </div>
 
-  <!-- EPISODE 3 -->
   <div class="live-card">
-    <div class="live-icon">▶</div>
+    <div class="episode-number-box">၃</div>
     <div class="live-info">
-      <div class="live-badge">● EPISODE 3</div>
-      <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၃</h3>
+      <div class="live-badge">● အပိုင်း ၃</div>
+      <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ</h3>
       <p>အပိုင်း ၃ ကြည့်ရှုရန်</p>
     </div>
     <button class="live-watch" onclick="playVideo('တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၃','https://ok.ru/videoembed/16362173237995?nochat=1&autoplay=1')">▶ ကြည့်မယ်</button>
   </div>
 
-  <!-- EPISODE 2 -->
   <div class="live-card">
-    <div class="live-icon">▶</div>
+    <div class="episode-number-box">၂</div>
     <div class="live-info">
-      <div class="live-badge">● EPISODE 2</div>
-      <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၂</h3>
+      <div class="live-badge">● အပိုင်း ၂</div>
+      <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ</h3>
       <p>အပိုင်း ၂ ကြည့်ရှုရန်</p>
     </div>
     <button class="live-watch" onclick="playVideo('တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၂','https://ok.ru/videoembed/16362025585387?nochat=1&autoplay=1')">▶ ကြည့်မယ်</button>
   </div>
 
-  <!-- EPISODE 1 -->
   <div class="live-card">
-    <div class="live-icon">▶</div>
+    <div class="episode-number-box">၁</div>
     <div class="live-info">
-      <div class="live-badge">● EPISODE 1</div>
-      <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၁</h3>
+      <div class="live-badge">● အပိုင်း ၁</div>
+      <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ</h3>
       <p>အပိုင်း ၁ ကြည့်ရှုရန်</p>
     </div>
     <button class="live-watch" onclick="playVideo('တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၁','https://ok.ru/videoembed/16360441252587?nochat=1&autoplay=1')">▶ ကြည့်မယ်</button>
@@ -615,7 +592,6 @@ function playVideo(title, link) {
   const frame = document.getElementById('videoFrame');
 
   currentVideoUrl = link;
-
   document.getElementById('nowTitle').textContent = title;
   document.getElementById('playerHelp').classList.remove('show');
 
