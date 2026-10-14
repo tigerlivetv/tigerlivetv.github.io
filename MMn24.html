@@ -316,61 +316,6 @@ body {
   transform: scale(.97);
 }
 
-.episode-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.episode-card {
-  position: relative;
-  padding: 14px 12px;
-  min-height: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 10px;
-  background: linear-gradient(145deg, #191921, #111117);
-  border: 1px solid var(--border);
-  border-radius: 11px;
-}
-
-.episode-number {
-  font: 800 10px Arial, sans-serif;
-  color: var(--red);
-  letter-spacing: 1px;
-}
-
-.episode-card h3 {
-  font-size: 12px;
-  line-height: 1.8;
-  font-weight: 700;
-}
-
-.episode-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 5px;
-}
-
-.episode-bottom span {
-  color: var(--muted);
-  font-size: 9px;
-}
-
-.episode-play {
-  border: 0;
-  border-radius: 6px;
-  padding: 7px 10px;
-  background: rgba(255,38,61,.13);
-  color: #ff5265;
-  font-family: inherit;
-  font-size: 10px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
 .footer {
   text-align: center;
   padding: 24px 15px;
@@ -589,80 +534,70 @@ body.fullscreen .video {
     <div class="section-tag">6 EPISODES</div>
   </div>
 
-  <div class="episode-grid">
-
-    <div class="episode-card">
-      <div class="episode-number">EPISODE 06</div>
+  <!-- EPISODE 6 -->
+  <div class="live-card">
+    <div class="live-icon">▶</div>
+    <div class="live-info">
+      <div class="live-badge">● EPISODE 6</div>
       <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၆</h3>
-      <div class="episode-bottom">
-        <span>အပိုင်း ၆</span>
-        <button class="episode-play" onclick="playVideo(
-          'တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၆',
-          'https://ok.ru/videoembed/16375042673387?nochat=1&autoplay=1'
-        )">▶ ကြည့်မယ်</button>
-      </div>
+      <p>အပိုင်း ၆ ကြည့်ရှုရန်</p>
     </div>
+    <button class="live-watch" onclick="playVideo('တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၆','https://ok.ru/videoembed/16375042673387?nochat=1&autoplay=1')">▶ ကြည့်မယ်</button>
+  </div>
 
-    <div class="episode-card">
-      <div class="episode-number">EPISODE 05</div>
+  <!-- EPISODE 5 -->
+  <div class="live-card">
+    <div class="live-icon">▶</div>
+    <div class="live-info">
+      <div class="live-badge">● EPISODE 5</div>
       <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၅</h3>
-      <div class="episode-bottom">
-        <span>အပိုင်း ၅</span>
-        <button class="episode-play" onclick="playVideo(
-          'တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၅',
-          'https://ok.ru/videoembed/16362485844715?nochat=1&autoplay=1'
-        )">▶ ကြည့်မယ်</button>
-      </div>
+      <p>အပိုင်း ၅ ကြည့်ရှုရန်</p>
     </div>
+    <button class="live-watch" onclick="playVideo('တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၅','https://ok.ru/videoembed/16362485844715?nochat=1&autoplay=1')">▶ ကြည့်မယ်</button>
+  </div>
 
-    <div class="episode-card">
-      <div class="episode-number">EPISODE 04</div>
+  <!-- EPISODE 4 -->
+  <div class="live-card">
+    <div class="live-icon">▶</div>
+    <div class="live-info">
+      <div class="live-badge">● EPISODE 4</div>
       <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၄</h3>
-      <div class="episode-bottom">
-        <span>အပိုင်း ၄</span>
-        <button class="episode-play" onclick="playVideo(
-          'တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၄',
-          'https://ok.ru/videoembed/16362301491947?nochat=1&autoplay=1'
-        )">▶ ကြည့်မယ်</button>
-      </div>
+      <p>အပိုင်း ၄ ကြည့်ရှုရန်</p>
     </div>
+    <button class="live-watch" onclick="playVideo('တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၄','https://ok.ru/videoembed/16362301491947?nochat=1&autoplay=1')">▶ ကြည့်မယ်</button>
+  </div>
 
-    <div class="episode-card">
-      <div class="episode-number">EPISODE 03</div>
+  <!-- EPISODE 3 -->
+  <div class="live-card">
+    <div class="live-icon">▶</div>
+    <div class="live-info">
+      <div class="live-badge">● EPISODE 3</div>
       <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၃</h3>
-      <div class="episode-bottom">
-        <span>အပိုင်း ၃</span>
-        <button class="episode-play" onclick="playVideo(
-          'တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၃',
-          'https://ok.ru/videoembed/16362173237995?nochat=1&autoplay=1'
-        )">▶ ကြည့်မယ်</button>
-      </div>
+      <p>အပိုင်း ၃ ကြည့်ရှုရန်</p>
     </div>
+    <button class="live-watch" onclick="playVideo('တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၃','https://ok.ru/videoembed/16362173237995?nochat=1&autoplay=1')">▶ ကြည့်မယ်</button>
+  </div>
 
-    <div class="episode-card">
-      <div class="episode-number">EPISODE 02</div>
+  <!-- EPISODE 2 -->
+  <div class="live-card">
+    <div class="live-icon">▶</div>
+    <div class="live-info">
+      <div class="live-badge">● EPISODE 2</div>
       <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၂</h3>
-      <div class="episode-bottom">
-        <span>အပိုင်း ၂</span>
-        <button class="episode-play" onclick="playVideo(
-          'တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၂',
-          'https://ok.ru/videoembed/16362025585387?nochat=1&autoplay=1'
-        )">▶ ကြည့်မယ်</button>
-      </div>
+      <p>အပိုင်း ၂ ကြည့်ရှုရန်</p>
     </div>
+    <button class="live-watch" onclick="playVideo('တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၂','https://ok.ru/videoembed/16362025585387?nochat=1&autoplay=1')">▶ ကြည့်မယ်</button>
+  </div>
 
-    <div class="episode-card">
-      <div class="episode-number">EPISODE 01</div>
+  <!-- EPISODE 1 -->
+  <div class="live-card">
+    <div class="live-icon">▶</div>
+    <div class="live-info">
+      <div class="live-badge">● EPISODE 1</div>
       <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၁</h3>
-      <div class="episode-bottom">
-        <span>အပိုင်း ၁</span>
-        <button class="episode-play" onclick="playVideo(
-          'တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၁',
-          'https://ok.ru/videoembed/16360441252587?nochat=1&autoplay=1'
-        )">▶ ကြည့်မယ်</button>
-      </div>
+      <p>အပိုင်း ၁ ကြည့်ရှုရန်</p>
     </div>
-
+    <button class="live-watch" onclick="playVideo('တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၁','https://ok.ru/videoembed/16360441252587?nochat=1&autoplay=1')">▶ ကြည့်မယ်</button>
   </div>
 
 </main>
