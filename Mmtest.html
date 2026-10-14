@@ -4,779 +4,740 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Myanmar TV | မုန်းမာန်ငြိုး နှင့် တာတေ</title>
+<title>Myanmar TV | ချမ်းမြေ့စေကြောင်း နှင့် တာတေ</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg: #09090d;
+  --card: #15151d;
+  --red: #ff263d;
+  --yellow: #ffd166;
+  --text: #ffffff;
+  --muted: #a7a7b5;
+  --border: rgba(255,255,255,.08);
 }
 
-body{
-    background:#080808;
-    color:#fff;
-    font-family:
-        "Noto Sans Myanmar",
-        "Myanmar Text",
-        Arial,
-        sans-serif;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-header{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    height:64px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 18px;
-    background:linear-gradient(135deg,#100000,#250000,#0b0b0b);
-    border-bottom:1px solid #6b0000;
-    box-shadow:0 3px 20px rgba(255,0,0,.18);
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans Myanmar', sans-serif;
+  min-height: 100vh;
 }
 
-.logo{
-    font-family:Arial,sans-serif;
-    font-weight:900;
-    font-size:22px;
-    letter-spacing:1px;
-    color:#fff;
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 17px 16px;
+  background: #101016;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.logo span{
-    color:#ff2020;
+.logo {
+  width: 45px;
+  height: 45px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #ff263d, #9e0018);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 800;
+  box-shadow: 0 0 20px rgba(255,38,61,.25);
 }
 
-.live-status{
-    font-family:Arial,sans-serif;
-    font-size:11px;
-    font-weight:bold;
-    color:#ff3030;
-    display:flex;
-    align-items:center;
-    gap:5px;
+.brand h1 {
+  font-family: Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 1px;
 }
 
-.live-dot{
-    width:8px;
-    height:8px;
-    background:#ff1717;
-    border-radius:50%;
-    box-shadow:0 0 10px #ff1717;
+.brand p {
+  color: var(--muted);
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  margin-top: 4px;
+  letter-spacing: 1px;
 }
 
-.hero{
-    padding:28px 16px 20px;
-    text-align:center;
-    background:
-        radial-gradient(circle at top,#3a0000 0%,#120000 35%,#080808 75%);
+.header-badge {
+  margin-left: auto;
+  color: #ff5969;
+  border: 1px solid rgba(255,38,61,.3);
+  background: rgba(255,38,61,.08);
+  padding: 6px 8px;
+  border-radius: 7px;
+  font: 700 9px Arial, sans-serif;
+  white-space: nowrap;
 }
 
-.hero h1{
-    font-size:25px;
-    font-weight:900;
-    margin-bottom:7px;
+.hero {
+  padding: 28px 17px 24px;
+  background:
+    radial-gradient(ellipse at top right, rgba(255,38,61,.16), transparent 65%),
+    linear-gradient(180deg, #151018, #09090d);
+  border-bottom: 1px solid var(--border);
 }
 
-.hero p{
-    color:#aaa;
-    font-size:13px;
+.hero-label {
+  color: var(--red);
+  font: 700 11px Arial, sans-serif;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
 }
 
-.container{
-    width:100%;
-    max-width:800px;
-    margin:auto;
-    padding:0 12px 40px;
+.hero h2 {
+  font-size: clamp(23px, 6vw, 30px);
+  font-weight: 800;
+  line-height: 1.6;
 }
 
-.section-title{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    margin:20px 2px 12px;
-    font-size:18px;
-    font-weight:900;
+.hero p {
+  color: #b6b6c2;
+  font-size: 12px;
+  line-height: 2;
+  margin-top: 10px;
 }
 
-.section-title::before{
-    content:"";
-    width:4px;
-    height:22px;
-    border-radius:10px;
-    background:#ff1717;
-    box-shadow:0 0 10px rgba(255,0,0,.6);
+.container {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 18px 14px 35px;
 }
 
-.channel-card{
-    position:relative;
-    overflow:hidden;
-    margin-bottom:12px;
-    padding:16px;
-    border-radius:16px;
-    background:linear-gradient(135deg,#170000,#0e0e0e);
-    border:1px solid #4b1111;
-    box-shadow:0 8px 25px rgba(0,0,0,.35);
+.player {
+  display: none;
+  margin-bottom: 22px;
+  background: #111117;
+  border: 1px solid rgba(255,38,61,.35);
+  border-radius: 14px;
+  overflow: hidden;
+  scroll-margin-top: 85px;
 }
 
-.channel-card::after{
-    content:"";
-    position:absolute;
-    width:100px;
-    height:100px;
-    right:-40px;
-    top:-40px;
-    background:#ff0000;
-    opacity:.08;
-    border-radius:50%;
+.player.show {
+  display: block;
 }
 
-.channel-info{
-    position:relative;
-    z-index:2;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
+.player-top {
+  padding: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
-.channel-name{
-    font-size:17px;
-    font-weight:900;
+.now-playing {
+  color: var(--red);
+  font: 700 10px Arial, sans-serif;
+  letter-spacing: 1.5px;
 }
 
-.channel-sub{
-    color:#999;
-    font-size:11px;
-    margin-top:4px;
+#nowTitle {
+  font-size: 13px;
+  line-height: 1.8;
+  margin-top: 5px;
+  overflow-wrap: anywhere;
 }
 
-.watch-btn{
-    border:0;
-    outline:0;
-    cursor:pointer;
-    padding:10px 16px;
-    border-radius:30px;
-    color:#fff;
-    font-weight:900;
-    font-size:12px;
-    background:linear-gradient(135deg,#e00000,#8b0000);
-    box-shadow:0 5px 15px rgba(255,0,0,.25);
+.player-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
 }
 
-.watch-btn:active{
-    transform:scale(.96);
+.control-btn {
+  background: #272731;
+  border: 1px solid var(--border);
+  color: white;
+  padding: 8px 10px;
+  border-radius: 7px;
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
 }
 
-/* PLAYER */
-.player-box{
-    display:none;
-    margin:15px 0 22px;
-    padding:10px;
-    border-radius:16px;
-    background:#050505;
-    border:1px solid #3c0b0b;
-    box-shadow:0 10px 30px rgba(0,0,0,.5);
+.video-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
 }
 
-.player-title{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    margin-bottom:9px;
+.video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
 }
 
-#playerTitle{
-    font-size:14px;
-    font-weight:900;
+.ad-bar {
+  background: linear-gradient(90deg, #8e0013, #e31937, #8e0013);
+  color: #fff;
+  padding: 9px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.8;
 }
 
-.close-btn{
-    border:0;
-    background:#260000;
-    color:#ff7777;
-    border:1px solid #5c1515;
-    border-radius:20px;
-    padding:6px 11px;
-    cursor:pointer;
-    font-size:11px;
-    font-weight:bold;
+.player-help {
+  display: none;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.9;
+  padding: 12px;
+  text-align: center;
 }
 
-.video-wrap{
-    width:100%;
-    aspect-ratio:16/9;
-    overflow:hidden;
-    border-radius:10px;
-    background:#000;
+.player-help.show {
+  display: block;
 }
 
-.video,
-#hlsVideo{
-    width:100%;
-    height:100%;
-    display:block;
-    border:0;
-    background:#000;
+.open-original {
+  display: inline-block;
+  color: var(--yellow);
+  margin-top: 5px;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
-#hlsVideo{
-    object-fit:contain;
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 25px 0 13px;
+  padding-left: 11px;
+  border-left: 3px solid var(--red);
 }
 
-/* EPISODES */
-.episode-list{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:9px;
+.section-title h2 {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.8;
 }
 
-.episode-btn{
-    min-height:52px;
-    border:1px solid #351010;
-    border-radius:12px;
-    background:linear-gradient(145deg,#161616,#0d0d0d);
-    color:#fff;
-    cursor:pointer;
-    font-family:inherit;
-    font-size:13px;
-    font-weight:800;
-    transition:.2s;
+.section-title p {
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 3px;
 }
 
-.episode-btn:hover{
-    border-color:#a50000;
-    background:#210000;
+.section-tag {
+  font: 700 10px Arial, sans-serif;
+  color: var(--red);
+  background: rgba(255,38,61,.1);
+  border: 1px solid rgba(255,38,61,.2);
+  border-radius: 6px;
+  padding: 6px 8px;
+  white-space: nowrap;
 }
 
-.episode-btn:active{
-    transform:scale(.96);
+.live-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 12px;
+  margin-bottom: 10px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #191921, #111117);
 }
 
-.episode-number{
-    display:block;
-    color:#ff3434;
-    font-family:Arial,sans-serif;
-    font-weight:900;
-    margin-top:2px;
+.live-icon {
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background: rgba(255,38,61,.12);
+  color: #ff465a;
+  border: 1px solid rgba(255,38,61,.18);
 }
 
-footer{
-    margin-top:20px;
-    padding:25px 15px;
-    text-align:center;
-    color:#666;
-    font-family:Arial,sans-serif;
-    font-size:11px;
-    border-top:1px solid #171717;
+.live-info {
+  min-width: 0;
+  flex: 1;
 }
 
-@media(max-width:480px){
-    .episode-list{
-        grid-template-columns:repeat(2,1fr);
-    }
+.live-badge {
+  color: var(--red);
+  font: 700 9px Arial, sans-serif;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
 
-    .hero h1{
-        font-size:22px;
-    }
+.live-info h3 {
+  font-size: 12px;
+  line-height: 1.9;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
 
-    .channel-name{
-        font-size:15px;
-    }
+.live-info p {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.8;
+  margin-top: 3px;
+}
 
-    .watch-btn{
-        padding:9px 12px;
-    }
+.live-watch {
+  border: 0;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ff334b, #d80020);
+  color: white;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.live-watch:active,
+.control-btn:active {
+  transform: scale(.97);
+}
+
+.episode-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.episode-card {
+  position: relative;
+  padding: 14px 12px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  background: linear-gradient(145deg, #191921, #111117);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+}
+
+.episode-number {
+  font: 800 10px Arial, sans-serif;
+  color: var(--red);
+  letter-spacing: 1px;
+}
+
+.episode-card h3 {
+  font-size: 12px;
+  line-height: 1.8;
+  font-weight: 700;
+}
+
+.episode-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.episode-bottom span {
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.episode-play {
+  border: 0;
+  border-radius: 6px;
+  padding: 7px 10px;
+  background: rgba(255,38,61,.13);
+  color: #ff5265;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.footer {
+  text-align: center;
+  padding: 24px 15px;
+  border-top: 1px solid var(--border);
+  background: #101016;
+}
+
+.footer h3 {
+  font: 800 13px Arial, sans-serif;
+  letter-spacing: 2px;
+}
+
+.footer p {
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 8px;
+  line-height: 1.8;
+}
+
+body.fullscreen .player {
+  border-radius: 0;
+}
+
+body.fullscreen .video-wrap {
+  height: calc(100vh - 115px);
+  aspect-ratio: auto;
+}
+
+body.fullscreen .video {
+  height: 100%;
+}
+
+@media (max-width: 360px) {
+  .header {
+    padding: 13px 10px;
+  }
+
+  .brand h1 {
+    font-size: 14px;
+  }
+
+  .header-badge {
+    font-size: 8px;
+    padding: 5px;
+  }
+
+  .live-card {
+    gap: 8px;
+    padding: 11px 9px;
+  }
+
+  .live-watch {
+    padding: 9px 8px;
+    font-size: 10px;
+  }
+
+  .live-info h3 {
+    font-size: 11px;
+  }
 }
 </style>
-
-<!-- HLS.JS -->
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
 </head>
 
 <body>
 
-<header>
-    <div class="logo">
-        MYANMAR <span>TV</span>
-    </div>
+<header class="header">
+  <div class="logo">▶</div>
 
-    <div class="live-status">
-        <span class="live-dot"></span>
-        TV CHANNEL
-    </div>
+  <div class="brand">
+    <h1>MYANMAR TV</h1>
+    <p>DRAMA • SERIES • LIVE</p>
+  </div>
+
+  <div class="header-badge">● TV CHANNEL</div>
 </header>
 
-
 <section class="hero">
-    <h1>မြန်မာဇာတ်လမ်းတွဲများ</h1>
-    <p>Myanmar TV • Live Channel • Series</p>
+  <div class="hero-label">MYANMAR DRAMA SERIES</div>
+  <h2>မြန်မာဇာတ်လမ်းတွဲများ</h2>
+  <p>
+    မြန်မာဇာတ်လမ်းတွဲများ၊ ရုပ်ရှင်ဇာတ်ကားများနှင့်
+    တိုက်ရိုက်ရုပ်သံအစီအစဉ်များကို ကြည့်ရှုနိုင်ပါပြီ။
+  </p>
 </section>
 
+<main class="container">
 
-<div class="container">
+  <!-- VIDEO PLAYER -->
+  <section class="player" id="player">
 
-    <!-- ================= PLAYER ================= -->
-    <div class="player-box" id="playerBox">
+    <div class="player-top">
+      <div>
+        <div class="now-playing">NOW PLAYING</div>
+        <div id="nowTitle">ဗီဒီယိုရွေးချယ်ပါ</div>
+      </div>
 
-        <div class="player-title">
-            <div id="playerTitle">Video Player</div>
+      <div class="player-actions">
+        <button class="control-btn" onclick="fullScreen()">
+          ⛶ Full
+        </button>
 
-            <button class="close-btn" onclick="closeVideo()">
-                ပိတ်မယ်
-            </button>
-        </div>
-
-        <div class="video-wrap">
-
-            <!-- OK.RU / EMBED PLAYER -->
-            <iframe
-                id="videoFrame"
-                class="video"
-                src="about:blank"
-                allowfullscreen
-                allow="autoplay; fullscreen; picture-in-picture">
-            </iframe>
-
-            <!-- HLS LIVE PLAYER -->
-            <video
-                id="hlsVideo"
-                controls
-                playsinline
-                preload="metadata">
-            </video>
-
-        </div>
+        <button class="control-btn" onclick="closeVideo()">
+          ✕ ပိတ်မယ်
+        </button>
+      </div>
     </div>
 
-
-    <!-- ================= LIVE CHANNELS ================= -->
-
-    <div class="section-title">
-        Live TV Channels
+    <div class="video-wrap">
+      <iframe
+        id="videoFrame"
+        class="video"
+        src="about:blank"
+        title="Myanmar TV Video Player"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen>
+      </iframe>
     </div>
 
-
-    <!-- MAHAR TV -->
-    <div class="channel-card">
-
-        <div class="channel-info">
-
-            <div>
-                <div class="channel-name">
-                    Mahar TV Channel
-                </div>
-
-                <div class="channel-sub">
-                    LIVE • မြန်မာရုပ်သံလိုင်း
-                </div>
-            </div>
-
-            <button
-                class="watch-btn"
-                onclick="playHLS(
-                    'Mahar TV Channel',
-                    'https://ygncdn.com/live/mahar/1080p/chunks.m3u8'
-                )">
-                WATCH LIVE
-            </button>
-
-        </div>
-
+    <div class="ad-bar">
+      ချမ်းမြေ့စေကြောင်း၊ တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများနှင့် Mahar TV Channel
     </div>
 
-
-    <!-- MRTV-4 -->
-    <div class="channel-card">
-
-        <div class="channel-info">
-
-            <div>
-                <div class="channel-name">
-                    MRTV-4 TV Channel
-                </div>
-
-                <div class="channel-sub">
-                    LIVE • MRTV-4
-                </div>
-            </div>
-
-            <button
-                class="watch-btn"
-                onclick="playHLS(
-                    'MRTV-4 TV Channel',
-                    'https://live.pyoneplay.com/live/01m2sn12yc6v2enx392qj2ekqt/audio2_stream.m3u8'
-                )">
-                WATCH LIVE
-            </button>
-
-        </div>
-
+    <div class="player-help" id="playerHelp">
+      ဗီဒီယိုဖွင့်မရပါက အောက်ပါလင့်ခ်မှ တိုက်ရိုက်ကြည့်ရှုနိုင်ပါသည်။
+      <br>
+      <span class="open-original" onclick="openOriginal()">
+        မူရင်းဗီဒီယိုကို ဖွင့်ရန်
+      </span>
     </div>
 
+  </section>
 
-    <!-- CHANNEL 7 -->
-    <div class="channel-card">
+  <!-- LIVE TV -->
+  <div class="section-title">
+    <div>
+      <h2>တိုက်ရိုက်ရုပ်သံ</h2>
+      <p>LIVE CHANNEL</p>
+    </div>
+    <div class="section-tag">LIVE TV</div>
+  </div>
 
-        <div class="channel-info">
+  <!-- MAHAR TV -->
+  <div class="live-card">
+    <div class="live-icon">▶</div>
 
-            <div>
-                <div class="channel-name">
-                    Channel 7
-                </div>
-
-                <div class="channel-sub">
-                    LIVE • Channel 7 Myanmar
-                </div>
-            </div>
-
-            <button
-                class="watch-btn"
-                onclick="playHLS(
-                    'Channel 7',
-                    'https://live.pyoneplay.com/live/01m2sr3kyn6bztz3xk02w3t7pn/video1_stream.m3u8'
-                )">
-                WATCH LIVE
-            </button>
-
-        </div>
-
+    <div class="live-info">
+      <div class="live-badge">● LIVE</div>
+      <h3>Mahar TV Channel Live</h3>
+      <p>တိုက်ရိုက်ရုပ်သံ ကြည့်ရှုရန်</p>
     </div>
 
+    <button
+      class="live-watch"
+      onclick="playVideo(
+        'Mahar TV Channel Live',
+        'https://ygncdn.com/live/mahar/1080p/chunks.m3u8'
+      )">
+      ▶ ကြည့်မယ်
+    </button>
+  </div>
 
-    <!-- ================= မုန်းမာန်ငြိုး ================= -->
+  <!-- THAR CHAW MOVIE -->
+  <div class="live-card">
+    <div class="live-icon">▶</div>
 
-    <div class="section-title">
-        မုန်းမာန်ငြိုး ဇာတ်လမ်းတွဲ
+    <div class="live-info">
+      <div class="live-badge">● MOVIE</div>
+      <h3>သားချော မြန်မာ့ရုပ်ရှင်ဇာတ်ကားကြီး</h3>
+      <p>ရုပ်ရှင်ဇာတ်ကားကြီး ကြည့်ရှုရန်</p>
     </div>
 
-    <div class="episode-list">
+    <button
+      class="live-watch"
+      onclick="playVideo(
+        'သားချော မြန်မာ့ရုပ်ရှင်ဇာတ်ကားကြီး',
+        'https://ok.ru/videoembed/16389445847787?nochat=1&autoplay=1'
+      )">
+      ▶ ကြည့်မယ်
+    </button>
+  </div>
 
-        <button class="episode-btn"
-            onclick="playVideo(
-                'မုန်းမာန်ငြိုး - အပိုင်း ၂၈',
-                'https://ok.ru/videoembed/16335686732523?nochat=1&autoplay=1'
-            )">
-            အပိုင်း
-            <span class="episode-number">28</span>
-        </button>
+  <!-- CHAN MYAY SAY KYAUNG -->
+  <div class="section-title">
+    <div>
+      <h2>ချမ်းမြေ့စေကြောင်း</h2>
+      <p>မြန်မာဇာတ်လမ်းတွဲ</p>
+    </div>
+    <div class="section-tag">1 EPISODE</div>
+  </div>
 
-        <button class="episode-btn"
-            onclick="playVideo(
-                'မုန်းမာန်ငြိုး - အပိုင်း ၂၇',
-                'https://ok.ru/videoembed/16349581019883?nochat=1&autoplay=1'
-            )">
-            အပိုင်း
-            <span class="episode-number">27</span>
-        </button>
+  <div class="live-card">
+    <div class="live-icon">▶</div>
 
-        <button class="episode-btn"
-            onclick="playVideo(
-                'မုန်းမာန်ငြိုး - အပိုင်း ၂၆',
-                'https://ok.ru/videoembed/16308769983211?nochat=1&autoplay=1'
-            )">
-            အပိုင်း
-            <span class="episode-number">26</span>
-        </button>
-
-        <button class="episode-btn"
-            onclick="playVideo(
-                'မုန်းမာန်ငြိုး - အပိုင်း ၂၅',
-                'https://ok.ru/videoembed/16297245936363?nochat=1&autoplay=1'
-            )">
-            အပိုင်း
-            <span class="episode-number">25</span>
-        </button>
-
-        <button class="episode-btn"
-            onclick="playVideo(
-                'မုန်းမာန်ငြိုး - အပိုင်း ၂၄',
-                'https://ok.ru/videoembed/16283322485483?nochat=1&autoplay=1'
-            )">
-            အပိုင်း
-            <span class="episode-number">24</span>
-        </button>
-
-        <button class="episode-btn"
-            onclick="playVideo(
-                'မုန်းမာန်ငြိုး - အပိုင်း ၂၃',
-                'https://ok.ru/videoembed/16274289068779?nochat=1&autoplay=1'
-            )">
-            အပိုင်း
-            <span class="episode-number">23</span>
-        </button>
-
+    <div class="live-info">
+      <div class="live-badge">● EPISODE 1</div>
+      <h3>ချမ်းမြေ့စေကြောင်း မြန်မာဇာတ်လမ်းတွဲ အပိုင်း ၁</h3>
+      <p>အပိုင်း ၁ အစအဆုံး ကြည့်ရှုရန်</p>
     </div>
 
+    <button
+      class="live-watch"
+      onclick="playVideo(
+        'ချမ်းမြေ့စေကြောင်း မြန်မာဇာတ်လမ်းတွဲ အပိုင်း ၁ အစအဆုံး',
+        'https://ok.ru/videoembed/16398995098347?nochat=1&autoplay=1'
+      )">
+      ▶ ကြည့်မယ်
+    </button>
+  </div>
 
-    <!-- ================= တာတေ ================= -->
+  <!-- TATE GAMBIRA SERIES -->
+  <div class="section-title">
+    <div>
+      <h2>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ</h2>
+      <p>မြန်မာဇာတ်လမ်းတွဲ အပိုင်းများ</p>
+    </div>
+    <div class="section-tag">6 EPISODES</div>
+  </div>
 
-    <div class="section-title">
-        တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ
+  <div class="episode-grid">
+
+    <div class="episode-card">
+      <div class="episode-number">EPISODE 06</div>
+      <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၆</h3>
+      <div class="episode-bottom">
+        <span>အပိုင်း ၆</span>
+        <button class="episode-play" onclick="playVideo(
+          'တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၆',
+          'https://ok.ru/videoembed/16375042673387?nochat=1&autoplay=1'
+        )">▶ ကြည့်မယ်</button>
+      </div>
     </div>
 
-    <div class="episode-list">
-
-        <button class="episode-btn"
-            onclick="playVideo(
-                'တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ - အပိုင်း ၆',
-                'https://ok.ru/videoembed/16360441252587?nochat=1'
-            )">
-            အပိုင်း
-            <span class="episode-number">6</span>
-        </button>
-
-        <button class="episode-btn"
-            onclick="playVideo(
-                'တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ - အပိုင်း ၅',
-                'https://ok.ru/videoembed/16362485844715?nochat=1'
-            )">
-            အပိုင်း
-            <span class="episode-number">5</span>
-        </button>
-
-        <button class="episode-btn"
-            onclick="playVideo(
-                'တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ - အပိုင်း ၄',
-                'https://ok.ru/videoembed/16362301491947?nochat=1'
-            )">
-            အပိုင်း
-            <span class="episode-number">4</span>
-        </button>
-
-        <button class="episode-btn"
-            onclick="playVideo(
-                'တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ - အပိုင်း ၃',
-                'https://ok.ru/videoembed/16362173237995?nochat=1'
-            )">
-            အပိုင်း
-            <span class="episode-number">3</span>
-        </button>
-
-        <button class="episode-btn"
-            onclick="playVideo(
-                'တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ - အပိုင်း ၂',
-                'https://ok.ru/videoembed/16362025585387?nochat=1'
-            )">
-            အပိုင်း
-            <span class="episode-number">2</span>
-        </button>
-
-        <button class="episode-btn"
-            onclick="playVideo(
-                'တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ - အပိုင်း ၁',
-                'https://ok.ru/videoembed/16360441252587?nochat=1'
-            )">
-            အပိုင်း
-            <span class="episode-number">1</span>
-        </button>
-
+    <div class="episode-card">
+      <div class="episode-number">EPISODE 05</div>
+      <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၅</h3>
+      <div class="episode-bottom">
+        <span>အပိုင်း ၅</span>
+        <button class="episode-play" onclick="playVideo(
+          'တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၅',
+          'https://ok.ru/videoembed/16362485844715?nochat=1&autoplay=1'
+        )">▶ ကြည့်မယ်</button>
+      </div>
     </div>
 
-</div>
+    <div class="episode-card">
+      <div class="episode-number">EPISODE 04</div>
+      <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၄</h3>
+      <div class="episode-bottom">
+        <span>အပိုင်း ၄</span>
+        <button class="episode-play" onclick="playVideo(
+          'တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၄',
+          'https://ok.ru/videoembed/16362301491947?nochat=1&autoplay=1'
+        )">▶ ကြည့်မယ်</button>
+      </div>
+    </div>
 
+    <div class="episode-card">
+      <div class="episode-number">EPISODE 03</div>
+      <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၃</h3>
+      <div class="episode-bottom">
+        <span>အပိုင်း ၃</span>
+        <button class="episode-play" onclick="playVideo(
+          'တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၃',
+          'https://ok.ru/videoembed/16362173237995?nochat=1&autoplay=1'
+        )">▶ ကြည့်မယ်</button>
+      </div>
+    </div>
 
-<footer>
-    MYANMAR TV
+    <div class="episode-card">
+      <div class="episode-number">EPISODE 02</div>
+      <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၂</h3>
+      <div class="episode-bottom">
+        <span>အပိုင်း ၂</span>
+        <button class="episode-play" onclick="playVideo(
+          'တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၂',
+          'https://ok.ru/videoembed/16362025585387?nochat=1&autoplay=1'
+        )">▶ ကြည့်မယ်</button>
+      </div>
+    </div>
+
+    <div class="episode-card">
+      <div class="episode-number">EPISODE 01</div>
+      <h3>တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၁</h3>
+      <div class="episode-bottom">
+        <span>အပိုင်း ၁</span>
+        <button class="episode-play" onclick="playVideo(
+          'တာတေ ဂမ္ဘီရဖြစ်ရပ်ဆန်းများ အပိုင်း ၁',
+          'https://ok.ru/videoembed/16360441252587?nochat=1&autoplay=1'
+        )">▶ ကြည့်မယ်</button>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<footer class="footer">
+  <h3>MYANMAR TV</h3>
+  <p>မြန်မာဇာတ်လမ်းတွဲများနှင့် ရုပ်သံအစီအစဉ်များ</p>
 </footer>
 
-
 <script>
+let currentVideoUrl = '';
 
-let hls = null;
+function playVideo(title, link) {
+  const player = document.getElementById('player');
+  const frame = document.getElementById('videoFrame');
 
-const playerBox = document.getElementById("playerBox");
-const playerTitle = document.getElementById("playerTitle");
-const videoFrame = document.getElementById("videoFrame");
-const hlsVideo = document.getElementById("hlsVideo");
+  currentVideoUrl = link;
 
+  document.getElementById('nowTitle').textContent = title;
+  document.getElementById('playerHelp').classList.remove('show');
 
-/* =========================
-   OK.RU / EMBED VIDEO
-========================= */
+  frame.src = 'about:blank';
+  player.classList.add('show');
 
-function playVideo(title, link){
-
-    destroyHLS();
-
-    hlsVideo.style.display = "none";
-    videoFrame.style.display = "block";
-
-    videoFrame.src = link;
-
-    playerTitle.textContent = title;
-
-    playerBox.style.display = "block";
-
-    setTimeout(() => {
-        playerBox.scrollIntoView({
-            behavior:"smooth",
-            block:"start"
-        });
-    },100);
+  setTimeout(() => {
+    frame.src = link;
+    player.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }, 150);
 }
 
-
-/* =========================
-   HLS LIVE CHANNEL
-========================= */
-
-function playHLS(title, stream){
-
-    videoFrame.src = "about:blank";
-    videoFrame.style.display = "none";
-
-    hlsVideo.style.display = "block";
-
-    playerTitle.textContent = title;
-
-    playerBox.style.display = "block";
-
-    destroyHLS();
-
-    /*
-       Browser supports native HLS
-       e.g. Safari / iPhone
-    */
-
-    if(
-        hlsVideo.canPlayType(
-            "application/vnd.apple.mpegurl"
-        )
-    ){
-
-        hlsVideo.src = stream;
-
-        hlsVideo.play().catch(() => {});
-
-    }
-
-    /*
-       Chrome / Android / Firefox
-       use HLS.js
-    */
-
-    else if(
-        typeof Hls !== "undefined" &&
-        Hls.isSupported()
-    ){
-
-        hls = new Hls({
-            enableWorker:true,
-            lowLatencyMode:true
-        });
-
-        hls.loadSource(stream);
-
-        hls.attachMedia(hlsVideo);
-
-        hls.on(
-            Hls.Events.MANIFEST_PARSED,
-            function(){
-
-                hlsVideo.play().catch(() => {});
-
-            }
-        );
-
-        hls.on(
-            Hls.Events.ERROR,
-            function(event,data){
-
-                console.log(
-                    "HLS Error:",
-                    data
-                );
-
-            }
-        );
-
-    }
-
-    else{
-
-        alert(
-            "ဒီ Browser မှာ Live Stream ဖွင့်လို့မရပါ။"
-        );
-
-    }
-
-    setTimeout(() => {
-
-        playerBox.scrollIntoView({
-            behavior:"smooth",
-            block:"start"
-        });
-
-    },100);
+function openOriginal() {
+  if (currentVideoUrl) {
+    window.open(currentVideoUrl, '_blank', 'noopener');
+  }
 }
 
+function closeVideo() {
+  document.getElementById('videoFrame').src = 'about:blank';
+  document.getElementById('player').classList.remove('show');
+  document.getElementById('playerHelp').classList.remove('show');
+  document.body.classList.remove('fullscreen');
 
-/* =========================
-   DESTROY HLS
-========================= */
+  if (document.fullscreenElement && document.exitFullscreen) {
+    document.exitFullscreen().catch(() => {});
+  }
+}
 
-function destroyHLS(){
+async function fullScreen() {
+  const player = document.getElementById('player');
 
-    try{
+  try {
+    if (!document.fullscreenElement) {
+      await player.requestFullscreen();
+      document.body.classList.add('fullscreen');
 
-        hlsVideo.pause();
-
-    }catch(e){}
-
-    hlsVideo.removeAttribute("src");
-
-    hlsVideo.load();
-
-    if(hls){
-
-        hls.destroy();
-
-        hls = null;
-
+      if (screen.orientation && screen.orientation.lock) {
+        await screen.orientation.lock('landscape').catch(() => {});
+      }
+    } else {
+      await document.exitFullscreen();
+      document.body.classList.remove('fullscreen');
     }
+  } catch (error) {
+    document.body.classList.toggle('fullscreen');
+  }
 }
 
-
-/* =========================
-   CLOSE PLAYER
-========================= */
-
-function closeVideo(){
-
-    destroyHLS();
-
-    videoFrame.src = "about:blank";
-
-    playerBox.style.display = "none";
-
-}
-
-
-/* =========================
-   FULLSCREEN
-========================= */
-
-function fullScreen(){
-
-    const box = document.querySelector(".video-wrap");
-
-    if(!document.fullscreenElement){
-
-        box.requestFullscreen().catch(() => {});
-
-    }else{
-
-        document.exitFullscreen();
-
-    }
-
-}
-
+document.addEventListener('fullscreenchange', () => {
+  if (!document.fullscreenElement) {
+    document.body.classList.remove('fullscreen');
+  }
+});
 </script>
 
 </body>
