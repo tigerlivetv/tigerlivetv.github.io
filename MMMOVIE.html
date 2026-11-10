@@ -35,10 +35,23 @@ button:disabled{opacity:.55;cursor:not-allowed}
 audio{width:100%;margin-top:12px}
 a.download{display:inline-block;color:#ffe27b;margin:12px 0}
 footer{text-align:center;color:#8190a7;padding:24px;font-size:12px}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;600;700&family=Noto+Serif+Myanmar:wght@400;600;700&display=swap');
+#subtitlePreview{
+ position:absolute;left:50%;bottom:8%;transform:translateX(-50%);
+ width:90%;text-align:center;white-space:pre-wrap;overflow-wrap:anywhere;
+ color:#fff;font-family:'Noto Sans Myanmar','Pyidaungsu','Myanmar Text','Padauk',sans-serif;
+ font-size:28px;font-weight:700;line-height:1.5;
+ text-shadow:2px 2px 3px #000,-2px -2px 3px #000,2px -2px 3px #000,-2px 2px 3px #000;
+ pointer-events:none;padding:0 8px;
+}
+.preview-wrap{position:relative}
+.font-sample{padding:10px;background:#101a2b;border:1px solid #48566d;border-radius:8px;line-height:1.8;margin-top:8px}
+.color-swatches{display:flex;gap:6px;flex-wrap:wrap}
+.color-swatches button{margin:0;padding:9px 12px;border:1px solid #77839a}
 </style>
 </head>
 <body>
-<header><h1>MOVIE RECAP AI</h1><p>မြန်မာဇာတ်ညွှန်း • AI အသံ • Blur Editor • Video Ratio</p></header>
+<header><h1>MOVIE RECAP AI</h1><p>မြန်မာဇာတ်ညွှန်း • AI အသံ • Blur Editor • မြန်မာစာတန်းထိုး • Video Ratio</p></header>
 <main>
 <section class="card">
 <h2>၁။ Gemini API သတ်မှတ်ချက်</h2>
@@ -47,7 +60,12 @@ footer{text-align:center;color:#8190a7;padding:24px;font-size:12px}
 <input id="apiKey" type="password" placeholder="Gemini API Key ကို ဒီမှာထည့်ပါ">
 <button class="secondary" style="flex:0 0 auto" onclick="toggleKey()">ပြ / ဖျောက်</button>
 </div>
-<p class="small">ဒီ HTML သည် စမ်းသပ်အသုံးပြုရန်ဖြစ်သည်။ API Key ကို browser ထဲတွင်သုံးခြင်းကြောင့် အခြားသူမြင်နိုင်နိုင်သည်။ အများသုံး Website အဖြစ်တင်မည်ဆိုလျှင် Backend မှတစ်ဆင့် API Key ကို လုံခြုံစွာထားပါ။</p>
+<div class="row">
+<button type="button" onclick="saveApiKey()">API Key သိမ်းမယ်</button>
+<button type="button" class="secondary" onclick="clearApiKey()">သိမ်းထားတဲ့ Key ဖျက်မယ်</button>
+</div>
+<div id="keyStatus" class="status">API Key ကို မသိမ်းရသေးပါ။</div>
+<p class="small">သိမ်းထားသော API Key ကို ဒီ Browser/ဖုန်း၏ Local Storage ထဲတွင်သာ သိမ်းမည်ဖြစ်ပြီး နောက်တစ်ကြိမ်ဖွင့်လျှင် အလိုအလျောက် ပြန်ဖြည့်ပေးမည်။ ကိုယ်ပိုင်ဖုန်းတွင်သာ အသုံးပြုပါ။ အခြားသူများနှင့်မျှဝေသောဖုန်း၊ အများသုံးကွန်ပျူတာတွင် မသိမ်းပါနှင့်။ Website အဖြစ် အများသုံးတင်မည်ဆိုလျှင် API Key ကို Backend တွင် လုံခြုံစွာထားပါ။</p>
 </section>
 
 <section class="card">
@@ -117,7 +135,63 @@ footer{text-align:center;color:#8190a7;padding:24px;font-size:12px}
 </section>
 
 <section class="card">
-<h2>၆။ Video Ratio & Background</h2>
+<h2>၆။ မြန်မာစာတန်းထိုးနှင့် ဖောင့်ရွေးချယ်ရန်</h2>
+<label>စာတန်းထိုးစာသား</label>
+<textarea id="subtitleText" rows="3" placeholder="ဒီနေရာမှာ မြန်မာစာတန်းထိုး စာသားရေးပါ..."></textarea>
+<label>မြန်မာဖောင့်</label>
+<select id="subtitleFont">
+<option value="'Noto Sans Myanmar','Pyidaungsu','Myanmar Text','Padauk',sans-serif">Noto Sans Myanmar</option>
+<option value="'Pyidaungsu','Noto Sans Myanmar','Myanmar Text',sans-serif">Pyidaungsu</option>
+<option value="'Myanmar Text','Noto Sans Myanmar',sans-serif">Myanmar Text</option>
+<option value="'Padauk','Noto Sans Myanmar',sans-serif">Padauk</option>
+<option value="'Noto Serif Myanmar','Pyidaungsu',serif">Noto Serif Myanmar</option>
+</select>
+<div class="font-sample" id="fontSample">မြန်မာစာတန်းထိုး စမ်းသပ်စာသား</div>
+<div class="row">
+ <div><label>စာလုံးအရွယ်</label><input id="subtitleSize" type="range" min="14" max="64" value="28"></div>
+ <div><label>စာလုံးအရောင်</label><input id="subtitleColor" type="color" value="#ffffff"></div>
+</div>
+<label>စာလုံးအရောင် အမြန်ရွေးရန်</label>
+<div class="color-swatches" id="textSwatches">
+ <button type="button" style="background:#ffffff;color:#111" data-color="#ffffff">အဖြူ</button>
+ <button type="button" style="background:#ffdf36;color:#111" data-color="#ffdf36">အဝါ</button>
+ <button type="button" style="background:#ff4545" data-color="#ff4545">အနီ</button>
+ <button type="button" style="background:#36d5ff;color:#111" data-color="#36d5ff">အပြာ</button>
+ <button type="button" style="background:#62ee80;color:#111" data-color="#62ee80">အစိမ်း</button>
+ <button type="button" style="background:#ff8be8;color:#111" data-color="#ff8be8">ပန်းရောင်</button>
+</div>
+<label>စာတန်းနောက်ခံ အရောင်</label>
+<div class="row">
+ <div><input id="subtitleBgColor" type="color" value="#000000"></div>
+ <div><select id="subtitleBgPreset">
+  <option value="transparent">နောက်ခံမပါ</option>
+  <option value="#000000" selected>အနက်ရောင်</option>
+  <option value="#ffffff">အဖြူရောင်</option>
+  <option value="#173b75">အပြာရင့်</option>
+  <option value="#7b2020">အနီရင့်</option>
+  <option value="#17613b">အစိမ်းရင့်</option>
+  <option value="#5b347d">ခရမ်းရင့်</option>
+  <option value="custom">ကိုယ်တိုင်ရွေးမယ်</option>
+ </select></div>
+</div>
+<label>နောက်ခံ အလင်းပိတ်နှုန်း <span id="subtitleBgOpacityText">65%</span></label>
+<input id="subtitleBgOpacity" type="range" min="0" max="100" value="65">
+<label>စာတန်းနောက်ခံ အဝိုင်းထောင့် <span id="subtitleBgRadiusText">10</span></label>
+<input id="subtitleBgRadius" type="range" min="0" max="30" value="10">
+<div class="row">
+ <div><label>စာတန်းအနေအထား</label>
+ <select id="subtitlePosition"><option value="top">အပေါ်</option><option value="middle">အလယ်</option><option value="bottom" selected>အောက်</option></select></div>
+ <div><label>စာလုံးအထူ</label>
+ <select id="subtitleWeight"><option value="400">ပုံမှန်</option><option value="600">အလတ်</option><option value="700" selected>အထူ</option></select></div>
+</div>
+<label>စာလုံးအနားသတ် (Outline)</label>
+<select id="subtitleOutline"><option value="2">ပုံမှန်</option><option value="0">မပါ</option><option value="4">ထူ</option><option value="6">အလွန်ထူ</option></select>
+<label class="row"><span>ဗီဒီယိုထဲတွင် စာတန်းထိုးပြရန်</span><input id="subtitleEnabled" type="checkbox" checked style="flex:0 0 22px"></label>
+<p class="small">Google Fonts မှ Noto Sans Myanmar / Noto Serif Myanmar ကို အင်တာနက်ရှိချိန်တွင် ရယူနိုင်သည်။ Offline သုံးပါက ဖုန်းထဲတွင်ရှိသော Pyidaungsu, Myanmar Text သို့မဟုတ် Padauk ဖောင့်ကို fallback အဖြစ်သုံးမည်။</p>
+</section>
+
+<section class="card">
+<h2>၇။ Video Ratio & Background</h2>
 <div class="ratios">
 <button class="active" onclick="setRatio('9:16',this)">9:16</button>
 <button onclick="setRatio('16:9',this)">16:9</button>
@@ -125,7 +199,19 @@ footer{text-align:center;color:#8190a7;padding:24px;font-size:12px}
 <button onclick="setRatio('4:3',this)">4:3</button>
 </div>
 <label>Background</label>
-<select id="bgMode"><option value="blur">Blur Background</option><option value="#000000">အနက်ရောင်</option><option value="#ffffff">အဖြူရောင်</option><option value="#202b42">အပြာရင့်</option><option value="#333333">မီးခိုးရင့်</option></select>
+<select id="bgMode">
+<option value="blur">Blur Background</option>
+<option value="#000000">အနက်ရောင်</option>
+<option value="#ffffff">အဖြူရောင်</option>
+<option value="#202b42">အပြာရင့်</option>
+<option value="#333333">မီးခိုးရင့်</option>
+<option value="#7b2020">အနီရင့်</option>
+<option value="#17613b">အစိမ်းရင့်</option>
+<option value="#5b347d">ခရမ်းရင့်</option>
+<option value="custom">ကိုယ်တိုင်ရွေးမယ်</option>
+</select>
+<label>ကိုယ်တိုင်ရွေးသော Background အရောင်</label>
+<input id="customBgColor" type="color" value="#202b42">
 <label>Video Fit</label>
 <select id="fitMode"><option value="contain">Video အပြည့်မြင်ရမယ် (Contain)</option><option value="cover">ဘောင်ပြည့်အောင် ဖြတ်ပြမယ် (Cover)</option></select>
 <p class="small">9:16 သည် TikTok/Shorts အတွက်၊ 16:9 သည် YouTube အတွက် အသုံးများသည်။ Ratio ပြောင်းလဲမှုကို Export ထဲတွင် အသုံးပြုမည်။</p>
@@ -136,7 +222,7 @@ footer{text-align:center;color:#8190a7;padding:24px;font-size:12px}
 </section>
 
 <section class="card">
-<h2>၇။ မူပိုင်ခွင့်နှင့် အသုံးပြုမှု သတိပြုရန်</h2>
+<h2>၈။ မူပိုင်ခွင့်နှင့် အသုံးပြုမှု သတိပြုရန်</h2>
 <p class="small">ဒီ Tool သည် Copyright စစ်ဆေးမှုကို ရှောင်ရန်၊ Content ID ကို လှည့်စားရန် သို့မဟုတ် Copyright Claim မဖြစ်အောင် အာမခံရန် မဟုတ်ပါ။ Blur လုပ်ခြင်း၊ Crop လုပ်ခြင်း၊ Ratio ပြောင်းခြင်းတို့က မူပိုင်ခွင့်ပြဿနာကို မဖယ်ရှားပေးပါ။ ကိုယ်ပိုင်/လိုင်စင်ရထားသော ဗီဒီယို၊ ခွင့်ပြုချက်ရထားသော ပုံနှင့် အသံကို အသုံးပြုပါ။ Recap ကို ကိုယ်ပိုင်စကားလုံး၊ ကိုယ်ပိုင်သုံးသပ်ချက်နှင့် မူရင်းအသံဖြင့် ဖန်တီးပါ။ အခြားသူ၏ ဇာတ်ကားအပိုင်းရှည်များကို အစားထိုးကြည့်ရှုနိုင်သည့်ပုံစံဖြင့် မပြန်လည်တင်ပါနှင့်။ မူပိုင်ခွင့်အခြေအနေသည် နိုင်ငံနှင့် အသုံးပြုပုံအလိုက် ကွာခြားနိုင်ပြီး Claim မဖြစ်မည်ဟု အာမခံမရပါ။</p>
 </section>
 </main>
@@ -150,7 +236,29 @@ let ratio="9:16", recorder=null, exportStream=null, drawRAF=null;
 let exportDone=false;
 
 function toggleKey(){ $("apiKey").type=$("apiKey").type==="password"?"text":"password"; }
+function saveApiKey(){
+ const value=$("apiKey").value.trim();
+ if(!value){setStatus("keyStatus","သိမ်းရန် API Key အရင်ထည့်ပါ။");return;}
+ try{
+  localStorage.setItem("movieRecapGeminiApiKey",value);
+  setStatus("keyStatus","API Key ကို ဒီ Browser ထဲမှာ သိမ်းပြီးပါပြီ။");
+ }catch(e){setStatus("keyStatus","သိမ်းမရပါ။ Browser ရဲ့ storage setting ကို စစ်ဆေးပါ။");}
+}
+function loadApiKey(){
+ try{
+  const saved=localStorage.getItem("movieRecapGeminiApiKey");
+  if(saved){$("apiKey").value=saved;setStatus("keyStatus","အရင်သိမ်းထားတဲ့ API Key ကို ပြန်ထည့်ပြီးပါပြီ။");}
+ }catch(e){setStatus("keyStatus","သိမ်းထားတဲ့ API Key ကို ဖတ်မရပါ။");}
+}
+function clearApiKey(){
+ try{
+  localStorage.removeItem("movieRecapGeminiApiKey");
+  $("apiKey").value="";
+  setStatus("keyStatus","သိမ်းထားတဲ့ API Key ကို ဖျက်ပြီးပါပြီ။");
+ }catch(e){setStatus("keyStatus","API Key ဖျက်မရပါ။");}
+}
 function key(){const k=$("apiKey").value.trim();if(!k)throw Error("Gemini API Key ထည့်ပါ။");return k;}
+loadApiKey();
 function setStatus(id,msg){$(id).textContent=msg;}
 function getVideoPrompt(){
  return `သင်သည် မြန်မာဘာသာဖြင့် ကိုယ်ပိုင်ရုပ်ရှင်သုံးသပ်ချက်နှင့် ဇာတ်လမ်းအကျဉ်းချုပ်ရေးသားသူဖြစ်သည်။
@@ -366,7 +474,9 @@ function drawContain(ctx,video,w,h){
 }
 function renderExportFrame(ctx,w,h){
  const v=$("preview");if(!v.videoWidth)return;
- const bg=$("bgMode").value,fit=$("fitMode").value;
+ let bg=$("bgMode").value;
+ if(bg==="custom")bg=$("customBgColor").value;
+ const fit=$("fitMode").value;
  if(bg==="blur"){
   ctx.save();ctx.filter="blur(24px)";drawCover(ctx,v,w,h);ctx.restore();
   ctx.fillStyle="rgba(0,0,0,.18)";ctx.fillRect(0,0,w,h);
@@ -380,11 +490,103 @@ function renderExportFrame(ctx,w,h){
   ctx.drawImage(v,0,0,v.videoWidth,v.videoHeight,0,0,w,h);
   ctx.restore();
  });
+ drawSubtitle(ctx,w,h);
 }
 function exportLoop(ctx,w,h){
  renderExportFrame(ctx,w,h);
  if(recorder&&recorder.state==="recording")drawRAF=requestAnimationFrame(()=>exportLoop(ctx,w,h));
 }
+function subtitleSettings(){
+ return {
+  text:$("subtitleText").value.trim(),
+  font:$("subtitleFont").value,
+  size:Number($("subtitleSize").value),
+  color:$("subtitleColor").value,
+  position:$("subtitlePosition").value,
+  weight:$("subtitleWeight").value,
+  outline:Number($("subtitleOutline").value),
+  bg:$("subtitleBgPreset").value==="custom"?$("subtitleBgColor").value:$("subtitleBgPreset").value,
+  bgOpacity:Number($("subtitleBgOpacity").value)/100,
+  bgRadius:Number($("subtitleBgRadius").value),
+  enabled:$("subtitleEnabled").checked
+ };
+}
+function drawSubtitle(ctx,w,h){
+ const s=subtitleSettings();
+ if(!s.enabled||!s.text)return;
+ const maxWidth=w*.90;
+ const fontSize=Math.max(14,Math.round(s.size*w/720));
+ ctx.save();
+ ctx.font=`${s.weight} ${fontSize}px ${s.font}`;
+ ctx.textAlign="center";
+ ctx.textBaseline="middle";
+ ctx.fillStyle=s.color;
+ ctx.strokeStyle="#000";
+ ctx.lineWidth=Math.max(2,s.outline*w/720);
+ ctx.lineJoin="round";
+ const lines=[];
+ const words=s.text.split("\\n");
+ for(const paragraph of words){
+  let line="";
+  for(const ch of Array.from(paragraph)){
+   const test=line+ch;
+   if(ctx.measureText(test).width>maxWidth && line){lines.push(line);line=ch;}
+   else line=test;
+  }
+  lines.push(line);
+ }
+ const lineHeight=fontSize*1.45,total=lines.length*lineHeight;
+ let y=s.position==="top"?h*.10+lineHeight/2:s.position==="middle"?(h-total)/2+lineHeight/2:h*.90-total+lineHeight/2;
+ if(s.bg!=="transparent"&&s.bgOpacity>0){
+  const widest=Math.min(maxWidth,Math.max(...lines.map(line=>ctx.measureText(line).width)));
+  const padX=fontSize*.42,padY=fontSize*.20;
+  const bx=(w-widest)/2-padX,by=y-lineHeight/2-padY;
+  const bw=widest+padX*2,bh=total+padY*2;
+  ctx.globalAlpha=s.bgOpacity;ctx.fillStyle=s.bg;
+  const r=Math.min(s.bgRadius*w/720,bw/2,bh/2);
+  ctx.beginPath();
+  ctx.moveTo(bx+r,by);ctx.arcTo(bx+bw,by,bx+bw,by+bh,r);
+  ctx.arcTo(bx+bw,by+bh,bx,by+bh,r);ctx.arcTo(bx,by+bh,bx,by,r);
+  ctx.arcTo(bx,by,bx+bw,by,r);ctx.closePath();ctx.fill();
+  ctx.globalAlpha=1;
+ }
+ lines.forEach(line=>{
+  if(s.outline>0)ctx.strokeText(line,w/2,y,maxWidth);
+  ctx.fillText(line,w/2,y,maxWidth);
+  y+=lineHeight;
+ });
+ ctx.restore();
+}
+function refreshFontSample(){
+ const sample=$("fontSample");
+ sample.style.fontFamily=$("subtitleFont").value;
+ sample.style.fontSize=Math.min(32,Number($("subtitleSize").value))+"px";
+ sample.style.color=$("subtitleColor").value;
+ sample.style.fontWeight=$("subtitleWeight").value;
+ sample.textContent=$("subtitleText").value.trim()||"မြန်မာစာတန်းထိုး စမ်းသပ်စာသား";
+}
+["subtitleFont","subtitleSize","subtitleColor","subtitleWeight","subtitleText"].forEach(id=>{
+ $(id).addEventListener("input",refreshFontSample);
+});
+document.querySelectorAll("#textSwatches button").forEach(btn=>{
+ btn.addEventListener("click",()=>{
+  $("subtitleColor").value=btn.dataset.color;
+  refreshFontSample();
+ });
+});
+$("subtitleBgPreset").addEventListener("change",()=>{
+ if($("subtitleBgPreset").value!=="custom"&&$("subtitleBgPreset").value!=="transparent"){
+  $("subtitleBgColor").value=$("subtitleBgPreset").value;
+ }
+});
+$("subtitleBgOpacity").addEventListener("input",()=>{
+ $("subtitleBgOpacityText").textContent=$("subtitleBgOpacity").value+"%";
+});
+$("subtitleBgRadius").addEventListener("input",()=>{
+ $("subtitleBgRadiusText").textContent=$("subtitleBgRadius").value;
+});
+refreshFontSample();
+
 async function exportVideo(){
  const v=$("preview");if(!v.src||!v.videoWidth){alert("အရင်ဆုံး Video File တင်ပါ။");return;}
  if(!window.MediaRecorder){alert("ဒီ Browser က Video Export မထောက်ပံ့ပါ။");return;}
