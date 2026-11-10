@@ -12,16 +12,16 @@
 body{
  margin:0;
  background:#0d1018;
- color:white;
+ color:#fff;
  font-family:Arial,sans-serif;
 }
 header{
- background:linear-gradient(120deg,#30236b,#111827);
- padding:20px;
+ padding:22px 12px;
  text-align:center;
+ background:linear-gradient(120deg,#392477,#101827);
 }
-header h1{margin:0;font-size:24px}
-header p{color:#c7c7d8;font-size:12px}
+header h1{margin:0;font-size:25px}
+header p{color:#c8c6dc;font-size:12px}
 main{max-width:900px;margin:auto;padding:14px}
 .card{
  background:#191f2d;
@@ -33,9 +33,9 @@ main{max-width:900px;margin:auto;padding:14px}
 h2{font-size:17px;margin-top:0}
 label{
  display:block;
- color:#b9c1d0;
  font-size:13px;
- margin:10px 0 5px;
+ color:#bdc5d5;
+ margin:12px 0 6px;
 }
 input,select,textarea{
  width:100%;
@@ -45,30 +45,34 @@ input,select,textarea{
  border:1px solid #39445a;
  border-radius:8px;
 }
-textarea{min-height:100px}
-button{
+textarea{min-height:90px}
+button,.api-link{
+ display:inline-block;
  padding:12px;
  border:0;
  border-radius:8px;
  background:#806bff;
  color:white;
  font-weight:bold;
+ text-align:center;
+ text-decoration:none;
  cursor:pointer;
  margin-top:8px;
 }
-button.secondary{background:#354057}
-button.danger{background:#a33b50}
+.api-link{width:100%;padding:15px}
+.secondary{background:#354057}
+.danger{background:#a33b50}
 .row{display:flex;gap:8px;flex-wrap:wrap}
 .row>*{flex:1}
-video{width:100%;background:black;margin-top:10px;border-radius:10px}
+video{width:100%;background:#000;margin-top:10px;border-radius:10px}
+audio{width:100%;margin-top:8px}
 .segment{
  background:#101725;
- padding:12px;
- border-radius:10px;
- margin-top:10px;
  border:1px solid #354057;
+ border-radius:10px;
+ padding:12px;
+ margin-top:10px;
 }
-audio{width:100%;margin-top:10px}
 .status{font-size:12px;color:#aab3c5;margin-top:10px;white-space:pre-wrap}
 .notice{
  background:#39301b;
@@ -76,7 +80,7 @@ audio{width:100%;margin-top:10px}
  border-radius:8px;
  font-size:12px;
  color:#ffe6a0;
- line-height:1.6;
+ line-height:1.7;
 }
 #preview{
  text-align:center;
@@ -94,6 +98,7 @@ audio{width:100%;margin-top:10px}
  margin-top:10px;
 }
 #bar{height:100%;width:0;background:#35d49a}
+small{color:#aab3c5}
 </style>
 </head>
 
@@ -101,44 +106,57 @@ audio{width:100%;margin-top:10px}
 
 <header>
 <h1>🎬 MM MOVIE RECAP</h1>
-<p>Myanmar Movie Recap Studio</p>
+<p>Myanmar AI Movie Recap Studio</p>
 </header>
 
 <main>
 
-<!-- API KEY -->
+<!-- GEMINI API -->
+
 <div class="card">
+
 <h2>🔑 Gemini API Settings</h2>
 
-<label>Gemini API Key</label>
-<input type="password" id="apiKey"
-placeholder="Enter Gemini API Key">
+<div class="notice">
+Gemini API Key မရှိသေးသူများ အောက်ပါခလုတ်ကို နှိပ်ပြီး Google AI Studio မှာ အခမဲ့အသုံးပြုခွင့်ရှိတဲ့ API Key ရယူနိုင်ပါတယ်။ Free Tier သည် သတ်မှတ်ထားသော Quota အတွင်းသာ အသုံးပြုနိုင်ပါတယ်။
+</div>
 
-<label>Voice Model</label>
+<a class="api-link"
+href="https://aistudio.google.com/api-keys"
+target="_blank"
+rel="noopener noreferrer">
+🔑 Gemini API Key ရယူရန်
+</a>
+
+<label>Gemini API Key ထည့်ရန်</label>
+
+<input type="password" id="apiKey"
+placeholder="Paste your Gemini API Key">
+
+<div class="row">
+<button onclick="saveKey()">💾 API Key သိမ်းရန်</button>
+<button class="secondary" onclick="testAPI()">🧪 API စမ်းသပ်ရန်</button>
+</div>
+
+<div id="apiStatus" class="status"></div>
+
+<label>TTS Model</label>
+
 <select id="model">
 <option value="gemini-3.1-flash-tts-preview">
 Gemini 3.1 Flash TTS
 </option>
 </select>
 
-<div class="row">
-<button onclick="saveKey()">Save API Key</button>
-<button class="secondary" onclick="testAPI()">Test API</button>
-</div>
-
-<div class="notice">
-Gemini API Key ကို Google AI Studio မှာ ရယူနိုင်ပါတယ်။
-Free Tier အသုံးပြုခွင့်နဲ့ Quota က အကောင့်နှင့် Model အလိုက် ကွာခြားနိုင်ပါတယ်။
-ကိုယ်ပိုင် Key ကို အခြားသူများထံ မမျှဝေပါနှင့်။
-</div>
-
-<div id="apiStatus" class="status"></div>
 </div>
 
 <!-- VIDEO -->
+
 <div class="card">
+
 <h2>🎞️ Video Editor</h2>
 
+<label>Video ထည့်ရန်</label>
 <input type="file" id="videoFile" accept="video/*">
 
 <video id="video" controls playsinline></video>
@@ -153,25 +171,29 @@ Free Tier အသုံးပြုခွင့်နဲ့ Quota က အကေ�
 
 <label>Original Video Volume</label>
 <input type="range" id="originalVolume"
-min="0" max="1" step="0.05" value="0.2">
+min="0" max="1" step=".05" value=".2">
+
 </div>
 
 <!-- SUBTITLE -->
+
 <div class="card">
+
 <h2>📝 Myanmar Subtitle</h2>
 
-<label>Import SRT File</label>
+<label>SRT File ထည့်ရန်</label>
 <input type="file" id="srtFile" accept=".srt">
 
-<button onclick="loadSRT()">Import Subtitle</button>
+<button onclick="loadSRT()">📥 Import SRT</button>
 
-<label>စာသားထည့်ရန်</label>
+<label>Recap စာသားရေးရန်</label>
+
 <textarea id="rawText"
 placeholder="မြန်မာ Movie Recap စာသားများ ထည့်ပါ..."></textarea>
 
 <div class="row">
-<button onclick="createLines()">Create Subtitles</button>
-<button class="secondary" onclick="addLine()">Add Line +</button>
+<button onclick="createLines()">Create Subtitle</button>
+<button class="secondary" onclick="addLine()">+ Add Line</button>
 </div>
 
 <div id="preview">Subtitle Preview</div>
@@ -185,23 +207,28 @@ placeholder="မြန်မာ Movie Recap စာသားများ ထည�
 <option value="yellow">Yellow</option>
 <option value="cyan">Cyan</option>
 </select>
+
 </div>
 
-<!-- TTS -->
+<!-- AI VOICE -->
+
 <div class="card">
+
 <h2>🎙️ Myanmar AI Voice Generator</h2>
 
 <label>Voice Type</label>
+
 <select id="voice">
-<option value="Kore">Female Voice - Kore</option>
-<option value="Aoede">Female Voice - Aoede</option>
-<option value="Zephyr">Female Voice - Zephyr</option>
-<option value="Puck">Male Voice - Puck</option>
-<option value="Charon">Male Voice - Charon</option>
-<option value="Fenrir">Male Voice - Fenrir</option>
+<option value="Kore">Female - Kore</option>
+<option value="Aoede">Female - Aoede</option>
+<option value="Zephyr">Female - Zephyr</option>
+<option value="Puck">Male - Puck</option>
+<option value="Charon">Male - Charon</option>
+<option value="Fenrir">Male - Fenrir</option>
 </select>
 
 <label>Voice Style</label>
+
 <select id="style">
 <option>Natural Myanmar Movie Recap Narration</option>
 <option>Emotional Movie Recap Narration</option>
@@ -210,25 +237,34 @@ placeholder="မြန်မာ Movie Recap စာသားများ ထည�
 </select>
 
 <div class="row">
-<button onclick="generateAll()">Generate All Voice</button>
+<button onclick="generateAll()">🎙️ Generate All Voice</button>
 <button class="danger" onclick="stopGeneration()">Stop</button>
 </div>
 
 <div id="progress"><div id="bar"></div></div>
+
 <div id="ttsStatus" class="status"></div>
+
 </div>
 
 <!-- TIMELINE -->
+
 <div class="card">
+
 <h2>📚 Subtitle Timeline</h2>
+
 <div id="segments"></div>
+
 </div>
 
 <!-- EXPORT -->
+
 <div class="card">
+
 <h2>📤 Export Video</h2>
 
 <label>Video Quality</label>
+
 <select id="quality">
 <option value="1">360p</option>
 <option value="1.5">540p</option>
@@ -239,17 +275,21 @@ placeholder="မြန်မာ Movie Recap စာသားများ ထည�
 <input type="range" id="voiceVolume"
 min="0" max="1.5" step=".05" value="1">
 
-<button onclick="exportVideo()">Export Video</button>
-<button class="secondary" onclick="downloadSRT()">Download SRT</button>
+<button onclick="startExport()">📥 Export Video</button>
+
+<button class="secondary" onclick="downloadSRT()">
+Download SRT
+</button>
 
 <div id="exportStatus" class="status"></div>
+
 </div>
 
 </main>
 
 <script>
 
-const $ = id => document.getElementById(id);
+const $=id=>document.getElementById(id);
 
 let lines=[];
 let stop=false;
@@ -258,63 +298,101 @@ let videoURL=null;
 $('apiKey').value=localStorage.getItem('mm_api_key')||'';
 
 function saveKey(){
+
  const key=$('apiKey').value.trim();
+
  if(!key)return alert('API Key ထည့်ပါ။');
+
  localStorage.setItem('mm_api_key',key);
- $('apiStatus').textContent='API Key Saved';
+
+ $('apiStatus').textContent='API Key သိမ်းပြီးပါပြီ။';
+
 }
 
 $('videoFile').onchange=e=>{
+
  const file=e.target.files[0];
+
  if(!file)return;
+
  if(videoURL)URL.revokeObjectURL(videoURL);
+
  videoURL=URL.createObjectURL(file);
+
  $('video').src=videoURL;
+
 };
 
 function parseTime(t){
+
  const a=t.trim().replace(',','.').split(':');
+
  return Number(a[0])*3600+
- Number(a[1])*60+Number(a[2]);
+ Number(a[1])*60+
+ Number(a[2]);
+
 }
 
 function loadSRT(){
+
  const file=$('srtFile').files[0];
+
  if(!file)return alert('SRT File ရွေးပါ။');
 
  const reader=new FileReader();
 
  reader.onload=()=>{
-  const blocks=reader.result.trim().replace(/\r/g,'').split(/\n\s*\n/);
+
+  const blocks=reader.result
+  .trim()
+  .replace(/\r/g,'')
+  .split(/\n\s*\n/);
+
   lines=[];
 
   blocks.forEach(block=>{
+
    const arr=block.split('\n');
+
    const index=arr.findIndex(x=>x.includes('-->'));
+
    if(index<0)return;
 
    const times=arr[index].split('-->');
 
    lines.push({
+
     start:parseTime(times[0]),
     end:parseTime(times[1]),
     text:arr.slice(index+1).join('\n'),
     blob:null,
     url:null
+
    });
+
   });
 
   render();
-  $('ttsStatus').textContent=lines.length+' subtitles imported';
+
+  $('ttsStatus').textContent=
+  lines.length+' subtitles imported';
+
  };
+
  reader.readAsText(file);
+
 }
 
 function createLines(){
- const arr=$('rawText').value.split('\n').filter(x=>x.trim());
+
+ const arr=$('rawText').value
+ .split('\n')
+ .filter(x=>x.trim());
+
  let t=0;
 
  lines=arr.map(text=>{
+
   const item={
    start:t,
    end:t+5,
@@ -322,69 +400,110 @@ function createLines(){
    blob:null,
    url:null
   };
+
   t+=5.2;
+
   return item;
+
  });
 
  render();
+
 }
 
 function addLine(){
- const t=lines.length?lines[lines.length-1].end+0.2:0;
+
+ const t=lines.length?
+ lines[lines.length-1].end+.2:0;
+
  lines.push({
+
   start:t,
   end:t+5,
   text:'',
   blob:null,
   url:null
+
  });
+
  render();
+
 }
 
 function render(){
+
  const host=$('segments');
+
  host.innerHTML='';
 
  lines.forEach((l,i)=>{
+
   const div=document.createElement('div');
+
   div.className='segment';
 
   div.innerHTML=`
+
   <b>အပိုင်း ${i+1}</b>
 
   <label>Start Time</label>
-  <input type="number" step=".1" value="${l.start}" data-i="${i}" data-k="start">
+  <input type="number" step=".1"
+  value="${l.start}" data-i="${i}" data-k="start">
 
   <label>End Time</label>
-  <input type="number" step=".1" value="${l.end}" data-i="${i}" data-k="end">
+  <input type="number" step=".1"
+  value="${l.end}" data-i="${i}" data-k="end">
 
   <label>Myanmar Text</label>
   <textarea data-i="${i}" data-k="text"></textarea>
 
   <div class="row">
-   <button data-act="voice" data-i="${i}">Generate Voice</button>
-   <button class="secondary" data-act="play" data-i="${i}">Preview</button>
-   <button class="danger" data-act="delete" data-i="${i}">Delete</button>
+  <button data-act="voice" data-i="${i}">
+  Generate Voice
+  </button>
+
+  <button class="secondary"
+  data-act="play" data-i="${i}"
+  ${l.url?'':'disabled'}>
+  Preview
+  </button>
+
+  <button class="danger"
+  data-act="delete" data-i="${i}">
+  Delete
+  </button>
   </div>
 
   ${l.url?'<audio controls src="'+l.url+'"></audio>':''}
+
   `;
 
   div.querySelector('textarea').value=l.text;
+
   host.appendChild(div);
+
  });
 
  host.querySelectorAll('[data-k]').forEach(el=>{
+
   el.onchange=()=>{
+
    const l=lines[Number(el.dataset.i)];
+
    const k=el.dataset.k;
+
    l[k]=k==='text'?el.value:Number(el.value);
+
   };
+
  });
 
  host.querySelectorAll('[data-act]').forEach(btn=>{
+
   btn.onclick=async()=>{
+
    const i=Number(btn.dataset.i);
+
    const action=btn.dataset.act;
 
    if(action==='voice')await generateOne(i);
@@ -394,105 +513,159 @@ function render(){
    }
 
    if(action==='delete'){
+
     lines.splice(i,1);
+
     render();
+
    }
+
   };
+
  });
 
  updateSubtitle();
+
 }
 
 async function callTTS(text){
 
  const key=$('apiKey').value.trim();
+
  if(!key)throw Error('Gemini API Key မရှိပါ။');
 
  const model=$('model').value;
+
  const voice=$('voice').value;
 
  const prompt=
  `${$('style').value}။ မြန်မာဘာသာစကားဖြင့် အောက်ပါစာသားကို သဘာဝကျကျ ဖတ်ပါ။ စာသားအသစ် မထည့်ပါနှင့်။\n${text}`;
 
  const response=await fetch(
+
  `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(key)}`,
+
  {
+
   method:'POST',
+
   headers:{'Content-Type':'application/json'},
+
   body:JSON.stringify({
+
    contents:[{
     parts:[{text:prompt}]
    }],
+
    generationConfig:{
+
     responseModalities:['AUDIO'],
+
     speechConfig:{
+
      voiceConfig:{
-      prebuiltVoiceConfig:{voiceName:voice}
+
+      prebuiltVoiceConfig:{
+       voiceName:voice
+      }
+
      }
+
     }
+
    }
+
   })
+
  }
+
  );
 
  const data=await response.json();
 
  if(!response.ok){
+
   throw Error(data.error?.message||'Gemini API Error');
+
  }
 
  const part=data.candidates?.[0]?.content?.parts?.find(
-  p=>p.inlineData?.data
+ p=>p.inlineData?.data
  );
 
  if(!part)throw Error('Audio data မရရှိပါ။');
 
  return makeWav(
-  part.inlineData.data,
-  part.inlineData.mimeType||'audio/pcm'
+ part.inlineData.data,
+ part.inlineData.mimeType||'audio/pcm'
  );
+
 }
 
 function makeWav(base64,mime){
 
  const raw=Uint8Array.from(
-  atob(base64),c=>c.charCodeAt(0)
+ atob(base64),c=>c.charCodeAt(0)
  );
 
- if(mime.includes('wav'))return new Blob([raw],{type:'audio/wav'});
+ if(mime.includes('wav')){
+  return new Blob([raw],{type:'audio/wav'});
+ }
 
  const header=new ArrayBuffer(44);
+
  const view=new DataView(header);
 
  function write(offset,str){
+
   for(let i=0;i<str.length;i++){
+
    view.setUint8(offset+i,str.charCodeAt(i));
+
   }
+
  }
 
  const rate=24000;
 
  write(0,'RIFF');
+
  view.setUint32(4,36+raw.length,true);
+
  write(8,'WAVE');
+
  write(12,'fmt ');
+
  view.setUint32(16,16,true);
+
  view.setUint16(20,1,true);
+
  view.setUint16(22,1,true);
+
  view.setUint32(24,rate,true);
+
  view.setUint32(28,rate*2,true);
+
  view.setUint16(32,2,true);
+
  view.setUint16(34,16,true);
+
  write(36,'data');
+
  view.setUint32(40,raw.length,true);
 
  return new Blob([header,raw],{type:'audio/wav'});
+
 }
 
 async function generateOne(i){
 
  try{
-  $('ttsStatus').textContent=`အပိုင်း ${i+1} အသံထုတ်နေသည်...`;
+
+  if(!lines[i].text.trim())throw Error('စာသားမရှိပါ။');
+
+  $('ttsStatus').textContent=
+  `အပိုင်း ${i+1} အသံထုတ်နေသည်...`;
 
   const blob=await callTTS(lines[i].text);
 
@@ -504,11 +677,15 @@ async function generateOne(i){
 
   render();
 
-  $('ttsStatus').textContent=`အပိုင်း ${i+1} အသံထုတ်ပြီးပါပြီ။`;
+  $('ttsStatus').textContent=
+  `အပိုင်း ${i+1} အသံထုတ်ပြီးပါပြီ။`;
 
  }catch(e){
+
   $('ttsStatus').textContent='Error: '+e.message;
+
  }
+
 }
 
 async function generateAll(){
@@ -522,12 +699,14 @@ async function generateAll(){
  for(let i=0;i<lines.length;i++){
 
   if(stop)break;
+
   if(!lines[i].text.trim())continue;
 
   $('ttsStatus').textContent=
   `Generating ${i+1}/${lines.length}`;
 
   try{
+
    const blob=await callTTS(lines[i].text);
 
    lines[i].blob=blob;
@@ -544,37 +723,62 @@ async function generateAll(){
    render();
 
   }catch(e){
+
    $('ttsStatus').textContent=e.message;
+
    break;
+
   }
+
  }
 
  $('ttsStatus').textContent=
  `Completed: ${done} voices`;
+
 }
 
 function stopGeneration(){
+
  stop=true;
+
 }
 
 async function testAPI(){
+
  try{
+
   $('apiStatus').textContent='Testing API...';
-  const blob=await callTTS('မင်္ဂလာပါ။ MM Movie Recap မှ ကြိုဆိုပါတယ်။');
+
+  const blob=await callTTS(
+  'မင်္ဂလာပါ။ MM Movie Recap မှ ကြိုဆိုပါတယ်။'
+  );
+
   downloadBlob(blob,'TTS_TEST.wav');
+
   $('apiStatus').textContent='API အောင်မြင်ပါသည်။';
+
  }catch(e){
+
   $('apiStatus').textContent=e.message;
+
  }
+
 }
 
 function downloadBlob(blob,name){
+
  const url=URL.createObjectURL(blob);
+
  const a=document.createElement('a');
+
  a.href=url;
+
  a.download=name;
+
  a.click();
+
  setTimeout(()=>URL.revokeObjectURL(url),3000);
+
 }
 
 function downloadSRT(){
@@ -582,12 +786,17 @@ function downloadSRT(){
  const text=lines.map((l,i)=>{
 
   function fmt(s){
+
    const h=Math.floor(s/3600);
+
    const m=Math.floor(s%3600/60);
+
    const sec=Math.floor(s%60);
+
    const ms=Math.floor(s%1*1000);
 
    return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')},${String(ms).padStart(3,'0')}`;
+
   }
 
   return `${i+1}\n${fmt(l.start)} --> ${fmt(l.end)}\n${l.text}`;
@@ -595,23 +804,33 @@ function downloadSRT(){
  }).join('\n\n');
 
  downloadBlob(
-  new Blob([text],{type:'text/plain;charset=utf-8'}),
-  'MM_MOVIE_RECAP.srt'
+ new Blob([text],{type:'text/plain;charset=utf-8'}),
+ 'MM_MOVIE_RECAP.srt'
  );
+
 }
 
 function updateSubtitle(){
 
  const t=$('video').currentTime||0;
- const line=lines.find(l=>t>=l.start&&t<=l.end);
 
- $('preview').textContent=line?line.text:'Subtitle Preview';
+ const line=lines.find(
+ l=>t>=l.start&&t<=l.end
+ );
+
+ $('preview').textContent=
+ line?line.text:'Subtitle Preview';
+
  $('preview').style.fontSize=$('fontSize').value+'px';
+
  $('preview').style.color=$('fontColor').value;
+
 }
 
 $('video').addEventListener('timeupdate',updateSubtitle);
+
 $('fontSize').oninput=updateSubtitle;
+
 $('fontColor').onchange=updateSubtitle;
 
 async function exportVideo(){
@@ -621,88 +840,99 @@ async function exportVideo(){
  if(!video.src)throw Error('Video ထည့်ပါ။');
 
  if(!lines.some(l=>l.blob))
- throw Error('အသံထုတ်ပြီးမှ Export လုပ်ပါ။');
+ throw Error('Voice အရင်ထုတ်ပါ။');
 
  if(!window.MediaRecorder)
  throw Error('Browser MediaRecorder မပံ့ပိုးပါ။');
 
  const ratio=$('ratio').value.split(':').map(Number);
+
  const scale=Number($('quality').value);
 
  const width=Math.round((ratio[0]>ratio[1]?1280:720)*scale);
+
  const height=Math.round(width*ratio[1]/ratio[0]);
 
  const canvas=document.createElement('canvas');
+
  canvas.width=width;
+
  canvas.height=height;
 
  const ctx=canvas.getContext('2d');
 
  const stream=canvas.captureStream(30);
 
- const audioContext=new AudioContext();
- const destination=audioContext.createMediaStreamDestination();
+ const ac=new AudioContext();
 
- const original=audioContext.createMediaElementSource(video);
- const originalGain=audioContext.createGain();
+ const destination=ac.createMediaStreamDestination();
+
+ const original=ac.createMediaElementSource(video);
+
+ const originalGain=ac.createGain();
 
  originalGain.gain.value=Number($('originalVolume').value);
 
  original.connect(originalGain);
+
  originalGain.connect(destination);
 
- destination.stream.getAudioTracks().forEach(track=>{
-  stream.addTrack(track);
+ destination.stream.getAudioTracks().forEach(t=>{
+ stream.addTrack(t);
  });
 
- const voiceGain=audioContext.createGain();
+ const voiceGain=ac.createGain();
+
  voiceGain.gain.value=Number($('voiceVolume').value);
+
  voiceGain.connect(destination);
 
- const mime='video/webm';
+ const recorder=new MediaRecorder(stream);
 
- const recorder=new MediaRecorder(stream,{mimeType:mime});
  const chunks=[];
 
  recorder.ondataavailable=e=>{
-  if(e.data.size)chunks.push(e.data);
+ if(e.data.size)chunks.push(e.data);
  };
 
  const finished=new Promise(resolve=>{
-  recorder.onstop=()=>resolve(
-   new Blob(chunks,{type:mime})
-  );
+ recorder.onstop=()=>resolve(
+ new Blob(chunks,{type:'video/webm'})
+ );
  });
 
  video.pause();
+
  video.currentTime=0;
 
- await audioContext.resume();
+ await ac.resume();
 
  function draw(){
 
   if(recorder.state!=='recording')return;
 
   ctx.fillStyle='black';
+
   ctx.fillRect(0,0,width,height);
 
-  const scaleFit=Math.min(
-   width/video.videoWidth,
-   height/video.videoHeight
+  const fit=Math.min(
+  width/video.videoWidth,
+  height/video.videoHeight
   );
 
-  const w=video.videoWidth*scaleFit;
-  const h=video.videoHeight*scaleFit;
+  const w=video.videoWidth*fit;
+
+  const h=video.videoHeight*fit;
 
   ctx.drawImage(
-   video,
-   (width-w)/2,
-   (height-h)/2,
-   w,h
+  video,
+  (width-w)/2,
+  (height-h)/2,
+  w,h
   );
 
   const line=lines.find(
-   l=>video.currentTime>=l.start&&video.currentTime<=l.end
+  l=>video.currentTime>=l.start&&video.currentTime<=l.end
   );
 
   if(line){
@@ -710,28 +940,32 @@ async function exportVideo(){
    const size=Number($('fontSize').value)*scale;
 
    ctx.font=`bold ${size}px sans-serif`;
+
    ctx.textAlign='center';
 
    ctx.fillStyle='rgba(0,0,0,.65)';
+
    ctx.fillRect(0,height-size*2.3,width,size*2.3);
 
    ctx.fillStyle=$('fontColor').value;
 
    ctx.fillText(
-    line.text.slice(0,80),
-    width/2,
-    height-size*.5,
-    width*.9
+   line.text.slice(0,80),
+   width/2,
+   height-size*.5,
+   width*.9
    );
+
   }
 
   requestAnimationFrame(draw);
+
  }
 
  recorder.start(250);
+
  video.play();
 
- // Voice-over is scheduled using the video timeline.
  const sources=[];
 
  for(const line of lines){
@@ -739,27 +973,31 @@ async function exportVideo(){
   if(!line.blob)continue;
 
   const array=await line.blob.arrayBuffer();
-  const buffer=await audioContext.decodeAudioData(array);
 
-  const source=audioContext.createBufferSource();
+  const buffer=await ac.decodeAudioData(array);
+
+  const source=ac.createBufferSource();
+
   source.buffer=buffer;
+
   source.connect(voiceGain);
 
   sources.push({source,time:line.start});
+
  }
 
- const startTime=audioContext.currentTime;
+ const startTime=ac.currentTime;
 
  sources.forEach(item=>{
-  item.source.start(startTime+item.time);
+ item.source.start(startTime+item.time);
  });
 
  requestAnimationFrame(draw);
 
- $('exportStatus').textContent='Exporting video...';
+ $('exportStatus').textContent='Exporting...';
 
  await new Promise(resolve=>{
-  video.addEventListener('ended',resolve,{once:true});
+ video.addEventListener('ended',resolve,{once:true});
  });
 
  recorder.stop();
@@ -767,21 +1005,29 @@ async function exportVideo(){
  const result=await finished;
 
  video.pause();
- audioContext.close();
+
+ await ac.close();
 
  downloadBlob(result,'MM_MOVIE_RECAP.webm');
 
  $('exportStatus').textContent='Export Completed!';
+
 }
 
 async function startExport(){
 
  try{
+
   $('exportStatus').textContent='Preparing...';
+
   await exportVideo();
+
  }catch(e){
+
   $('exportStatus').textContent='Error: '+e.message;
+
  }
+
 }
 
 render();
