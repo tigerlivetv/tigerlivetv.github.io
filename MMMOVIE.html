@@ -3,1036 +3,609 @@
 <html lang="my">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#10131c">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MM MOVIE RECAP</title>
-
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;
- background:#0d1018;
- color:#fff;
- font-family:Arial,sans-serif;
-}
-header{
- padding:22px 12px;
- text-align:center;
- background:linear-gradient(120deg,#392477,#101827);
-}
+body{margin:0;background:#0b1020;color:#f4f5fa;font-family:Arial,"Noto Sans Myanmar",sans-serif}
+header{padding:22px 12px;text-align:center;background:linear-gradient(120deg,#24134f,#7545d6)}
 header h1{margin:0;font-size:25px}
-header p{color:#c8c6dc;font-size:12px}
-main{max-width:900px;margin:auto;padding:14px}
-.card{
- background:#191f2d;
- border:1px solid #30394d;
- border-radius:14px;
- padding:15px;
- margin-bottom:15px;
-}
-h2{font-size:17px;margin-top:0}
-label{
- display:block;
- font-size:13px;
- color:#bdc5d5;
- margin:12px 0 6px;
-}
-input,select,textarea{
- width:100%;
- padding:12px;
- background:#0e1420;
- color:white;
- border:1px solid #39445a;
- border-radius:8px;
-}
-textarea{min-height:90px}
-button,.api-link{
- display:inline-block;
- padding:12px;
- border:0;
- border-radius:8px;
- background:#806bff;
- color:white;
- font-weight:bold;
- text-align:center;
- text-decoration:none;
- cursor:pointer;
- margin-top:8px;
-}
-.api-link{width:100%;padding:15px}
-.secondary{background:#354057}
-.danger{background:#a33b50}
-.row{display:flex;gap:8px;flex-wrap:wrap}
-.row>*{flex:1}
-video{width:100%;background:#000;margin-top:10px;border-radius:10px}
-audio{width:100%;margin-top:8px}
-.segment{
- background:#101725;
- border:1px solid #354057;
- border-radius:10px;
- padding:12px;
- margin-top:10px;
-}
-.status{font-size:12px;color:#aab3c5;margin-top:10px;white-space:pre-wrap}
-.notice{
- background:#39301b;
- padding:12px;
- border-radius:8px;
- font-size:12px;
- color:#ffe6a0;
- line-height:1.7;
-}
-#preview{
- text-align:center;
- background:#080808;
- padding:15px;
- font-weight:bold;
- margin-top:10px;
- min-height:45px;
-}
-#progress{
- height:8px;
- background:#30394d;
- border-radius:10px;
- overflow:hidden;
- margin-top:10px;
-}
-#bar{height:100%;width:0;background:#35d49a}
-small{color:#aab3c5}
+header p{font-size:12px;color:#e0d7ff;margin:8px 0 0}
+main{max-width:900px;margin:auto;padding:12px}
+.card{background:#171e32;border:1px solid #303b58;border-radius:14px;padding:15px;margin-bottom:14px}
+h2{font-size:17px;color:#c4b5fd;margin:0 0 13px}
+h3{font-size:14px;color:#d7d0ff}
+label{display:block;font-size:13px;color:#cbd5e1;margin:12px 0 6px}
+input,select,textarea{width:100%;padding:11px;border-radius:8px;border:1px solid #3b4968;background:#0c1427;color:white;font-size:14px}
+textarea{min-height:90px;line-height:1.8}
+button{border:0;border-radius:9px;padding:12px;background:#7652d9;color:white;font-weight:bold;font-size:13px;cursor:pointer}
+button:disabled{opacity:.45}
+button.green{background:#16875d}
+button.red{background:#a83e55}
+button.gray{background:#34415e}
+button.orange{background:#ad6a25}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.row button{flex:1}
+.api-button{display:block;text-align:center;padding:16px;border:2px solid #b5a5ff;border-radius:11px;background:#7354dd;color:white;text-decoration:none;font-weight:bold;margin-bottom:13px}
+.small{font-size:12px;color:#a4b0c7;line-height:1.7}
+.status{background:#0c1427;padding:11px;border-radius:8px;font-size:12px;line-height:1.7;white-space:pre-wrap;margin-top:10px;color:#c7baff}
+video{width:100%;max-height:420px;background:#000;border-radius:9px}
+canvas{width:100%;display:block;background:#000}
+.preview{border-radius:10px;overflow:hidden;background:#000}
+.item{background:#0c1427;padding:11px;border-radius:9px;margin-top:9px;border:1px solid #34405a}
+.item textarea{min-height:65px;margin-top:7px}
+.item button{margin-top:7px}
+.audio-item{padding:10px;background:#0c1427;border-radius:8px;margin-top:9px}
+audio{width:100%;margin-top:7px}
+input[type=range]{padding:0}
+.value{color:#c4b5fd;font-size:12px}
+hr{border:0;border-top:1px solid #303b58;margin:15px 0}
+footer{text-align:center;color:#78839d;font-size:12px;padding:20px}
 </style>
 </head>
-
 <body>
-
 <header>
 <h1>🎬 MM MOVIE RECAP</h1>
-<p>Myanmar AI Movie Recap Studio</p>
+<p>VIDEO DOWNLOADER • SUBTITLE • AI VOICE • COLOR EDITOR</p>
 </header>
 
 <main>
 
-<!-- GEMINI API -->
-
-<div class="card">
-
-<h2>🔑 Gemini API Settings</h2>
-
-<div class="notice">
-Gemini API Key မရှိသေးသူများ အောက်ပါခလုတ်ကို နှိပ်ပြီး Google AI Studio မှာ အခမဲ့အသုံးပြုခွင့်ရှိတဲ့ API Key ရယူနိုင်ပါတယ်။ Free Tier သည် သတ်မှတ်ထားသော Quota အတွင်းသာ အသုံးပြုနိုင်ပါတယ်။
-</div>
-
-<a class="api-link"
-href="https://aistudio.google.com/api-keys"
-target="_blank"
-rel="noopener noreferrer">
-🔑 Gemini API Key ရယူရန်
+<section class="card">
+<h2>🔑 GEMINI API KEY</h2>
+<a class="api-button" href="https://aistudio.google.com/api-keys" target="_blank" rel="noopener">
+🔑 API KEY ရယူရန် ဒီမှာနှိပ်ပါ
 </a>
-
-<label>Gemini API Key ထည့်ရန်</label>
-
-<input type="password" id="apiKey"
-placeholder="Paste your Gemini API Key">
-
+<label>Gemini API Key</label>
+<input id="apiKey" type="password" placeholder="Gemini API Key ထည့်ပါ">
 <div class="row">
-<button onclick="saveKey()">💾 API Key သိမ်းရန်</button>
-<button class="secondary" onclick="testAPI()">🧪 API စမ်းသပ်ရန်</button>
+<button onclick="saveKey()">💾 သိမ်းမယ်</button>
+<button class="gray" onclick="toggleKey()">👁 ကြည့်မယ်</button>
+<button class="green" onclick="testAPI()">API စမ်းမယ်</button>
 </div>
-
-<div id="apiStatus" class="status"></div>
-
 <label>TTS Model</label>
-
-<select id="model">
-<option value="gemini-3.1-flash-tts-preview">
-Gemini 3.1 Flash TTS
-</option>
+<select id="ttsModel">
+<option value="gemini-3.1-flash-tts-preview">Gemini Flash TTS Preview</option>
 </select>
+<div id="apiStatus" class="status">API Key မထည့်ရသေးပါ။</div>
+<p class="small">API Key ကို ကိုယ့်ဖုန်းမှာသာ သိမ်းထားပါ။ အများသုံး Website ပေါ်သို့ တင်မည်ဆိုပါက Server-side API လုံခြုံရေး စီစဉ်ပါ။</p>
+</section>
 
+<section class="card">
+<h2>⬇️ VIDEO DOWNLOADER</h2>
+<label>တိုက်ရိုက် Download လုပ်နိုင်သော Video URL</label>
+<input id="videoUrl" type="url" placeholder="https://example.com/video.mp4">
+<div class="row">
+<button onclick="downloadDirect()">⬇️ Video Download</button>
+<button class="gray" onclick="loadVideoUrl()">▶ URL ဖြင့် ဖွင့်မယ်</button>
 </div>
-
-<!-- VIDEO -->
-
-<div class="card">
-
-<h2>🎞️ Video Editor</h2>
-
-<label>Video ထည့်ရန်</label>
+<p class="small">MP4/WebM တိုက်ရိုက်ဖိုင် URL များကို အသုံးပြုပါ။ Website တချို့တွင် CORS ကန့်သတ်ချက်ကြောင့် Browser မှ Download မရနိုင်ပါ။</p>
+<hr>
+<label>ဖုန်းထဲမှ Video ထည့်ရန်</label>
 <input type="file" id="videoFile" accept="video/*">
-
+<div style="margin-top:12px">
 <video id="video" controls playsinline></video>
+</div>
+<div class="row">
+<button class="gray" onclick="video.play()">▶ ဖွင့်မယ်</button>
+<button class="gray" onclick="video.pause()">⏸ ရပ်မယ်</button>
+<button class="red" onclick="resetVideo()">ဖယ်ရှားမယ်</button>
+</div>
+</section>
 
+<section class="card">
+<h2>🧹 မူရင်းစာတန်း ဖျောက်ရန်</h2>
+<label>ဖျောက်နည်း</label>
+<select id="maskMode">
+<option value="none">မဖျောက်ပါ</option>
+<option value="cover">အရောင်နဲ့ ဖုံးမယ်</option>
+<option value="blur">Blur လုပ်မယ်</option>
+</select>
+<label>ဖျောက်မည့်နေရာ အမြင့် <span id="maskHeightVal" class="value">15%</span></label>
+<input id="maskHeight" type="range" min="5" max="40" value="15">
+<label>ဖျောက်မည့်နေရာ အောက်ဘက်မှ အကွာအဝေး <span id="maskBottomVal" class="value">3%</span></label>
+<input id="maskBottom" type="range" min="0" max="40" value="3">
+<label>ဖုံးမည့်အရောင်</label>
+<input id="maskColor" type="color" value="#000000">
+<p class="small">မူရင်းစာတန်းရှိတဲ့နေရာကို ရွေးပြီး ဖုံးပါ။ Blur က စာလုံးကို မှုန်ဝါးစေခြင်းသာဖြစ်ပြီး ပုံရိပ်ထဲက စာသားကို အမှန်တကယ်ပြန်ဖျက်ခြင်း မဟုတ်ပါ။</p>
+</section>
+
+<section class="card">
+<h2>📝 မြန်မာစာတန်းထိုး</h2>
+<label>SRT ဖိုင် ထည့်ရန်</label>
+<input id="srtFile" type="file" accept=".srt,.txt">
+<label>စာတန်းအသစ် ရိုက်ထည့်ရန်</label>
+<textarea id="newSubtitle" placeholder="မြန်မာစာတန်းထိုး ရေးပါ..."></textarea>
+<div class="row">
+<button onclick="addSubtitle()">➕ စာတန်းထည့်မယ်</button>
+<button class="gray" onclick="exportSRT()">⬇️ SRT ထုတ်မယ်</button>
+<button class="red" onclick="clearSubtitles()">အားလုံးဖျက်မယ်</button>
+</div>
+<label>စာတန်း အရွယ်အစား</label>
+<input id="fontSize" type="range" min="18" max="65" value="34">
+<label>စာတန်း အရောင်</label>
+<select id="fontColor">
+<option value="#ffffff">အဖြူ</option>
+<option value="#ffff00">အဝါ</option>
+<option value="#00ffff">အပြာနု</option>
+<option value="#ffcc00">ရွှေရောင်</option>
+</select>
+<label>စာတန်း နောက်ခံ</label>
+<select id="subBg">
+<option value="rgba(0,0,0,.7)">အနက်ရောင်</option>
+<option value="transparent">နောက်ခံမပါ</option>
+<option value="rgba(50,20,100,.8)">ခရမ်းရောင်</option>
+</select>
+<label>စာတန်းနေရာ</label>
+<select id="subPosition">
+<option value="bottom">အောက်ခြေ</option>
+<option value="center">အလယ်</option>
+<option value="top">အပေါ်ခြေ</option>
+</select>
+<div id="subtitleList"></div>
+<div id="subStatus" class="status">SRT မထည့်ရသေးပါ။</div>
+</section>
+
+<section class="card">
+<h2>🎨 VIDEO COLOR EDITOR</h2>
+<label>Brightness <span id="brightVal" class="value">100%</span></label>
+<input id="brightness" type="range" min="0" max="200" value="100">
+<label>Contrast <span id="contrastVal" class="value">100%</span></label>
+<input id="contrast" type="range" min="0" max="200" value="100">
+<label>Saturation <span id="satVal" class="value">100%</span></label>
+<input id="saturation" type="range" min="0" max="250" value="100">
+<label>Grayscale <span id="grayVal" class="value">0%</span></label>
+<input id="grayscale" type="range" min="0" max="100" value="0">
+<label>Sepia <span id="sepiaVal" class="value">0%</span></label>
+<input id="sepia" type="range" min="0" max="100" value="0">
+<label>Blur <span id="blurVal" class="value">0px</span></label>
+<input id="blur" type="range" min="0" max="8" value="0">
+<label>Color Preset</label>
+<select id="preset">
+<option value="normal">Normal</option>
+<option value="cinema">Cinema</option>
+<option value="warm">Warm</option>
+<option value="cool">Cool</option>
+<option value="vintage">Vintage</option>
+<option value="bw">Black & White</option>
+</select>
+<button class="gray" style="width:100%;margin-top:12px" onclick="resetColor()">↺ Color Reset</button>
+</section>
+
+<section class="card">
+<h2>🎙 GEMINI AI VOICE</h2>
+<label>Voice ရွေးရန်</label>
+<select id="voiceName">
+<option value="Charon">အမျိုးသားဆန်သော အသံ - Charon</option>
+<option value="Fenrir">အမျိုးသားဆန်သော အသံ - Fenrir</option>
+<option value="Kore">အမျိုးသမီးဆန်သော အသံ - Kore</option>
+<option value="Aoede">အမျိုးသမီးဆန်သော အသံ - Aoede</option>
+<option value="Puck">Puck</option>
+<option value="Zephyr">Zephyr</option>
+</select>
+<label>အသံပုံစံ</label>
+<select id="voiceStyle">
+<option value="သဘာဝကျပြီး ရှင်းလင်းသော မြန်မာ Movie Recap narrator ပုံစံဖြင့် ဖတ်ပါ။">Movie Recap</option>
+<option value="စိတ်လှုပ်ရှားဖွယ် ခံစားချက်အပြည့်ဖြင့် မြန်မာဘာသာစကားဖြင့် ဖတ်ပါ။">စိတ်လှုပ်ရှားဖွယ်</option>
+<option value="တည်ငြိမ်နူးညံ့သော မြန်မာအသံဖြင့် ဖတ်ပါ။">နူးညံ့တည်ငြိမ်</option>
+<option value="ဝမ်းနည်းကြေကွဲဖွယ် ခံစားချက်ပါသော မြန်မာအသံဖြင့် ဖတ်ပါ။">ဝမ်းနည်းဖွယ်</option>
+</select>
+<label>အသံထုတ်မည့် စာသား</label>
+<textarea id="voiceText" placeholder="ဇာတ်လမ်းပြောစာသား ထည့်ပါ..."></textarea>
+<div class="row">
+<button onclick="makeSingleVoice()">🎤 အသံထုတ်မယ်</button>
+<button class="green" onclick="makeAllVoices()">စာတန်းအားလုံး အသံထုတ်မယ်</button>
+</div>
+<div id="voiceStatus" class="status">အသံမထုတ်ရသေးပါ။</div>
+<div id="audioList"></div>
+</section>
+
+<section class="card">
+<h2>🔊 AUDIO MIXER</h2>
+<label>မူရင်း Video အသံ <span id="originalVolVal" class="value">25%</span></label>
+<input id="originalVolume" type="range" min="0" max="100" value="25">
+<label>AI Voice အသံ <span id="aiVolVal" class="value">100%</span></label>
+<input id="aiVolume" type="range" min="0" max="200" value="100">
+</section>
+
+<section class="card">
+<h2>👀 VIDEO PREVIEW</h2>
+<div class="preview"><canvas id="renderCanvas" width="720" height="405"></canvas></div>
 <label>Video Ratio</label>
 <select id="ratio">
-<option value="9:16">9:16 Portrait</option>
-<option value="16:9">16:9 Landscape</option>
+<option value="16:9">16:9 YouTube</option>
+<option value="9:16">9:16 TikTok / Shorts</option>
 <option value="1:1">1:1 Square</option>
 <option value="4:3">4:3</option>
 </select>
+</section>
 
-<label>Original Video Volume</label>
-<input type="range" id="originalVolume"
-min="0" max="1" step=".05" value=".2">
-
-</div>
-
-<!-- SUBTITLE -->
-
-<div class="card">
-
-<h2>📝 Myanmar Subtitle</h2>
-
-<label>SRT File ထည့်ရန်</label>
-<input type="file" id="srtFile" accept=".srt">
-
-<button onclick="loadSRT()">📥 Import SRT</button>
-
-<label>Recap စာသားရေးရန်</label>
-
-<textarea id="rawText"
-placeholder="မြန်မာ Movie Recap စာသားများ ထည့်ပါ..."></textarea>
-
-<div class="row">
-<button onclick="createLines()">Create Subtitle</button>
-<button class="secondary" onclick="addLine()">+ Add Line</button>
-</div>
-
-<div id="preview">Subtitle Preview</div>
-
-<label>Font Size</label>
-<input type="number" id="fontSize" value="24">
-
-<label>Font Color</label>
-<select id="fontColor">
-<option value="white">White</option>
-<option value="yellow">Yellow</option>
-<option value="cyan">Cyan</option>
-</select>
-
-</div>
-
-<!-- AI VOICE -->
-
-<div class="card">
-
-<h2>🎙️ Myanmar AI Voice Generator</h2>
-
-<label>Voice Type</label>
-
-<select id="voice">
-<option value="Kore">Female - Kore</option>
-<option value="Aoede">Female - Aoede</option>
-<option value="Zephyr">Female - Zephyr</option>
-<option value="Puck">Male - Puck</option>
-<option value="Charon">Male - Charon</option>
-<option value="Fenrir">Male - Fenrir</option>
-</select>
-
-<label>Voice Style</label>
-
-<select id="style">
-<option>Natural Myanmar Movie Recap Narration</option>
-<option>Emotional Movie Recap Narration</option>
-<option>Documentary Narration</option>
-<option>Sad Story Narration</option>
-</select>
-
-<div class="row">
-<button onclick="generateAll()">🎙️ Generate All Voice</button>
-<button class="danger" onclick="stopGeneration()">Stop</button>
-</div>
-
-<div id="progress"><div id="bar"></div></div>
-
-<div id="ttsStatus" class="status"></div>
-
-</div>
-
-<!-- TIMELINE -->
-
-<div class="card">
-
-<h2>📚 Subtitle Timeline</h2>
-
-<div id="segments"></div>
-
-</div>
-
-<!-- EXPORT -->
-
-<div class="card">
-
-<h2>📤 Export Video</h2>
-
-<label>Video Quality</label>
-
-<select id="quality">
-<option value="1">360p</option>
-<option value="1.5">540p</option>
-<option value="2">720p</option>
-</select>
-
-<label>Voice Volume</label>
-<input type="range" id="voiceVolume"
-min="0" max="1.5" step=".05" value="1">
-
-<button onclick="startExport()">📥 Export Video</button>
-
-<button class="secondary" onclick="downloadSRT()">
-Download SRT
-</button>
-
-<div id="exportStatus" class="status"></div>
-
-</div>
+<section class="card">
+<h2>📤 EXPORT VIDEO</h2>
+<button class="green" style="width:100%;padding:16px" onclick="exportVideo()">🎬 VIDEO EXPORT လုပ်မယ်</button>
+<div id="exportStatus" class="status">Export မလုပ်ရသေးပါ။</div>
+</section>
 
 </main>
+<footer>MM MOVIE RECAP • Made for Android Browser</footer>
 
 <script>
-
 const $=id=>document.getElementById(id);
+const video=$("video");
+const canvas=$("renderCanvas");
+const ctx=canvas.getContext("2d");
+let subs=[];
+let audioCtx=null;
+let mediaSource=null;
+let videoGain=null;
+let exporting=false;
+let rafStarted=false;
 
-let lines=[];
-let stop=false;
-let videoURL=null;
-
-$('apiKey').value=localStorage.getItem('mm_api_key')||'';
-
+function status(id,msg){$(id).textContent=msg}
 function saveKey(){
-
- const key=$('apiKey').value.trim();
-
- if(!key)return alert('API Key ထည့်ပါ။');
-
- localStorage.setItem('mm_api_key',key);
-
- $('apiStatus').textContent='API Key သိမ်းပြီးပါပြီ။';
-
+ const k=$("apiKey").value.trim();
+ if(!k)return alert("API Key ထည့်ပါ။");
+ localStorage.setItem("mmrecap_api",k);
+ status("apiStatus","API Key သိမ်းပြီးပါပြီ။");
 }
-
-$('videoFile').onchange=e=>{
-
- const file=e.target.files[0];
-
- if(!file)return;
-
- if(videoURL)URL.revokeObjectURL(videoURL);
-
- videoURL=URL.createObjectURL(file);
-
- $('video').src=videoURL;
-
-};
-
-function parseTime(t){
-
- const a=t.trim().replace(',','.').split(':');
-
- return Number(a[0])*3600+
- Number(a[1])*60+
- Number(a[2]);
-
+function toggleKey(){
+ $("apiKey").type=$("apiKey").type==="password"?"text":"password";
 }
-
-function loadSRT(){
-
- const file=$('srtFile').files[0];
-
- if(!file)return alert('SRT File ရွေးပါ။');
-
- const reader=new FileReader();
-
- reader.onload=()=>{
-
-  const blocks=reader.result
-  .trim()
-  .replace(/\r/g,'')
-  .split(/\n\s*\n/);
-
-  lines=[];
-
-  blocks.forEach(block=>{
-
-   const arr=block.split('\n');
-
-   const index=arr.findIndex(x=>x.includes('-->'));
-
-   if(index<0)return;
-
-   const times=arr[index].split('-->');
-
-   lines.push({
-
-    start:parseTime(times[0]),
-    end:parseTime(times[1]),
-    text:arr.slice(index+1).join('\n'),
-    blob:null,
-    url:null
-
-   });
-
-  });
-
-  render();
-
-  $('ttsStatus').textContent=
-  lines.length+' subtitles imported';
-
- };
-
- reader.readAsText(file);
-
+function key(){return $("apiKey").value.trim()||localStorage.getItem("mmrecap_api")||""}
+window.addEventListener("load",()=>{
+ $("apiKey").value=localStorage.getItem("mmrecap_api")||"";
+ startRender();
+});
+function resetVideo(){
+ video.pause();video.removeAttribute("src");video.load();
 }
-
-function createLines(){
-
- const arr=$('rawText').value
- .split('\n')
- .filter(x=>x.trim());
-
- let t=0;
-
- lines=arr.map(text=>{
-
-  const item={
-   start:t,
-   end:t+5,
-   text,
-   blob:null,
-   url:null
-  };
-
-  t+=5.2;
-
-  return item;
-
- });
-
- render();
-
+$("videoFile").addEventListener("change",e=>{
+ const f=e.target.files[0];if(!f)return;
+ video.src=URL.createObjectURL(f);video.load();
+});
+async function loadVideoUrl(){
+ const url=$("videoUrl").value.trim();
+ if(!url)return alert("Video URL ထည့်ပါ။");
+ video.crossOrigin="anonymous";
+ video.src=url;video.load();
+ video.play().catch(()=>{});
 }
-
-function addLine(){
-
- const t=lines.length?
- lines[lines.length-1].end+.2:0;
-
- lines.push({
-
-  start:t,
-  end:t+5,
-  text:'',
-  blob:null,
-  url:null
-
- });
-
- render();
-
-}
-
-function render(){
-
- const host=$('segments');
-
- host.innerHTML='';
-
- lines.forEach((l,i)=>{
-
-  const div=document.createElement('div');
-
-  div.className='segment';
-
-  div.innerHTML=`
-
-  <b>အပိုင်း ${i+1}</b>
-
-  <label>Start Time</label>
-  <input type="number" step=".1"
-  value="${l.start}" data-i="${i}" data-k="start">
-
-  <label>End Time</label>
-  <input type="number" step=".1"
-  value="${l.end}" data-i="${i}" data-k="end">
-
-  <label>Myanmar Text</label>
-  <textarea data-i="${i}" data-k="text"></textarea>
-
-  <div class="row">
-  <button data-act="voice" data-i="${i}">
-  Generate Voice
-  </button>
-
-  <button class="secondary"
-  data-act="play" data-i="${i}"
-  ${l.url?'':'disabled'}>
-  Preview
-  </button>
-
-  <button class="danger"
-  data-act="delete" data-i="${i}">
-  Delete
-  </button>
-  </div>
-
-  ${l.url?'<audio controls src="'+l.url+'"></audio>':''}
-
-  `;
-
-  div.querySelector('textarea').value=l.text;
-
-  host.appendChild(div);
-
- });
-
- host.querySelectorAll('[data-k]').forEach(el=>{
-
-  el.onchange=()=>{
-
-   const l=lines[Number(el.dataset.i)];
-
-   const k=el.dataset.k;
-
-   l[k]=k==='text'?el.value:Number(el.value);
-
-  };
-
- });
-
- host.querySelectorAll('[data-act]').forEach(btn=>{
-
-  btn.onclick=async()=>{
-
-   const i=Number(btn.dataset.i);
-
-   const action=btn.dataset.act;
-
-   if(action==='voice')await generateOne(i);
-
-   if(action==='play'&&lines[i].url){
-    new Audio(lines[i].url).play();
-   }
-
-   if(action==='delete'){
-
-    lines.splice(i,1);
-
-    render();
-
-   }
-
-  };
-
- });
-
- updateSubtitle();
-
-}
-
-async function callTTS(text){
-
- const key=$('apiKey').value.trim();
-
- if(!key)throw Error('Gemini API Key မရှိပါ။');
-
- const model=$('model').value;
-
- const voice=$('voice').value;
-
- const prompt=
- `${$('style').value}။ မြန်မာဘာသာစကားဖြင့် အောက်ပါစာသားကို သဘာဝကျကျ ဖတ်ပါ။ စာသားအသစ် မထည့်ပါနှင့်။\n${text}`;
-
- const response=await fetch(
-
- `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(key)}`,
-
- {
-
-  method:'POST',
-
-  headers:{'Content-Type':'application/json'},
-
-  body:JSON.stringify({
-
-   contents:[{
-    parts:[{text:prompt}]
-   }],
-
-   generationConfig:{
-
-    responseModalities:['AUDIO'],
-
-    speechConfig:{
-
-     voiceConfig:{
-
-      prebuiltVoiceConfig:{
-       voiceName:voice
-      }
-
-     }
-
-    }
-
-   }
-
-  })
-
- }
-
- );
-
- const data=await response.json();
-
- if(!response.ok){
-
-  throw Error(data.error?.message||'Gemini API Error');
-
- }
-
- const part=data.candidates?.[0]?.content?.parts?.find(
- p=>p.inlineData?.data
- );
-
- if(!part)throw Error('Audio data မရရှိပါ။');
-
- return makeWav(
- part.inlineData.data,
- part.inlineData.mimeType||'audio/pcm'
- );
-
-}
-
-function makeWav(base64,mime){
-
- const raw=Uint8Array.from(
- atob(base64),c=>c.charCodeAt(0)
- );
-
- if(mime.includes('wav')){
-  return new Blob([raw],{type:'audio/wav'});
- }
-
- const header=new ArrayBuffer(44);
-
- const view=new DataView(header);
-
- function write(offset,str){
-
-  for(let i=0;i<str.length;i++){
-
-   view.setUint8(offset+i,str.charCodeAt(i));
-
-  }
-
- }
-
- const rate=24000;
-
- write(0,'RIFF');
-
- view.setUint32(4,36+raw.length,true);
-
- write(8,'WAVE');
-
- write(12,'fmt ');
-
- view.setUint32(16,16,true);
-
- view.setUint16(20,1,true);
-
- view.setUint16(22,1,true);
-
- view.setUint32(24,rate,true);
-
- view.setUint32(28,rate*2,true);
-
- view.setUint16(32,2,true);
-
- view.setUint16(34,16,true);
-
- write(36,'data');
-
- view.setUint32(40,raw.length,true);
-
- return new Blob([header,raw],{type:'audio/wav'});
-
-}
-
-async function generateOne(i){
-
+async function downloadDirect(){
+ const url=$("videoUrl").value.trim();
+ if(!url)return alert("Video URL ထည့်ပါ။");
+ status("exportStatus","Download လုပ်နေပါတယ်...");
  try{
-
-  if(!lines[i].text.trim())throw Error('စာသားမရှိပါ။');
-
-  $('ttsStatus').textContent=
-  `အပိုင်း ${i+1} အသံထုတ်နေသည်...`;
-
-  const blob=await callTTS(lines[i].text);
-
-  lines[i].blob=blob;
-
-  if(lines[i].url)URL.revokeObjectURL(lines[i].url);
-
-  lines[i].url=URL.createObjectURL(blob);
-
-  render();
-
-  $('ttsStatus').textContent=
-  `အပိုင်း ${i+1} အသံထုတ်ပြီးပါပြီ။`;
-
- }catch(e){
-
-  $('ttsStatus').textContent='Error: '+e.message;
-
- }
-
-}
-
-async function generateAll(){
-
- if(!lines.length)return alert('စာသားထည့်ပါ။');
-
- stop=false;
-
- let done=0;
-
- for(let i=0;i<lines.length;i++){
-
-  if(stop)break;
-
-  if(!lines[i].text.trim())continue;
-
-  $('ttsStatus').textContent=
-  `Generating ${i+1}/${lines.length}`;
-
-  try{
-
-   const blob=await callTTS(lines[i].text);
-
-   lines[i].blob=blob;
-
-   if(lines[i].url)URL.revokeObjectURL(lines[i].url);
-
-   lines[i].url=URL.createObjectURL(blob);
-
-   done++;
-
-   $('bar').style.width=
-   ((i+1)/lines.length*100)+'%';
-
-   render();
-
-  }catch(e){
-
-   $('ttsStatus').textContent=e.message;
-
-   break;
-
+  const r=await fetch(url);
+  if(!r.ok)throw new Error("Download မအောင်မြင်ပါ။ HTTP "+r.status);
+  const blob=await r.blob();
+  if(!blob.type.startsWith("video/") && !url.match(/\.(mp4|webm|mov|m4v)(\?|$)/i)){
+   throw new Error("ဒီ URL က Video ဖိုင်တိုက်ရိုက်မဟုတ်နိုင်ပါ။");
   }
-
- }
-
- $('ttsStatus').textContent=
- `Completed: ${done} voices`;
-
-}
-
-function stopGeneration(){
-
- stop=true;
-
-}
-
-async function testAPI(){
-
- try{
-
-  $('apiStatus').textContent='Testing API...';
-
-  const blob=await callTTS(
-  'မင်္ဂလာပါ။ MM Movie Recap မှ ကြိုဆိုပါတယ်။'
-  );
-
-  downloadBlob(blob,'TTS_TEST.wav');
-
-  $('apiStatus').textContent='API အောင်မြင်ပါသည်။';
-
+  const a=document.createElement("a");
+  const u=URL.createObjectURL(blob);
+  a.href=u;a.download="MM-MOVIE-RECAP-VIDEO";
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(u),60000);
+  status("exportStatus","Download စတင်ပြီးပါပြီ။");
  }catch(e){
-
-  $('apiStatus').textContent=e.message;
-
+  status("exportStatus","Download မရပါ။ ဒီ Website မှာ CORS ကန့်သတ်ချက်ရှိနိုင်ပါတယ်။\n"+e.message+"\nခွင့်ပြုထားသော direct video URL ကို အသုံးပြုပါ၊ သို့မဟုတ် ဖုန်းထဲမှ Video ဖိုင်ရွေးပါ။");
  }
-
 }
-
+function timeSec(t){
+ const p=t.trim().replace(",",".").split(":");
+ return Number(p[0])*3600+Number(p[1])*60+Number(p[2]);
+}
+function timeSrt(s){
+ const ms=Math.floor((s%1)*1000);
+ const d=new Date(Math.floor(s)*1000);
+ return [d.getUTCHours(),d.getUTCMinutes(),d.getUTCSeconds()].map(x=>String(x).padStart(2,"0")).join(":")+","+String(ms).padStart(3,"0");
+}
+function parseSrt(raw){
+ const out=[];
+ raw.replace(/\r/g,"").trim().split(/\n\s*\n/).forEach(block=>{
+  const lines=block.split("\n");
+  const i=lines.findIndex(x=>x.includes("-->"));
+  if(i<0)return;
+  const t=lines[i].split("-->");
+  if(t.length!==2)return;
+  const start=timeSec(t[0]),end=timeSec(t[1]);
+  const text=lines.slice(i+1).join("\n").trim();
+  if(text && end>start)out.push({start,end,text,blob:null});
+ });
+ return out;
+}
+$("srtFile").addEventListener("change",async e=>{
+ const f=e.target.files[0];if(!f)return;
+ subs=parseSrt(await f.text());renderSubs();
+ status("subStatus",subs.length+" ခု စာတန်းထိုး ထည့်ပြီးပါပြီ။");
+});
+function addSubtitle(){
+ const text=$("newSubtitle").value.trim();
+ if(!text)return alert("စာတန်းရေးပါ။");
+ const start=video.currentTime||0;
+ subs.push({start,end:start+5,text,blob:null});
+ subs.sort((a,b)=>a.start-b.start);
+ $("newSubtitle").value="";renderSubs();
+}
+function renderSubs(){
+ const box=$("subtitleList");box.innerHTML="";
+ subs.forEach((s,i)=>{
+  const d=document.createElement("div");d.className="item";
+  const title=document.createElement("b");title.textContent="စာတန်း "+(i+1);d.appendChild(title);
+  const a=document.createElement("input");a.type="number";a.step=".1";a.value=s.start;
+  a.addEventListener("change",()=>s.start=Math.max(0,+a.value||0));d.appendChild(a);
+  const b=document.createElement("input");b.type="number";b.step=".1";b.value=s.end;
+  b.addEventListener("change",()=>s.end=Math.max(s.start,+b.value||0));d.appendChild(b);
+  const t=document.createElement("textarea");t.value=s.text;
+  t.addEventListener("input",()=>s.text=t.value);d.appendChild(t);
+  const del=document.createElement("button");del.className="red";del.textContent="ဖျက်မယ်";
+  del.onclick=()=>{subs.splice(i,1);renderSubs()};d.appendChild(del);
+  box.appendChild(d);
+ });
+}
+function clearSubtitles(){subs=[];renderSubs();status("subStatus","စာတန်းအားလုံး ဖျက်ပြီးပါပြီ။")}
+function exportSRT(){
+ if(!subs.length)return alert("စာတန်းမရှိပါ။");
+ const text=subs.map((s,i)=>(i+1)+"\n"+timeSrt(s.start)+" --> "+timeSrt(s.end)+"\n"+s.text).join("\n\n");
+ downloadBlob(new Blob([text],{type:"text/plain;charset=utf-8"}),"MM-MOVIE-RECAP.srt");
+}
 function downloadBlob(blob,name){
-
  const url=URL.createObjectURL(blob);
-
- const a=document.createElement('a');
-
- a.href=url;
-
- a.download=name;
-
- a.click();
-
- setTimeout(()=>URL.revokeObjectURL(url),3000);
-
+ const a=document.createElement("a");a.href=url;a.download=name;a.click();
+ setTimeout(()=>URL.revokeObjectURL(url),60000);
 }
-
-function downloadSRT(){
-
- const text=lines.map((l,i)=>{
-
-  function fmt(s){
-
-   const h=Math.floor(s/3600);
-
-   const m=Math.floor(s%3600/60);
-
-   const sec=Math.floor(s%60);
-
-   const ms=Math.floor(s%1*1000);
-
-   return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')},${String(ms).padStart(3,'0')}`;
-
-  }
-
-  return `${i+1}\n${fmt(l.start)} --> ${fmt(l.end)}\n${l.text}`;
-
- }).join('\n\n');
-
- downloadBlob(
- new Blob([text],{type:'text/plain;charset=utf-8'}),
- 'MM_MOVIE_RECAP.srt'
- );
-
+function presetValues(){
+ const p=$("preset").value;
+ const vals={
+  normal:[100,100,100,0,0,0],
+  cinema:[105,120,115,0,0,0],
+  warm:[108,105,120,0,18,0],
+  cool:[102,110,105,0,0,0],
+  vintage:[105,90,85,8,25,0],
+  bw:[100,115,0,100,0,0]
+ }[p];
+ ["brightness","contrast","saturation","grayscale","sepia","blur"].forEach((id,i)=>$(id).value=vals[i]);
+ updateLabels();
 }
-
-function updateSubtitle(){
-
- const t=$('video').currentTime||0;
-
- const line=lines.find(
- l=>t>=l.start&&t<=l.end
- );
-
- $('preview').textContent=
- line?line.text:'Subtitle Preview';
-
- $('preview').style.fontSize=$('fontSize').value+'px';
-
- $('preview').style.color=$('fontColor').value;
-
+$("preset").addEventListener("change",presetValues);
+function resetColor(){
+ $("preset").value="normal";presetValues();
 }
-
-$('video').addEventListener('timeupdate',updateSubtitle);
-
-$('fontSize').oninput=updateSubtitle;
-
-$('fontColor').onchange=updateSubtitle;
-
-async function exportVideo(){
-
- const video=$('video');
-
- if(!video.src)throw Error('Video ထည့်ပါ။');
-
- if(!lines.some(l=>l.blob))
- throw Error('Voice အရင်ထုတ်ပါ။');
-
- if(!window.MediaRecorder)
- throw Error('Browser MediaRecorder မပံ့ပိုးပါ။');
-
- const ratio=$('ratio').value.split(':').map(Number);
-
- const scale=Number($('quality').value);
-
- const width=Math.round((ratio[0]>ratio[1]?1280:720)*scale);
-
- const height=Math.round(width*ratio[1]/ratio[0]);
-
- const canvas=document.createElement('canvas');
-
- canvas.width=width;
-
- canvas.height=height;
-
- const ctx=canvas.getContext('2d');
-
- const stream=canvas.captureStream(30);
-
- const ac=new AudioContext();
-
- const destination=ac.createMediaStreamDestination();
-
- const original=ac.createMediaElementSource(video);
-
- const originalGain=ac.createGain();
-
- originalGain.gain.value=Number($('originalVolume').value);
-
- original.connect(originalGain);
-
- originalGain.connect(destination);
-
- destination.stream.getAudioTracks().forEach(t=>{
- stream.addTrack(t);
- });
-
- const voiceGain=ac.createGain();
-
- voiceGain.gain.value=Number($('voiceVolume').value);
-
- voiceGain.connect(destination);
-
- const recorder=new MediaRecorder(stream);
-
- const chunks=[];
-
- recorder.ondataavailable=e=>{
- if(e.data.size)chunks.push(e.data);
- };
-
- const finished=new Promise(resolve=>{
- recorder.onstop=()=>resolve(
- new Blob(chunks,{type:'video/webm'})
- );
- });
-
- video.pause();
-
- video.currentTime=0;
-
- await ac.resume();
-
- function draw(){
-
-  if(recorder.state!=='recording')return;
-
-  ctx.fillStyle='black';
-
-  ctx.fillRect(0,0,width,height);
-
-  const fit=Math.min(
-  width/video.videoWidth,
-  height/video.videoHeight
-  );
-
-  const w=video.videoWidth*fit;
-
-  const h=video.videoHeight*fit;
-
-  ctx.drawImage(
-  video,
-  (width-w)/2,
-  (height-h)/2,
-  w,h
-  );
-
-  const line=lines.find(
-  l=>video.currentTime>=l.start&&video.currentTime<=l.end
-  );
-
-  if(line){
-
-   const size=Number($('fontSize').value)*scale;
-
-   ctx.font=`bold ${size}px sans-serif`;
-
-   ctx.textAlign='center';
-
-   ctx.fillStyle='rgba(0,0,0,.65)';
-
-   ctx.fillRect(0,height-size*2.3,width,size*2.3);
-
-   ctx.fillStyle=$('fontColor').value;
-
-   ctx.fillText(
-   line.text.slice(0,80),
-   width/2,
-   height-size*.5,
-   width*.9
-   );
-
-  }
-
-  requestAnimationFrame(draw);
-
+function updateLabels(){
+ const ids=["brightness","contrast","saturation","grayscale","sepia","blur"];
+ const labels=["brightVal","contrastVal","satVal","grayVal","sepiaVal","blurVal"];
+ const suffix=["%","%","%","%","%","px"];
+ ids.forEach((id,i)=>$(labels[i]).textContent=$(id).value+suffix[i]);
+ $("maskHeightVal").textContent=$("maskHeight").value+"%";
+ $("maskBottomVal").textContent=$("maskBottom").value+"%";
+ $("originalVolVal").textContent=$("originalVolume").value+"%";
+ $("aiVolVal").textContent=$("aiVolume").value+"%";
+}
+document.querySelectorAll('input[type=range]').forEach(x=>x.addEventListener("input",updateLabels));
+function colorFilter(){
+ return `brightness(${$("brightness").value}%) contrast(${$("contrast").value}%) saturate(${$("saturation").value}%) grayscale(${$("grayscale").value}%) sepia(${$("sepia").value}%) blur(${$("blur").value}px)`;
+}
+function drawText(text){
+ const size=+$("fontSize").value;
+ ctx.font="bold "+size+"px Arial, sans-serif";
+ ctx.textAlign="center";ctx.textBaseline="middle";
+ const words=text.split(/\s+/);let lines=[],line="";
+ for(const w of words){
+  const test=line?line+" "+w:w;
+  if(ctx.measureText(test).width>canvas.width-36&&line){lines.push(line);line=w}
+  else line=test;
  }
-
- recorder.start(250);
-
- video.play();
-
- const sources=[];
-
- for(const line of lines){
-
-  if(!line.blob)continue;
-
-  const array=await line.blob.arrayBuffer();
-
-  const buffer=await ac.decodeAudioData(array);
-
-  const source=ac.createBufferSource();
-
-  source.buffer=buffer;
-
-  source.connect(voiceGain);
-
-  sources.push({source,time:line.start});
-
- }
-
- const startTime=ac.currentTime;
-
- sources.forEach(item=>{
- item.source.start(startTime+item.time);
+ if(line)lines.push(line);
+ const lh=size*1.45,total=lh*lines.length;
+ let y=$("subPosition").value==="top"?total/2+15:
+       $("subPosition").value==="center"?canvas.height/2:
+       canvas.height-total/2-20;
+ lines.forEach((l,i)=>{
+  const yy=y+i*lh;
+  const width=ctx.measureText(l).width+22;
+  if($("subBg").value!=="transparent"){
+   ctx.fillStyle=$("subBg").value;
+   ctx.fillRect((canvas.width-width)/2,yy-lh/2,width,lh);
+  }
+  ctx.fillStyle=$("fontColor").value;
+  ctx.shadowColor="#000";ctx.shadowBlur=4;
+  ctx.fillText(l,canvas.width/2,yy);
+  ctx.shadowBlur=0;
  });
-
- requestAnimationFrame(draw);
-
- $('exportStatus').textContent='Exporting...';
-
- await new Promise(resolve=>{
- video.addEventListener('ended',resolve,{once:true});
- });
-
- recorder.stop();
-
- const result=await finished;
-
- video.pause();
-
- await ac.close();
-
- downloadBlob(result,'MM_MOVIE_RECAP.webm');
-
- $('exportStatus').textContent='Export Completed!';
-
 }
+function drawFrame(){
+ const ratio=$("ratio").value.split(":").map(Number);
+ const W=720,H=Math.round(W*ratio[1]/ratio[0]);
+ if(canvas.width!==W||canvas.height!==H){canvas.width=W;canvas.height=H}
+ ctx.fillStyle="#000";ctx.fillRect(0,0,W,H);
+ if(video.readyState>=2&&video.videoWidth){
+  const scale=Math.max(W/video.videoWidth,H/video.videoHeight);
+  const sw=W/scale,sh=H/scale;
+  const sx=(video.videoWidth-sw)/2,sy=(video.videoHeight-sh)/2;
+  ctx.save();ctx.filter=colorFilter();
+  ctx.drawImage(video,sx,sy,sw,sh,0,0,W,H);
+  ctx.restore();
 
-async function startExport(){
-
+  const mode=$("maskMode").value;
+  if(mode!=="none"){
+   const mh=H*(+$("maskHeight").value/100);
+   const bottom=H*(+$("maskBottom").value/100);
+   const y=H-bottom-mh;
+   if(mode==="cover"){
+    ctx.fillStyle=$("maskColor").value;
+    ctx.fillRect(0,y,W,mh);
+   }else{
+    ctx.save();
+    ctx.beginPath();ctx.rect(0,y,W,mh);ctx.clip();
+    ctx.filter="blur(13px)";
+    ctx.drawImage(video,sx,sy,sw,sh,0,0,W,H);
+    ctx.restore();
+    ctx.fillStyle="rgba(0,0,0,.12)";
+    ctx.fillRect(0,y,W,mh);
+   }
+  }
+  const s=subs.find(x=>video.currentTime>=x.start&&video.currentTime<=x.end);
+  if(s)drawText(s.text);
+ }
+}
+function startRender(){
+ if(rafStarted)return;rafStarted=true;
+ function loop(){drawFrame();requestAnimationFrame(loop)}
+ requestAnimationFrame(loop);
+}
+async function getAC(){
+ if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+ if(audioCtx.state==="suspended")await audioCtx.resume();
+ return audioCtx;
+}
+async function requestTTS(text){
+ const k=key();if(!k)throw Error("API Key ထည့်ပါ။");
+ const model=$("ttsModel").value;
+ const prompt="Speak the following Burmese text clearly and naturally. "+$("voiceStyle").value+" Read only the text, do not add anything:\n"+text;
+ const url="https://generativelanguage.googleapis.com/v1beta/models/"+model+":generateContent?key="+encodeURIComponent(k);
+ const r=await fetch(url,{
+  method:"POST",
+  headers:{"Content-Type":"application/json"},
+  body:JSON.stringify({
+   contents:[{parts:[{text:prompt}]}],
+   generationConfig:{
+    responseModalities:["AUDIO"],
+    speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:$("voiceName").value}}}
+   }
+  })
+ });
+ const data=await r.json();
+ if(!r.ok)throw Error(data.error?.message||"Gemini API Error");
+ const part=data.candidates?.[0]?.content?.parts?.find(p=>p.inlineData?.data);
+ if(!part)throw Error("Audio data မရပါ။");
+ const raw=Uint8Array.from(atob(part.inlineData.data),c=>c.charCodeAt(0));
+ const mime=part.inlineData.mimeType||"";
+ if(mime.includes("wav"))return new Blob([raw],{type:"audio/wav"});
+ return pcmWav(raw,24000);
+}
+function pcmWav(raw,rate){
+ const b=new ArrayBuffer(44+raw.length),v=new DataView(b);
+ const str=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};
+ str(0,"RIFF");v.setUint32(4,36+raw.length,true);str(8,"WAVE");str(12,"fmt ");
+ v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
+ v.setUint32(24,rate,true);v.setUint32(28,rate*2,true);
+ v.setUint16(32,2,true);v.setUint16(34,16,true);str(36,"data");
+ v.setUint32(40,raw.length,true);new Uint8Array(b,44).set(raw);
+ return new Blob([b],{type:"audio/wav"});
+}
+async function testAPI(){
  try{
-
-  $('exportStatus').textContent='Preparing...';
-
-  await exportVideo();
-
- }catch(e){
-
-  $('exportStatus').textContent='Error: '+e.message;
-
- }
-
+  status("apiStatus","API စမ်းသပ်နေပါတယ်...");
+  const b=await requestTTS("မင်္ဂလာပါ။ MM Movie Recap မှ ကြိုဆိုပါတယ်။");
+  const u=URL.createObjectURL(b);const a=new Audio(u);a.play();
+  status("apiStatus","API ချိတ်ဆက်မှု အောင်မြင်ပါတယ်။");
+ }catch(e){status("apiStatus","Error: "+e.message)}
 }
+function showAudio(title,blob){
+ const d=document.createElement("div");d.className="audio-item";
+ const t=document.createElement("div");t.textContent=title;d.appendChild(t);
+ const a=document.createElement("audio");a.controls=true;a.src=URL.createObjectURL(blob);d.appendChild(a);
+ const dl=document.createElement("button");dl.className="gray";dl.textContent="အသံ Download";
+ dl.onclick=()=>downloadBlob(blob,"MM-VOICE.wav");d.appendChild(dl);
+ $("audioList").appendChild(d);
+}
+async function makeSingleVoice(){
+ const t=$("voiceText").value.trim();if(!t)return alert("စာသားထည့်ပါ။");
+ try{
+  status("voiceStatus","အသံထုတ်နေပါတယ်...");
+  const b=await requestTTS(t);showAudio("အသစ်ထုတ်ထားသော အသံ",b);
+  status("voiceStatus","အသံထုတ်ပြီးပါပြီ။");
+ }catch(e){status("voiceStatus","Error: "+e.message)}
+}
+async function makeAllVoices(){
+ if(!subs.length)return alert("SRT ထည့်ပါ။");
+ let ok=0;
+ try{
+  for(let i=0;i<subs.length;i++){
+   status("voiceStatus",`အသံထုတ်နေပါတယ် ${i+1}/${subs.length}`);
+   subs[i].blob=await requestTTS(subs[i].text);
+   showAudio("စာတန်း "+(i+1),subs[i].blob);ok++;
+  }
+  status("voiceStatus",ok+" ခု အသံထုတ်ပြီးပါပြီ။");
+ }catch(e){status("voiceStatus","Error: "+e.message+"\n"+ok+" ခု အောင်မြင်ပါတယ်။")}
+}
+async function exportVideo(){
+ if(exporting)return;
+ if(!video.src||!video.videoWidth)return alert("Video ထည့်ပါ။");
+ if(!subs.length)return alert("စာတန်းထိုးထည့်ပါ။");
+ if(!subs.every(s=>s.blob))return alert("စာတန်းအားလုံးအတွက် AI Voice အရင်ထုတ်ပါ။");
+ if(!window.MediaRecorder||!canvas.captureStream)return alert("Browser က Video Export မပံ့ပိုးပါ။");
+ exporting=true;
+ const btn=document.querySelector('button[onclick="exportVideo()"]');btn.disabled=true;
+ let recorder=null,stream=null,canvasStream=null,audioDest=null;
+ try{
+  const ac=await getAC();
+  if(!mediaSource){
+   mediaSource=ac.createMediaElementSource(video);
+   videoGain=ac.createGain();mediaSource.connect(videoGain);
+   videoGain.connect(ac.destination);
+  }
+  videoGain.gain.value=+$("originalVolume").value/100;
+  audioDest=ac.createMediaStreamDestination();
+  videoGain.connect(audioDest);
 
-render();
-
+  const initial=video.currentTime;
+  const decoded=[];
+  for(let i=0;i<subs.length;i++){
+   status("exportStatus",`အသံပြင်ဆင်နေပါတယ် ${i+1}/${subs.length}`);
+   const buf=await ac.decodeAudioData(await subs[i].blob.arrayBuffer());
+   decoded.push({buffer:buf,start:subs[i].start,end:subs[i].end});
+  }
+  video.currentTime=0;
+  await new Promise(resolve=>{
+   if(video.readyState>=2)resolve();
+   else video.addEventListener("loadeddata",resolve,{once:true});
+  });
+  canvasStream=canvas.captureStream(30);
+  stream=new MediaStream([
+   ...canvasStream.getVideoTracks(),
+   ...audioDest.stream.getAudioTracks()
+  ]);
+  const mime=MediaRecorder.isTypeSupported("video/webm;codecs=vp9,opus")
+   ?"video/webm;codecs=vp9,opus":"video/webm";
+  recorder=new MediaRecorder(stream,{mimeType:mime});
+  const chunks=[];
+  recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+  const stopped=new Promise(resolve=>recorder.onstop=resolve);
+  recorder.start(1000);
+  await video.play();
+  const startAt=ac.currentTime+0.08;
+  const sources=[];
+  decoded.forEach(item=>{
+   if(item.end<=0)return;
+   const src=ac.createBufferSource(),gain=ac.createGain();
+   src.buffer=item.buffer;gain.gain.value=+$("aiVolume").value/100;
+   src.connect(gain);gain.connect(audioDest);
+   src.start(startAt+Math.max(0,item.start),0);
+   sources.push(src);
+  });
+  status("exportStatus","Video Export လုပ်နေပါတယ်။ မပြီးမချင်း Browser ကို မပိတ်ပါနဲ့။");
+  await new Promise(resolve=>{
+   if(video.ended){resolve();return}
+   video.addEventListener("ended",resolve,{once:true});
+  });
+  recorder.stop();await stopped;
+  sources.forEach(s=>{try{s.stop()}catch(e){}});
+  const blob=new Blob(chunks,{type:"video/webm"});
+  downloadBlob(blob,"MM-MOVIE-RECAP.webm");
+  status("exportStatus","Export ပြီးပါပြီ။ Download စတင်ပါပြီ။");
+  video.pause();
+  videoGain.disconnect(audioDest);
+ }catch(e){
+  status("exportStatus","Export Error: "+e.message);
+  if(recorder&&recorder.state!=="inactive")try{recorder.stop()}catch(_){}
+ }finally{
+  exporting=false;btn.disabled=false;
+  if(stream)stream.getTracks().forEach(t=>t.stop());
+  if(canvasStream)canvasStream.getTracks().forEach(t=>t.stop());
+ }
+}
+updateLabels();
 </script>
-
 </body>
 </html>
