@@ -1,0 +1,477 @@
+
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MM MOVIE RECAP</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#080d19;color:#f5f7ff;
+ font-family:Arial,sans-serif;
+}
+header{
+ background:#101a2d;padding:20px;text-align:center;
+ border-bottom:1px solid #263955;
+}
+header h1{margin:0;color:#28c8ff;letter-spacing:2px}
+header p{color:#9cabc4;margin:8px 0 0}
+.container{max-width:1100px;margin:auto;padding:15px}
+.panel{
+ background:#111b2e;border:1px solid #253753;
+ padding:16px;border-radius:13px;margin-bottom:15px;
+}
+h3{color:#28c8ff;margin:0 0 14px}
+label{display:block;color:#c4cee0;margin:12px 0 6px}
+input,select,textarea,button{
+ width:100%;padding:11px;border-radius:8px;
+ border:1px solid #354764;background:#091326;color:white;
+}
+input[type=color]{height:42px;padding:3px}
+input[type=checkbox]{width:auto}
+button{
+ background:#078db8;border:0;font-weight:bold;
+ cursor:pointer;margin-top:8px;
+}
+button.secondary{background:#34435c}
+button:disabled{opacity:.5}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.preview{
+ background:#000;width:100%;max-height:65vh;
+ display:flex;align-items:center;justify-content:center;
+ overflow:hidden;border-radius:10px;
+}
+video{display:block;max-width:100%;max-height:65vh}
+#subPreview{
+ position:absolute;bottom:8%;left:5%;width:90%;
+ text-align:center;white-space:pre-wrap;
+ font-size:24px;color:white;
+ text-shadow:2px 2px 3px black;
+ pointer-events:none;
+}
+#stage{position:relative;background:#000;overflow:hidden}
+#status{color:#42d7ff;font-size:13px}
+small{color:#9cabc4}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>MM MOVIE RECAP</h1>
+<p>MYANMAR MOVIE RECAP VIDEO EDITOR</p>
+</header>
+
+<main class="container">
+
+<section class="panel">
+<h3>01 — VIDEO IMPORT</h3>
+<label>Video ဖိုင်ရွေးပါ</label>
+<input type="file" id="videoFile" accept="video/*">
+
+<div id="stage" class="preview">
+<video id="video" playsinline></video>
+<div id="subPreview"></div>
+</div>
+
+<div class="row">
+<button onclick="video.play()">▶ PLAY</button>
+<button class="secondary" onclick="video.pause()">⏸ PAUSE</button>
+</div>
+
+<label>Timeline</label>
+<input type="range" id="seek" min="0" max="100" value="0">
+
+<div class="row">
+<div>
+<label>Playback Speed</label>
+<select id="speed">
+<option value=".5">0.5x</option>
+<option value="1" selected>1x</option>
+<option value="1.5">1.5x</option>
+<option value="2">2x</option>
+</select>
+</div>
+<div>
+<label>Video Ratio</label>
+<select id="ratio">
+<option value="9/16">9:16 Portrait</option>
+<option value="16/9">16:9 Landscape</option>
+<option value="1/1">1:1 Square</option>
+<option value="4/3">4:3 Classic</option>
+</select>
+</div>
+</div>
+</section>
+
+<section class="panel">
+<h3>02 — MYANMAR SUBTITLES</h3>
+
+<label>SRT Subtitle ဖိုင်ထည့်ပါ</label>
+<input type="file" id="srtFile" accept=".srt,.txt">
+
+<label>ကိုယ်တိုင်စာတန်းရေးရန်</label>
+<textarea id="manualSub" rows="3"
+placeholder="မြန်မာစာတန်းရေးပါ..."></textarea>
+
+<div class="row">
+<div>
+<label>Font Size</label>
+<input type="number" id="fontSize" value="24" min="12" max="60">
+</div>
+<div>
+<label>Bottom Position (%)</label>
+<input type="number" id="subBottom" value="8" min="0" max="40">
+</div>
+</div>
+
+<div class="row">
+<div>
+<label>စာလုံးအရောင်</label>
+<input type="color" id="fontColor" value="#ffffff">
+</div>
+<div>
+<label>စာတန်းနောက်ခံ</label>
+<input type="color" id="subBg" value="#000000">
+</div>
+</div>
+
+<label>နောက်ခံအလင်းပိတ်မှု</label>
+<input type="range" id="bgOpacity" min="0" max="100" value="0">
+
+<label>
+<input type="checkbox" id="showSub" checked>
+ စာတန်းပြရန်
+</label>
+</section>
+
+<section class="panel">
+<h3>03 — AUDIO CONTROL</h3>
+
+<label>မူရင်းဗီဒီယိုအသံ</label>
+<input type="range" id="originalVolume" min="0" max="100" value="100">
+
+<label>
+<input type="checkbox" id="muteOriginal">
+ မူရင်းအသံပိတ်ရန်
+</label>
+
+<label>မြန်မာ Voice-over အသံဖိုင်</label>
+<input type="file" id="voiceFile" accept="audio/*">
+
+<label>Voice-over Volume</label>
+<input type="range" id="voiceVolume" min="0" max="100" value="100">
+
+<audio id="voice"></audio>
+
+<div class="row">
+<button onclick="voice.play()">▶ VOICE PLAY</button>
+<button class="secondary" onclick="voice.pause()">⏸ VOICE PAUSE</button>
+</div>
+</section>
+
+<section class="panel">
+<h3>04 — EXPORT SETTINGS</h3>
+
+<div class="row">
+<div>
+<label>Quality</label>
+<select id="quality">
+<option value="2500000">Standard</option>
+<option value="5000000" selected>High</option>
+<option value="8000000">Very High</option>
+</select>
+</div>
+<div>
+<label>Frame Rate</label>
+<select id="fps">
+<option value="24">24 FPS</option>
+<option value="30" selected>30 FPS</option>
+<option value="60">60 FPS</option>
+</select>
+</div>
+</div>
+
+<button id="exportBtn" onclick="exportVideo()">
+⬇ EXPORT VIDEO
+</button>
+
+<progress id="progress" value="0" max="100"
+style="width:100%;margin-top:12px"></progress>
+
+<p id="status">Ready to export</p>
+<small>Export format: WebM. Chrome Browser အသုံးပြုရန် အကြံပြုသည်။</small>
+</section>
+
+</main>
+
+<script>
+const video=document.getElementById('video');
+const voice=document.getElementById('voice');
+const stage=document.getElementById('stage');
+const subPreview=document.getElementById('subPreview');
+
+let subtitles=[];
+let exporting=false;
+
+document.getElementById('videoFile').onchange=e=>{
+ const f=e.target.files[0];
+ if(!f)return;
+ video.src=URL.createObjectURL(f);
+ video.load();
+};
+
+document.getElementById('voiceFile').onchange=e=>{
+ const f=e.target.files[0];
+ if(f)voice.src=URL.createObjectURL(f);
+};
+
+document.getElementById('speed').onchange=e=>{
+ video.playbackRate=Number(e.target.value);
+};
+
+document.getElementById('ratio').onchange=e=>{
+ const r=e.target.value;
+ stage.style.aspectRatio=r;
+ stage.style.width='100%';
+ video.style.width='100%';
+ video.style.height='100%';
+ video.style.objectFit='contain';
+};
+
+video.ontimeupdate=()=>{
+ if(video.duration){
+  document.getElementById('seek').value=
+   video.currentTime/video.duration*100;
+ }
+ updateSubtitle();
+};
+
+document.getElementById('seek').oninput=e=>{
+ if(video.duration)
+ video.currentTime=Number(e.target.value)/100*video.duration;
+};
+
+function parseTime(t){
+ const p=t.trim().replace(',','.').split(':').map(Number);
+ return p[0]*3600+p[1]*60+p[2];
+}
+
+document.getElementById('srtFile').onchange=async e=>{
+ const f=e.target.files[0];
+ if(!f)return;
+ const content=(await f.text()).replace(/\r/g,'');
+ subtitles=content.split(/\n\s*\n/).map(block=>{
+  const lines=block.split('\n');
+  const i=lines.findIndex(x=>x.includes('-->'));
+  if(i<0)return null;
+  const times=lines[i].split('-->');
+  return {
+   start:parseTime(times[0]),
+   end:parseTime(times[1]),
+   text:lines.slice(i+1).join('\n')
+  };
+ }).filter(Boolean);
+ updateSubtitle();
+};
+
+function currentSubtitle(){
+ const manual=document.getElementById('manualSub').value;
+ const s=subtitles.find(x=>
+  video.currentTime>=x.start&&video.currentTime<=x.end);
+ return s?s.text:(!subtitles.length?manual:'');
+}
+
+function updateSubtitle(){
+ const show=document.getElementById('showSub').checked;
+ subPreview.textContent=show?currentSubtitle():'';
+ subPreview.style.fontSize=document.getElementById('fontSize').value+'px';
+ subPreview.style.bottom=document.getElementById('subBottom').value+'%';
+ subPreview.style.color=document.getElementById('fontColor').value;
+ const hex=document.getElementById('subBg').value;
+ const n=parseInt(hex.slice(1),16);
+ const alpha=Number(document.getElementById('bgOpacity').value)/100;
+ subPreview.style.background=
+  `rgba(${n>>16},${(n>>8)&255},${n&255},${alpha})`;
+ subPreview.style.padding='5px';
+ subPreview.style.borderRadius='5px';
+}
+
+document.querySelectorAll(
+ '#manualSub,#fontSize,#subBottom,#fontColor,#subBg,#bgOpacity,#showSub'
+).forEach(el=>el.addEventListener('input',updateSubtitle));
+
+document.getElementById('muteOriginal').onchange=e=>{
+ video.muted=e.target.checked;
+};
+
+document.getElementById('originalVolume').oninput=e=>{
+ video.volume=Number(e.target.value)/100;
+};
+
+document.getElementById('voiceVolume').oninput=e=>{
+ voice.volume=Number(e.target.value)/100;
+};
+
+function drawExportSubtitle(ctx,w,h){
+ if(!document.getElementById('showSub').checked)return;
+ const txt=currentSubtitle();
+ if(!txt)return;
+
+ const size=Number(document.getElementById('fontSize').value)*w/500;
+ const lines=txt.split('\n');
+ const lineHeight=size*1.3;
+ const bottom=Number(document.getElementById('subBottom').value)/100*h;
+ const y=h-bottom;
+
+ ctx.font=`bold ${size}px sans-serif`;
+ ctx.textAlign='center';
+ ctx.textBaseline='bottom';
+
+ const opacity=Number(document.getElementById('bgOpacity').value)/100;
+ const hex=document.getElementById('subBg').value;
+ const n=parseInt(hex.slice(1),16);
+
+ ctx.fillStyle=`rgba(${n>>16},${(n>>8)&255},${n&255},${opacity})`;
+ ctx.fillRect(w*.04,y-lines.length*lineHeight-8,w*.92,lines.length*lineHeight+14);
+
+ ctx.fillStyle=document.getElementById('fontColor').value;
+ ctx.strokeStyle='#000';
+ ctx.lineWidth=Math.max(2,size/12);
+
+ lines.forEach((line,i)=>{
+  const yy=y-(lines.length-1-i)*lineHeight;
+  ctx.strokeText(line,w/2,yy);
+  ctx.fillText(line,w/2,yy);
+ });
+}
+
+async function exportVideo(){
+ if(!video.src||!video.duration){
+  alert('Video အရင်ထည့်ပေးပါ');
+  return;
+ }
+ if(!window.MediaRecorder||!HTMLCanvasElement.prototype.captureStream){
+  alert('ဒီ Browser မှာ Export မရပါ။ Chrome အသုံးပြုပါ။');
+  return;
+ }
+
+ const btn=document.getElementById('exportBtn');
+ btn.disabled=true;
+ exporting=true;
+
+ const [rw,rh]=document.getElementById('ratio').value.split('/').map(Number);
+ const W=1080,H=Math.round(1080*rh/rw);
+ const canvas=document.createElement('canvas');
+ canvas.width=W;canvas.height=H;
+ const ctx=canvas.getContext('2d');
+ const fps=Number(document.getElementById('fps').value);
+ const stream=canvas.captureStream(fps);
+
+ let audioContext=null;
+ let videoGain=null;
+ let voiceGain=null;
+
+ try{
+  audioContext=new AudioContext();
+  const destination=audioContext.createMediaStreamDestination();
+
+  const videoSource=audioContext.createMediaElementSource(video);
+  videoGain=audioContext.createGain();
+  videoSource.connect(videoGain);
+  videoGain.connect(destination);
+  videoGain.gain.value=
+   document.getElementById('muteOriginal').checked?0:
+   Number(document.getElementById('originalVolume').value)/100;
+
+  if(voice.src){
+   const voiceSource=audioContext.createMediaElementSource(voice);
+   voiceGain=audioContext.createGain();
+   voiceSource.connect(voiceGain);
+   voiceGain.connect(destination);
+   voiceGain.gain.value=Number(document.getElementById('voiceVolume').value)/100;
+  }
+
+  destination.stream.getAudioTracks().forEach(t=>stream.addTrack(t));
+ }catch(err){
+  console.warn('Audio mixing unavailable',err);
+ }
+
+ const mime=MediaRecorder.isTypeSupported('video/webm;codecs=vp9')
+  ?'video/webm;codecs=vp9':'video/webm';
+
+ const recorder=new MediaRecorder(stream,{
+  mimeType:mime,
+  videoBitsPerSecond:Number(document.getElementById('quality').value)
+ });
+
+ const chunks=[];
+ recorder.ondataavailable=e=>{
+  if(e.data.size)chunks.push(e.data);
+ };
+
+ recorder.onstop=()=>{
+  const blob=new Blob(chunks,{type:'video/webm'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='MM-MOVIE-RECAP.webm';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),60000);
+  btn.disabled=false;
+  document.getElementById('status').textContent='Export Complete!';
+  document.getElementById('progress').value=100;
+  if(audioContext)audioContext.close();
+ };
+
+ function draw(){
+  if(!exporting)return;
+  ctx.fillStyle='#000';
+  ctx.fillRect(0,0,W,H);
+
+  if(video.readyState>=2){
+   const scale=Math.min(W/video.videoWidth,H/video.videoHeight);
+   const dw=video.videoWidth*scale;
+   const dh=video.videoHeight*scale;
+   ctx.drawImage(video,(W-dw)/2,(H-dh)/2,dw,dh);
+  }
+
+  drawExportSubtitle(ctx,W,H);
+  requestAnimationFrame(draw);
+ }
+
+ video.pause();
+ voice.pause();
+ video.currentTime=0;
+ voice.currentTime=0;
+
+ if(audioContext&&audioContext.state==='suspended')
+  await audioContext.resume();
+
+ recorder.start(250);
+ await video.play();
+ if(voice.src)voice.play().catch(()=>{});
+
+ draw();
+
+ const timer=setInterval(()=>{
+  const p=video.duration?video.currentTime/video.duration*100:0;
+  document.getElementById('progress').value=p;
+  document.getElementById('status').textContent=
+   'Exporting... '+Math.round(p)+'%';
+
+  if(video.ended){
+   clearInterval(timer);
+   exporting=false;
+   if(recorder.state!=='inactive')recorder.stop();
+   video.pause();
+   voice.pause();
+  }
+ },200);
+}
+</script>
+
+</body>
+</html>
