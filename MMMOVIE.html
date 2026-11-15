@@ -3,501 +3,516 @@
 <html lang="my">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Myanmar Movie Recap Studio</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Myanmar Local AI SRT</title>
 <style>
-*{
- box-sizing:border-box;
-}
+*{box-sizing:border-box}
 body{
- margin:0;
- padding:15px;
- background:#0e111a;
- color:#fff;
- font-family:Arial,sans-serif;
+ margin:0;background:#10131c;color:#fff;
+ font-family:Arial,sans-serif;padding:14px
 }
-.app{
- max-width:850px;
- margin:auto;
-}
-.header{
- text-align:center;
- padding:20px 10px;
-}
-.header h1{
- color:#ffbd59;
- font-size:25px;
- margin:0 0 8px;
-}
-.header p{
- color:#aab5c8;
- font-size:13px;
-}
+.app{max-width:850px;margin:auto}
+h2{text-align:center;color:#ffbd59}
 .card{
- background:#1b2230;
- border:1px solid #354158;
- border-radius:14px;
- padding:16px;
- margin:15px 0;
+ background:#1c2230;border:1px solid #354158;
+ border-radius:13px;padding:15px;margin:14px 0
 }
-.card h3{
- margin-top:0;
- color:#ffbd59;
-}
-input,textarea{
- width:100%;
- padding:13px;
- margin-top:10px;
- background:#101722;
- color:#fff;
- border:1px solid #465168;
- border-radius:9px;
- font-size:15px;
-}
-textarea{
- min-height:220px;
- resize:vertical;
- line-height:1.7;
-}
+h3{color:#ffbd59;margin-top:0}
 button{
- width:100%;
- padding:14px;
- margin-top:10px;
- border:0;
- border-radius:9px;
- font-size:15px;
- font-weight:bold;
- cursor:pointer;
+ width:100%;padding:14px;margin-top:9px;
+ border:0;border-radius:9px;font-size:15px;
+ font-weight:bold;cursor:pointer
 }
-button:active{
- opacity:.75;
+input,select,textarea{
+ width:100%;padding:12px;margin-top:9px;
+ background:#101722;color:white;
+ border:1px solid #465168;border-radius:8px;
+ font-size:15px
 }
-.upload{
- background:#e9aa42;
- color:#111;
-}
-.copy{
- background:#16a36a;
- color:#fff;
-}
-.chatgpt{
- background:#263d37;
- color:#fff;
- border:1px solid #16a36a;
-}
-.gemini{
- background:#2856a4;
- color:#fff;
-}
-.download{
- background:#e94b57;
- color:white;
-}
-.clear{
- background:#424b5d;
- color:white;
-}
-.info{
- color:#b5c1d5;
- font-size:13px;
- line-height:1.8;
-}
-.status{
- color:#55dfa1;
- font-size:13px;
- margin-top:10px;
-}
-video{
- width:100%;
- max-height:350px;
- margin-top:12px;
- background:#000;
- border-radius:10px;
-}
-.hidden{
- display:none;
-}
+textarea{min-height:200px;line-height:1.7}
+video{width:100%;margin-top:12px;border-radius:9px;background:#000}
+.green{background:#159b67;color:white}
+.orange{background:#e9aa42;color:#111}
+.red{background:#d94755;color:white}
+.gray{background:#414b5e;color:white}
+.blue{background:#2861bb;color:white}
+.info{font-size:13px;color:#bdc8d9;line-height:1.8}
+.status{color:#61e2a0;font-size:13px;margin-top:10px;white-space:pre-wrap}
+progress{width:100%;height:17px;margin-top:12px}
+.hidden{display:none}
 </style>
 </head>
-
 <body>
 <div class="app">
 
-<div class="header">
- <h1>MYANMAR MOVIE RECAP STUDIO</h1>
- <p>Video to Burmese Movie Recap SRT</p>
-</div>
+<h2>MYANMAR LOCAL AI SRT</h2>
+<p class="info" style="text-align:center">
+Android Video to Burmese Subtitle Generator
+</p>
 
-<!-- VIDEO UPLOAD -->
 <div class="card">
- <h3>၁။ ရုပ်ရှင် Video ထည့်ပါ</h3>
-
- <input
-  type="file"
-  id="videoFile"
-  accept="video/*"
- >
-
- <div id="videoInfo" class="info">
-  Video ဖိုင်ရွေးချယ်ပေးပါ။
- </div>
-
- <video
-  id="videoPreview"
-  class="hidden"
-  controls
-  playsinline
- ></video>
-
- <button class="clear" onclick="clearVideo()">
-  Video ပြန်ဖျက်မယ်
- </button>
+<h3>၁။ Video ထည့်ပါ</h3>
+<input type="file" id="file" accept="video/*">
+<div id="fileInfo" class="info">Video မရွေးရသေးပါ။</div>
+<video id="video" controls playsinline class="hidden"></video>
 </div>
 
-<!-- PROMPT -->
 <div class="card">
- <h3>၂။ Movie Recap Prompt</h3>
-
- <p class="info">
-  Video ရွေးချယ်ပြီးသည်နှင့် Prompt အလိုအလျောက်ပေါ်လာပါမည်။
- </p>
-
- <textarea
-  id="prompt"
-  placeholder="Video ရွေးထည့်ပါ။ Prompt ဒီနေရာမှာ အလိုအလျောက်ပေါ်လာပါမယ်။"
- ></textarea>
-
- <button class="copy" onclick="copyPrompt()">
-  PROMPT COPY ယူမယ်
- </button>
-
- <div id="copyStatus" class="status"></div>
+<h3>၂။ Local AI Model</h3>
+<p class="info">
+Whisper Tiny Multilingual Model ကို ဖုန်း Browser ထဲမှာ Download လုပ်ပြီး အသုံးပြုမယ်။
+ပထမဆုံးအကြိမ် အင်တာနက်လိုအပ်ပါတယ်။
+</p>
+<select id="engine">
+<option value="auto">အလိုအလျောက် GPU / CPU</option>
+<option value="wasm">CPU (WASM)</option>
+<option value="webgpu">GPU (WebGPU)</option>
+</select>
+<button class="blue" id="loadBtn" onclick="loadModel()">
+LOCAL AI MODEL DOWNLOAD / LOAD
+</button>
+<div id="modelStatus" class="status">Model မဖွင့်ရသေးပါ။</div>
 </div>
 
-<!-- AI SELECT -->
 <div class="card">
- <h3>၃။ AI ရွေးချယ်ပါ</h3>
-
- <button class="chatgpt" onclick="openAI('chatgpt')">
-  ChatGPT ဖွင့်မယ်
- </button>
-
- <button class="gemini" onclick="openAI('gemini')">
-  Gemini ဖွင့်မယ်
- </button>
-
- <p class="info">
-  AI စာမျက်နှာကို ဖွင့်ပြီး ရွေးထားတဲ့ Video ကို ကိုယ်တိုင် Upload လုပ်ပါ။
-  ထို့နောက် Copy ယူထားတဲ့ Prompt ကို Paste လုပ်ပြီး SRT ထုတ်ခိုင်းပါ။
-  Login နှင့် Video Upload ကန့်သတ်ချက်များ ရှိနိုင်ပါသည်။
- </p>
+<h3>၃။ အသံကို စာသားပြောင်းပါ</h3>
+<p class="info">
+မိနစ် ၃၀ Video ကို တစ်မိနစ်စီ အပိုင်းခွဲပြီး အသံကို နားထောင်ကာ စာသားပြောင်းပေးမယ်။
+လုပ်ဆောင်နေစဉ် Browser ကို မပိတ်ပါနှင့်။
+</p>
+<button class="green" id="startBtn" onclick="startProcess()" disabled>
+AI စတင်လုပ်ဆောင်မယ်
+</button>
+<button class="orange" id="pauseBtn" onclick="pauseProcess()" disabled>
+ခဏရပ်မယ်
+</button>
+<button class="gray" onclick="resumeProcess()" id="resumeBtn" disabled>
+ပြန်စမယ်
+</button>
+<progress id="progress" value="0" max="100"></progress>
+<div id="processStatus" class="status">အသင့်ဖြစ်နေပါပြီ။</div>
 </div>
 
-<!-- SRT -->
 <div class="card">
- <h3>၄။ AI ထုတ်ပေးတဲ့ SRT ထည့်ပါ</h3>
+<h3>၄။ ထုတ်ပေးသော စာသား / SRT</h3>
+<textarea id="result" placeholder="AI ထုတ်ပေးသော မြန်မာစာသားနှင့် SRT ဒီနေရာမှာ ပေါ်လာပါမယ်။"></textarea>
+<button class="red" onclick="downloadSRT()">SRT DOWNLOAD</button>
+<button class="gray" onclick="copyResult()">စာသား Copy ယူမယ်</button>
+</div>
 
- <textarea
-  id="srt"
-  placeholder="ChatGPT သို့မဟုတ် Gemini ထုတ်ပေးတဲ့ SRT စာသားကို ဒီနေရာမှာ Paste လုပ်ပါ။"
- ></textarea>
-
- <button class="download" onclick="downloadSRT()">
-  SRT FILE DOWNLOAD
- </button>
-
- <div id="srtStatus" class="status"></div>
+<div class="card">
+<h3>မှတ်ချက်</h3>
+<p class="info">
+ဒီဗားရှင်းက Video ထဲက အသံကို Whisper AI နဲ့ နားထောင်ပြီး
+မြန်မာစာသားနှင့် အချိန်မှတ်တမ်း ထုတ်ပေးတာပါ။
+ရုပ်ပုံထဲက ဇာတ်ကွက်တွေကို ကြည့်ပြီး Movie Recap ပြန်ရေးပေးတဲ့ Vision AI မပါသေးပါ။
+အသံမပါသော မြင်ကွင်းတွေကို ဇာတ်လမ်းအဖြစ် မခန့်မှန်းပါ။
+</p>
 </div>
 
 </div>
 
-<script>
-const fileInput = document.getElementById("videoFile");
-const video = document.getElementById("videoPreview");
-const videoInfo = document.getElementById("videoInfo");
-const promptBox = document.getElementById("prompt");
+<script type="module">
+import { pipeline, env } from
+"https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1";
 
-let selectedVideo = null;
+env.allowLocalModels = false;
+env.allowRemoteModels = true;
+
+let transcriber = null;
+let selectedFile = null;
 let videoURL = null;
-let videoDuration = "မသိရသေးပါ";
+let audioContext = null;
+let source = null;
+let processor = null;
 
-// TIME FORMAT
-function formatDuration(seconds){
+let captured = [];
+let capturedLength = 0;
+let targetSamples = 0;
+let chunkStart = 0;
+let processing = false;
+let paused = false;
+let running = false;
+let finished = false;
+let srtItems = [];
+let segmentNumber = 1;
 
- if(!Number.isFinite(seconds)){
-  return "မသိရသေးပါ";
- }
+const file = document.getElementById("file");
+const video = document.getElementById("video");
+const result = document.getElementById("result");
+const progress = document.getElementById("progress");
+const processStatus = document.getElementById("processStatus");
 
- seconds = Math.floor(seconds);
-
- const h = String(
-  Math.floor(seconds / 3600)
- ).padStart(2,"0");
-
- const m = String(
-  Math.floor((seconds % 3600) / 60)
- ).padStart(2,"0");
-
- const s = String(
-  seconds % 60
- ).padStart(2,"0");
-
- return `${h}:${m}:${s}`;
+function status(id,text){
+ document.getElementById(id).textContent=text;
 }
 
-// CREATE PROMPT
-function makePrompt(){
-
- if(!selectedVideo) return;
-
- const fileName = selectedVideo.name;
-
- promptBox.value =
-`သင်သည် Professional Myanmar Movie Recap ဇာတ်ညွှန်းရေးသားသူနှင့် SRT Subtitle ဖန်တီးသူဖြစ်သည်။
-
-VIDEO FILE NAME: ${fileName}
-VIDEO DURATION: ${videoDuration}
-
-အရေးအကြီးဆုံးညွှန်ကြားချက် -
-
-ကျွန်ုပ် Upload လုပ်ပေးထားသော VIDEO ကိုသာ အခြေခံ၍ အလုပ်လုပ်ပါ။
-
-VIDEO ထဲမှာ တကယ်ဖြစ်ပျက်နေသော ဇာတ်လမ်းကိုသာ ပြန်လည်ရေးသားပါ။
-
-မိမိစိတ်ကူးဖြင့် ဇာတ်လမ်းဖန်တီးခြင်း၊ မရှိသောအဖြစ်အပျက် ထည့်သွင်းခြင်း၊ ဇာတ်ကောင်အမည် ခန့်မှန်းခြင်း လုံးဝမလုပ်ပါနှင့်။
-
-အဆင့် (၁) VIDEO ကို လေ့လာခြင်း
-
-1. Video အစမှအဆုံးအထိ လေ့လာပါ။
-2. ဇာတ်လမ်းအစ၊ အလယ်နှင့် အဆုံးကို သေချာနားလည်ပါ။
-3. ဇာတ်ကောင်တစ်ဦးချင်းစီကို ခွဲခြားသတ်မှတ်ပါ။
-4. ဘယ်သူက ဘာလုပ်သည်၊ ဘယ်နေရာမှာ ဘာဖြစ်သည်ကို မှတ်သားပါ။
-5. ဖြစ်ရပ်တစ်ခုနှင့်တစ်ခု ဆက်စပ်မှုကို နားလည်ပါ။
-6. အရေးကြီးသော ဇာတ်ကွက်များကို မကျော်ပါနှင့်။
-7. Video ထဲမှာ မပါသော အကြောင်းအရာများကို မထည့်ပါနှင့်။
-8. Video တစ်ခုလုံးကို ကြည့်ရှုနိုင်ခြင်းမရှိပါက မကြည့်ရသေးသောအပိုင်းကို ခန့်မှန်းမရေးပါနှင့်။
-
-အဆင့် (၂) မြန်မာ Movie Recap ရေးသားခြင်း
-
-1. မြန်မာစကားပြော သဘာဝကျကျ ရေးသားပါ။
-2. Movie Recap Narration ပုံစံဖြင့် တစ်ယောက်တည်း ဇာတ်ကြောင်းပြန်ပြောပါ။
-3. ဇာတ်လမ်းကို Video ထဲက အစဉ်အတိုင်း ရေးပါ။
-4. ဖြစ်ရပ်များကို အသေးစိတ်နားလည်လွယ်အောင် ရေးပါ။
-5. မူရင်းဇာတ်ကား Dialogue များကို အရှည်လိုက် ကူးမရေးပါနှင့်။
-6. အရေးကြီးသော ဇာတ်ကွက်များကို မချန်ခဲ့ပါနှင့်။
-7. စာကြောင်းများကို မြန်မာအသံဖတ်ရန် အဆင်ပြေအောင် ရေးပါ။
-8. ဇာတ်လမ်းအဆုံးကိုလည်း Video အတိုင်း ဖော်ပြပါ။
-
-အဆင့် (၃) SRT ဖိုင် ထုတ်လုပ်ခြင်း
-
-1. Video ရဲ့ မူရင်းကြာချိန်ကို လိုက်နာပါ။
-2. ဖြစ်ရပ်ဖြစ်ပွားသည့်အချိန်နှင့် Narration ကိုက်ညီရမည်။
-3. Timestamp များကို ခန့်မှန်းပြီး မတီထွင်ပါနှင့်။
-4. Subtitle တစ်ခုနှင့်တစ်ခု အချိန်မထပ်စေရပါ။
-5. စာကြောင်းများကို အသံဖတ်ရန် သင့်တော်သော အရှည်ဖြင့် ခွဲပါ။
-6. Video အစမှ အဆုံးအထိ အစဉ်လိုက် ထုတ်ပေးပါ။
-7. SRT Format မှန်ကန်ရမည်။
-8. SRT အားလုံးကို ပြည့်စုံစွာ ထုတ်ပေးပါ။
-
-SRT FORMAT ဥပမာ -
-
-1
-00:00:00,000 --> 00:00:05,000
-တစ်နေ့မှာတော့ ဒီလူငယ်လေးဟာ ထူးဆန်းတဲ့ဖြစ်ရပ်တစ်ခုနဲ့ ရင်ဆိုင်ခဲ့ရပါတယ်။
-
-2
-00:00:05,000 --> 00:00:10,000
-အဲဒီဖြစ်ရပ်က သူ့ဘဝကို အကြီးအကျယ် ပြောင်းလဲသွားစေခဲ့ပါတယ်။
-
-အထူးသတိပြုရန် -
-
-- Video မကြည့်ဘဲ ဇာတ်လမ်းမရေးပါနှင့်။
-- မရှိသော ဇာတ်ကွက်များ မတီထွင်ပါနှင့်။
-- ဇာတ်ကောင်များကို မရောထွေးပါနှင့်။
-- ဇာတ်လမ်းအပိုင်းများကို မကျော်ပါနှင့်။
-- Video တစ်ခုလုံးကို မမြင်နိုင်ပါက အသုံးပြုသူအား အသိပေးပါ။
-- မသေချာသော Timestamp များကို အမှန်ဟု မဖော်ပြပါနှင့်။
-
-နောက်ဆုံးရလဒ်ကို SRT စာသားအဖြစ်သာ ထုတ်ပေးပါ။
-Markdown Code Fence နှင့် ရှင်းပြချက်များ မထည့်ပါနှင့်။
-
-ယခု Upload လုပ်ထားသော Video ကို လေ့လာပြီး မြန်မာ Movie Recap SRT ဖိုင် အပြည့်အစုံ ဖန်တီးပေးပါ။`;
-
+function formatTime(seconds){
+ if(!Number.isFinite(seconds)) return 0;
+ return Math.max(0,seconds);
 }
 
-// VIDEO SELECT
-fileInput.addEventListener("change", function(){
+function timestamp(seconds){
+ let ms=Math.floor(seconds*1000);
+ let h=Math.floor(ms/3600000);
+ ms%=3600000;
+ let m=Math.floor(ms/60000);
+ ms%=60000;
+ let s=Math.floor(ms/1000);
+ ms%=1000;
+ return String(h).padStart(2,"0")+":"+
+ String(m).padStart(2,"0")+":"+
+ String(s).padStart(2,"0")+","+
+ String(ms).padStart(3,"0");
+}
 
- const file = this.files && this.files[0];
+file.addEventListener("change",()=>{
+ const f=file.files[0];
+ if(!f)return;
 
- if(!file) return;
-
- if(!file.type.startsWith("video/")){
-  alert("Video ဖိုင်ကိုသာ ရွေးချယ်ပါ။");
-  this.value = "";
+ if(!f.type.startsWith("video/")){
+  alert("Video ဖိုင်ကို ရွေးပါ။");
+  file.value="";
   return;
  }
 
- selectedVideo = file;
- videoDuration = "ဖတ်ရှုနေသည်...";
+ selectedFile=f;
 
- if(videoURL){
-  URL.revokeObjectURL(videoURL);
- }
+ if(videoURL)URL.revokeObjectURL(videoURL);
+ videoURL=URL.createObjectURL(f);
 
- videoURL = URL.createObjectURL(file);
-
- video.src = videoURL;
+ video.src=videoURL;
  video.classList.remove("hidden");
 
- // ချက်ချင်း Prompt ဖန်တီးမည်
- makePrompt();
+ status("fileInfo","Video: "+f.name+
+ "\nSize: "+(f.size/1024/1024).toFixed(1)+" MB");
 
- videoInfo.textContent =
-  "Video ရွေးချယ်ပြီးပါပြီ: " + file.name;
-
- document.getElementById("copyStatus").textContent =
-  "Prompt အသင့်ဖြစ်ပါပြီ။";
-
- // VIDEO DURATION
- video.onloadedmetadata = function(){
-
-  videoDuration = formatDuration(video.duration);
-
-  videoInfo.textContent =
-   "ဖိုင်အမည်: " + file.name +
-   " | ကြာချိန်: " + videoDuration;
-
-  makePrompt();
+ video.onloadedmetadata=()=>{
+  status("fileInfo","Video: "+f.name+
+  "\nကြာချိန်: "+timestamp(video.duration));
  };
-
- video.onerror = function(){
-
-  videoDuration = "မသိရသေးပါ";
-
-  videoInfo.textContent =
-   "Video Preview မရနိုင်ပါ။ Prompt ကို အသုံးပြုနိုင်ပါသည်။";
-
-  makePrompt();
- };
-
 });
 
-// CLEAR VIDEO
-function clearVideo(){
-
- selectedVideo = null;
-
- if(videoURL){
-  URL.revokeObjectURL(videoURL);
-  videoURL = null;
- }
-
- video.pause();
- video.removeAttribute("src");
- video.load();
- video.classList.add("hidden");
-
- fileInput.value = "";
- promptBox.value = "";
-
- videoInfo.textContent = "Video ဖိုင်ရွေးချယ်ပေးပါ။";
-
- document.getElementById("copyStatus").textContent = "";
-}
-
-// COPY PROMPT
-async function copyPrompt(){
-
- if(!selectedVideo){
-  alert("အရင်ဆုံး Video ထည့်ပေးပါ။");
-  return;
- }
-
- const text = promptBox.value;
+async function loadModel(){
+ const btn=document.getElementById("loadBtn");
+ btn.disabled=true;
 
  try{
+  status("modelStatus","Local AI Model Download / Load လုပ်နေပါသည်...");
 
-  await navigator.clipboard.writeText(text);
+  let device="wasm";
+  const choice=document.getElementById("engine").value;
 
-  document.getElementById("copyStatus").textContent =
-   "Prompt Copy လုပ်ပြီးပါပြီ။";
+  if(choice==="webgpu"){
+   if(!navigator.gpu)throw new Error("ဒီ Browser မှာ WebGPU မရနိုင်ပါ။");
+   device="webgpu";
+  }else if(choice==="auto" && navigator.gpu){
+   device="webgpu";
+  }
 
- }catch(error){
+  const options={
+   dtype:"q8",
+   device:device
+  };
 
-  promptBox.focus();
-  promptBox.select();
+  transcriber=await pipeline(
+   "automatic-speech-recognition",
+   "onnx-community/whisper-tiny",
+   {
+    ...options,
+    progress_callback:(p)=>{
+     if(p.status){
+      status("modelStatus",
+       p.status+" "+(p.file||""));
+     }
+    }
+   }
+  );
 
-  const success = document.execCommand("copy");
+  status("modelStatus","Local Whisper AI အသင့်ဖြစ်ပါပြီ။");
+  document.getElementById("startBtn").disabled=false;
 
-  document.getElementById("copyStatus").textContent =
-   success
-   ? "Prompt Copy လုပ်ပြီးပါပြီ။"
-   : "Prompt ကို Select လုပ်ပြီး Copy နှိပ်ပါ။";
-
+ }catch(e){
+  status("modelStatus","Model Load မအောင်မြင်ပါ။\n"+e.message+
+   "\nအင်တာနက်စစ်ဆေးပြီး ပြန်စမ်းပါ။");
+  btn.disabled=false;
  }
 }
 
-// OPEN AI
-function openAI(type){
+function resample(input,sourceRate,targetRate){
+ if(sourceRate===targetRate)return input;
 
- if(!selectedVideo){
-  alert("အရင်ဆုံး Video ထည့်ပေးပါ။");
+ const ratio=sourceRate/targetRate;
+ const length=Math.floor(input.length/ratio);
+ const output=new Float32Array(length);
+
+ for(let i=0;i<length;i++){
+  const pos=i*ratio;
+  const left=Math.floor(pos);
+  const right=Math.min(left+1,input.length-1);
+  const fraction=pos-left;
+
+  output[i]=input[left]*(1-fraction)+input[right]*fraction;
+ }
+ return output;
+}
+
+function joinCaptured(){
+ const all=new Float32Array(capturedLength);
+ let offset=0;
+
+ for(const part of captured){
+  all.set(part,offset);
+  offset+=part.length;
+ }
+ return all;
+}
+
+function makeSRT(output,base,duration){
+ let chunks=output.chunks||[];
+
+ if(!chunks.length && output.text){
+  chunks=[{
+   text:output.text,
+   timestamp:[0,duration]
+  }];
+ }
+
+ for(const item of chunks){
+  const text=(item.text||"").trim();
+  if(!text)continue;
+
+  const times=item.timestamp||[0,duration];
+  const start=base+formatTime(times[0]||0);
+  const end=base+formatTime(times[1]||duration);
+
+  if(end<=start)continue;
+
+  srtItems.push({
+   number:segmentNumber++,
+   start,
+   end,
+   text
+  });
+ }
+
+ srtItems.sort((a,b)=>a.start-b.start);
+
+ result.value=srtItems.map(x=>
+  x.number+"\n"+
+  timestamp(x.start)+" --> "+timestamp(x.end)+"\n"+
+  x.text
+ ).join("\n\n");
+
+}
+
+async function transcribeChunk(finalChunk=false){
+ if(processing)return;
+ if(!capturedLength)return;
+
+ processing=true;
+ paused=true;
+ video.pause();
+
+ const audio=joinCaptured();
+ const start=chunkStart;
+ const duration=audio.length/audioContext.sampleRate;
+
+ captured=[];
+ capturedLength=0;
+
+ status("processStatus",
+  "အသံအပိုင်းကို AI လေ့လာနေပါသည်။ "+timestamp(start));
+
+ try{
+  const samples=resample(
+   audio,audioContext.sampleRate,16000
+  );
+
+  const output=await transcriber(samples,{
+   sampling_rate:16000,
+   return_timestamps:true,
+   chunk_length_s:30,
+   stride_length_s:5,
+   language:"burmese",
+   task:"transcribe"
+  });
+
+  makeSRT(output,start,duration);
+
+  const percent=video.duration?
+   Math.min(100,video.currentTime/video.duration*100):0;
+
+  progress.value=percent;
+
+  status("processStatus",
+   "ပြီးစီးမှု: "+percent.toFixed(1)+"%\n"+
+   "ပြီးသွားသောအချိန်: "+timestamp(video.currentTime));
+
+ }catch(e){
+  status("processStatus","AI Transcription Error: "+e.message);
+  running=false;
+  processing=false;
   return;
  }
 
- const urls = {
-  chatgpt:"https://chatgpt.com/",
-  gemini:"https://gemini.google.com/app"
- };
+ processing=false;
+ chunkStart=video.currentTime;
 
- window.open(urls[type],"_blank");
+ if(finalChunk || video.ended){
+  finishProcess();
+  return;
+ }
 
+ if(running && !paused){
+  video.play().catch(e=>{
+   status("processStatus","Play ခလုတ်ကို နှိပ်ပြီး ပြန်စပါ။");
+  });
+ }
 }
 
-// DOWNLOAD SRT
+function finishProcess(){
+ running=false;
+ finished=true;
+ paused=false;
+ progress.value=100;
+ status("processStatus",
+  "ပြီးပါပြီ။ SRT ဖိုင်ကို Download လုပ်နိုင်ပါပြီ။");
+}
+
+async function startProcess(){
+ if(!selectedFile){
+  alert("အရင်ဆုံး Video ထည့်ပါ။");
+  return;
+ }
+ if(!transcriber){
+  alert("အရင်ဆုံး Local AI Model Load လုပ်ပါ။");
+  return;
+ }
+ if(running)return;
+
+ try{
+  if(!audioContext){
+   audioContext=new AudioContext();
+   source=audioContext.createMediaElementSource(video);
+
+   processor=audioContext.createScriptProcessor(4096,1,1);
+
+   source.connect(processor);
+   processor.connect(audioContext.destination);
+
+   targetSamples=audioContext.sampleRate*60;
+
+   processor.onaudioprocess=(event)=>{
+    if(!running || processing || paused)return;
+
+    const data=event.inputBuffer.getChannelData(0);
+    const copy=new Float32Array(data);
+
+    captured.push(copy);
+    capturedLength+=copy.length;
+
+    if(capturedLength>=targetSamples){
+     transcribeChunk(false);
+    }
+   };
+  }
+
+  if(audioContext.state==="suspended"){
+   await audioContext.resume();
+  }
+
+  if(video.currentTime>=video.duration){
+   video.currentTime=0;
+  }
+
+  chunkStart=video.currentTime;
+  running=true;
+  paused=false;
+  finished=false;
+
+  document.getElementById("pauseBtn").disabled=false;
+  document.getElementById("resumeBtn").disabled=true;
+
+  await video.play();
+
+  status("processStatus","Video အသံကို ဖမ်းယူနေပါသည်...");
+
+ }catch(e){
+  running=false;
+  status("processStatus","စတင်၍မရပါ: "+e.message);
+ }
+}
+
+video.addEventListener("ended",()=>{
+ if(running && !processing){
+  transcribeChunk(true);
+ }
+});
+
+function pauseProcess(){
+ if(!running)return;
+
+ paused=true;
+ video.pause();
+
+ document.getElementById("resumeBtn").disabled=false;
+
+ status("processStatus","ခဏရပ်ထားပါသည်။");
+}
+
+async function resumeProcess(){
+ if(!running || processing)return;
+
+ paused=false;
+ document.getElementById("resumeBtn").disabled=true;
+
+ if(audioContext.state==="suspended"){
+  await audioContext.resume();
+ }
+
+ video.play().catch(e=>{
+  status("processStatus","Video ကို ပြန်ဖွင့်၍မရပါ။");
+ });
+}
+
 function downloadSRT(){
-
- let text = document.getElementById("srt").value.trim();
-
+ const text=result.value.trim();
  if(!text){
-  alert("SRT စာသား ထည့်ပေးပါ။");
+  alert("SRT စာသား မရှိသေးပါ။");
   return;
  }
 
- // Markdown Code Fence ရှိလျှင် ဖယ်ရှားမည်
- text = text.replace(/^```(?:srt|text)?\s*/i,"");
- text = text.replace(/\s*```$/,"");
+ const blob=new Blob(["\uFEFF"+text],{
+  type:"text/plain;charset=utf-8"
+ });
 
- text = text.replace(/\r\n/g,"\n");
- text = text.replace(/\n{3,}/g,"\n\n");
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
 
- const blob = new Blob(
-  ["\uFEFF" + text],
-  {type:"text/plain;charset=utf-8"}
- );
-
- const url = URL.createObjectURL(blob);
-
- const a = document.createElement("a");
-
- a.href = url;
- a.download = "Myanmar_Movie_Recap.srt";
-
- document.body.appendChild(a);
+ a.href=url;
+ a.download="Myanmar_Local_AI.srt";
  a.click();
- a.remove();
 
- setTimeout(function(){
-  URL.revokeObjectURL(url);
- },1500);
-
- document.getElementById("srtStatus").textContent =
-  "SRT ဖိုင် Download လုပ်ပြီးပါပြီ။";
-
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 
+async function copyResult(){
+ try{
+  await navigator.clipboard.writeText(result.value);
+  alert("Copy လုပ်ပြီးပါပြီ။");
+ }catch(e){
+  result.select();
+  document.execCommand("copy");
+ }
+}
+
+window.loadModel=loadModel;
+window.startProcess=startProcess;
+window.pauseProcess=pauseProcess;
+window.resumeProcess=resumeProcess;
+window.downloadSRT=downloadSRT;
+window.copyResult=copyResult;
 </script>
 </body>
 </html>
