@@ -3,516 +3,129 @@
 <html lang="my">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Myanmar Local AI SRT</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Recap SRT Maker</title>
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;background:#10131c;color:#fff;
- font-family:Arial,sans-serif;padding:14px
+ margin:0;padding:20px;
+ background:#10131c;color:#fff;
+ font-family:Arial,sans-serif;
 }
-.app{max-width:850px;margin:auto}
-h2{text-align:center;color:#ffbd59}
-.card{
- background:#1c2230;border:1px solid #354158;
- border-radius:13px;padding:15px;margin:14px 0
+.container{
+ max-width:600px;margin:auto;
+ background:#1c2230;padding:20px;
+ border-radius:16px;
 }
-h3{color:#ffbd59;margin-top:0}
+h2{text-align:center;color:#70d6ff}
+p{line-height:1.7;color:#cbd5e1}
+input,button{
+ width:100%;padding:15px;margin:10px 0;
+ border:0;border-radius:10px;font-size:16px;
+}
+input{background:#30394b;color:white}
 button{
- width:100%;padding:14px;margin-top:9px;
- border:0;border-radius:9px;font-size:15px;
- font-weight:bold;cursor:pointer
+ background:#1688e8;color:white;
+ font-weight:bold;
 }
-input,select,textarea{
- width:100%;padding:12px;margin-top:9px;
- background:#101722;color:white;
- border:1px solid #465168;border-radius:8px;
- font-size:15px
-}
-textarea{min-height:200px;line-height:1.7}
-video{width:100%;margin-top:12px;border-radius:9px;background:#000}
-.green{background:#159b67;color:white}
-.orange{background:#e9aa42;color:#111}
-.red{background:#d94755;color:white}
-.gray{background:#414b5e;color:white}
-.blue{background:#2861bb;color:white}
-.info{font-size:13px;color:#bdc8d9;line-height:1.8}
-.status{color:#61e2a0;font-size:13px;margin-top:10px;white-space:pre-wrap}
-progress{width:100%;height:17px;margin-top:12px}
-.hidden{display:none}
+button:disabled{opacity:.4}
+#status{color:#ffd166;white-space:pre-wrap}
+.small{font-size:13px;color:#9ca3af}
 </style>
 </head>
 <body>
-<div class="app">
+<div class="container">
+<h2>Movie Recap SRT Maker</h2>
+<p>ဗီဒီယိုရွေးပြီး Gemini ဆီ တိုက်ရိုက်မျှဝေပါ။</p>
 
-<h2>MYANMAR LOCAL AI SRT</h2>
-<p class="info" style="text-align:center">
-Android Video to Burmese Subtitle Generator
-</p>
+<input type="file" id="video" accept="video/*">
 
-<div class="card">
-<h3>၁။ Video ထည့်ပါ</h3>
-<input type="file" id="file" accept="video/*">
-<div id="fileInfo" class="info">Video မရွေးရသေးပါ။</div>
-<video id="video" controls playsinline class="hidden"></video>
+<div id="info" class="small">Video မရွေးရသေးပါ။</div>
+
+<button id="share" disabled>GEMINI သို့ VIDEO ပို့ရန်</button>
+
+<div id="status">အသင့်ဖြစ်ပါပြီ။</div>
 </div>
 
-<div class="card">
-<h3>၂။ Local AI Model</h3>
-<p class="info">
-Whisper Tiny Multilingual Model ကို ဖုန်း Browser ထဲမှာ Download လုပ်ပြီး အသုံးပြုမယ်။
-ပထမဆုံးအကြိမ် အင်တာနက်လိုအပ်ပါတယ်။
-</p>
-<select id="engine">
-<option value="auto">အလိုအလျောက် GPU / CPU</option>
-<option value="wasm">CPU (WASM)</option>
-<option value="webgpu">GPU (WebGPU)</option>
-</select>
-<button class="blue" id="loadBtn" onclick="loadModel()">
-LOCAL AI MODEL DOWNLOAD / LOAD
-</button>
-<div id="modelStatus" class="status">Model မဖွင့်ရသေးပါ။</div>
-</div>
+<script>
+const videoInput=document.getElementById("video");
+const shareBtn=document.getElementById("share");
+const info=document.getElementById("info");
+const status=document.getElementById("status");
 
-<div class="card">
-<h3>၃။ အသံကို စာသားပြောင်းပါ</h3>
-<p class="info">
-မိနစ် ၃၀ Video ကို တစ်မိနစ်စီ အပိုင်းခွဲပြီး အသံကို နားထောင်ကာ စာသားပြောင်းပေးမယ်။
-လုပ်ဆောင်နေစဉ် Browser ကို မပိတ်ပါနှင့်။
-</p>
-<button class="green" id="startBtn" onclick="startProcess()" disabled>
-AI စတင်လုပ်ဆောင်မယ်
-</button>
-<button class="orange" id="pauseBtn" onclick="pauseProcess()" disabled>
-ခဏရပ်မယ်
-</button>
-<button class="gray" onclick="resumeProcess()" id="resumeBtn" disabled>
-ပြန်စမယ်
-</button>
-<progress id="progress" value="0" max="100"></progress>
-<div id="processStatus" class="status">အသင့်ဖြစ်နေပါပြီ။</div>
-</div>
+let selectedFile=null;
 
-<div class="card">
-<h3>၄။ ထုတ်ပေးသော စာသား / SRT</h3>
-<textarea id="result" placeholder="AI ထုတ်ပေးသော မြန်မာစာသားနှင့် SRT ဒီနေရာမှာ ပေါ်လာပါမယ်။"></textarea>
-<button class="red" onclick="downloadSRT()">SRT DOWNLOAD</button>
-<button class="gray" onclick="copyResult()">စာသား Copy ယူမယ်</button>
-</div>
+videoInput.addEventListener("change",()=>{
+ selectedFile=videoInput.files[0];
 
-<div class="card">
-<h3>မှတ်ချက်</h3>
-<p class="info">
-ဒီဗားရှင်းက Video ထဲက အသံကို Whisper AI နဲ့ နားထောင်ပြီး
-မြန်မာစာသားနှင့် အချိန်မှတ်တမ်း ထုတ်ပေးတာပါ။
-ရုပ်ပုံထဲက ဇာတ်ကွက်တွေကို ကြည့်ပြီး Movie Recap ပြန်ရေးပေးတဲ့ Vision AI မပါသေးပါ။
-အသံမပါသော မြင်ကွင်းတွေကို ဇာတ်လမ်းအဖြစ် မခန့်မှန်းပါ။
-</p>
-</div>
+ if(!selectedFile)return;
 
-</div>
+ info.textContent=
+ "ဖိုင်အမည်: "+selectedFile.name+
+ "\nအရွယ်အစား: "+
+ (selectedFile.size/1024/1024).toFixed(1)+" MB";
 
-<script type="module">
-import { pipeline, env } from
-"https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.8.1";
-
-env.allowLocalModels = false;
-env.allowRemoteModels = true;
-
-let transcriber = null;
-let selectedFile = null;
-let videoURL = null;
-let audioContext = null;
-let source = null;
-let processor = null;
-
-let captured = [];
-let capturedLength = 0;
-let targetSamples = 0;
-let chunkStart = 0;
-let processing = false;
-let paused = false;
-let running = false;
-let finished = false;
-let srtItems = [];
-let segmentNumber = 1;
-
-const file = document.getElementById("file");
-const video = document.getElementById("video");
-const result = document.getElementById("result");
-const progress = document.getElementById("progress");
-const processStatus = document.getElementById("processStatus");
-
-function status(id,text){
- document.getElementById(id).textContent=text;
-}
-
-function formatTime(seconds){
- if(!Number.isFinite(seconds)) return 0;
- return Math.max(0,seconds);
-}
-
-function timestamp(seconds){
- let ms=Math.floor(seconds*1000);
- let h=Math.floor(ms/3600000);
- ms%=3600000;
- let m=Math.floor(ms/60000);
- ms%=60000;
- let s=Math.floor(ms/1000);
- ms%=1000;
- return String(h).padStart(2,"0")+":"+
- String(m).padStart(2,"0")+":"+
- String(s).padStart(2,"0")+","+
- String(ms).padStart(3,"0");
-}
-
-file.addEventListener("change",()=>{
- const f=file.files[0];
- if(!f)return;
-
- if(!f.type.startsWith("video/")){
-  alert("Video ဖိုင်ကို ရွေးပါ။");
-  file.value="";
-  return;
- }
-
- selectedFile=f;
-
- if(videoURL)URL.revokeObjectURL(videoURL);
- videoURL=URL.createObjectURL(f);
-
- video.src=videoURL;
- video.classList.remove("hidden");
-
- status("fileInfo","Video: "+f.name+
- "\nSize: "+(f.size/1024/1024).toFixed(1)+" MB");
-
- video.onloadedmetadata=()=>{
-  status("fileInfo","Video: "+f.name+
-  "\nကြာချိန်: "+timestamp(video.duration));
+ const shareData={
+  files:[selectedFile]
  };
-});
 
-async function loadModel(){
- const btn=document.getElementById("loadBtn");
- btn.disabled=true;
-
- try{
-  status("modelStatus","Local AI Model Download / Load လုပ်နေပါသည်...");
-
-  let device="wasm";
-  const choice=document.getElementById("engine").value;
-
-  if(choice==="webgpu"){
-   if(!navigator.gpu)throw new Error("ဒီ Browser မှာ WebGPU မရနိုင်ပါ။");
-   device="webgpu";
-  }else if(choice==="auto" && navigator.gpu){
-   device="webgpu";
-  }
-
-  const options={
-   dtype:"q8",
-   device:device
-  };
-
-  transcriber=await pipeline(
-   "automatic-speech-recognition",
-   "onnx-community/whisper-tiny",
-   {
-    ...options,
-    progress_callback:(p)=>{
-     if(p.status){
-      status("modelStatus",
-       p.status+" "+(p.file||""));
-     }
-    }
-   }
-  );
-
-  status("modelStatus","Local Whisper AI အသင့်ဖြစ်ပါပြီ။");
-  document.getElementById("startBtn").disabled=false;
-
- }catch(e){
-  status("modelStatus","Model Load မအောင်မြင်ပါ။\n"+e.message+
-   "\nအင်တာနက်စစ်ဆေးပြီး ပြန်စမ်းပါ။");
-  btn.disabled=false;
- }
-}
-
-function resample(input,sourceRate,targetRate){
- if(sourceRate===targetRate)return input;
-
- const ratio=sourceRate/targetRate;
- const length=Math.floor(input.length/ratio);
- const output=new Float32Array(length);
-
- for(let i=0;i<length;i++){
-  const pos=i*ratio;
-  const left=Math.floor(pos);
-  const right=Math.min(left+1,input.length-1);
-  const fraction=pos-left;
-
-  output[i]=input[left]*(1-fraction)+input[right]*fraction;
- }
- return output;
-}
-
-function joinCaptured(){
- const all=new Float32Array(capturedLength);
- let offset=0;
-
- for(const part of captured){
-  all.set(part,offset);
-  offset+=part.length;
- }
- return all;
-}
-
-function makeSRT(output,base,duration){
- let chunks=output.chunks||[];
-
- if(!chunks.length && output.text){
-  chunks=[{
-   text:output.text,
-   timestamp:[0,duration]
-  }];
- }
-
- for(const item of chunks){
-  const text=(item.text||"").trim();
-  if(!text)continue;
-
-  const times=item.timestamp||[0,duration];
-  const start=base+formatTime(times[0]||0);
-  const end=base+formatTime(times[1]||duration);
-
-  if(end<=start)continue;
-
-  srtItems.push({
-   number:segmentNumber++,
-   start,
-   end,
-   text
-  });
- }
-
- srtItems.sort((a,b)=>a.start-b.start);
-
- result.value=srtItems.map(x=>
-  x.number+"\n"+
-  timestamp(x.start)+" --> "+timestamp(x.end)+"\n"+
-  x.text
- ).join("\n\n");
-
-}
-
-async function transcribeChunk(finalChunk=false){
- if(processing)return;
- if(!capturedLength)return;
-
- processing=true;
- paused=true;
- video.pause();
-
- const audio=joinCaptured();
- const start=chunkStart;
- const duration=audio.length/audioContext.sampleRate;
-
- captured=[];
- capturedLength=0;
-
- status("processStatus",
-  "အသံအပိုင်းကို AI လေ့လာနေပါသည်။ "+timestamp(start));
-
- try{
-  const samples=resample(
-   audio,audioContext.sampleRate,16000
-  );
-
-  const output=await transcriber(samples,{
-   sampling_rate:16000,
-   return_timestamps:true,
-   chunk_length_s:30,
-   stride_length_s:5,
-   language:"burmese",
-   task:"transcribe"
-  });
-
-  makeSRT(output,start,duration);
-
-  const percent=video.duration?
-   Math.min(100,video.currentTime/video.duration*100):0;
-
-  progress.value=percent;
-
-  status("processStatus",
-   "ပြီးစီးမှု: "+percent.toFixed(1)+"%\n"+
-   "ပြီးသွားသောအချိန်: "+timestamp(video.currentTime));
-
- }catch(e){
-  status("processStatus","AI Transcription Error: "+e.message);
-  running=false;
-  processing=false;
-  return;
- }
-
- processing=false;
- chunkStart=video.currentTime;
-
- if(finalChunk || video.ended){
-  finishProcess();
-  return;
- }
-
- if(running && !paused){
-  video.play().catch(e=>{
-   status("processStatus","Play ခလုတ်ကို နှိပ်ပြီး ပြန်စပါ။");
-  });
- }
-}
-
-function finishProcess(){
- running=false;
- finished=true;
- paused=false;
- progress.value=100;
- status("processStatus",
-  "ပြီးပါပြီ။ SRT ဖိုင်ကို Download လုပ်နိုင်ပါပြီ။");
-}
-
-async function startProcess(){
- if(!selectedFile){
-  alert("အရင်ဆုံး Video ထည့်ပါ။");
-  return;
- }
- if(!transcriber){
-  alert("အရင်ဆုံး Local AI Model Load လုပ်ပါ။");
-  return;
- }
- if(running)return;
-
- try{
-  if(!audioContext){
-   audioContext=new AudioContext();
-   source=audioContext.createMediaElementSource(video);
-
-   processor=audioContext.createScriptProcessor(4096,1,1);
-
-   source.connect(processor);
-   processor.connect(audioContext.destination);
-
-   targetSamples=audioContext.sampleRate*60;
-
-   processor.onaudioprocess=(event)=>{
-    if(!running || processing || paused)return;
-
-    const data=event.inputBuffer.getChannelData(0);
-    const copy=new Float32Array(data);
-
-    captured.push(copy);
-    capturedLength+=copy.length;
-
-    if(capturedLength>=targetSamples){
-     transcribeChunk(false);
-    }
-   };
-  }
-
-  if(audioContext.state==="suspended"){
-   await audioContext.resume();
-  }
-
-  if(video.currentTime>=video.duration){
-   video.currentTime=0;
-  }
-
-  chunkStart=video.currentTime;
-  running=true;
-  paused=false;
-  finished=false;
-
-  document.getElementById("pauseBtn").disabled=false;
-  document.getElementById("resumeBtn").disabled=true;
-
-  await video.play();
-
-  status("processStatus","Video အသံကို ဖမ်းယူနေပါသည်...");
-
- }catch(e){
-  running=false;
-  status("processStatus","စတင်၍မရပါ: "+e.message);
- }
-}
-
-video.addEventListener("ended",()=>{
- if(running && !processing){
-  transcribeChunk(true);
+ if(navigator.canShare &&
+    navigator.canShare(shareData)){
+  shareBtn.disabled=false;
+  status.textContent="Gemini သို့ မျှဝေရန် အသင့်ဖြစ်ပါပြီ။";
+ }else{
+  shareBtn.disabled=true;
+  status.textContent=
+  "ဒီ Browser က Video Share ကို မထောက်ပံ့ပါ။ Chrome မှာဖွင့်ကြည့်ပါ။";
  }
 });
 
-function pauseProcess(){
- if(!running)return;
+shareBtn.addEventListener("click",async()=>{
+ if(!selectedFile)return;
 
- paused=true;
- video.pause();
+ const prompt=`
+ဒီဗီဒီယိုကို အစမှအဆုံး လေ့လာပြီး
+Movie Recap ပုံစံဖြင့် မြန်မာဘာသာစကားသဘာဝကျကျ
+ပြန်လည်ရေးသားပေးပါ။
 
- document.getElementById("resumeBtn").disabled=false;
+စည်းကမ်းများ
+1. ဗီဒီယိုထဲက မြင်ကွင်းများနှင့် ဖြစ်ရပ်များကို အခြေခံပါ။
+2. ဇာတ်လမ်းအစဉ်အတိုင်း ရေးပါ။
+3. ဇာတ်ကောင်အမည်များကို တစ်သမတ်တည်းထားပါ။
+4. စကားပြောသံကို တိုက်ရိုက်ကူးမရေးဘဲ
+   ဇာတ်ကြောင်းပြောသူပုံစံဖြင့် ရေးပါ။
+5. အချိန်အမှတ်များကို ဗီဒီယိုနှင့် ကိုက်ညီအောင်ထားပါ။
+6. SRT Format သာ ထုတ်ပေးပါ။
+7. အပိုရှင်းလင်းချက် မထည့်ပါနှင့်။
 
- status("processStatus","ခဏရပ်ထားပါသည်။");
-}
+ဥပမာ -
+1
+00:00:00,000 --> 00:00:05,000
+မြန်မာ Movie Recap ဇာတ်ကြောင်းစာသား
 
-async function resumeProcess(){
- if(!running || processing)return;
+SRT ဖိုင်အတွက် အသင့်ဖြစ်သော စာသားကို ထုတ်ပေးပါ။
+`;
 
- paused=false;
- document.getElementById("resumeBtn").disabled=true;
-
- if(audioContext.state==="suspended"){
-  await audioContext.resume();
- }
-
- video.play().catch(e=>{
-  status("processStatus","Video ကို ပြန်ဖွင့်၍မရပါ။");
- });
-}
-
-function downloadSRT(){
- const text=result.value.trim();
- if(!text){
-  alert("SRT စာသား မရှိသေးပါ။");
-  return;
- }
-
- const blob=new Blob(["\uFEFF"+text],{
-  type:"text/plain;charset=utf-8"
- });
-
- const url=URL.createObjectURL(blob);
- const a=document.createElement("a");
-
- a.href=url;
- a.download="Myanmar_Local_AI.srt";
- a.click();
-
- setTimeout(()=>URL.revokeObjectURL(url),1000);
-}
-
-async function copyResult(){
  try{
-  await navigator.clipboard.writeText(result.value);
-  alert("Copy လုပ်ပြီးပါပြီ။");
- }catch(e){
-  result.select();
-  document.execCommand("copy");
- }
-}
+  status.textContent="Android Share Menu ဖွင့်နေပါပြီ...";
 
-window.loadModel=loadModel;
-window.startProcess=startProcess;
-window.pauseProcess=pauseProcess;
-window.resumeProcess=resumeProcess;
-window.downloadSRT=downloadSRT;
-window.copyResult=copyResult;
+  await navigator.share({
+   files:[selectedFile],
+   text:prompt,
+   title:"Movie Recap SRT"
+  });
+
+  status.textContent=
+  "Share လုပ်ပြီးပါပြီ။ Gemini ထဲမှာ Video ရောက်လာပါက Send ကိုနှိပ်ပါ။";
+
+ }catch(error){
+  if(error.name==="AbortError"){
+   status.textContent="Share ကို ပယ်ဖျက်လိုက်ပါတယ်။";
+  }else{
+   status.textContent="Share မအောင်မြင်ပါ: "+error.message;
+  }
+ }
+});
 </script>
 </body>
 </html>
