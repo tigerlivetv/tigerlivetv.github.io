@@ -3,145 +3,413 @@
 <html lang="my">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Myanmar Movie Recap AI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Myanmar Movie Recap Studio</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;padding:15px;background:#10131c;color:white;font-family:Arial,sans-serif}
-.app{max-width:800px;margin:auto}
-h2{text-align:center;color:#ffbd59}
-.card{background:#1c2230;padding:16px;border-radius:13px;margin:14px 0;border:1px solid #354158}
-input,textarea{width:100%;padding:12px;margin-top:10px;background:#101722;color:white;border:1px solid #465168;border-radius:8px;font-size:15px}
-textarea{min-height:250px;resize:vertical}
-button{width:100%;padding:14px;margin-top:10px;border:0;border-radius:9px;font-weight:bold;font-size:15px;cursor:pointer}
-.upload{background:#e7a83d;color:#111}
-.copy{background:#16a36a;color:white}
-.chat{background:#263746;color:white}
-.gemini{background:#4285f4;color:white}
-.download{background:#e94b57;color:white}
-.info{color:#b7c4d8;font-size:13px;line-height:1.8}
-video{width:100%;max-height:300px;margin-top:12px;border-radius:9px;background:#000}
-.hidden{display:none}
+*{
+ box-sizing:border-box;
+}
+body{
+ margin:0;
+ padding:15px;
+ background:#0e111a;
+ color:#fff;
+ font-family:Arial,sans-serif;
+}
+.app{
+ max-width:850px;
+ margin:auto;
+}
+.header{
+ text-align:center;
+ padding:20px 10px;
+}
+.header h1{
+ color:#ffbd59;
+ font-size:25px;
+ margin:0 0 8px;
+}
+.header p{
+ color:#aab5c8;
+ font-size:13px;
+}
+.card{
+ background:#1b2230;
+ border:1px solid #354158;
+ border-radius:14px;
+ padding:16px;
+ margin:15px 0;
+}
+.card h3{
+ margin-top:0;
+ color:#ffbd59;
+}
+input,textarea{
+ width:100%;
+ padding:13px;
+ margin-top:10px;
+ background:#101722;
+ color:#fff;
+ border:1px solid #465168;
+ border-radius:9px;
+ font-size:15px;
+}
+textarea{
+ min-height:220px;
+ resize:vertical;
+ line-height:1.7;
+}
+button{
+ width:100%;
+ padding:14px;
+ margin-top:10px;
+ border:0;
+ border-radius:9px;
+ font-size:15px;
+ font-weight:bold;
+ cursor:pointer;
+}
+button:active{
+ opacity:.75;
+}
+.upload{
+ background:#e9aa42;
+ color:#111;
+}
+.copy{
+ background:#16a36a;
+ color:#fff;
+}
+.chatgpt{
+ background:#263d37;
+ color:#fff;
+ border:1px solid #16a36a;
+}
+.gemini{
+ background:#2856a4;
+ color:#fff;
+}
+.download{
+ background:#e94b57;
+ color:white;
+}
+.clear{
+ background:#424b5d;
+ color:white;
+}
+.info{
+ color:#b5c1d5;
+ font-size:13px;
+ line-height:1.8;
+}
+.status{
+ color:#55dfa1;
+ font-size:13px;
+ margin-top:10px;
+}
+video{
+ width:100%;
+ max-height:350px;
+ margin-top:12px;
+ background:#000;
+ border-radius:10px;
+}
+.hidden{
+ display:none;
+}
 </style>
 </head>
+
 <body>
 <div class="app">
-<h2>MYANMAR MOVIE RECAP AI</h2>
 
+<div class="header">
+ <h1>MYANMAR MOVIE RECAP STUDIO</h1>
+ <p>Video to Burmese Movie Recap SRT</p>
+</div>
+
+<!-- VIDEO UPLOAD -->
 <div class="card">
-<h3>၁။ ရုပ်ရှင် Video ထည့်ပါ</h3>
-<input type="file" id="videoFile" accept="video/*">
-<div id="videoInfo" class="info">Video မရွေးရသေးပါ။</div>
-<video id="videoPreview" controls class="hidden"></video>
+ <h3>၁။ ရုပ်ရှင် Video ထည့်ပါ</h3>
+
+ <input
+  type="file"
+  id="videoFile"
+  accept="video/*"
+ >
+
+ <div id="videoInfo" class="info">
+  Video ဖိုင်ရွေးချယ်ပေးပါ။
+ </div>
+
+ <video
+  id="videoPreview"
+  class="hidden"
+  controls
+  playsinline
+ ></video>
+
+ <button class="clear" onclick="clearVideo()">
+  Video ပြန်ဖျက်မယ်
+ </button>
 </div>
 
-<div class="card" id="promptCard">
-<h3>၂။ Movie Recap Prompt</h3>
-<textarea id="prompt" placeholder="Video ရွေးလိုက်တာနဲ့ Prompt ဒီနေရာမှာ ပေါ်လာပါမယ်။"></textarea>
-<button class="copy" onclick="copyPrompt()">PROMPT COPY ယူမယ်</button>
-<div id="copyStatus" class="info"></div>
-</div>
-
+<!-- PROMPT -->
 <div class="card">
-<h3>၃။ AI ရွေးချယ်ပါ</h3>
-<button class="chat" onclick="openAI('chatgpt')">ChatGPT ဖွင့်မယ်</button>
-<button class="gemini" onclick="openAI('gemini')">Gemini ဖွင့်မယ်</button>
-<p class="info">AI စာမျက်နှာမှာ Video ကို ကိုယ်တိုင် Upload လုပ်ပြီး Copy ယူထားတဲ့ Prompt ကို Paste လုပ်ပါ။</p>
+ <h3>၂။ Movie Recap Prompt</h3>
+
+ <p class="info">
+  Video ရွေးချယ်ပြီးသည်နှင့် Prompt အလိုအလျောက်ပေါ်လာပါမည်။
+ </p>
+
+ <textarea
+  id="prompt"
+  placeholder="Video ရွေးထည့်ပါ။ Prompt ဒီနေရာမှာ အလိုအလျောက်ပေါ်လာပါမယ်။"
+ ></textarea>
+
+ <button class="copy" onclick="copyPrompt()">
+  PROMPT COPY ယူမယ်
+ </button>
+
+ <div id="copyStatus" class="status"></div>
 </div>
 
+<!-- AI SELECT -->
 <div class="card">
-<h3>၄။ SRT ထုတ်ရန်</h3>
-<textarea id="srt" placeholder="AI ထုတ်ပေးတဲ့ SRT စာသားကို ဒီနေရာမှာ Paste လုပ်ပါ။"></textarea>
-<button class="download" onclick="downloadSRT()">SRT FILE DOWNLOAD</button>
+ <h3>၃။ AI ရွေးချယ်ပါ</h3>
+
+ <button class="chatgpt" onclick="openAI('chatgpt')">
+  ChatGPT ဖွင့်မယ်
+ </button>
+
+ <button class="gemini" onclick="openAI('gemini')">
+  Gemini ဖွင့်မယ်
+ </button>
+
+ <p class="info">
+  AI စာမျက်နှာကို ဖွင့်ပြီး ရွေးထားတဲ့ Video ကို ကိုယ်တိုင် Upload လုပ်ပါ။
+  ထို့နောက် Copy ယူထားတဲ့ Prompt ကို Paste လုပ်ပြီး SRT ထုတ်ခိုင်းပါ။
+  Login နှင့် Video Upload ကန့်သတ်ချက်များ ရှိနိုင်ပါသည်။
+ </p>
 </div>
+
+<!-- SRT -->
+<div class="card">
+ <h3>၄။ AI ထုတ်ပေးတဲ့ SRT ထည့်ပါ</h3>
+
+ <textarea
+  id="srt"
+  placeholder="ChatGPT သို့မဟုတ် Gemini ထုတ်ပေးတဲ့ SRT စာသားကို ဒီနေရာမှာ Paste လုပ်ပါ။"
+ ></textarea>
+
+ <button class="download" onclick="downloadSRT()">
+  SRT FILE DOWNLOAD
+ </button>
+
+ <div id="srtStatus" class="status"></div>
+</div>
+
 </div>
 
 <script>
 const fileInput = document.getElementById("videoFile");
 const video = document.getElementById("videoPreview");
-const info = document.getElementById("videoInfo");
+const videoInfo = document.getElementById("videoInfo");
 const promptBox = document.getElementById("prompt");
 
 let selectedVideo = null;
 let videoURL = null;
+let videoDuration = "မသိရသေးပါ";
 
+// TIME FORMAT
 function formatDuration(seconds){
- if(!Number.isFinite(seconds)) return "မသိရသေးပါ";
+
+ if(!Number.isFinite(seconds)){
+  return "မသိရသေးပါ";
+ }
+
  seconds = Math.floor(seconds);
- const h = String(Math.floor(seconds/3600)).padStart(2,"0");
- const m = String(Math.floor((seconds%3600)/60)).padStart(2,"0");
- const s = String(seconds%60).padStart(2,"0");
+
+ const h = String(
+  Math.floor(seconds / 3600)
+ ).padStart(2,"0");
+
+ const m = String(
+  Math.floor((seconds % 3600) / 60)
+ ).padStart(2,"0");
+
+ const s = String(
+  seconds % 60
+ ).padStart(2,"0");
+
  return `${h}:${m}:${s}`;
 }
 
-function makePrompt(fileName, duration){
+// CREATE PROMPT
+function makePrompt(){
+
+ if(!selectedVideo) return;
+
+ const fileName = selectedVideo.name;
+
  promptBox.value =
-`သင်သည် Professional Myanmar Movie Recap ဇာတ်ကြောင်းပြောသူဖြစ်သည်။
+`သင်သည် Professional Myanmar Movie Recap ဇာတ်ညွှန်းရေးသားသူနှင့် SRT Subtitle ဖန်တီးသူဖြစ်သည်။
 
-Video File: ${fileName}
-Video Duration: ${duration}
+VIDEO FILE NAME: ${fileName}
+VIDEO DURATION: ${videoDuration}
 
-ကျွန်ုပ် Upload လုပ်ထားသော Video ကို အစမှအဆုံး လေ့လာပါ။
+အရေးအကြီးဆုံးညွှန်ကြားချက် -
 
-လိုအပ်ချက်များ -
-1. ဇာတ်လမ်းကို အစမှအဆုံး အစဉ်လိုက် ပြန်လည်ဖော်ပြပါ။
-2. မြန်မာဘာသာစကား သဘာဝကျကျ အသုံးပြုပါ။
-3. Movie Recap အသံဇာတ်ကြောင်းပုံစံ ရေးပါ။
-4. ဇာတ်ကောင်အမည်များနှင့် ဖြစ်ရပ်များကို မမှားစေပါနှင့်။
-5. ဗီဒီယိုထဲတွင် မပါသောအကြောင်းအရာ မတီထွင်ပါနှင့်။
-6. စာကြောင်းများကို အသံဖတ်ရန် သင့်တော်အောင် ခွဲပါ။
-7. ဗီဒီယိုအချိန်နှင့် ကိုက်ညီသော SRT Timestamp များ ထည့်ပါ။
-8. SRT အချိန်များ မထပ်စေပါနှင့်။
-9. SRT ဖိုင်အပြည့်အစုံ ထုတ်ပေးပါ။
-10. Markdown Code Fence မသုံးပါနှင့်။
+ကျွန်ုပ် Upload လုပ်ပေးထားသော VIDEO ကိုသာ အခြေခံ၍ အလုပ်လုပ်ပါ။
 
-SRT ပုံစံ -
+VIDEO ထဲမှာ တကယ်ဖြစ်ပျက်နေသော ဇာတ်လမ်းကိုသာ ပြန်လည်ရေးသားပါ။
+
+မိမိစိတ်ကူးဖြင့် ဇာတ်လမ်းဖန်တီးခြင်း၊ မရှိသောအဖြစ်အပျက် ထည့်သွင်းခြင်း၊ ဇာတ်ကောင်အမည် ခန့်မှန်းခြင်း လုံးဝမလုပ်ပါနှင့်။
+
+အဆင့် (၁) VIDEO ကို လေ့လာခြင်း
+
+1. Video အစမှအဆုံးအထိ လေ့လာပါ။
+2. ဇာတ်လမ်းအစ၊ အလယ်နှင့် အဆုံးကို သေချာနားလည်ပါ။
+3. ဇာတ်ကောင်တစ်ဦးချင်းစီကို ခွဲခြားသတ်မှတ်ပါ။
+4. ဘယ်သူက ဘာလုပ်သည်၊ ဘယ်နေရာမှာ ဘာဖြစ်သည်ကို မှတ်သားပါ။
+5. ဖြစ်ရပ်တစ်ခုနှင့်တစ်ခု ဆက်စပ်မှုကို နားလည်ပါ။
+6. အရေးကြီးသော ဇာတ်ကွက်များကို မကျော်ပါနှင့်။
+7. Video ထဲမှာ မပါသော အကြောင်းအရာများကို မထည့်ပါနှင့်။
+8. Video တစ်ခုလုံးကို ကြည့်ရှုနိုင်ခြင်းမရှိပါက မကြည့်ရသေးသောအပိုင်းကို ခန့်မှန်းမရေးပါနှင့်။
+
+အဆင့် (၂) မြန်မာ Movie Recap ရေးသားခြင်း
+
+1. မြန်မာစကားပြော သဘာဝကျကျ ရေးသားပါ။
+2. Movie Recap Narration ပုံစံဖြင့် တစ်ယောက်တည်း ဇာတ်ကြောင်းပြန်ပြောပါ။
+3. ဇာတ်လမ်းကို Video ထဲက အစဉ်အတိုင်း ရေးပါ။
+4. ဖြစ်ရပ်များကို အသေးစိတ်နားလည်လွယ်အောင် ရေးပါ။
+5. မူရင်းဇာတ်ကား Dialogue များကို အရှည်လိုက် ကူးမရေးပါနှင့်။
+6. အရေးကြီးသော ဇာတ်ကွက်များကို မချန်ခဲ့ပါနှင့်။
+7. စာကြောင်းများကို မြန်မာအသံဖတ်ရန် အဆင်ပြေအောင် ရေးပါ။
+8. ဇာတ်လမ်းအဆုံးကိုလည်း Video အတိုင်း ဖော်ပြပါ။
+
+အဆင့် (၃) SRT ဖိုင် ထုတ်လုပ်ခြင်း
+
+1. Video ရဲ့ မူရင်းကြာချိန်ကို လိုက်နာပါ။
+2. ဖြစ်ရပ်ဖြစ်ပွားသည့်အချိန်နှင့် Narration ကိုက်ညီရမည်။
+3. Timestamp များကို ခန့်မှန်းပြီး မတီထွင်ပါနှင့်။
+4. Subtitle တစ်ခုနှင့်တစ်ခု အချိန်မထပ်စေရပါ။
+5. စာကြောင်းများကို အသံဖတ်ရန် သင့်တော်သော အရှည်ဖြင့် ခွဲပါ။
+6. Video အစမှ အဆုံးအထိ အစဉ်လိုက် ထုတ်ပေးပါ။
+7. SRT Format မှန်ကန်ရမည်။
+8. SRT အားလုံးကို ပြည့်စုံစွာ ထုတ်ပေးပါ။
+
+SRT FORMAT ဥပမာ -
 
 1
 00:00:00,000 --> 00:00:05,000
 တစ်နေ့မှာတော့ ဒီလူငယ်လေးဟာ ထူးဆန်းတဲ့ဖြစ်ရပ်တစ်ခုနဲ့ ရင်ဆိုင်ခဲ့ရပါတယ်။
 
-အခု Upload လုပ်ထားသော Video ကို လေ့လာပြီး မြန်မာ Movie Recap SRT ဖိုင် ထုတ်ပေးပါ။`;
+2
+00:00:05,000 --> 00:00:10,000
+အဲဒီဖြစ်ရပ်က သူ့ဘဝကို အကြီးအကျယ် ပြောင်းလဲသွားစေခဲ့ပါတယ်။
+
+အထူးသတိပြုရန် -
+
+- Video မကြည့်ဘဲ ဇာတ်လမ်းမရေးပါနှင့်။
+- မရှိသော ဇာတ်ကွက်များ မတီထွင်ပါနှင့်။
+- ဇာတ်ကောင်များကို မရောထွေးပါနှင့်။
+- ဇာတ်လမ်းအပိုင်းများကို မကျော်ပါနှင့်။
+- Video တစ်ခုလုံးကို မမြင်နိုင်ပါက အသုံးပြုသူအား အသိပေးပါ။
+- မသေချာသော Timestamp များကို အမှန်ဟု မဖော်ပြပါနှင့်။
+
+နောက်ဆုံးရလဒ်ကို SRT စာသားအဖြစ်သာ ထုတ်ပေးပါ။
+Markdown Code Fence နှင့် ရှင်းပြချက်များ မထည့်ပါနှင့်။
+
+ယခု Upload လုပ်ထားသော Video ကို လေ့လာပြီး မြန်မာ Movie Recap SRT ဖိုင် အပြည့်အစုံ ဖန်တီးပေးပါ။`;
+
 }
 
+// VIDEO SELECT
 fileInput.addEventListener("change", function(){
+
  const file = this.files && this.files[0];
 
  if(!file) return;
 
  if(!file.type.startsWith("video/")){
-  alert("Video ဖိုင်ကိုသာ ရွေးချယ်ပေးပါ။");
-  this.value="";
+  alert("Video ဖိုင်ကိုသာ ရွေးချယ်ပါ။");
+  this.value = "";
   return;
  }
 
  selectedVideo = file;
+ videoDuration = "ဖတ်ရှုနေသည်...";
 
- if(videoURL) URL.revokeObjectURL(videoURL);
+ if(videoURL){
+  URL.revokeObjectURL(videoURL);
+ }
 
  videoURL = URL.createObjectURL(file);
+
  video.src = videoURL;
  video.classList.remove("hidden");
 
- // Prompt ကို Video ရွေးချယ်ချင်း ချက်ချင်းဖန်တီးမည်
- makePrompt(file.name, "ဖတ်ရှုနေသည်...");
+ // ချက်ချင်း Prompt ဖန်တီးမည်
+ makePrompt();
 
- info.textContent = "Video ရွေးချယ်ပြီးပါပြီ: " + file.name;
+ videoInfo.textContent =
+  "Video ရွေးချယ်ပြီးပါပြီ: " + file.name;
 
+ document.getElementById("copyStatus").textContent =
+  "Prompt အသင့်ဖြစ်ပါပြီ။";
+
+ // VIDEO DURATION
  video.onloadedmetadata = function(){
-  const duration = formatDuration(video.duration);
-  info.textContent = "Video: " + file.name +
-   " | ကြာချိန်: " + duration;
-  makePrompt(file.name, duration);
+
+  videoDuration = formatDuration(video.duration);
+
+  videoInfo.textContent =
+   "ဖိုင်အမည်: " + file.name +
+   " | ကြာချိန်: " + videoDuration;
+
+  makePrompt();
  };
 
  video.onerror = function(){
-  info.textContent = "Video Preview မရနိုင်ပါ။ Prompt ကိုတော့ အသုံးပြုနိုင်ပါသည်။";
-  makePrompt(file.name, "မသိရသေးပါ");
+
+  videoDuration = "မသိရသေးပါ";
+
+  videoInfo.textContent =
+   "Video Preview မရနိုင်ပါ။ Prompt ကို အသုံးပြုနိုင်ပါသည်။";
+
+  makePrompt();
  };
+
 });
 
+// CLEAR VIDEO
+function clearVideo(){
+
+ selectedVideo = null;
+
+ if(videoURL){
+  URL.revokeObjectURL(videoURL);
+  videoURL = null;
+ }
+
+ video.pause();
+ video.removeAttribute("src");
+ video.load();
+ video.classList.add("hidden");
+
+ fileInput.value = "";
+ promptBox.value = "";
+
+ videoInfo.textContent = "Video ဖိုင်ရွေးချယ်ပေးပါ။";
+
+ document.getElementById("copyStatus").textContent = "";
+}
+
+// COPY PROMPT
 async function copyPrompt(){
+
  if(!selectedVideo){
   alert("အရင်ဆုံး Video ထည့်ပေးပါ။");
   return;
@@ -150,20 +418,30 @@ async function copyPrompt(){
  const text = promptBox.value;
 
  try{
+
   await navigator.clipboard.writeText(text);
+
   document.getElementById("copyStatus").textContent =
    "Prompt Copy လုပ်ပြီးပါပြီ။";
+
  }catch(error){
+
   promptBox.focus();
   promptBox.select();
+
   const success = document.execCommand("copy");
+
   document.getElementById("copyStatus").textContent =
-   success ? "Prompt Copy လုပ်ပြီးပါပြီ။" :
-   "စာသားကို Select လုပ်ပြီး Copy နှိပ်ပါ။";
+   success
+   ? "Prompt Copy လုပ်ပြီးပါပြီ။"
+   : "Prompt ကို Select လုပ်ပြီး Copy နှိပ်ပါ။";
+
  }
 }
 
+// OPEN AI
 function openAI(type){
+
  if(!selectedVideo){
   alert("အရင်ဆုံး Video ထည့်ပေးပါ။");
   return;
@@ -174,10 +452,13 @@ function openAI(type){
   gemini:"https://gemini.google.com/app"
  };
 
- window.open(urls[type], "_blank");
+ window.open(urls[type],"_blank");
+
 }
 
+// DOWNLOAD SRT
 function downloadSRT(){
+
  let text = document.getElementById("srt").value.trim();
 
  if(!text){
@@ -185,23 +466,38 @@ function downloadSRT(){
   return;
  }
 
- text = text.replace(/\r\n/g,"\n").replace(/\n{3,}/g,"\n\n");
+ // Markdown Code Fence ရှိလျှင် ဖယ်ရှားမည်
+ text = text.replace(/^```(?:srt|text)?\s*/i,"");
+ text = text.replace(/\s*```$/,"");
 
- const blob = new Blob(["\uFEFF"+text], {
-  type:"text/plain;charset=utf-8"
- });
+ text = text.replace(/\r\n/g,"\n");
+ text = text.replace(/\n{3,}/g,"\n\n");
+
+ const blob = new Blob(
+  ["\uFEFF" + text],
+  {type:"text/plain;charset=utf-8"}
+ );
 
  const url = URL.createObjectURL(blob);
+
  const a = document.createElement("a");
 
  a.href = url;
  a.download = "Myanmar_Movie_Recap.srt";
+
  document.body.appendChild(a);
  a.click();
  a.remove();
 
- setTimeout(()=>URL.revokeObjectURL(url),1000);
+ setTimeout(function(){
+  URL.revokeObjectURL(url);
+ },1500);
+
+ document.getElementById("srtStatus").textContent =
+  "SRT ဖိုင် Download လုပ်ပြီးပါပြီ။";
+
 }
+
 </script>
 </body>
 </html>
