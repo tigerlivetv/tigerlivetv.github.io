@@ -3,56 +3,41 @@
 <html lang="my">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Myanmar Movie Recap AI</title>
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;background:#10131c;color:white;
- font-family:Arial,sans-serif;padding:15px
-}
-.app{max-width:850px;margin:auto}
+body{margin:0;padding:15px;background:#10131c;color:white;font-family:Arial,sans-serif}
+.app{max-width:800px;margin:auto}
 h2{text-align:center;color:#ffbd59}
-.card{
- background:#1c2230;padding:16px;
- border-radius:14px;margin:14px 0;
- border:1px solid #354158
-}
-input,textarea{
- width:100%;padding:13px;margin-top:10px;
- background:#101722;color:white;
- border:1px solid #465168;border-radius:8px;
- font-size:15px
-}
-textarea{min-height:220px;resize:vertical}
-button{
- width:100%;padding:14px;margin-top:10px;
- border:0;border-radius:9px;font-weight:bold;
- font-size:15px;cursor:pointer
-}
+.card{background:#1c2230;padding:16px;border-radius:13px;margin:14px 0;border:1px solid #354158}
+input,textarea{width:100%;padding:12px;margin-top:10px;background:#101722;color:white;border:1px solid #465168;border-radius:8px;font-size:15px}
+textarea{min-height:250px;resize:vertical}
+button{width:100%;padding:14px;margin-top:10px;border:0;border-radius:9px;font-weight:bold;font-size:15px;cursor:pointer}
 .upload{background:#e7a83d;color:#111}
 .copy{background:#16a36a;color:white}
-.chat{background:#202a38;color:white}
+.chat{background:#263746;color:white}
 .gemini{background:#4285f4;color:white}
 .download{background:#e94b57;color:white}
-.info{color:#aebbd0;font-size:13px;line-height:1.8}
-video{width:100%;max-height:330px;margin-top:12px;border-radius:10px}
+.info{color:#b7c4d8;font-size:13px;line-height:1.8}
+video{width:100%;max-height:300px;margin-top:12px;border-radius:9px;background:#000}
+.hidden{display:none}
 </style>
 </head>
 <body>
 <div class="app">
-<h2>🎬 MYANMAR MOVIE RECAP AI</h2>
+<h2>MYANMAR MOVIE RECAP AI</h2>
 
 <div class="card">
-<h3>၁။ ရုပ်ရှင်ဗီဒီယို ထည့်ပါ</h3>
+<h3>၁။ ရုပ်ရှင် Video ထည့်ပါ</h3>
 <input type="file" id="videoFile" accept="video/*">
-<div id="videoInfo" class="info">ဗီဒီယို မရွေးရသေးပါ။</div>
-<video id="videoPreview" controls hidden></video>
+<div id="videoInfo" class="info">Video မရွေးရသေးပါ။</div>
+<video id="videoPreview" controls class="hidden"></video>
 </div>
 
-<div class="card">
-<h3>၂။ AI Prompt</h3>
-<textarea id="prompt" placeholder="Video ရွေးလိုက်တာနဲ့ Prompt အလိုအလျောက် ပေါ်လာပါမယ်။"></textarea>
+<div class="card" id="promptCard">
+<h3>၂။ Movie Recap Prompt</h3>
+<textarea id="prompt" placeholder="Video ရွေးလိုက်တာနဲ့ Prompt ဒီနေရာမှာ ပေါ်လာပါမယ်။"></textarea>
 <button class="copy" onclick="copyPrompt()">PROMPT COPY ယူမယ်</button>
 <div id="copyStatus" class="info"></div>
 </div>
@@ -61,105 +46,120 @@ video{width:100%;max-height:330px;margin-top:12px;border-radius:10px}
 <h3>၃။ AI ရွေးချယ်ပါ</h3>
 <button class="chat" onclick="openAI('chatgpt')">ChatGPT ဖွင့်မယ်</button>
 <button class="gemini" onclick="openAI('gemini')">Gemini ဖွင့်မယ်</button>
-<p class="info">
-AI ကိုဖွင့်ပြီး Video ကို Upload လုပ်ပါ။ ပြီးရင် Copy ယူထားတဲ့ Prompt ကို Paste လုပ်ပြီး SRT ထုတ်ခိုင်းပါ။
-AI ရဲ့ Video Upload လုပ်နိုင်မှုဟာ အကောင့်နဲ့ ဝန်ဆောင်မှုကန့်သတ်ချက်ပေါ် မူတည်ပါတယ်။
-</p>
+<p class="info">AI စာမျက်နှာမှာ Video ကို ကိုယ်တိုင် Upload လုပ်ပြီး Copy ယူထားတဲ့ Prompt ကို Paste လုပ်ပါ။</p>
 </div>
 
 <div class="card">
-<h3>၄။ AI ထုတ်ပေးတဲ့ SRT ထည့်ပါ</h3>
-<textarea id="srt" placeholder="AI ထုတ်ပေးတဲ့ SRT စာသားကို ဒီနေရာမှာ Paste လုပ်ပါ..."></textarea>
+<h3>၄။ SRT ထုတ်ရန်</h3>
+<textarea id="srt" placeholder="AI ထုတ်ပေးတဲ့ SRT စာသားကို ဒီနေရာမှာ Paste လုပ်ပါ။"></textarea>
 <button class="download" onclick="downloadSRT()">SRT FILE DOWNLOAD</button>
 </div>
 </div>
 
 <script>
-let selectedVideo=null;
-let videoURL=null;
+const fileInput = document.getElementById("videoFile");
+const video = document.getElementById("videoPreview");
+const info = document.getElementById("videoInfo");
+const promptBox = document.getElementById("prompt");
 
-const fileInput=document.getElementById("videoFile");
+let selectedVideo = null;
+let videoURL = null;
 
-fileInput.addEventListener("change",function(){
- const file=this.files[0];
- if(!file)return;
+function formatDuration(seconds){
+ if(!Number.isFinite(seconds)) return "မသိရသေးပါ";
+ seconds = Math.floor(seconds);
+ const h = String(Math.floor(seconds/3600)).padStart(2,"0");
+ const m = String(Math.floor((seconds%3600)/60)).padStart(2,"0");
+ const s = String(seconds%60).padStart(2,"0");
+ return `${h}:${m}:${s}`;
+}
 
- selectedVideo=file;
+function makePrompt(fileName, duration){
+ promptBox.value =
+`သင်သည် Professional Myanmar Movie Recap ဇာတ်ကြောင်းပြောသူဖြစ်သည်။
 
- if(videoURL)URL.revokeObjectURL(videoURL);
- videoURL=URL.createObjectURL(file);
+Video File: ${fileName}
+Video Duration: ${duration}
 
- const video=document.getElementById("videoPreview");
- video.src=videoURL;
- video.hidden=false;
-
- const durationText=()=>{
-  const sec=Math.floor(video.duration||0);
-  const h=String(Math.floor(sec/3600)).padStart(2,"0");
-  const m=String(Math.floor(sec%3600/60)).padStart(2,"0");
-  const s=String(sec%60).padStart(2,"0");
-  return `${h}:${m}:${s}`;
- };
-
- video.onloadedmetadata=()=>{
-  const duration=durationText();
-  document.getElementById("videoInfo").textContent=
-   "ဖိုင်အမည်: "+file.name+" | ကြာချိန်: "+duration;
-  makePrompt(file.name,duration);
- };
-});
-
-function makePrompt(name,duration){
- const prompt=`သင်သည် Professional Myanmar Movie Recap ဇာတ်ကြောင်းပြောသူနှင့် SRT Subtitle ဖန်တီးသူဖြစ်သည်။
-
-VIDEO FILE: ${name}
-VIDEO DURATION: ${duration}
-
-ကျွန်ုပ် Upload လုပ်ထားသော ဗီဒီယိုကို အစမှအဆုံး လေ့လာပြီး မြန်မာ Movie Recap SRT ဖိုင် ဖန်တီးပေးပါ။
+ကျွန်ုပ် Upload လုပ်ထားသော Video ကို အစမှအဆုံး လေ့လာပါ။
 
 လိုအပ်ချက်များ -
-1. ဗီဒီယိုထဲက ဇာတ်လမ်းကို အစမှအဆုံး ကြည့်ရှုလေ့လာပါ။
-2. ဇာတ်လမ်းအစဉ်အတိုင်း မြန်မာဘာသာဖြင့် ပြန်လည်ဇာတ်ကြောင်းပြောပါ။
-3. Movie Recap ပုံစံ သဘာဝကျသော မြန်မာစကားပြော အသုံးပြုပါ။
-4. ဇာတ်ကောင်အမည်၊ နေရာနှင့် ဖြစ်ရပ်များကို မမှားစေပါနှင့်။
-5. မူရင်းဇာတ်ကားထဲက Dialogue များကို အရှည်လိုက် ကူးမရေးပါနှင့်။ ကိုယ်ပိုင်စကားဖြင့် အကျဉ်းချုပ်ပြန်ရေးပါ။
-6. ဗီဒီယိုထဲတွင် မပါသော ဇာတ်လမ်းများကို မတီထွင်ပါနှင့်။
-7. စာကြောင်းများကို အသံဖတ်ရန် အဆင်ပြေသော အရှည်ဖြင့် ခွဲပါ။
-8. Subtitle အချိန်များသည် ဗီဒီယို၏ အစမှအဆုံးအထိ ကိုက်ညီရမည်။
-9. SRT Timestamp Format ကို HH:MM:SS,mmm အသုံးပြုပါ။
-10. Subtitle တစ်ခုနှင့်တစ်ခု အချိန်မထပ်စေပါနှင့်။
-11. SRT ကို အစအဆုံး ပြည့်စုံစွာ ထုတ်ပေးပါ။
-12. SRT စာသားကိုသာ ထုတ်ပေးပါ။ ရှင်းပြချက်နှင့် Markdown Code Fence မထည့်ပါနှင့်။
+1. ဇာတ်လမ်းကို အစမှအဆုံး အစဉ်လိုက် ပြန်လည်ဖော်ပြပါ။
+2. မြန်မာဘာသာစကား သဘာဝကျကျ အသုံးပြုပါ။
+3. Movie Recap အသံဇာတ်ကြောင်းပုံစံ ရေးပါ။
+4. ဇာတ်ကောင်အမည်များနှင့် ဖြစ်ရပ်များကို မမှားစေပါနှင့်။
+5. ဗီဒီယိုထဲတွင် မပါသောအကြောင်းအရာ မတီထွင်ပါနှင့်။
+6. စာကြောင်းများကို အသံဖတ်ရန် သင့်တော်အောင် ခွဲပါ။
+7. ဗီဒီယိုအချိန်နှင့် ကိုက်ညီသော SRT Timestamp များ ထည့်ပါ။
+8. SRT အချိန်များ မထပ်စေပါနှင့်။
+9. SRT ဖိုင်အပြည့်အစုံ ထုတ်ပေးပါ။
+10. Markdown Code Fence မသုံးပါနှင့်။
 
-ဥပမာ -
+SRT ပုံစံ -
 
 1
 00:00:00,000 --> 00:00:05,000
 တစ်နေ့မှာတော့ ဒီလူငယ်လေးဟာ ထူးဆန်းတဲ့ဖြစ်ရပ်တစ်ခုနဲ့ ရင်ဆိုင်ခဲ့ရပါတယ်။
 
-2
-00:00:05,000 --> 00:00:10,000
-အဲဒီဖြစ်ရပ်က သူ့ဘဝကို အကြီးအကျယ် ပြောင်းလဲသွားစေခဲ့ပါတယ်။
-
-အခု Upload လုပ်ထားသော ဗီဒီယိုကို လေ့လာပြီး အချိန်ကိုက် မြန်မာ Movie Recap SRT ဖိုင် ထုတ်ပေးပါ။`;
-
- document.getElementById("prompt").value=prompt;
+အခု Upload လုပ်ထားသော Video ကို လေ့လာပြီး မြန်မာ Movie Recap SRT ဖိုင် ထုတ်ပေးပါ။`;
 }
 
+fileInput.addEventListener("change", function(){
+ const file = this.files && this.files[0];
+
+ if(!file) return;
+
+ if(!file.type.startsWith("video/")){
+  alert("Video ဖိုင်ကိုသာ ရွေးချယ်ပေးပါ။");
+  this.value="";
+  return;
+ }
+
+ selectedVideo = file;
+
+ if(videoURL) URL.revokeObjectURL(videoURL);
+
+ videoURL = URL.createObjectURL(file);
+ video.src = videoURL;
+ video.classList.remove("hidden");
+
+ // Prompt ကို Video ရွေးချယ်ချင်း ချက်ချင်းဖန်တီးမည်
+ makePrompt(file.name, "ဖတ်ရှုနေသည်...");
+
+ info.textContent = "Video ရွေးချယ်ပြီးပါပြီ: " + file.name;
+
+ video.onloadedmetadata = function(){
+  const duration = formatDuration(video.duration);
+  info.textContent = "Video: " + file.name +
+   " | ကြာချိန်: " + duration;
+  makePrompt(file.name, duration);
+ };
+
+ video.onerror = function(){
+  info.textContent = "Video Preview မရနိုင်ပါ။ Prompt ကိုတော့ အသုံးပြုနိုင်ပါသည်။";
+  makePrompt(file.name, "မသိရသေးပါ");
+ };
+});
+
 async function copyPrompt(){
- const text=document.getElementById("prompt").value;
  if(!selectedVideo){
   alert("အရင်ဆုံး Video ထည့်ပေးပါ။");
   return;
  }
+
+ const text = promptBox.value;
+
  try{
   await navigator.clipboard.writeText(text);
-  document.getElementById("copyStatus").textContent="Prompt Copy လုပ်ပြီးပါပြီ။";
- }catch(e){
-  const area=document.getElementById("prompt");
-  area.select();
-  document.execCommand("copy");
-  document.getElementById("copyStatus").textContent="Prompt Copy လုပ်ပြီးပါပြီ။";
+  document.getElementById("copyStatus").textContent =
+   "Prompt Copy လုပ်ပြီးပါပြီ။";
+ }catch(error){
+  promptBox.focus();
+  promptBox.select();
+  const success = document.execCommand("copy");
+  document.getElementById("copyStatus").textContent =
+   success ? "Prompt Copy လုပ်ပြီးပါပြီ။" :
+   "စာသားကို Select လုပ်ပြီး Copy နှိပ်ပါ။";
  }
 }
 
@@ -168,29 +168,39 @@ function openAI(type){
   alert("အရင်ဆုံး Video ထည့်ပေးပါ။");
   return;
  }
- const urls={
+
+ const urls = {
   chatgpt:"https://chatgpt.com/",
   gemini:"https://gemini.google.com/app"
  };
- window.open(urls[type],"_blank");
+
+ window.open(urls[type], "_blank");
 }
 
 function downloadSRT(){
- let text=document.getElementById("srt").value.trim();
+ let text = document.getElementById("srt").value.trim();
+
  if(!text){
-  alert("SRT စာသားထည့်ပေးပါ။");
+  alert("SRT စာသား ထည့်ပေးပါ။");
   return;
  }
- text=text.replace(/\r\n/g,"\n").replace(/\n{3,}/g,"\n\n");
- const blob=new Blob(["\uFEFF"+text],{
+
+ text = text.replace(/\r\n/g,"\n").replace(/\n{3,}/g,"\n\n");
+
+ const blob = new Blob(["\uFEFF"+text], {
   type:"text/plain;charset=utf-8"
  });
- const url=URL.createObjectURL(blob);
- const a=document.createElement("a");
- a.href=url;
- a.download="Myanmar_Movie_Recap.srt";
+
+ const url = URL.createObjectURL(blob);
+ const a = document.createElement("a");
+
+ a.href = url;
+ a.download = "Myanmar_Movie_Recap.srt";
+ document.body.appendChild(a);
  a.click();
- URL.revokeObjectURL(url);
+ a.remove();
+
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 </script>
 </body>
